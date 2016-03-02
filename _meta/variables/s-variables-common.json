@@ -1,0 +1,5 @@
+{
+  "project": "serverless-app",
+  "projectBucket": "serverless-app.com",
+  "projectBucketRegion": "us-east-1"
+}
