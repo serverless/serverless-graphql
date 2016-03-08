@@ -13,7 +13,7 @@
   "endpoints": [
     {
       "path": "admin",
-      "method": "GET",
+      "method": "POST",
       "type": "AWS",
       "authorizationType": "none",
       "customAuthorizer": false,
