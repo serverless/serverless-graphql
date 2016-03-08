@@ -1,0 +1,19 @@
+{
+  "name": "auth",
+  "customName": false,
+  "customRole": false,
+  "handler": "handler.handler",
+  "runtime": "nodejs",
+  "timeout": 6,
+  "memorySize": 1024,
+  "custom": {
+    "excludePatterns": [],
+    "envVars": []
+  },
+  "endpoints": [],
+  "events": [],
+  "vpc": {
+    "securityGroupIds": [],
+    "subnetIds": []
+  }
+}

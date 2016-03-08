@@ -1,0 +1,27 @@
+{
+  "name": "event1",
+  "customName": false,
+  "customRole": false,
+  "handler": "handler.handler",
+  "runtime": "nodejs",
+  "timeout": 6,
+  "memorySize": 1024,
+  "custom": {
+    "excludePatterns": [],
+    "envVars": []
+  },
+  "endpoints": [],
+  "events": [
+    {
+      "name": "mySchedule",
+      "type": "schedule",
+      "config": {
+        "schedule": "rate(5 minutes)"
+      }
+    }
+  ],
+  "vpc": {
+    "securityGroupIds": [],
+    "subnetIds": []
+  }
+}
