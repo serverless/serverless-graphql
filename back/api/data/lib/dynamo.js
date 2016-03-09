@@ -7,9 +7,7 @@ const dynamoConfig = {
 const docClient = new AWS.DynamoDB.DocumentClient(dynamoConfig);
 const stage = process.env.SERVERLESS_STAGE;
 const projectName = process.env.SERVERLESS_PROJECT_NAME;
-const postsTable = projectName + '-posts-' + stage;
-const authorsTable = projectName + '-authors-' + stage;
-const commentsTable = projectName + '-comments-' + stage;
+const usersTable = projectName + '-users-' + stage;
 
 export function createUser(user) {
   return new Promise(function(resolve, reject) {
