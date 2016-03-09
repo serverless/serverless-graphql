@@ -20,7 +20,7 @@ const AdminQueries = new GraphQLObjectType({
   fields: () => ({
     users: {
       type: new GraphQLList(UserType),
-      description: "List of posts in the blog",
+      description: "List of users",
       resolve: function(source, args) {
         return getUsers();
       }
