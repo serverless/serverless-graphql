@@ -1,5 +1,5 @@
 {
-  "name": "serverless-app",
+  "name": "serverless-boilerplate",
   "version": "0.0.1",
   "description": "The Serverless Application Boilerplate",
   "author": "me",
@@ -7,7 +7,7 @@
   "private": false,
   "repository": {
     "type": "git",
-    "url": "git://github.com/serverless/serverless-app"
+    "url": "git://github.com/serverless/serverless-boilerplate"
   },
   "dependencies": {
     "serverless-client-s3": "0.0.1"
