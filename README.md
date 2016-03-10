@@ -1,3 +1,3 @@
-#serverless-app
+#serverless-boilerplate
 
 The ultimate serverless application boilerplate.
