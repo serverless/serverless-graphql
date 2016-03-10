@@ -1,5 +1,5 @@
 {
-  "name": "serverless-app",
+  "name": "serverless-boilerplate",
   "custom": {},
   "plugins": [
     "serverless-client-s3"
