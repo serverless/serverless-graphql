@@ -1,4 +1,4 @@
-#serverless-boilerplate
+#Serverless Boilerplate
 
 The ultimate serverless application boilerplate.
 
