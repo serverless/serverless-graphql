@@ -42,7 +42,7 @@ const AdminMutuations = new GraphQLObjectType({
   name: 'AdminMutations',
   fields: {
     createUser: {
-      type: User,
+      type: UserType,
       description: "Create User",
       args: {
         name: {type: new GraphQLLimitedString(10, 30)},
@@ -54,7 +54,7 @@ const AdminMutuations = new GraphQLObjectType({
       }
     },
     updateUser: {
-      type: User,
+      type: UserType,
       description: "Update User",
       args: {
         id: {type: new GraphQLNonNull(GraphQLString)},

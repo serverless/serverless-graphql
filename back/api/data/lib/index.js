@@ -1,6 +1,6 @@
 import { graphql } from 'graphql';
-import AdminSchema from '../graphql/AdminSchema';
-import PublicSchema from '../graphql/PublicSchema';
+import AdminSchema from './graphql/AdminSchema';
+import PublicSchema from './graphql/PublicSchema';
 
 export function runAdminGraphQL(event, cb) {
 
