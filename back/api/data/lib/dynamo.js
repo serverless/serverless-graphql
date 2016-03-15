@@ -1,9 +1,13 @@
 import Promise from 'bluebird';
 import AWS from 'aws-sdk';
+import uuid from 'uuid';
+import bcryptjs from 'bcryptjs';
+
 const dynamoConfig = {
   sessionToken:    process.env.AWS_SESSION_TOKEN,
   region:          process.env.AWS_REGION
 };
+
 const docClient = new AWS.DynamoDB.DocumentClient(dynamoConfig);
 const stage = process.env.SERVERLESS_STAGE;
 const projectName = process.env.SERVERLESS_PROJECT_NAME;
@@ -11,6 +15,11 @@ const usersTable = projectName + '-users-' + stage;
 
 export function createUser(user) {
   return new Promise(function(resolve, reject) {
+    let salt = bcryptjs.genSaltSync(10);
+
+    user.id = uuid.v1();
+    user.password = bcryptjs.hashSync(user.password, salt);
+
     var params = {
       TableName: usersTable,
       Item: user
@@ -26,12 +35,15 @@ export function createUser(user) {
 
 export function updateUser(user) {
   return new Promise(function(resolve, reject) {
+    let salt = bcryptjs.genSaltSync(10);
+
+    user.password = bcryptjs.hashSync(user.password, salt);
+
     var params = {
       TableName: usersTable,
       Item: user
     };
 
-    // TODO: validate and fix if not correct
     docClient.put(params, function(err, data) {
       if (err) return reject(err);
       return resolve(user);
@@ -68,7 +80,8 @@ export function getUser(id) {
       },
       AttributesToGet: [
         'id',
-        'name'
+        'name',
+        'email'
       ]
     };
 
@@ -80,3 +93,19 @@ export function getUser(id) {
   });
 }
 
+export function deleteUser(id) {
+  return new Promise(function(resolve, reject) {
+    var params = {
+      TableName: usersTable,
+      Key: {
+        id: id
+      }
+    };
+
+    docClient.delete(params, function(err, data) {
+      if (err) return reject(err);
+      return resolve();
+    });
+
+  });
+}
