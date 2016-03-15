@@ -15,6 +15,7 @@ class UsersIndex extends Component {
           <Link to={ 'users/' + user.id }>
             <span>{user.email}</span>
           </Link>
+          <Link to={ 'users/' + user.id + '/edit' }>Edit</Link>
         </li>
       );
     });

@@ -35,12 +35,15 @@ export function createUser(user) {
 
 export function updateUser(user) {
   return new Promise(function(resolve, reject) {
+    let salt = bcryptjs.genSaltSync(10);
+
+    user.password = bcryptjs.hashSync(user.password, salt);
+
     var params = {
       TableName: usersTable,
       Item: user
     };
 
-    // TODO: validate and fix if not correct
     docClient.put(params, function(err, data) {
       if (err) return reject(err);
       return resolve(user);
@@ -77,7 +80,8 @@ export function getUser(id) {
       },
       AttributesToGet: [
         'id',
-        'name'
+        'name',
+        'email'
       ]
     };
 

@@ -57,7 +57,10 @@ const AdminMutations = new GraphQLObjectType({
       type: UserType,
       description: "Update User",
       args: {
-        id: { type: new GraphQLNonNull(GraphQLString) }
+        id: { type: new GraphQLNonNull(GraphQLString) },
+        name: { type: new GraphQLNonNull(GraphQLString) },
+        password: { type: new GraphQLNonNull(GraphQLString) },
+        email: { type: new GraphQLNonNull(GraphQLString) }
       },
       resolve: function(source, args) {
         return updateUser(args);
