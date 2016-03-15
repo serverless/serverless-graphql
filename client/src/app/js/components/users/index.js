@@ -43,8 +43,7 @@ class UsersIndex extends Component {
                 {this.renderUsers()}
               </tbody>
             </table>
-          ) : <div>There are currently no users available to display</div> }
-          <hr />
+          ) : <div>There are currently no users available to display<hr /></div> }
           <Link to={ 'users/new' } className="button button-primary">Add</Link>
         </div>
       </div>
