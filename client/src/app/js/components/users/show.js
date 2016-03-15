@@ -12,7 +12,7 @@ class UsersShow extends Component {
     const { user } = this.props;
 
     if (!user) {
-      return <div>Loading...</div>;
+      return <div className="row"><div className="twelve columns">Loading...</div></div>
     }
 
     return (
