@@ -2,16 +2,16 @@ import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
 import App from './components/app';
-import Users from './components/users/index';
-import User from './components/users/show';
-import Edit from './components/users/edit';
-import New from './components/users/new';
+import UsersIndex from './components/users/index';
+import UsersShow from './components/users/show';
+import UsersEdit from './components/users/edit';
+import UsersNew from './components/users/new';
 
 export default (
   <Route path="/" component={App}>
-    <IndexRoute component={Users} />
-    <Route path="users/:id" component={User} />
-    <Route path="users/:id/edit" component={Edit} />
-    <Route path="user/new" component={New} />
+    <IndexRoute component={UsersIndex} />
+    <Route path="users/:id/show" component={UsersShow} />
+    <Route path="users/:id/edit" component={UsersEdit} />
+    <Route path="users/new" component={UsersNew} />
   </Route>
 );

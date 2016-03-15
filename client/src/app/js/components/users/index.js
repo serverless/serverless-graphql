@@ -12,7 +12,7 @@ class UsersIndex extends Component {
     return this.props.users.map((user) => {
       return (
         <li key={user.id}>
-          <Link to={ 'users/' + user.id }>
+          <Link to={ 'users/' + user.id + '/show' }>
             <span>{user.email}</span>
           </Link>
           <Link to={ 'users/' + user.id + '/edit' }>Edit</Link>
@@ -27,7 +27,7 @@ class UsersIndex extends Component {
         <ul>
           {this.renderUsers()}
         </ul>
-        <Link to={ 'user/new' }>
+        <Link to={ 'users/new' }>
           <span>Add</span>
         </Link>
       </div>
