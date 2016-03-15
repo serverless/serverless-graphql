@@ -33,14 +33,19 @@ class UsersNew extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit.bind(this)}>
-        <input type="text" placeholder="Name" ref="name" />
-        <input type="email" placeholder="E-Mail" ref="email" />
-        <input type="password" placeholder="Password" ref="password" />
-        <input type="submit" />
-
-        <Link to="/">Cancel</Link>
-      </form>
+      <div className="row">
+        <div className="four columns offset-by-four">
+          <form onSubmit={this.handleSubmit.bind(this)}>
+            <h1>Add user</h1>
+            <hr />
+            <input type="text" placeholder="Name" className="u-full-width" ref="name" />
+            <input type="email" placeholder="E-Mail" className="u-full-width" ref="email" />
+            <input type="password" placeholder="Password" className="u-full-width" ref="password" />
+            <input type="submit" className="button button-primary" />
+            <Link to="/" className="u-pull-right button">Cancel</Link>
+          </form>
+        </div>
+      </div>
     );
   }
 }

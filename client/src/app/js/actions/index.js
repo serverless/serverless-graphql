@@ -20,7 +20,7 @@ export function createUser(user) {
 }
 
 export function fetchUsers() {
-  const query = { "query": "{ users { id, email } }" };
+  const query = { "query": "{ users { id, name, email } }" };
   const request = axios.post(`${API_URL}/public/`, JSON.stringify(query));
 
   return {

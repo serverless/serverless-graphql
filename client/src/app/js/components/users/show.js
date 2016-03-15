@@ -20,9 +20,15 @@ class UsersShow extends Component {
     }
 
     return (
-      <div>
-        <Link to='/'>Back</Link>
-        <p>{user.name}</p>
+      <div className="row">
+        <div className="four columns offset-by-four">
+          <h1>{user.name}</h1>
+          <hr />
+          <p>{user.id}</p>
+          <p>{user.email}</p>
+          <hr />
+          <Link to='/' className="button u-full-width">Back</Link>
+        </div>
       </div>
     );
   }

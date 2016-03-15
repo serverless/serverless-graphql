@@ -53,15 +53,20 @@ class UsersEdit extends Component {
     }
 
     return (
-      <div>
-        <form onSubmit={this.handleSubmit.bind(this)}>
-          <input type="text" placeholder="Name" ref="name" defaultValue={user.name}/>
-          <input type="email" placeholder="E-Mail" ref="email" defaultValue={user.email} />
-          <input type="password" placeholder="Password" ref="password" defaultValue={user.password} />
-          <input type="submit" />
-        </form>
-        <button onClick={this.onDeleteClick.bind(this)}>Delete</button>
-        <Link to="/">Cancel</Link>
+      <div className="row">
+        <div className="four columns offset-by-four">
+          <h1>Edit user</h1>
+          <hr />
+          <form onSubmit={this.handleSubmit.bind(this)}>
+            <input type="text" placeholder="Name" className="u-full-width" ref="name" defaultValue={user.name}/>
+            <input type="email" placeholder="E-Mail" className="u-full-width" ref="email" defaultValue={user.email} />
+            <input type="password" placeholder="Password" className="u-full-width" ref="password" defaultValue={user.password} />
+            <input type="submit" className="button button-primary" />
+            <Link to="/" className="u-pull-right button">Cancel</Link>
+          </form>
+          <hr />
+          <button onClick={this.onDeleteClick.bind(this)} className="button u-full-width">Delete</button>
+        </div>
       </div>
     );
   }

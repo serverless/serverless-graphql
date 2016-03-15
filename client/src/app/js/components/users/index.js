@@ -11,25 +11,42 @@ class UsersIndex extends Component {
   renderUsers() {
     return this.props.users.map((user) => {
       return (
-        <li key={user.id}>
-          <Link to={ 'users/' + user.id + '/show' }>
-            <span>{user.email}</span>
-          </Link>
-          <Link to={ 'users/' + user.id + '/edit' }>Edit</Link>
-        </li>
+        <tr key={user.id}>
+          <td>
+            <Link to={ 'users/' + user.id + '/show' }>{user.id}</Link>
+          </td>
+          <td>{user.name}</td>
+          <td>{user.email}</td>
+          <td><Link to={ 'users/' + user.id + '/edit' }>Edit</Link></td>
+        </tr>
       );
     });
   }
 
   render() {
     return (
-      <div>
-        <ul>
-          {this.renderUsers()}
-        </ul>
-        <Link to={ 'users/new' }>
-          <span>Add</span>
-        </Link>
+      <div className="row">
+        <div className="twelve columns">
+          <h1>Users</h1>
+          <hr />
+          {this.props.users.length ? (
+            <table className="u-full-width">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>E-Mail</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.renderUsers()}
+              </tbody>
+            </table>
+          ) : <div>There are currently no users available to display</div> }
+          <hr />
+          <Link to={ 'users/new' } className="button button-primary">Add</Link>
+        </div>
       </div>
     );
   }
