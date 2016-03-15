@@ -93,3 +93,19 @@ export function getUser(id) {
   });
 }
 
+export function deleteUser(id) {
+  return new Promise(function(resolve, reject) {
+    var params = {
+      TableName: usersTable,
+      Key: {
+        id: id
+      }
+    };
+
+    docClient.delete(params, function(err, data) {
+      if (err) return reject(err);
+      return resolve();
+    });
+
+  });
+}

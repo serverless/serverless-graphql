@@ -12,7 +12,7 @@ import {
 
 import UserType from './UserType';
 
-import { getUsers, getUser, createUser, updateUser } from '../dynamo';
+import { getUsers, getUser, createUser, updateUser, deleteUser } from '../dynamo';
 
 const AdminQueries = new GraphQLObjectType({
   name: 'AdminSchema',
@@ -64,6 +64,17 @@ const AdminMutations = new GraphQLObjectType({
       },
       resolve: function(source, args) {
         return updateUser(args);
+      }
+    },
+    deleteUser: {
+      type: UserType,
+      description: "Delete User",
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLString) }
+      },
+      resolve: function(source, args) {
+        let id = args.id;
+        return deleteUser(id);
       }
     }
   }
