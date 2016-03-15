@@ -38,16 +38,16 @@ const AdminQueries = new GraphQLObjectType({
   })
 });
 
-const AdminMutuations = new GraphQLObjectType({
+const AdminMutations = new GraphQLObjectType({
   name: 'AdminMutations',
   fields: {
     createUser: {
       type: UserType,
       description: "Create User",
       args: {
-        name: {type: new GraphQLLimitedString(10, 30)},
-        password: {type: new GraphQLNonNull(GraphQLString)},
-        email: {type: new GraphQLNonNull(GraphQLString)}
+        name: { type: new GraphQLNonNull(GraphQLString) },
+        password: { type: new GraphQLNonNull(GraphQLString) },
+        email: { type: new GraphQLNonNull(GraphQLString) }
       },
       resolve: function(source, args) {
         return createUser(args);
@@ -57,7 +57,7 @@ const AdminMutuations = new GraphQLObjectType({
       type: UserType,
       description: "Update User",
       args: {
-        id: {type: new GraphQLNonNull(GraphQLString)},
+        id: { type: new GraphQLNonNull(GraphQLString) }
       },
       resolve: function(source, args) {
         return updateUser(args);
@@ -68,7 +68,7 @@ const AdminMutuations = new GraphQLObjectType({
 
 const AdminSchema = new GraphQLSchema({
   query: AdminQueries,
-  mutation: AdminMutuations
+  mutation: AdminMutations
 });
 
 export default AdminSchema;

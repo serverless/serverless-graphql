@@ -26,6 +26,9 @@ class UsersIndex extends Component {
         <ul>
           {this.renderUsers()}
         </ul>
+        <Link to={ 'user/new' }>
+          <span>Add</span>
+        </Link>
       </div>
     );
   }
