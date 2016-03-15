@@ -4,10 +4,6 @@ import { fetchUser } from '../../actions/index';
 import { Link } from 'react-router';
 
 class UsersShow extends Component {
-  static contextTypes = {
-    router: PropTypes.object
-  };
-
   componentWillMount() {
     this.props.fetchUser(this.props.params.id);
   }
