@@ -3,9 +3,9 @@
   "customName": false,
   "customRole": false,
   "handler": "handler.handler",
-  "runtime": "nodejs",
   "timeout": 6,
   "memorySize": 1024,
+  "authorizer": {},
   "custom": {
     "excludePatterns": [],
     "envVars": []
@@ -23,5 +23,6 @@
   "vpc": {
     "securityGroupIds": [],
     "subnetIds": []
-  }
+  },
+  "runtime": "nodejs"
 }
