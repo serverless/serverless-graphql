@@ -3,12 +3,25 @@
   "customName": false,
   "customRole": false,
   "handler": "public/handler.handler",
-  "runtime": "nodejs",
   "timeout": 6,
   "memorySize": 1024,
+  "authorizer": {},
   "custom": {
     "excludePatterns": [],
-    "envVars": []
+    "envVars": [],
+    "optimize": {
+      "exclude": [ "aws-sdk" ],
+      "transforms": [
+        {
+          "name": "babelify",
+          "opts": {
+            "presets": [
+              "es2015"
+            ]
+          }
+        }
+      ]
+    }
   },
   "endpoints": [
     {
@@ -16,6 +29,7 @@
       "method": "POST",
       "type": "AWS",
       "authorizationType": "none",
+      "authorizerId": false,
       "customAuthorizer": false,
       "apiKeyRequired": false,
       "requestParameters": {},
@@ -41,5 +55,6 @@
   "vpc": {
     "securityGroupIds": [],
     "subnetIds": []
-  }
+  },
+  "runtime": "nodejs"
 }

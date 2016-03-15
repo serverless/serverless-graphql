@@ -2,6 +2,6 @@
   "name": "serverless-boilerplate",
   "custom": {},
   "plugins": [
-    "serverless-client-s3"
+    "serverless-optimizer-plugin"
   ]
 }
