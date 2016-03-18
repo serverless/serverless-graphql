@@ -5,7 +5,10 @@
   "handler": "handler.handler",
   "timeout": 6,
   "memorySize": 1024,
-  "authorizer": {},
+  "authorizer": {
+    "type": "TOKEN",
+    "identitySource": "method.request.header.Authorization"
+  },
   "custom": {
     "excludePatterns": [],
     "envVars": []
