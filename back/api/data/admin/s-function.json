@@ -1,5 +1,7 @@
 {
   "name": "admin",
+  "runtime": "nodejs",
+  "description": "Serverless Lambda function for project: serverless-boilerplate",
   "customName": false,
   "customRole": false,
   "handler": "admin/handler.handler",
@@ -10,7 +12,9 @@
     "excludePatterns": [],
     "envVars": [],
     "optimize": {
-      "exclude": [ "aws-sdk" ],
+      "exclude": [
+        "aws-sdk"
+      ],
       "transforms": [
         {
           "name": "babelify",
@@ -52,9 +56,13 @@
     }
   ],
   "events": [],
+  "environment": {
+    "SERVERLESS_PROJECT": "serverless-boilerplate",
+    "SERVERLESS_STAGE": "${stage}",
+    "SERVERLESS_REGION": "${region}"
+  },
   "vpc": {
     "securityGroupIds": [],
     "subnetIds": []
-  },
-  "runtime": "nodejs"
+  }
 }

@@ -1,5 +1,7 @@
 {
   "name": "util1",
+  "runtime": "nodejs",
+  "description": "Serverless Lambda function for project: serverless-boilerplate",
   "customName": false,
   "customRole": false,
   "handler": "handler.handler",
@@ -12,9 +14,13 @@
   },
   "endpoints": [],
   "events": [],
+  "environment": {
+    "SERVERLESS_PROJECT": "serverless-boilerplate",
+    "SERVERLESS_STAGE": "${stage}",
+    "SERVERLESS_REGION": "${region}"
+  },
   "vpc": {
     "securityGroupIds": [],
     "subnetIds": []
-  },
-  "runtime": "nodejs"
+  }
 }

@@ -1,44 +1,28 @@
 {
-  "name": "public",
-  "runtime": "nodejs",
+  "name": "test",
+  "runtime": "babel",
   "description": "Serverless Lambda function for project: serverless-boilerplate",
   "customName": false,
   "customRole": false,
-  "handler": "public/handler.handler",
+  "handler": "handler.default",
   "timeout": 6,
   "memorySize": 1024,
   "authorizer": {},
   "custom": {
-    "excludePatterns": [],
-    "envVars": [],
-    "optimize": {
-      "exclude": [
-        "aws-sdk"
-      ],
-      "transforms": [
-        {
-          "name": "babelify",
-          "opts": {
-            "presets": [
-              "es2015"
-            ]
-          }
-        }
-      ]
-    }
+    "excludePatterns": []
   },
   "endpoints": [
     {
-      "path": "public",
-      "method": "POST",
+      "path": "test",
+      "method": "GET",
       "type": "AWS",
-      "authorizationType": "CUSTOM",
-      "authorizerFunction": "auth",
+      "authorizationType": "none",
+      "authorizerFunction": false,
       "customAuthorizer": false,
       "apiKeyRequired": false,
       "requestParameters": {},
       "requestTemplates": {
-        "application/json": "{\"query\" : $input.json(\"$\")}"
+        "application/json": ""
       },
       "responses": {
         "400": {
