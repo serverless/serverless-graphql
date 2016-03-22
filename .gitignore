@@ -37,7 +37,4 @@ node_modules
 #SERVERLESS
 admin.env
 .env
-#Boilerplate - Prevent sharing of _meta in project boilerplate
 _meta
-#Prevent the tracking of the metadata of stages that start with dev
-_meta/**/*-dev*
