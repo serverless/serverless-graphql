@@ -16,7 +16,7 @@
     "graphql": "^0.4.18",
     "graphql-custom-types": "^0.2.0",
     "serverless-client-s3": "0.0.1",
-    "serverless-runtime-babel": "0.0.2",
+    "serverless-runtime-babel": "0.0.1",
     "uuid": "^2.0.1"
   }
 }
