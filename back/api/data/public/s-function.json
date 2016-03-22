@@ -1,6 +1,6 @@
 {
   "name": "public",
-  "runtime": "nodejs",
+  "runtime": "babel",
   "description": "Serverless Lambda function for project: serverless-boilerplate",
   "customName": false,
   "customRole": false,
@@ -9,23 +9,7 @@
   "memorySize": 1024,
   "authorizer": {},
   "custom": {
-    "excludePatterns": [],
-    "envVars": [],
-    "optimize": {
-      "exclude": [
-        "aws-sdk"
-      ],
-      "transforms": [
-        {
-          "name": "babelify",
-          "opts": {
-            "presets": [
-              "es2015"
-            ]
-          }
-        }
-      ]
-    }
+    "excludePatterns": []
   },
   "endpoints": [
     {
