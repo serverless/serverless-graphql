@@ -1,5 +1,5 @@
 #Serverless Boilerplate
-[![serverless](http://public.serverless.com/badges/v1.svg)](http://www.serverless.com)
+[![serverless](http://public.serverless.com/badges/v3.svg)](http://www.serverless.com)
 
 The ultimate serverless application boilerplate.
 
