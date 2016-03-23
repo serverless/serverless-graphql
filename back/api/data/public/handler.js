@@ -1,6 +1,6 @@
 'use strict';
 
-var lib = require('../lib');
+var lib = require('../../lib');
 
 module.exports.handler = function(event, context) {
 

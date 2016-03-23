@@ -1,8 +1,8 @@
 import { graphql } from 'graphql';
-import AdminSchema from './graphql/AdminSchema';
+import PrivateSchema from './graphql/PrivateSchema';
 import PublicSchema from './graphql/PublicSchema';
 
-export function runAdminGraphQL(event, cb) {
+export function runPrivateGraphQL(event, cb) {
 
   let query = event.query;
 
@@ -12,7 +12,7 @@ export function runAdminGraphQL(event, cb) {
     query = event.query.query.replace("\n", ' ', "g");
   }
 
-  graphql(AdminSchema, query).then( function(result) {
+  graphql(PrivateSchema, query).then( function(result) {
     return cb(null, result);
   });
 

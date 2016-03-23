@@ -1,10 +1,10 @@
 {
-  "name": "admin",
-  "runtime": "babel",
+  "name": "authenticate",
+  "runtime": "nodejs",
   "description": "Serverless Lambda function for project: serverless-boilerplate",
   "customName": false,
   "customRole": false,
-  "handler": "admin/handler.handler",
+  "handler": "handler.handler",
   "timeout": 6,
   "memorySize": 1024,
   "authorizer": {},
@@ -13,16 +13,15 @@
   },
   "endpoints": [
     {
-      "path": "admin",
-      "method": "POST",
+      "path": "authenticate",
+      "method": "GET",
       "type": "AWS",
-      "authorizationType": "CUSTOM",
-      "authorizerFunction": "auth",
-      "customAuthorizer": false,
+      "authorizationType": "none",
+      "authorizerFunction": false,
       "apiKeyRequired": false,
       "requestParameters": {},
       "requestTemplates": {
-        "application/json": "{\"query\" : $input.json(\"$\")}"
+        "application/json": ""
       },
       "responses": {
         "400": {
@@ -43,7 +42,8 @@
   "environment": {
     "SERVERLESS_PROJECT": "serverless-boilerplate",
     "SERVERLESS_STAGE": "${stage}",
-    "SERVERLESS_REGION": "${region}"
+    "SERVERLESS_REGION": "${region}",
+    "AUTH_TOKEN_SECRET": "${authTokenSecret}"
   },
   "vpc": {
     "securityGroupIds": [],

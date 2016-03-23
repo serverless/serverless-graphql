@@ -1,5 +1,5 @@
 {
-  "name": "auth",
+  "name": "authorize",
   "runtime": "nodejs",
   "description": "Serverless Lambda function for project: serverless-boilerplate",
   "customName": false,
