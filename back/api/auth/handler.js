@@ -1,6 +1,4 @@
 var jwt  = require('jsonwebtoken');
-var fs   = require('fs');
-var cert = fs.readFileSync('cert.pem');
 
 exports.handler = function(event, context) {
 
@@ -10,7 +8,7 @@ exports.handler = function(event, context) {
   if(token[0] === 'Bearer'){
     // Token-based re-authorization
     // Verify
-    jwt.verify(token[1], cert, function(err, data){
+    jwt.verify(token[1], process.env.AUTH_TOKEN_SECRET, function(err, data){
       if(err){
         console.log('Verification Failure', err);
         context.fail('Unauthorized');
