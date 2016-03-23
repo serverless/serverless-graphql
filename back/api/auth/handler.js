@@ -1,25 +1,31 @@
+var jwt  = require('jsonwebtoken');
+var fs   = require('fs');
+var cert = fs.readFileSync('cert.pem');
+
 exports.handler = function(event, context) {
 
   console.log('Running custom authorizer at ', new Date().toISOString() );
 
-  var token = event.authorizationToken;
-  token = 'allow'; // Auto-pass token for Serverless test
-
-  // Call oauth provider, crack jwt token, etc.
-  // In this example, the token is treated as the status for simplicity.
-
-  switch (token) {
-    case 'allow':
-      context.succeed(generatePolicy('user', 'Allow', event.methodArn));
-      break;
-    case 'deny':
-      context.succeed(generatePolicy('user', 'Deny', event.methodArn));
-      break;
-    case 'unauthorized':
-      context.fail("Unauthorized");
-      break;
-    default:
-      context.fail("error");
+  var token = event.authorizationToken.split(' ');
+  if(token[0] === 'Bearer'){
+    // Token-based re-authorization
+    // Verify
+    jwt.verify(token[1], cert, function(err, data){
+      if(err){
+        console.log('Verification Failure', err);
+        context.fail('Unauthorized');
+      } else if (data && data.id){
+        console.log('LOGIN', data);
+        context.succeed(generatePolicy(data.id, 'Allow', event.methodArn));
+      } else {
+        console.log('Invalid User', data);
+        context.fail('Unauthorized');
+      }
+    });
+  } else {
+    // Require a "Bearer" token
+    console.log('Wrong token type', token[0]);
+    context.fail('Unauthorized');
   }
 };
 
