@@ -4,7 +4,7 @@
   "description": "Serverless Lambda function for project: serverless-boilerplate",
   "customName": false,
   "customRole": false,
-  "handler": "public/handler.handler",
+  "handler": "data/public/handler.handler",
   "timeout": 6,
   "memorySize": 1024,
   "authorizer": {},
