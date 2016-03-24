@@ -10,7 +10,20 @@ export const DELETE_USER = 'DELETE_USER';
 const API_URL = 'https://example.com/stage';
 
 export function createUser(user) {
-  const query = { "query": "mutation createNewUser { user: createUser (name: \"" + user.name + "\", email: \"" + user.email + "\", password: \"" + user.password + "\"), { id, name, email } }" };
+  const query = { "query":
+    `mutation createNewUser {
+      user: createUser (
+        name: "${user.name}"
+        email: "${user.email}"
+        password: "${user.password}"
+      )
+      {
+        id
+        name
+        email
+      }
+    }`
+  };
   const request = axios.post(`${API_URL}/private/`, JSON.stringify(query));
 
   return {
@@ -20,7 +33,15 @@ export function createUser(user) {
 }
 
 export function fetchUsers() {
-  const query = { "query": "{ users { id, name, email } }" };
+  const query = { "query":
+    `{
+      users {
+        id
+        name
+        email
+      }
+    }`
+  };
   const request = axios.post(`${API_URL}/public/`, JSON.stringify(query));
 
   return {
@@ -30,7 +51,16 @@ export function fetchUsers() {
 }
 
 export function fetchUser(id) {
-  const query = { "query": "{ user(id: \"" + id +  "\") { id, name, email } }" };
+  const query = { "query":
+    `{
+      user(id: "${id}")
+      {
+        id
+        name
+        email
+      }
+    }`
+  };
   const request = axios.post(`${API_URL}/public/`, JSON.stringify(query));
 
   return {
@@ -40,7 +70,21 @@ export function fetchUser(id) {
 }
 
 export function updateUser(user) {
-  const query = { "query": "mutation updateExistingUser { user: updateUser (id: \"" + user.id + "\" name: \"" + user.name + "\", email: \"" + user.email + "\", password: \"" + user.password + "\"), { id, name, email } }" };
+  const query = { "query":
+    `mutation updateExistingUser {
+      user: updateUser (
+        id: "${user.id}"
+        name: "${user.name}",
+        email: "${user.email}"
+        password: "${user.password}"
+      )
+      {
+        id
+        name
+        email
+      }
+    }`
+  };
   const request = axios.post(`${API_URL}/private/`, JSON.stringify(query));
 
   return {
@@ -50,7 +94,16 @@ export function updateUser(user) {
 }
 
 export function deleteUser(id) {
-  const query = { "query": "mutation deleteExistingUser { user: deleteUser (id: \"" + id + "\"), { id } }" };
+  const query = { "query":
+    `mutation deleteExistingUser {
+      user: deleteUser (
+        id: "${id}"
+      )
+      {
+        id
+      }
+    }`
+  };
   const request = axios.post(`${API_URL}/private/`, JSON.stringify(query));
 
   return {
