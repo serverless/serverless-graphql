@@ -11,7 +11,7 @@ const API_URL = 'https://example.com/stage';
 
 export function createUser(user) {
   const query = { "query": "mutation createNewUser { user: createUser (name: \"" + user.name + "\", email: \"" + user.email + "\", password: \"" + user.password + "\"), { id, name, email } }" };
-  const request = axios.post(`${API_URL}/admin/`, JSON.stringify(query));
+  const request = axios.post(`${API_URL}/private/`, JSON.stringify(query));
 
   return {
     type: CREATE_USER,
@@ -41,7 +41,7 @@ export function fetchUser(id) {
 
 export function updateUser(user) {
   const query = { "query": "mutation updateExistingUser { user: updateUser (id: \"" + user.id + "\" name: \"" + user.name + "\", email: \"" + user.email + "\", password: \"" + user.password + "\"), { id, name, email } }" };
-  const request = axios.post(`${API_URL}/admin/`, JSON.stringify(query));
+  const request = axios.post(`${API_URL}/private/`, JSON.stringify(query));
 
   return {
     type: UPDATE_USER,
@@ -51,7 +51,7 @@ export function updateUser(user) {
 
 export function deleteUser(id) {
   const query = { "query": "mutation deleteExistingUser { user: deleteUser (id: \"" + id + "\"), { id } }" };
-  const request = axios.post(`${API_URL}/admin/`, JSON.stringify(query));
+  const request = axios.post(`${API_URL}/private/`, JSON.stringify(query));
 
   return {
     type: DELETE_USER,
