@@ -4,7 +4,7 @@ import UsersReducer from './users';
 const rootReducer = combineReducers({
   users: UsersReducer
 
-  // Add additional reducers here
+  // TODO: Add additional reducers here
 
 });
 

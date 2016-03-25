@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-export const FETCH_USERS = 'FETCH_USERS';
-export const FETCH_USER = 'FETCH_USER';
+export const GET_USERS = 'GET_USERS';
+export const GET_USER = 'GET_USER';
 export const CREATE_USER = 'CREATE_USER';
 export const UPDATE_USER = 'UPDATE_USER';
 export const DELETE_USER = 'DELETE_USER';
@@ -32,7 +32,7 @@ export function createUser(user) {
   };
 }
 
-export function fetchUsers() {
+export function getUsers() {
   const query = { "query":
     `{
       users {
@@ -45,12 +45,12 @@ export function fetchUsers() {
   const request = axios.post(`${API_URL}/public/`, JSON.stringify(query));
 
   return {
-    type: FETCH_USERS,
+    type: GET_USERS,
     payload: request
   };
 }
 
-export function fetchUser(id) {
+export function getUser(id) {
   const query = { "query":
     `{
       user(id: "${id}")
@@ -64,7 +64,7 @@ export function fetchUser(id) {
   const request = axios.post(`${API_URL}/public/`, JSON.stringify(query));
 
   return {
-    type: FETCH_USER,
+    type: GET_USER,
     payload: request
   };
 }

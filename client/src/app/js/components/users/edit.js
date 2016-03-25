@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { fetchUser, updateUser, deleteUser } from '../../actions/index';
+import { getUser, updateUser, deleteUser } from '../../actions/index';
 import { Link } from 'react-router';
 
 class UsersEdit extends Component {
@@ -9,7 +9,7 @@ class UsersEdit extends Component {
   };
 
   componentWillMount() {
-    this.props.fetchUser(this.props.params.id);
+    this.props.getUser(this.props.params.id);
   }
 
   onDeleteClick() {
@@ -76,4 +76,4 @@ function mapStateToProps(state) {
   return { user: state.users.user };
 }
 
-export default connect(mapStateToProps, { fetchUser, updateUser, deleteUser })(UsersEdit);
+export default connect(mapStateToProps, { getUser, updateUser, deleteUser })(UsersEdit);

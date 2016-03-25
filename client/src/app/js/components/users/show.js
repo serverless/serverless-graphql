@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { fetchUser } from '../../actions/index';
+import { getUser } from '../../actions/index';
 import { Link } from 'react-router';
 
 class UsersShow extends Component {
   componentWillMount() {
-    this.props.fetchUser(this.props.params.id);
+    this.props.getUser(this.props.params.id);
   }
 
   render() {
@@ -34,4 +34,4 @@ function mapStateToProps(state) {
   return { user: state.users.user };
 }
 
-export default connect(mapStateToProps, { fetchUser })(UsersShow);
+export default connect(mapStateToProps, { getUser })(UsersShow);
