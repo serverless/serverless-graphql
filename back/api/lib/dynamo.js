@@ -1,7 +1,7 @@
 import Promise from 'bluebird';
 import AWS from 'aws-sdk';
 import uuid from 'uuid';
-import bcryptjs from 'bcryptjs';
+import crypto from 'crypto';
 
 const dynamoConfig = {
   sessionToken:    process.env.AWS_SESSION_TOKEN,
@@ -15,10 +15,16 @@ const usersTable = projectName + '-users-' + stage;
 
 export function createUser(user) {
   return new Promise(function(resolve, reject) {
-    let salt = bcryptjs.genSaltSync(10);
 
     user.id = uuid.v1();
-    user.password = bcryptjs.hashSync(user.password, salt);
+
+    // save password hash
+    user.hash = crypto
+      .createHmac("md5", process.env.AUTH_TOKEN_SECRET)
+      .update(user.password)
+      .digest('hex');
+
+    delete user.password; // don't save plain password!
 
     var params = {
       TableName: usersTable,
@@ -37,7 +43,12 @@ export function updateUser(user) {
   return new Promise(function(resolve, reject) {
     let salt = bcryptjs.genSaltSync(10);
 
-    user.password = bcryptjs.hashSync(user.password, salt);
+    user.hash = crypto
+      .createHmac("md5", process.env.AUTH_TOKEN_SECRET)
+      .update(user.password)
+      .digest('hex');
+
+    delete user.password;
 
     var params = {
       TableName: usersTable,

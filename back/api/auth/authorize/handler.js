@@ -12,7 +12,7 @@ exports.handler = function(event, context) {
       if(err){
         console.log('Verification Failure', err);
         context.fail('Unauthorized');
-      } else if (data && data.id){
+      } else if (data && data.id) {
         console.log('LOGIN', data);
         context.succeed(generatePolicy(data.id, 'Allow', event.methodArn));
       } else {
