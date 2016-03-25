@@ -1,4 +1,4 @@
-import axios from 'axios';
+import 'whatwg-fetch';
 
 export const GET_USERS = 'GET_USERS';
 export const GET_USER = 'GET_USER';
@@ -24,12 +24,16 @@ export function createUser(user) {
       }
     }`
   };
-  const request = axios.post(`${API_URL}/private/`, JSON.stringify(query));
 
-  return {
+  return (dispatch) => fetch(`${API_URL}/private/`, {
+    method: 'POST',
+    body: JSON.stringify(query)
+  })
+  .then(response => response.json())
+  .then(json => dispatch({
     type: CREATE_USER,
-    payload: request
-  };
+    payload: json
+  }));
 }
 
 export function getUsers() {
@@ -42,12 +46,16 @@ export function getUsers() {
       }
     }`
   };
-  const request = axios.post(`${API_URL}/public/`, JSON.stringify(query));
 
-  return {
+  return (dispatch) => fetch(`${API_URL}/public/`, {
+    method: 'POST',
+    body: JSON.stringify(query)
+  })
+  .then(response => response.json())
+  .then(json => dispatch({
     type: GET_USERS,
-    payload: request
-  };
+    payload: json
+  }));
 }
 
 export function getUser(id) {
@@ -61,12 +69,16 @@ export function getUser(id) {
       }
     }`
   };
-  const request = axios.post(`${API_URL}/public/`, JSON.stringify(query));
 
-  return {
+  return (dispatch) => fetch(`${API_URL}/public/`, {
+    method: 'POST',
+    body: JSON.stringify(query)
+  })
+  .then(response => response.json())
+  .then(json => dispatch({
     type: GET_USER,
-    payload: request
-  };
+    payload: json
+  }));
 }
 
 export function updateUser(user) {
@@ -85,12 +97,16 @@ export function updateUser(user) {
       }
     }`
   };
-  const request = axios.post(`${API_URL}/private/`, JSON.stringify(query));
 
-  return {
+  return (dispatch) => fetch(`${API_URL}/private/`, {
+    method: 'POST',
+    body: JSON.stringify(query)
+  })
+  .then(response => response.json())
+  .then(json => dispatch({
     type: UPDATE_USER,
-    payload: request
-  }
+    payload: json
+  }));
 }
 
 export function deleteUser(id) {
@@ -104,10 +120,14 @@ export function deleteUser(id) {
       }
     }`
   };
-  const request = axios.post(`${API_URL}/private/`, JSON.stringify(query));
 
-  return {
+  return (dispatch) => fetch(`${API_URL}/private/`, {
+    method: 'POST',
+    body: JSON.stringify(query)
+  })
+  .then(response => response.json())
+  .then(json => dispatch({
     type: DELETE_USER,
-    payload: request
-  }
+    payload: json
+  }));
 }
