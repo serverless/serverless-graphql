@@ -14,7 +14,7 @@ The ultimate serverless application boilerplate.
 1. Run `npm install` in the root of the project
 2. Run `serverless project init` and follow the setup instructions to initialize the project
 3. Run `serverless dash deploy` and deploy all endpoints and functions
-4. Make sure to enable CORS for your API Gateway endpoints (so that external client can access them)
+4. Make sure to enable CORS for your API Gateway endpoints (so that external clients can access them)
 
 ### Client
 1. `cd` into the `client/src` folder
