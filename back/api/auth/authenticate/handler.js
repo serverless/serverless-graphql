@@ -2,26 +2,33 @@
 
 var jwt    = require('jsonwebtoken');
 var crypto = require('crypto');
+var lib    = require('../../lib');
 
 module.exports.handler = function(event, context) {
 
   if (!event.username) context.fail('username is required');
   if (!event.password) context.fail('password is required');
 
-  var user = {}; // lookup username/password_hash via GraphQL
+  var query = 'query { user(id: "' + event.username + '") { id, name, email, hash } }';
 
-  if (!user) context.fail('user not found');
+  return lib.queryPublicSchema(query)
+    .then(function(result) {
+      var user = result.data.user;
 
-  var hash = crypto
-    .createHmac("md5", process.env.AUTH_TOKEN_SECRET)
-    .update(event.password)
-    .digest('hex');
+      if (!user) context.fail('user not found');
 
-  if (hash != user.hash) context.fail('invalid password');
+      var hash = crypto
+        .createHmac("md5", process.env.AUTH_TOKEN_SECRET)
+        .update(event.password)
+        .digest('hex');
 
-  var token = jwt.sign(user, process.env.AUTH_TOKEN_SECRET);
+      if (hash != user.hash) context.fail('invalid password');
 
-  return context.done(null, {
-    token: token
-  });
+      var token = jwt.sign(user, process.env.AUTH_TOKEN_SECRET);
+
+
+      return context.done(null, {
+        token: token
+      });
+    });
 };

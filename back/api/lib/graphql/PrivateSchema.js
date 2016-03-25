@@ -14,9 +14,9 @@ import UserType from './UserType';
 
 import { getUsers, getUser, createUser, updateUser, deleteUser } from '../dynamo';
 
-const AdminQueries = new GraphQLObjectType({
-  name: 'AdminSchema',
-  description: "Root of the Admin Schema",
+const PrivateQueries = new GraphQLObjectType({
+  name: 'PrivateSchema',
+  description: "Root of the Private Schema",
   fields: () => ({
     users: {
       type: new GraphQLList(UserType),
@@ -38,8 +38,8 @@ const AdminQueries = new GraphQLObjectType({
   })
 });
 
-const AdminMutations = new GraphQLObjectType({
-  name: 'AdminMutations',
+const PrivateMutations = new GraphQLObjectType({
+  name: 'PrivateMutations',
   fields: {
     createUser: {
       type: UserType,
@@ -80,9 +80,9 @@ const AdminMutations = new GraphQLObjectType({
   }
 });
 
-const AdminSchema = new GraphQLSchema({
-  query: AdminQueries,
-  mutation: AdminMutations
+const PrivateSchema = new GraphQLSchema({
+  query: PrivateQueries,
+  mutation: PrivateMutations
 });
 
-export default AdminSchema;
+export default PrivateSchema;
