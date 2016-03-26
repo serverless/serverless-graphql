@@ -16,11 +16,16 @@ The ultimate serverless application boilerplate.
 3. Run `serverless dash deploy` and deploy all endpoints and functions
 4. Make sure to enable CORS for your API Gateway endpoints (so that external clients can access them)
 
-### Client
+### Start client
 1. `cd` into the `client/src` folder
 2. Run `npm install`
 3. Run `npm start`
 4. Open your browser and go to [http://localhost:8080](http://localhost:8080)
+
+### Build client
+1. `cd` into the `client/src` folder
+2. Run `npm run-script build`
+3. The built assets are now in `client/dist`
 
 ---
 
