@@ -1,4 +1,4 @@
-import { GET_USERS, GET_USER } from '../actions/users';
+import { GET_USERS, GET_USER } from '../actions/constants';
 
 const INITIAL_STATE = { all: [], user: null };
 

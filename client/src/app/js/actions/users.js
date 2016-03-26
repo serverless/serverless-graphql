@@ -1,11 +1,14 @@
 import 'whatwg-fetch';
 import { API_URL } from './index';
 
-export const GET_USERS = 'GET_USERS';
-export const GET_USER = 'GET_USER';
-export const CREATE_USER = 'CREATE_USER';
-export const UPDATE_USER = 'UPDATE_USER';
-export const DELETE_USER = 'DELETE_USER';
+import {
+  ERROR,
+  GET_USERS,
+  GET_USER,
+  CREATE_USER,
+  UPDATE_USER,
+  DELETE_USER
+} from './constants';
 
 export function createUser(user) {
   const query = { "query":
@@ -31,6 +34,10 @@ export function createUser(user) {
   .then(json => dispatch({
     type: CREATE_USER,
     payload: json
+  }))
+  .catch(exception => dispatch({
+    type: ERROR,
+    payload: exception.message
   }));
 }
 
@@ -53,6 +60,10 @@ export function getUsers() {
   .then(json => dispatch({
     type: GET_USERS,
     payload: json
+  }))
+  .catch(exception => dispatch({
+    type: ERROR,
+    payload: exception.message
   }));
 }
 
@@ -76,6 +87,10 @@ export function getUser(id) {
   .then(json => dispatch({
     type: GET_USER,
     payload: json
+  }))
+  .catch(exception => dispatch({
+    type: ERROR,
+    payload: exception.message
   }));
 }
 
@@ -104,6 +119,10 @@ export function updateUser(user) {
   .then(json => dispatch({
     type: UPDATE_USER,
     payload: json
+  }))
+  .catch(exception => dispatch({
+    type: ERROR,
+    payload: exception.message
   }));
 }
 
@@ -127,5 +146,9 @@ export function deleteUser(id) {
   .then(json => dispatch({
     type: DELETE_USER,
     payload: json
+  }))
+  .catch(exception => dispatch({
+    type: ERROR,
+    payload: exception.message
   }));
 }
