@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getUsers } from '../../actions/index';
+import { getUsers } from '../../actions/users';
 import { Link } from 'react-router';
 
 class UsersIndex extends Component {

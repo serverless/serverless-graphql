@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { getUser } from '../../actions/index';
+import { getUser } from '../../actions/users';
 import { Link } from 'react-router';
 
 class UsersShow extends Component {

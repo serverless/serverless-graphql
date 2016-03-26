@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { getUser, updateUser, deleteUser } from '../../actions/index';
+import { getUser, updateUser, deleteUser } from '../../actions/users';
 import { Link } from 'react-router';
 
 class UsersEdit extends Component {
