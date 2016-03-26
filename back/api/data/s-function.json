@@ -1,10 +1,10 @@
 {
-  "name": "private",
+  "name": "data",
   "runtime": "babel",
   "description": "Serverless Lambda function for project: serverless-boilerplate",
   "customName": false,
   "customRole": false,
-  "handler": "data/private/handler.handler",
+  "handler": "handler.default",
   "timeout": 6,
   "memorySize": 1024,
   "authorizer": {},
@@ -13,16 +13,15 @@
   },
   "endpoints": [
     {
-      "path": "private",
+      "path": "data",
       "method": "POST",
       "type": "AWS",
-      "authorizationType": "CUSTOM",
-      "authorizerFunction": "authorize",
-      "customAuthorizer": false,
+      "authorizationType": "none",
+      "authorizerFunction": false,
       "apiKeyRequired": false,
       "requestParameters": {},
       "requestTemplates": {
-        "application/json": "{\"query\" : $input.json(\"$\")}"
+        "application/json": ""
       },
       "responses": {
         "400": {
@@ -43,7 +42,8 @@
   "environment": {
     "SERVERLESS_PROJECT": "serverless-boilerplate",
     "SERVERLESS_STAGE": "${stage}",
-    "SERVERLESS_REGION": "${region}"
+    "SERVERLESS_REGION": "${region}",
+    "AUTH_TOKEN_SECRET": "${authTokenSecret}"
   },
   "vpc": {
     "securityGroupIds": [],

@@ -74,11 +74,11 @@ const Mutations = new GraphQLObjectType({
         return loginUser(args);
       }
     },
-    updateUser: { // authenticated
+    updateUser: { // Authenticated, requires JWT
       type: UserType,
       description: "Update User",
       args: {
-        id: { type: new GraphQLNonNull(GraphQLString) },
+        jwt: { type: new GraphQLNonNull(GraphQLString) },
         name: { type: new GraphQLNonNull(GraphQLString) },
         password: { type: new GraphQLNonNull(GraphQLString) },
         email: { type: new GraphQLNonNull(GraphQLString) }

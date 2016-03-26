@@ -1,7 +1,7 @@
 {
   "name": "serverless-boilerplate",
   "version": "0.0.1",
-  "description": "The Serverless Application Boilerplate",
+  "description": "The Serverless Application Boilerplate API Dependencies",
   "author": "me",
   "license": "MIT",
   "private": false,
@@ -11,14 +11,11 @@
   },
   "dependencies": {
     "aws-sdk": "^2.2.43",
-    "bcryptjs": "^2.3.0",
     "jsonwebtoken": "^5.7.0",
     "crypto-js": "^3.1.6",
     "bluebird": "^3.3.4",
     "graphql": "^0.4.18",
     "graphql-custom-types": "^0.2.0",
-    "serverless-client-s3": "1.0.0",
-    "serverless-runtime-babel": "^0.0.5",
     "uuid": "^2.0.1"
   }
 }

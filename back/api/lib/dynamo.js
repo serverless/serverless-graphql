@@ -46,7 +46,7 @@ export function loginUser(user) {
     var params = {
       TableName: usersTable,
       Key: {
-        id: id
+        name: user.name
       },
       AttributesToGet: [
         'id',
@@ -76,15 +76,19 @@ export function loginUser(user) {
   });
 }
 
-export function updateUser(user) {
+export function updateUser(obj) {
   return new Promise(function(resolve, reject) {
 
+    // make sure user is logged in
+    var user = jwt.verify(obj.jwt, process.env.AUTH_TOKEN_SECRET);
+
+    // update data
+    user.name = obj.name;
+    user.email = obj.email;
     user.hash = crypto
       .createHmac("md5", process.env.AUTH_TOKEN_SECRET)
-      .update(user.password)
+      .update(obj.password)
       .digest('hex');
-
-    delete user.password;
 
     var params = {
       TableName: usersTable,
