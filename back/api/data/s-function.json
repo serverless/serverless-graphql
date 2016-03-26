@@ -9,7 +9,11 @@
   "memorySize": 1024,
   "authorizer": {},
   "custom": {
-    "excludePatterns": []
+    "excludePatterns": [],
+    "cors": {
+      "allowOrigin": "*",
+      "allowHeaders": ["Content-Type", "X-Amz-Date", "Authorization", "X-Api-Key"]
+    }
   },
   "endpoints": [
     {

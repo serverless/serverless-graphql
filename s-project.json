@@ -8,6 +8,7 @@
   },
   "plugins": [
     "serverless-runtime-babel",
-    "serverless-meta-sync"
+    "serverless-meta-sync",
+    "serverless-cors-plugin"
   ]
 }
