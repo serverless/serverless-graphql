@@ -11,23 +11,30 @@ The goal here is not just to create the ultimate boilerplate project for buildin
 ## Setup
 
 ### Serverless
-1. Run `npm install` in the root of the project
-2. Run `serverless project init` and follow the setup instructions to initialize the project
-3. Add the `authTokenSecret` variable to `s-variables-STAGE-REGION.json` and give it a strong value. This is the secret used to hash passwords and generate JSON web tokens.
-4. Install lambda dependencies before deployment: `cd back/api/` and run `npm install`
-3. Run `serverless dash deploy` and deploy all endpoints and functions
-4. Make sure to enable CORS for your API Gateway endpoints (so that external clients can access them)
+If you haven't yet installed `serverless` on your machine, run `npm install -g serverless`. Then:
 
-### Start client
-1. `cd` into the `client/src` folder
-2. Run `npm install`
-3. Run `npm start`
-4. Open your browser and go to [http://localhost:8080](http://localhost:8080)
+```
+git clone https://github.com/serverless/serverless-boilerplate.git
+cd serverless-boilerplate
+serverless project init
+```
 
-### Build client
-1. `cd` into the `client/src` folder
-2. Run `npm run-script build`
-3. The built assets are now in `client/dist`
+After following the setup instructions, add the `authTokenSecret` variable to `_meta/variables/s-variables-STAGE-REGION.json` and give it a strong value. This is the secret used to hash passwords and generate JSON web tokens. Then:
+
+```
+cd back/api
+npm install
+serverless dash deploy
+```
+
+### Client
+Set `API_URL` in `client/src/app/js/actions/index.js`
+
+```
+cd ../../client/src
+npm install
+npm start
+```
 
 ### Testing With GraphiQL
 If you're running OSX, you can use the [GraphiQL Electron App](https://github.com/skevy/graphiql-app) to test the GraphQL backend without a client:
