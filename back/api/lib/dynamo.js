@@ -21,7 +21,7 @@ export function createUser(user) {
 
     // save password hash
     user.hash = crypto
-      .createHmac("md5", process.env.AUTH_TOKEN_SECRET)
+      .createHmac('md5', process.env.AUTH_TOKEN_SECRET)
       .update(user.password)
       .digest('hex');
 
@@ -60,7 +60,7 @@ export function loginUser(user) {
       if (err) return reject(err);
 
       var hash = crypto
-        .createHmac("md5", process.env.AUTH_TOKEN_SECRET)
+        .createHmac('md5', process.env.AUTH_TOKEN_SECRET)
         .update(user.password)
         .digest('hex');
 
@@ -86,7 +86,7 @@ export function updateUser(obj) {
     user.name = obj.name;
     user.email = obj.email;
     user.hash = crypto
-      .createHmac("md5", process.env.AUTH_TOKEN_SECRET)
+      .createHmac('md5', process.env.AUTH_TOKEN_SECRET)
       .update(obj.password)
       .digest('hex');
 
@@ -116,9 +116,8 @@ export function getUsers() {
 
     docClient.scan(params, function(err, data) {
       if (err) return reject(err);
-      return resolve(data["Items"]);
+      return resolve(data.Items);
     });
-
   });
 }
 
@@ -138,7 +137,7 @@ export function getUser(id) {
 
     docClient.get(params, function(err, data) {
       if (err) return reject(err);
-      return resolve(data["Item"]);
+      return resolve(data.Item);
     });
 
   });

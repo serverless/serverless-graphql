@@ -13,15 +13,3 @@ export function query(query) {
     return cb(null, result);
   });
 }
-
-
-export function queryPublicSchema(query) {
-
-  // patch to allow queries from GraphiQL
-  // like the initial introspectionQuery
-  if (query && query.hasOwnProperty('query')) {
-    query = query.query.replace("\n", ' ', "g");
-  }
-
-  return graphql(PublicSchema, query);
-}

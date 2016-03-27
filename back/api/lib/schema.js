@@ -7,36 +7,31 @@ import {
 } from 'graphql';
 
 import {
-  GraphQLLimitedString
-} from 'graphql-custom-types';
+  getUsers,
+  getUser,
+  createUser,
+  loginUser,
+  updateUser
+} from './dynamo';
 
-import { getUsers, getUser, createUser, loginUser, updateUser, deleteUser } from './dynamo';
-
-const UserType = new GraphQLObjectType({
-  name: "User",
-  description: "User",
-  fields: () => ({
-    id: {type: GraphQLString},
-    name: {type: GraphQLString},
-    email: {type: GraphQLString},
-    hash: {type: GraphQLString}
-  })
-});
+import {
+  UserType
+} from './types';
 
 const Queries = new GraphQLObjectType({
-  name: 'Schema Root',
-  description: "Root of the Schema",
+  name: 'Root',
+  description: 'Root of the Schema',
   fields: () => ({
     users: {
       type: new GraphQLList(UserType),
-      description: "List of users",
+      description: 'List of users',
       resolve: function(source, args) {
         return getUsers();
       }
     },
     user: {
       type: UserType,
-      description: "Get User by id",
+      description: 'Get User by id',
       args: {
         id: {type: new GraphQLNonNull(GraphQLString)}
       },
@@ -47,13 +42,12 @@ const Queries = new GraphQLObjectType({
   })
 });
 
-
 const Mutations = new GraphQLObjectType({
   name: 'Mutations',
   fields: {
     createUser: {
       type: UserType,
-      description: "Create User",
+      description: 'Create User',
       args: {
         name: { type: new GraphQLNonNull(GraphQLString) },
         password: { type: new GraphQLNonNull(GraphQLString) },
@@ -65,7 +59,7 @@ const Mutations = new GraphQLObjectType({
     },
     loginUser: {
       type: UserType,
-      description: "Login User",
+      description: 'Login User',
       args: {
         name: { type: new GraphQLNonNull(GraphQLString) },
         password: { type: new GraphQLNonNull(GraphQLString) }
@@ -76,7 +70,7 @@ const Mutations = new GraphQLObjectType({
     },
     updateUser: { // Authenticated, requires JWT
       type: UserType,
-      description: "Update User",
+      description: 'Update User',
       args: {
         jwt: { type: new GraphQLNonNull(GraphQLString) },
         name: { type: new GraphQLNonNull(GraphQLString) },
