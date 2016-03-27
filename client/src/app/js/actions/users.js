@@ -26,7 +26,7 @@ export function createUser(user) {
     }`
   };
 
-  return (dispatch) => fetch(`${API_URL}/private/`, {
+  return (dispatch) => fetch(`${API_URL}/data/`, {
     method: 'POST',
     body: JSON.stringify(query)
   })
@@ -52,7 +52,7 @@ export function getUsers() {
     }`
   };
 
-  return (dispatch) => fetch(`${API_URL}/public/`, {
+  return (dispatch) => fetch(`${API_URL}/data/`, {
     method: 'POST',
     body: JSON.stringify(query)
   })
@@ -79,7 +79,7 @@ export function getUser(id) {
     }`
   };
 
-  return (dispatch) => fetch(`${API_URL}/public/`, {
+  return (dispatch) => fetch(`${API_URL}/data/`, {
     method: 'POST',
     body: JSON.stringify(query)
   })
@@ -111,7 +111,7 @@ export function updateUser(user) {
     }`
   };
 
-  return (dispatch) => fetch(`${API_URL}/private/`, {
+  return (dispatch) => fetch(`${API_URL}/data/`, {
     method: 'POST',
     body: JSON.stringify(query)
   })
@@ -138,7 +138,7 @@ export function deleteUser(id) {
     }`
   };
 
-  return (dispatch) => fetch(`${API_URL}/private/`, {
+  return (dispatch) => fetch(`${API_URL}/data/`, {
     method: 'POST',
     body: JSON.stringify(query)
   })
