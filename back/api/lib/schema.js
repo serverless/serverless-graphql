@@ -10,13 +10,22 @@ import {
   GraphQLLimitedString
 } from 'graphql-custom-types';
 
-import UserType from './UserType';
+import { getUsers, getUser, createUser, loginUser, updateUser, deleteUser } from './dynamo';
 
-import { getUsers, getUser, createUser, updateUser, deleteUser } from '../dynamo';
+const UserType = new GraphQLObjectType({
+  name: "User",
+  description: "User",
+  fields: () => ({
+    id: {type: GraphQLString},
+    name: {type: GraphQLString},
+    email: {type: GraphQLString},
+    hash: {type: GraphQLString}
+  })
+});
 
-const PrivateQueries = new GraphQLObjectType({
-  name: 'PrivateSchema',
-  description: "Root of the Private Schema",
+const Queries = new GraphQLObjectType({
+  name: 'Schema Root',
+  description: "Root of the Schema",
   fields: () => ({
     users: {
       type: new GraphQLList(UserType),
@@ -38,8 +47,9 @@ const PrivateQueries = new GraphQLObjectType({
   })
 });
 
-const PrivateMutations = new GraphQLObjectType({
-  name: 'PrivateMutations',
+
+const Mutations = new GraphQLObjectType({
+  name: 'Mutations',
   fields: {
     createUser: {
       type: UserType,
@@ -53,11 +63,22 @@ const PrivateMutations = new GraphQLObjectType({
         return createUser(args);
       }
     },
-    updateUser: {
+    loginUser: {
+      type: UserType,
+      description: "Login User",
+      args: {
+        name: { type: new GraphQLNonNull(GraphQLString) },
+        password: { type: new GraphQLNonNull(GraphQLString) }
+      },
+      resolve: function(source, args) {
+        return loginUser(args);
+      }
+    },
+    updateUser: { // Authenticated, requires JWT
       type: UserType,
       description: "Update User",
       args: {
-        id: { type: new GraphQLNonNull(GraphQLString) },
+        jwt: { type: new GraphQLNonNull(GraphQLString) },
         name: { type: new GraphQLNonNull(GraphQLString) },
         password: { type: new GraphQLNonNull(GraphQLString) },
         email: { type: new GraphQLNonNull(GraphQLString) }
@@ -65,24 +86,13 @@ const PrivateMutations = new GraphQLObjectType({
       resolve: function(source, args) {
         return updateUser(args);
       }
-    },
-    deleteUser: {
-      type: UserType,
-      description: "Delete User",
-      args: {
-        id: { type: new GraphQLNonNull(GraphQLString) }
-      },
-      resolve: function(source, args) {
-        let id = args.id;
-        return deleteUser(id);
-      }
     }
   }
 });
 
-const PrivateSchema = new GraphQLSchema({
-  query: PrivateQueries,
-  mutation: PrivateMutations
+const Schema = new GraphQLSchema({
+  query: Queries,
+  mutation: Mutations
 });
 
-export default PrivateSchema;
+export default Schema;

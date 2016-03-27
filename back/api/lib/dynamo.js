@@ -2,6 +2,7 @@ import Promise from 'bluebird';
 import AWS from 'aws-sdk';
 import uuid from 'uuid';
 import crypto from 'crypto';
+import jwt from 'jsonwebtoken';
 
 const dynamoConfig = {
   sessionToken:    process.env.AWS_SESSION_TOKEN,
@@ -39,16 +40,55 @@ export function createUser(user) {
   });
 }
 
-export function updateUser(user) {
+export function loginUser(user) {
   return new Promise(function(resolve, reject) {
-    let salt = bcryptjs.genSaltSync(10);
 
+    var params = {
+      TableName: usersTable,
+      Key: {
+        name: user.name
+      },
+      AttributesToGet: [
+        'id',
+        'name',
+        'email',
+        'hash'
+      ]
+    };
+
+    docClient.get(params, function(err, data) {
+      if (err) return reject(err);
+
+      var hash = crypto
+        .createHmac("md5", process.env.AUTH_TOKEN_SECRET)
+        .update(user.password)
+        .digest('hex');
+
+      if (hash != data.Item.hash) reject('invalid password');
+
+      var obj = {
+        user: data.Item,
+        token: jwt.sign(data.Item, process.env.AUTH_TOKEN_SECRET)
+      };
+
+      return resolve(obj);
+    });
+  });
+}
+
+export function updateUser(obj) {
+  return new Promise(function(resolve, reject) {
+
+    // make sure user is logged in
+    var user = jwt.verify(obj.jwt, process.env.AUTH_TOKEN_SECRET);
+
+    // update data
+    user.name = obj.name;
+    user.email = obj.email;
     user.hash = crypto
       .createHmac("md5", process.env.AUTH_TOKEN_SECRET)
-      .update(user.password)
+      .update(obj.password)
       .digest('hex');
-
-    delete user.password;
 
     var params = {
       TableName: usersTable,
