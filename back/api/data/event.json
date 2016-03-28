@@ -1,1 +1,3 @@
-{}
+{
+  "query": "query getUsersTest { users {id username name email jwt} }"
+}

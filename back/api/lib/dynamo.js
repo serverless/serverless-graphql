@@ -9,6 +9,7 @@ const dynamoConfig = {
   region:          process.env.AWS_REGION
 };
 
+
 const docClient = new AWS.DynamoDB.DocumentClient(dynamoConfig);
 const stage = process.env.SERVERLESS_STAGE;
 const projectName = process.env.SERVERLESS_PROJECT;
@@ -20,7 +21,7 @@ export function createUser(user) {
     user.id = uuid.v1();
 
     // save password hash
-    user.hash = crypto
+    user.password_hash = crypto
       .createHmac('md5', process.env.AUTH_TOKEN_SECRET)
       .update(user.password)
       .digest('hex');
@@ -46,32 +47,32 @@ export function loginUser(user) {
     var params = {
       TableName: usersTable,
       Key: {
-        name: user.name
+        username: user.username
       },
       AttributesToGet: [
         'id',
         'name',
+        'username',
         'email',
-        'hash'
+        'password_hash'
       ]
     };
 
     docClient.get(params, function(err, data) {
       if (err) return reject(err);
 
-      var hash = crypto
+      var password_hash = crypto
         .createHmac('md5', process.env.AUTH_TOKEN_SECRET)
         .update(user.password)
         .digest('hex');
 
-      if (hash != data.Item.hash) reject('invalid password');
+      if (password_hash != data.Item.password_hash) reject('invalid password');
 
-      var obj = {
-        user: data.Item,
-        token: jwt.sign(data.Item, process.env.AUTH_TOKEN_SECRET)
-      };
+      delete data.Item.password_hash;
 
-      return resolve(obj);
+      data.Item.jwt = jwt.sign(data.Item, process.env.AUTH_TOKEN_SECRET);
+
+      return resolve(data.Item);
     });
   });
 }
@@ -83,9 +84,9 @@ export function updateUser(obj) {
     var user = jwt.verify(obj.jwt, process.env.AUTH_TOKEN_SECRET);
 
     // update data
-    user.name = obj.name;
-    user.email = obj.email;
-    user.hash = crypto
+    user.email = obj.email || user.email;
+    user.name = obj.name || user.name;
+    user.password_hash = crypto
       .createHmac('md5', process.env.AUTH_TOKEN_SECRET)
       .update(obj.password)
       .digest('hex');
@@ -109,6 +110,7 @@ export function getUsers() {
       TableName: usersTable,
       AttributesToGet: [
         'id',
+        'username',
         'name',
         'email'
       ]
@@ -121,15 +123,16 @@ export function getUsers() {
   });
 }
 
-export function getUser(id) {
+export function getUser(username) {
   return new Promise(function(resolve, reject) {
     var params = {
       TableName: usersTable,
       Key: {
-        id: id
+        username: username
       },
       AttributesToGet: [
         'id',
+        'username',
         'name',
         'email'
       ]
@@ -143,12 +146,15 @@ export function getUser(id) {
   });
 }
 
-export function deleteUser(id) {
+export function deleteUser(obj) {
   return new Promise(function(resolve, reject) {
+
+    var user = jwt.verify(obj.jwt, process.env.AUTH_TOKEN_SECRET);
+
     var params = {
       TableName: usersTable,
       Key: {
-        id: id
+        username: user.username
       }
     };
 

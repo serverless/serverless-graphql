@@ -11,7 +11,8 @@ import {
   getUser,
   createUser,
   loginUser,
-  updateUser
+  updateUser,
+  deleteUser
 } from './dynamo';
 
 import {
@@ -31,12 +32,12 @@ const Queries = new GraphQLObjectType({
     },
     user: {
       type: UserType,
-      description: 'Get User by id',
+      description: 'Get User by username',
       args: {
-        id: {type: new GraphQLNonNull(GraphQLString)}
+        username: {type: new GraphQLNonNull(GraphQLString)}
       },
-      resolve: function(source, {id}) {
-        return getUser(id);
+      resolve: function(source, {username}) {
+        return getUser(username);
       }
     }
   })
@@ -49,6 +50,7 @@ const Mutations = new GraphQLObjectType({
       type: UserType,
       description: 'Create User',
       args: {
+        username: { type: new GraphQLNonNull(GraphQLString) },
         name: { type: new GraphQLNonNull(GraphQLString) },
         password: { type: new GraphQLNonNull(GraphQLString) },
         email: { type: new GraphQLNonNull(GraphQLString) }
@@ -61,24 +63,34 @@ const Mutations = new GraphQLObjectType({
       type: UserType,
       description: 'Login User',
       args: {
-        name: { type: new GraphQLNonNull(GraphQLString) },
+        username: { type: new GraphQLNonNull(GraphQLString) },
         password: { type: new GraphQLNonNull(GraphQLString) }
       },
       resolve: function(source, args) {
         return loginUser(args);
       }
     },
-    updateUser: { // Authenticated, requires JWT
+    updateUser: {
       type: UserType,
       description: 'Update User',
       args: {
         jwt: { type: new GraphQLNonNull(GraphQLString) },
         name: { type: new GraphQLNonNull(GraphQLString) },
-        password: { type: new GraphQLNonNull(GraphQLString) },
-        email: { type: new GraphQLNonNull(GraphQLString) }
+        email: { type: new GraphQLNonNull(GraphQLString) },
+        password: { type: new GraphQLNonNull(GraphQLString) }
       },
       resolve: function(source, args) {
         return updateUser(args);
+      }
+    },
+    deleteUser: {
+      type: UserType,
+      description: 'Delete User',
+      args: {
+        jwt: { type: new GraphQLNonNull(GraphQLString) }
+      },
+      resolve: function(source, args) {
+        return deleteUser(args);
       }
     }
   }
