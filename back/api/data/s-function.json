@@ -21,7 +21,7 @@
       "apiKeyRequired": false,
       "requestParameters": {},
       "requestTemplates": {
-        "application/json": ""
+        "application/json": "{\"query\" : $input.json(\"$\")}"
       },
       "responses": {
         "400": {
@@ -40,7 +40,7 @@
   ],
   "events": [],
   "environment": {
-    "SERVERLESS_PROJECT": "serverless-boilerplate",
+    "SERVERLESS_PROJECT": "${project}",
     "SERVERLESS_STAGE": "${stage}",
     "SERVERLESS_REGION": "${region}",
     "AUTH_TOKEN_SECRET": "${authTokenSecret}"

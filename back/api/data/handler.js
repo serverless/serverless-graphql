@@ -7,7 +7,7 @@ module.exports.handler = function(event, context) {
       .then(function (response) {
         context.done(null, response);
       });
-}
+};
 
 /*
 
@@ -36,7 +36,7 @@ module.exports.handler = function(event, context) {
  "query": "mutation updateUserTest {updateUser (name: \"Fake Name\", email: \"eahefnawy@gmail.com\", password: \"secret\", jwt: \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImVhaGVmbmF3eSIsImlkIjoiZDg2N2RhNzAtZjRkZS0xMWU1LTk0ZDgtNmZjZDY3ZWM2MjMwIiwiZW1haWwiOiJlYWhlZm5hd3lAZ21haWwuY29tIiwibmFtZSI6IkVzbGFtIEEuIEhlZm5hd3kiLCJpYXQiOjE0NTkxNjc0MzF9.XfA_B-ufkNHhjw3IWoQZ-hQE1kxMgs1OTfP-TMT436A\"){id username name email jwt}}"
  }
 
- // update user
+ // delete user
  {
  "query": "mutation deleteUserTest {deleteUser (jwt: \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImVhaGVmbmF3eSIsImlkIjoiZDg2N2RhNzAtZjRkZS0xMWU1LTk0ZDgtNmZjZDY3ZWM2MjMwIiwiZW1haWwiOiJlYWhlZm5hd3lAZ21haWwuY29tIiwibmFtZSI6IkVzbGFtIEEuIEhlZm5hd3kiLCJpYXQiOjE0NTkxNjc0MzF9.XfA_B-ufkNHhjw3IWoQZ-hQE1kxMgs1OTfP-TMT436A\"){id username name email jwt}}"
  }
