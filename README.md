@@ -1,7 +1,7 @@
 # Serverless Boilerplate
 [![serverless](http://public.serverless.com/badges/v3.svg)](http://www.serverless.com)
 
-The goal here is not just to create the ultimate boilerplate project for building serverless applications, but to create an application boilerplate with the *lowest total cost of ownership* (e.g., code, administration, cost) by leveraging new tech (e.g., Lambda, GraphQL).
+The goal here is not just to create the ultimate boilerplate project for building serverless applications, but to create an application boilerplate with the *lowest total cost of ownership* (e.g., the least code, administration, cost) by leveraging new tech (e.g., Lambda, GraphQL).
 
 - [Setup](#setup)
 - [Team](#team)
