@@ -1,7 +1,13 @@
 {
   "name": "serverless-boilerplate",
-  "custom": {},
+  "custom": {
+    "meta": {
+      "name": "${meta_bucket}",
+      "region": "${meta_bucket_region}"
+    }
+  },
   "plugins": [
-    "serverless-runtime-babel"
+    "serverless-runtime-babel",
+    "serverless-meta-sync"
   ]
 }

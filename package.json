@@ -10,8 +10,9 @@
     "url": "git://github.com/serverless/serverless-boilerplate"
   },
   "dependencies": {
+    "jsonwebtoken": "^5.7.0",
     "serverless-client-s3": "1.0.0",
-    "serverless-runtime-babel": "^0.0.5",
-    "jsonwebtoken": "^5.7.0"
+    "serverless-meta-sync": "0.0.1",
+    "serverless-runtime-babel": "^0.0.5"
   }
 }
