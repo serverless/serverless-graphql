@@ -9,7 +9,5 @@ export function query(query) {
     query = query.query.replace("\n", ' ', "g");
   }
 
-  graphql(Schema, query).then( function(result) {
-    return cb(null, result);
-  });
+  return graphql(Schema, query);
 }
