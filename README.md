@@ -13,6 +13,8 @@ The goal here is not just to create the ultimate boilerplate project for buildin
 ### Serverless
 1. Run `npm install` in the root of the project
 2. Run `serverless project init` and follow the setup instructions to initialize the project
+3. Add the `authTokenSecret` variable to `s-variables-STAGE-REGION.json` and give it a strong value. This is the secret used to hash passwords and generate JSON web tokens.
+4. Install lambda dependencies before deployment: `cd back/api/` and run `npm install`
 3. Run `serverless dash deploy` and deploy all endpoints and functions
 4. Make sure to enable CORS for your API Gateway endpoints (so that external clients can access them)
 
@@ -31,7 +33,7 @@ The goal here is not just to create the ultimate boilerplate project for buildin
 If you're running OSX, you can use the [GraphiQL Electron App](https://github.com/skevy/graphiql-app) to test the GraphQL backend without a client:
 
 - Install [brew cask](https://caskroom.github.io) for easy installation: `brew tap caskroom/cask`
-- Install GraphiQl App: `brew cask install graphiql`
+- Install GraphiQL App: `brew cask install graphiql`
 - Open GraphiQL application. You'll find it in your Application folder.
 - Add your data endpoint to the "GraphQL Endpoint" text field, and make sure the "Method" is set to `POST`.
 - Try this mutation to create the first user:
