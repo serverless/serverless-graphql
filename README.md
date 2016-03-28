@@ -34,7 +34,7 @@ If you're running OSX, you can use the [GraphiQL Electron App](https://github.co
 
 - Install [brew cask](https://caskroom.github.io) for easy installation: `brew tap caskroom/cask`
 - Install GraphiQL App: `brew cask install graphiql`
-- Open GraphiQL application. You'll find it in your Application folder.
+- Open GraphiQL application. Just search for `GraphiQL` using OSX Spotlight Search!
 - Add your data endpoint to the "GraphQL Endpoint" text field, and make sure the "Method" is set to `POST`.
 - Try this mutation to create the first user:
 
