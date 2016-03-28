@@ -27,6 +27,59 @@ The goal here is not just to create the ultimate boilerplate project for buildin
 2. Run `npm run-script build`
 3. The built assets are now in `client/dist`
 
+### Testing With GraphiQL
+If you're running OSX, you can use the [GraphiQL Electron App](https://github.com/skevy/graphiql-app) to test the GraphQL backend without a client:
+
+- Install [brew cask](https://caskroom.github.io) for easy installation: `brew tap caskroom/cask`
+- Install GraphiQl App: `brew cask install graphiql`
+- Open GraphiQL application. You'll find it in your Application folder.
+- Add your data endpoint to the "GraphQL Endpoint" text field, and make sure the "Method" is set to `POST`.
+- Try this mutation to create the first user:
+
+
+```
+mutation createUserTest {
+  createUser (username: "serverless", name: "Serverless Inc.", email: "hello@serverless.com", password: "secret") {
+    id 
+    username 
+    name 
+    email  
+  }
+}
+```
+
+- Now list all users using the following query:
+
+
+```
+query getUsersTest { 
+  users {
+    id
+    username
+    name
+    email
+  } 
+}
+```
+
+- You should get the user you just created:
+
+
+```
+{
+  "data": {
+    "users": [
+      {
+        "id": "aca42ee0-f509-11e5-bc11-0d8b1f79b4b9",
+        "username": "serverless",
+        "name": "Serverless Inc.",
+        "email": "hello@serverless.com"
+      }
+    ]
+  }
+}
+```
+
 ---
 
 ## Team
