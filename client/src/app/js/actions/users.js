@@ -14,13 +14,15 @@ export function createUser(user) {
   const query = { "query":
     `mutation createNewUser {
       user: createUser (
-        name: "${user.name}"
+        name: "${user.name}",
+        username: "${user.username}"
         email: "${user.email}"
         password: "${user.password}"
       )
       {
         id
         name
+        username
         email
       }
     }`
@@ -47,6 +49,7 @@ export function getUsers() {
       users {
         id
         name
+        username
         email
       }
     }`
@@ -67,13 +70,14 @@ export function getUsers() {
   }));
 }
 
-export function getUser(id) {
+export function getUser(username) {
   const query = { "query":
     `{
-      user(id: "${id}")
+      user(username: "${username}")
       {
         id
         name
+        username
         email
       }
     }`
@@ -99,7 +103,8 @@ export function updateUser(user) {
     `mutation updateExistingUser {
       user: updateUser (
         id: "${user.id}"
-        name: "${user.name}",
+        name: "${user.name}"
+        username: "${user.username}"
         email: "${user.email}"
         password: "${user.password}"
       )

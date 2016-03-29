@@ -20,7 +20,7 @@ class UsersIndex extends Component {
             <table className="u-full-width">
               <thead>
                 <tr>
-                  <th>ID</th>
+                  <th>Username</th>
                   <th>Name</th>
                   <th>E-Mail</th>
                   <th></th>
@@ -31,11 +31,11 @@ class UsersIndex extends Component {
                 return (
                   <tr key={user.id}>
                     <td>
-                      <Link to={ 'users/' + user.id + '/show' }>{user.id}</Link>
+                      <Link to={ 'users/' + user.username + '/show' }>{user.username}</Link>
                     </td>
                     <td>{user.name}</td>
                     <td>{user.email}</td>
-                    <td><Link to={ 'users/' + user.id + '/edit' }>Edit</Link></td>
+                    <td><Link to={ 'users/' + user.username + '/edit' }>Edit</Link></td>
                   </tr>
                 )}
               )}

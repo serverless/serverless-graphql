@@ -10,8 +10,8 @@ import UsersNew from './components/users/new';
 export default (
   <Route path="/" component={App}>
     <IndexRoute component={UsersIndex} />
-    <Route path="users/:id/show" component={UsersShow} />
-    <Route path="users/:id/edit" component={UsersEdit} />
+    <Route path="users/:username/show" component={UsersShow} />
+    <Route path="users/:username/edit" component={UsersEdit} />
     <Route path="users/new" component={UsersNew} />
   </Route>
 );

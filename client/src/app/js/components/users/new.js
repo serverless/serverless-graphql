@@ -12,12 +12,14 @@ class UsersNew extends Component {
     event.preventDefault();
 
     let name = this.refs.name.value;
+    let username = this.refs.username.value;
     let email = this.refs.email.value;
     let password = this.refs.password.value;
 
-    if (name.length !== 0 && email.length !== 0 && password.length !== 0) {
+    if (name.length !== 0 && username.length !== 0 && email.length !== 0 && password.length !== 0) {
       let user = {
         name: name,
+        username: username,
         email: email,
         password: password
       };
@@ -39,6 +41,7 @@ class UsersNew extends Component {
             <h1>Add user</h1>
             <hr />
             <input type="text" placeholder="Name" className="u-full-width" ref="name" />
+            <input type="text" placeholder="Username" className="u-full-width" ref="username" />
             <input type="email" placeholder="E-Mail" className="u-full-width" ref="email" />
             <input type="password" placeholder="Password" className="u-full-width" ref="password" />
             <input type="submit" className="button button-primary" />

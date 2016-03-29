@@ -9,7 +9,7 @@ class UsersEdit extends Component {
   };
 
   componentWillMount() {
-    this.props.getUser(this.props.params.id);
+    this.props.getUser(this.props.params.username);
   }
 
   onDeleteClick() {
@@ -59,6 +59,7 @@ class UsersEdit extends Component {
           <hr />
           <form onSubmit={this.handleSubmit.bind(this)}>
             <input type="text" placeholder="Name" className="u-full-width" ref="name" defaultValue={user.name}/>
+            <input type="text" placeholder="Username" className="u-full-width" ref="name" defaultValue={user.username}/>
             <input type="email" placeholder="E-Mail" className="u-full-width" ref="email" defaultValue={user.email} />
             <input type="password" placeholder="Password" className="u-full-width" ref="password" defaultValue={user.password} />
             <input type="submit" className="button button-primary" />
