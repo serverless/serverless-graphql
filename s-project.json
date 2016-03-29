@@ -1,5 +1,5 @@
 {
-  "name": "serverless-boilerplate",
+  "name": "sls-boilerplate",
   "custom": {
     "meta": {
       "name": "${meta_bucket}",
@@ -7,12 +7,18 @@
     },
     "cors": {
       "allowOrigin": "*",
-      "allowHeaders": ["Content-Type", "X-Amz-Date", "Authorization", "X-Api-Key"]
+      "allowHeaders": [
+        "Content-Type",
+        "X-Amz-Date",
+        "Authorization",
+        "X-Api-Key"
+      ]
     }
   },
   "plugins": [
     "serverless-runtime-babel",
     "serverless-meta-sync",
-    "serverless-cors-plugin"
+    "serverless-cors-plugin",
+    "serverless-client-s3"
   ]
 }
