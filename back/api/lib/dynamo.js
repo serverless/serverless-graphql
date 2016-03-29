@@ -1,7 +1,7 @@
 import Promise from 'bluebird';
 import AWS from 'aws-sdk';
 import uuid from 'uuid';
-import crypto from 'crypto';
+import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 const dynamoConfig = {
@@ -20,11 +20,8 @@ export function createUser(user) {
 
     user.id = uuid.v1();
 
-    // save password hash
-    user.password_hash = crypto
-      .createHmac('md5', process.env.AUTH_TOKEN_SECRET)
-      .update(user.password)
-      .digest('hex');
+    // generated salted hash with bcrypt with 10 work factor
+    user.password_hash = bcrypt.hashSync(user.password, 10);
 
     delete user.password; // don't save plain password!
 
@@ -61,12 +58,9 @@ export function loginUser(user) {
     docClient.get(params, function(err, data) {
       if (err) return reject(err);
 
-      var password_hash = crypto
-        .createHmac('md5', process.env.AUTH_TOKEN_SECRET)
-        .update(user.password)
-        .digest('hex');
+      var match = bcrypt.compareSync(user.password, data.Item.password_hash);
 
-      if (password_hash != data.Item.password_hash) reject('invalid password');
+      if (!match) reject('invalid password');
 
       delete data.Item.password_hash;
 
@@ -86,10 +80,7 @@ export function updateUser(obj) {
     // update data
     user.email = obj.email || user.email;
     user.name = obj.name || user.name;
-    user.password_hash = crypto
-      .createHmac('md5', process.env.AUTH_TOKEN_SECRET)
-      .update(obj.password)
-      .digest('hex');
+    user.password_hash = bcrypt.hashSync(obj.password, 10);
 
     var params = {
       TableName: usersTable,
