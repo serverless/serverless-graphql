@@ -1,13 +1,13 @@
 {
-  "name": "serverless-boilerplate",
-  "custom": {
-    "meta": {
-      "name": "${meta_bucket}",
-      "region": "${meta_bucket_region}"
+  name: "serverless-boilerplate",
+  custom: {
+    meta: {
+      name: "${meta_bucket}",
+      region: "${meta_bucket_region}"
     },
-    "cors": {
-      "allowOrigin": "*",
-      "allowHeaders": [
+    cors: {
+      allowOrigin: "*",
+      allowHeaders: [
         "Content-Type",
         "X-Amz-Date",
         "Authorization",
@@ -15,7 +15,7 @@
       ]
     }
   },
-  "plugins": [
+  plugins: [
     "serverless-runtime-babel",
     "serverless-meta-sync",
     "serverless-cors-plugin",
