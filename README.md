@@ -37,12 +37,21 @@ npm start
 ```
 
 ### Testing With GraphiQL
-If you're running OSX, you can use the [GraphiQL Electron App](https://github.com/skevy/graphiql-app) to test the GraphQL backend without a client:
+
+You may use the [serverless-client-s3](https://github.com/serverless/serverless-client-s3) plugin to deploy a web client to S3.
+ 
+- Set `API_URL` in `/client/dist/index.html`
+- Run `serverless client deploy`
+
+Alternatively (if you're running OSX), you can use the [GraphiQL Electron App](https://github.com/skevy/graphiql-app) to test the GraphQL backend without a client:
 
 - Install [brew cask](https://caskroom.github.io) for easy installation: `brew tap caskroom/cask`
 - Install GraphiQL App: `brew cask install graphiql`
 - Open GraphiQL application. Just search for `GraphiQL` using OSX Spotlight Search!
 - Add your data endpoint to the "GraphQL Endpoint" text field, and make sure the "Method" is set to `POST`.
+
+Using your GraphiQL client, 
+
 - Try this mutation to create the first user:
 
 

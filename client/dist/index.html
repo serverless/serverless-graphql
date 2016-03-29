@@ -40,7 +40,7 @@
      */
 
     // Add your GraphQL endpoint
-    var GRAPHQL_ENDPOINT = null || (window.location.origin + '/graphql');
+    var API_URL = null || (window.location.origin + '/graphql');
 
     // Parse the search string to get url parameters.
     var search = window.location.search;
@@ -93,7 +93,7 @@
 
     // Defines a GraphQL fetcher using the fetch API.
     function graphQLFetcher(graphQLParams) {
-        return fetch(GRAPHQL_ENDPOINT, {
+        return fetch(API_URL, {
             mode: 'cors',
             method: 'post',
             headers: {
