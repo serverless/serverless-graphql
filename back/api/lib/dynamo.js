@@ -9,43 +9,33 @@ const dynamoConfig = {
   region:          process.env.AWS_REGION
 };
 
-
 const docClient = new AWS.DynamoDB.DocumentClient(dynamoConfig);
 const stage = process.env.SERVERLESS_STAGE;
 const projectName = process.env.SERVERLESS_PROJECT;
 const usersTable = projectName + '-users-' + stage;
 
-export function createUser(user) {
-  return new Promise(function(resolve, reject) {
-
-    user.id = uuid.v1();
-
-    // generated salted hash with bcryptjs with 10 work factor
-    user.password_hash = bcryptjs.hashSync(user.password, 10);
-
-    delete user.password; // don't save plain password!
-
-    var params = {
-      TableName: usersTable,
-      Item: user
-    };
-
-    docClient.put(params, function(err, data) {
-      if (err) return reject(err);
-      return resolve(user);
-    });
-
-  });
+const db = (method, params) => {
+  return Promise.fromCallback(cb => docClient[method](params, cb));
 }
 
-export function loginUser(user) {
-  return new Promise(function(resolve, reject) {
+export function createUser(user) {
+  user.id = uuid.v1();
 
-    var params = {
+  // generated salted hash with bcryptjs with 10 work factor
+  user.password_hash = bcryptjs.hashSync(user.password, 10);
+
+  delete user.password; // don't save plain password!
+
+  return db('put', {
+    TableName: usersTable,
+    Item: user
+  }).then(() => user);
+}
+
+export function loginUser({username, password}) {
+  return db('get', {
       TableName: usersTable,
-      Key: {
-        username: user.username
-      },
+      Key: {username},
       AttributesToGet: [
         'id',
         'name',
@@ -53,106 +43,65 @@ export function loginUser(user) {
         'email',
         'password_hash'
       ]
-    };
+    })
+    .then(({Item}) => {
+      let match = bcryptjs.compareSync(password, Item.password_hash);
+      if (!match) return Promise.reject('invalid password');
 
-    docClient.get(params, function(err, data) {
-      if (err) return reject(err);
+      delete Item.password_hash;
 
-      var match = bcryptjs.compareSync(user.password, data.Item.password_hash);
+      Item.jwt = jwt.sign(Item, process.env.AUTH_TOKEN_SECRET);
+      Item.username = "superman"
 
-      if (!match) reject('invalid password');
-
-      delete data.Item.password_hash;
-
-      data.Item.jwt = jwt.sign(data.Item, process.env.AUTH_TOKEN_SECRET);
-
-      return resolve(data.Item);
+      return Item;
     });
-  });
 }
 
 export function updateUser(obj) {
-  return new Promise(function(resolve, reject) {
+  // make sure user is logged in
+  let user = jwt.verify(obj.jwt, process.env.AUTH_TOKEN_SECRET);
 
-    // make sure user is logged in
-    var user = jwt.verify(obj.jwt, process.env.AUTH_TOKEN_SECRET);
+  // update data
+  user.email = obj.email || user.email;
+  user.name = obj.name || user.name;
+  user.password_hash = bcryptjs.hashSync(obj.password, 10);
 
-    // update data
-    user.email = obj.email || user.email;
-    user.name = obj.name || user.name;
-    user.password_hash = bcryptjs.hashSync(obj.password, 10);
-
-    var params = {
-      TableName: usersTable,
-      Item: user
-    };
-
-    docClient.put(params, function(err, data) {
-      if (err) return reject(err);
-      return resolve(user);
-    });
-
-  });
+  return db('put', {
+    TableName: usersTable,
+    Item: user
+  }).then(() => user);
 }
 
 export function getUsers() {
-  return new Promise(function(resolve, reject) {
-    var params = {
-      TableName: usersTable,
-      AttributesToGet: [
-        'id',
-        'username',
-        'name',
-        'email'
-      ]
-    };
-
-    docClient.scan(params, function(err, data) {
-      if (err) return reject(err);
-      return resolve(data.Items);
-    });
-  });
+  return db('scan', {
+    TableName: usersTable,
+    AttributesToGet: [
+      'id',
+      'username',
+      'name',
+      'email'
+    ]
+  }).then(({Items}) => Items);
 }
 
 export function getUser(username) {
-  return new Promise(function(resolve, reject) {
-    var params = {
-      TableName: usersTable,
-      Key: {
-        username: username
-      },
-      AttributesToGet: [
-        'id',
-        'username',
-        'name',
-        'email'
-      ]
-    };
-
-    docClient.get(params, function(err, data) {
-      if (err) return reject(err);
-      return resolve(data.Item);
-    });
-
-  });
+  return db('get', {
+    TableName: usersTable,
+    Key: {username},
+    AttributesToGet: [
+      'id',
+      'username',
+      'name',
+      'email'
+    ]
+  }).then(({Item}) => Item);
 }
 
 export function deleteUser(obj) {
-  return new Promise(function(resolve, reject) {
+  let {username} = jwt.verify(obj.jwt, process.env.AUTH_TOKEN_SECRET);
 
-    var user = jwt.verify(obj.jwt, process.env.AUTH_TOKEN_SECRET);
-
-    var params = {
-      TableName: usersTable,
-      Key: {
-        username: user.username
-      }
-    };
-
-    docClient.delete(params, function(err, data) {
-      if (err) return reject(err);
-      return resolve();
-    });
-
+  return db('delete', {
+    TableName: usersTable,
+    Key: {username}
   });
 }
