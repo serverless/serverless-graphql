@@ -1,5 +1,5 @@
 {
-  "name": "sls-boilerplate",
+  "name": "serverless-boilerplate",
   "custom": {
     "meta": {
       "name": "${meta_bucket}",
