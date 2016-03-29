@@ -51,7 +51,6 @@ export function loginUser({username, password}) {
       delete Item.password_hash;
 
       Item.jwt = jwt.sign(Item, process.env.AUTH_TOKEN_SECRET);
-      Item.username = "superman"
 
       return Item;
     });
