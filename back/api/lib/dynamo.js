@@ -1,7 +1,7 @@
 import Promise from 'bluebird';
 import AWS from 'aws-sdk';
 import uuid from 'uuid';
-import bcrypt from 'bcrypt';
+import bcryptjs from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 const dynamoConfig = {
@@ -20,8 +20,8 @@ export function createUser(user) {
 
     user.id = uuid.v1();
 
-    // generated salted hash with bcrypt with 10 work factor
-    user.password_hash = bcrypt.hashSync(user.password, 10);
+    // generated salted hash with bcryptjs with 10 work factor
+    user.password_hash = bcryptjs.hashSync(user.password, 10);
 
     delete user.password; // don't save plain password!
 
@@ -58,7 +58,7 @@ export function loginUser(user) {
     docClient.get(params, function(err, data) {
       if (err) return reject(err);
 
-      var match = bcrypt.compareSync(user.password, data.Item.password_hash);
+      var match = bcryptjs.compareSync(user.password, data.Item.password_hash);
 
       if (!match) reject('invalid password');
 
@@ -80,7 +80,7 @@ export function updateUser(obj) {
     // update data
     user.email = obj.email || user.email;
     user.name = obj.name || user.name;
-    user.password_hash = bcrypt.hashSync(obj.password, 10);
+    user.password_hash = bcryptjs.hashSync(obj.password, 10);
 
     var params = {
       TableName: usersTable,
