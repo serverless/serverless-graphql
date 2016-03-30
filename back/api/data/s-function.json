@@ -4,12 +4,25 @@
   "description": "Serverless Lambda function for project: serverless-boilerplate",
   "customName": false,
   "customRole": false,
-  "handler": "data/handler.handler",
+  "handler": "data/handler.default",
   "timeout": 6,
   "memorySize": 1024,
   "authorizer": {},
   "custom": {
-    "excludePatterns": []
+    "excludePatterns": [],
+    "runtime": {
+      "transforms": [
+        {
+          "name": "babelify",
+          "opts": {
+            "presets": [
+              "es2015"
+            ]
+          }
+        },
+        "bulkify"
+      ]
+    }
   },
   "endpoints": [
     {

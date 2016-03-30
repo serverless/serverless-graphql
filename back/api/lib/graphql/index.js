@@ -1,7 +1,7 @@
 import { graphql } from 'graphql';
 import Schema from './schema'
 
-export function query(query) {
+export default (query) => {
 
   // patch to allow queries from GraphiQL
   // like the initial introspectionQuery
