@@ -1,10 +1,6 @@
-'use strict';
+import gql from '../lib/graphql'
 
-var lib = require('../lib');
-
-module.exports.handler = function(event, context) {
-  return lib.query(event.query);
-};
+export default ({query}) => gql(query)
 
 /*
 
