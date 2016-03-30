@@ -7,7 +7,9 @@ import {
   GET_USER,
   CREATE_USER,
   UPDATE_USER,
-  DELETE_USER
+  DELETE_USER,
+  LOGIN_USER,
+  LOGOUT_USER
 } from './constants';
 
 export function createUser(user) {
@@ -156,4 +158,42 @@ export function deleteUser(id) {
     type: ERROR,
     payload: exception.message
   }));
+}
+
+export function loginUser(user) {
+  const query = { "query":
+    `mutation loginUser {
+      user: loginUser (
+        username: "${user.username}",
+        password: "${user.password}"
+      )
+      {
+        id
+        username
+        name
+        email
+        jwt
+      }
+    }`
+  };
+
+  return (dispatch) => fetch(`${API_URL}/data/`, {
+    method: 'POST',
+    body: JSON.stringify(query)
+  })
+  .then(response => response.json())
+  .then(json => dispatch({
+    type: LOGIN_USER,
+    payload: json
+  }))
+  .catch(exception => dispatch({
+    type: ERROR,
+    payload: exception.message
+  }));
+}
+
+export function logoutUser() {
+  return {
+    type: LOGOUT_USER
+  }
 }
