@@ -1,24 +1,14 @@
 import Promise from 'bluebird';
-import AWS from 'aws-sdk';
 import uuid from 'uuid';
 import bcryptjs from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import db from '../../../dynamodb';
 
-const dynamoConfig = {
-  sessionToken:    process.env.AWS_SESSION_TOKEN,
-  region:          process.env.AWS_REGION
-};
-
-const docClient = new AWS.DynamoDB.DocumentClient(dynamoConfig);
 const stage = process.env.SERVERLESS_STAGE;
 const projectName = process.env.SERVERLESS_PROJECT;
 const usersTable = projectName + '-users-' + stage;
 
-const db = (method, params) => {
-  return Promise.fromCallback(cb => docClient[method](params, cb));
-}
-
-export function createUser(user) {
+export function create(user) {
   user.id = uuid.v1();
 
   // generated salted hash with bcryptjs with 10 work factor
@@ -32,7 +22,7 @@ export function createUser(user) {
   }).then(() => user);
 }
 
-export function loginUser({username, password}) {
+export function login({username, password}) {
   return db('get', {
       TableName: usersTable,
       Key: {username},
@@ -45,6 +35,8 @@ export function loginUser({username, password}) {
       ]
     })
     .then(({Item}) => {
+      if (!Item) return Promise.reject('User not found');
+
       let match = bcryptjs.compareSync(password, Item.password_hash);
       if (!match) return Promise.reject('invalid password');
 
@@ -56,7 +48,32 @@ export function loginUser({username, password}) {
     });
 }
 
-export function updateUser(obj) {
+export function get(username) {
+  return db('get', {
+    TableName: usersTable,
+    Key: {username},
+    AttributesToGet: [
+      'id',
+      'username',
+      'name',
+      'email'
+    ]
+  }).then(({Item}) => Item);
+}
+
+export function getAll() {
+  return db('scan', {
+    TableName: usersTable,
+    AttributesToGet: [
+      'id',
+      'username',
+      'name',
+      'email'
+    ]
+  }).then(({Items}) => Items);
+}
+
+export function update(obj) {
   // make sure user is logged in
   let user = jwt.verify(obj.jwt, process.env.AUTH_TOKEN_SECRET);
 
@@ -71,32 +88,7 @@ export function updateUser(obj) {
   }).then(() => user);
 }
 
-export function getUsers() {
-  return db('scan', {
-    TableName: usersTable,
-    AttributesToGet: [
-      'id',
-      'username',
-      'name',
-      'email'
-    ]
-  }).then(({Items}) => Items);
-}
-
-export function getUser(username) {
-  return db('get', {
-    TableName: usersTable,
-    Key: {username},
-    AttributesToGet: [
-      'id',
-      'username',
-      'name',
-      'email'
-    ]
-  }).then(({Item}) => Item);
-}
-
-export function deleteUser(obj) {
+export function remove(obj) {
   let {username} = jwt.verify(obj.jwt, process.env.AUTH_TOKEN_SECRET);
 
   return db('delete', {
