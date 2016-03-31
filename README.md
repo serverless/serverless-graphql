@@ -1,7 +1,7 @@
 # Serverless Boilerplate
 [![serverless](http://public.serverless.com/badges/v3.svg)](http://www.serverless.com)
 
-The Serverless GraphQL Boilerplate.  It's a monolithic architecture that leverages new technologies (Lambda, GraphQL) to reach a very low *total cost of ownership* (i.e., least amount of code, administration, cost).  This is ideal for smaller projects.
+This boilerplate application features a monolithic architecture that leverages new technologies (Lambda, GraphQL) to reach a very low *total cost of ownership* (i.e., least amount of code, administration, cost).  This is ideal for smaller projects.
 
 - [Setup](#setup)
 - [Team](#team)
