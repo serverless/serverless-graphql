@@ -1,0 +1,7 @@
+{
+  "apiGatewayRequestTemplate": {
+    "application/json": {
+      "apiId" : "$context.apiId"
+    }
+  }
+}
