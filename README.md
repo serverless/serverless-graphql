@@ -16,6 +16,7 @@ If you haven't yet installed `serverless` on your machine, run `npm install -g s
 ```
 git clone https://github.com/serverless/serverless-boilerplate.git
 cd serverless-boilerplate
+npm install
 serverless project init
 ```
 
@@ -25,10 +26,11 @@ After following the setup instructions, add the `authTokenSecret` variable to `_
 cd back/api
 npm install
 serverless dash deploy
+serverless endpoint deploy --all
 ```
 
 ### Client
-Set `API_URL` in `client/src/app/js/actions/index.js`
+Set `API_URL` in `client/src/app/js/actions/index.js`. Then:
 
 ```
 cd ../../client/src
