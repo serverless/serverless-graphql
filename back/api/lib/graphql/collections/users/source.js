@@ -1,8 +1,8 @@
 import Promise from 'bluebird';
 import uuid from 'uuid';
 import bcryptjs from 'bcryptjs';
-import jwt from 'jsonwebtoken';
 import db from '../../../dynamodb';
+import authenticate from './auth';
 
 const stage = process.env.SERVERLESS_STAGE;
 const projectName = process.env.SERVERLESS_PROJECT;
@@ -10,6 +10,7 @@ const usersTable = projectName + '-users-' + stage;
 
 export function create(user) {
   user.id = uuid.v1();
+  user.permissions = ['UPDATE_USER', 'DELETE_USER'];
 
   // generated salted hash with bcryptjs with 10 work factor
   user.password_hash = bcryptjs.hashSync(user.password, 10);
@@ -42,7 +43,7 @@ export function login({username, password}) {
 
       delete Item.password_hash;
 
-      Item.jwt = jwt.sign(Item, process.env.AUTH_TOKEN_SECRET);
+      Item.token = authenticate(Item);
 
       return Item;
     });
@@ -73,9 +74,7 @@ export function getAll() {
   }).then(({Items}) => Items);
 }
 
-export function update(obj) {
-  // make sure user is logged in
-  let user = jwt.verify(obj.jwt, process.env.AUTH_TOKEN_SECRET);
+export function update(user, obj) {
 
   // update data
   user.email = obj.email || user.email;
@@ -88,11 +87,10 @@ export function update(obj) {
   }).then(() => user);
 }
 
-export function remove(obj) {
-  let {username} = jwt.verify(obj.jwt, process.env.AUTH_TOKEN_SECRET);
+export function remove(user) {
 
   return db('delete', {
     TableName: usersTable,
-    Key: {username}
+    Key: user.username
   });
 }
