@@ -1,13 +1,13 @@
 import Promise from 'bluebird';
 
 export default function(data) {
-  data.forEach((d) => {validate[d](d)});
+  Object.keys(data).forEach((d) => {validate[d](data[d])});
   return Promise.resolve();
 }
 
 let validate = {
   username: (username) => {
-    let re = /[^A-Za-z0-9_@\.]|@{2,}|\.{5,}/;
+    let re = /^[a-z0-9_-]{3,16}$/;
     if (!re.test(username)) return Promise.reject('invalid username');
   },
   password: (password) => {

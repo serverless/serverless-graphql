@@ -32,6 +32,7 @@ export function login({username, password}) {
         'name',
         'username',
         'email',
+        'permissions',
         'password_hash'
       ]
     })
@@ -88,9 +89,8 @@ export function update(user, obj) {
 }
 
 export function remove(user) {
-
   return db('delete', {
     TableName: usersTable,
-    Key: user.username
+    Key: { username: user.username }
   });
 }

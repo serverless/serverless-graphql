@@ -26,7 +26,6 @@ After following the setup instructions, add the `authTokenSecret` variable to `_
 cd back/api
 npm install
 serverless dash deploy
-serverless endpoint deploy --all
 ```
 
 ### Client

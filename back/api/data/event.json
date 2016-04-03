@@ -1,3 +1,3 @@
 {
-  "query": "query getUsersTest { users {id username name email jwt} }"
+  "query": "mutation createUserTest {createUser (username: \"eahefnawy\", name: \"Eslam A. Hefnawy\", email: \"eslam@serverless.com\", password: \"secret\"){id username name email token}}"
 }
