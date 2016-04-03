@@ -1,9 +1,9 @@
 import {GraphQLString, GraphQLNonNull} from 'graphql';
 
 import UserType from './type';
-import validate from './validate.js';
-import {create, update, remove, login} from './source';
-import {authorize, authenticate} from './auth';
+import validate from './validate';
+import {authorize} from '../../../auth';
+import {create, update, remove, login} from './resolves';
 
 export default {
   createUser: {

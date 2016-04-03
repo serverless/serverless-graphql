@@ -11,6 +11,6 @@ export default new GraphQLObjectType({
     username: {type: GraphQLString},
     name: {type: GraphQLString},
     email: {type: GraphQLString},
-    jwt: {type: GraphQLString}
+    token: {type: GraphQLString}
   })
 });

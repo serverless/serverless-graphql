@@ -2,7 +2,7 @@ import Promise from 'bluebird';
 import uuid from 'uuid';
 import bcryptjs from 'bcryptjs';
 import db from '../../../dynamodb';
-import authenticate from './auth';
+import {authenticate} from '../../../auth';
 
 const stage = process.env.SERVERLESS_STAGE;
 const projectName = process.env.SERVERLESS_PROJECT;

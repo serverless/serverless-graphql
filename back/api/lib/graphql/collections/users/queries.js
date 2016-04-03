@@ -5,8 +5,8 @@ import {
 } from 'graphql';
 
 import UserType from './type';
-import validate from './validate.js';
-import {get, getAll} from './source';
+import validate from './validate';
+import {get, getAll} from './resolves';
 
 export default {
   users: {

@@ -20,7 +20,7 @@ npm install
 serverless project init
 ```
 
-After following the setup instructions, add the `authTokenSecret` variable to `_meta/variables/s-variables-STAGE-REGION.json` and give it a strong value. This is the secret used to hash passwords and generate JSON web tokens. Then:
+After following the setup instructions, add the `authTokenSecret` variable to `_meta/variables/s-variables-STAGE-REGION.json` and give it a strong value. This is the secret used to generate JSON web tokens. Then:
 
 ```
 cd back/api
