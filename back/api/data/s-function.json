@@ -56,7 +56,8 @@
     "SERVERLESS_PROJECT": "${project}",
     "SERVERLESS_STAGE": "${stage}",
     "SERVERLESS_REGION": "${region}",
-    "AUTH_TOKEN_SECRET": "${authTokenSecret}"
+    "AUTH_TOKEN_SECRET": "${authTokenSecret}",
+    "LOCAL_DDB_ENDPOINT": "${localDynamoDbEndpoint}"
   },
   "vpc": {
     "securityGroupIds": [],

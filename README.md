@@ -37,6 +37,13 @@ npm install
 npm start
 ```
 
+### Testing With A Local DynamoDB Instance
+- Install [Docker](https://www.docker.com/)
+- Run `docker-compose up` to install and run DynamoDB.
+- Add the `localDynamoDbEndpoint` variable with the value `http://<DOCKER-MACHINE-IP>:8000` to `_meta/variables/s-variables-common.json`. Example value:  `http://192.168.99.100:8000`.
+- Run `sls setup db -s <stage> -r <region>` to create tables in the local DynamoDB instance.
+- Run `sls offline start` to start [the offline server](https://github.com/dherault/serverless-offline).
+
 ### Testing With GraphiQL
 If you're running OSX, you can use the [GraphiQL Electron App](https://github.com/skevy/graphiql-app) to test the GraphQL backend without a client:
 
