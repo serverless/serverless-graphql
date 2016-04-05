@@ -49,6 +49,29 @@
           }
         }
       }
+    },
+    {
+      "path": "schema",
+      "method": "GET",
+      "type": "AWS",
+      "authorizationType": "none",
+      "authorizerFunction": false,
+      "apiKeyRequired": false,
+      "requestParameters": {},
+      "requestTemplates": "$${introspectionQueryRequestTemplate}",
+      "responses": {
+        "400": {
+          "statusCode": "400"
+        },
+        "default": {
+          "statusCode": "200",
+          "responseParameters": {},
+          "responseModels": {},
+          "responseTemplates": {
+            "application/json": ""
+          }
+        }
+      }
     }
   ],
   "events": [],
@@ -56,7 +79,8 @@
     "SERVERLESS_PROJECT": "${project}",
     "SERVERLESS_STAGE": "${stage}",
     "SERVERLESS_REGION": "${region}",
-    "AUTH_TOKEN_SECRET": "${authTokenSecret}"
+    "AUTH_TOKEN_SECRET": "${authTokenSecret}",
+    "LOCAL_DDB_ENDPOINT": "${localDynamoDbEndpoint}"
   },
   "vpc": {
     "securityGroupIds": [],

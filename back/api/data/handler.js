@@ -1,37 +1,40 @@
 import gql from '../lib/graphql'
 
 export default ({query}) => gql(query)
+//export default ({query}) => gql("query IntrospectionQuery { __schema { queryType { name } mutationType { name } subscriptionType { name } types { ...FullType } directives { name description args { ...InputValue } onOperation onFragment onField } } } fragment FullType on __Type { kind name description fields(includeDeprecated: true) { name description args { ...InputValue } type { ...TypeRef } isDeprecated deprecationReason } inputFields { ...InputValue } interfaces { ...TypeRef } enumValues(includeDeprecated: true) { name description isDeprecated deprecationReason } possibleTypes { ...TypeRef } } fragment InputValue on __InputValue { name description type { ...TypeRef } defaultValue } fragment TypeRef on __Type { kind name ofType { kind name ofType { kind name ofType { kind name } } } }")
+
+//export default ({query}) => {return query;}
 
 /*
 
 // create user
  {
- "query": "mutation createUserTest {createUser (username: \"eahefnawy\", name: \"Eslam A. Hefnawy\", email: \"eslam@serverless.com\", password: \"secret\"){id username name email jwt}}"
+ "query": "mutation createUserTest {createUser (username: \"eahefnawy\", name: \"Eslam A. Hefnawy\", email: \"eslam@serverless.com\", password: \"secret\"){id username name email token}}"
  }
 
  // get users
  {
- "query": "query getUsersTest { users {id username name email jwt} }"
+ "query": "query getUsersTest { users {id username name email token} }"
  }
 
  // get user
  {
- "query": "query getUserTest { user (username: \"eahefnawy\") {id username name email jwt} }"
+ "query": "query getUserTest { user (username: \"eahefnawy\") {id username name email token} }"
  }
 
  // login
  {
- "query": "mutation loginUserTest {loginUser (username: \"eahefnawy\", password: \"secret\"){id username name email jwt}}"
+ "query": "mutation loginUserTest {loginUser (username: \"eahefnawy\", password: \"secret\"){id username name email token}}"
  }
 
  // update user
  {
- "query": "mutation updateUserTest {updateUser (name: \"Fake Name\", email: \"eahefnawy@gmail.com\", password: \"secret\", jwt: \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImVhaGVmbmF3eSIsImlkIjoiZDg2N2RhNzAtZjRkZS0xMWU1LTk0ZDgtNmZjZDY3ZWM2MjMwIiwiZW1haWwiOiJlYWhlZm5hd3lAZ21haWwuY29tIiwibmFtZSI6IkVzbGFtIEEuIEhlZm5hd3kiLCJpYXQiOjE0NTkxNjc0MzF9.XfA_B-ufkNHhjw3IWoQZ-hQE1kxMgs1OTfP-TMT436A\"){id username name email jwt}}"
+ "query": "mutation updateUserTest {updateUser (name: \"Fake Name\", email: \"eahefnawy@gmail.com\", password: \"secret\", token: \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImVhaGVmbmF3eSIsImlkIjoiYzU1YTg2NTAtZjk4Yy0xMWU1LWI0ZGQtZWJlMTMzYmNkNDJjIiwiZW1haWwiOiJlc2xhbUBzZXJ2ZXJsZXNzLmNvbSIsIm5hbWUiOiJFc2xhbSBBLiBIZWZuYXd5IiwicGVybWlzc2lvbnMiOlsiVVBEQVRFX1VTRVIiLCJERUxFVEVfVVNFUiJdLCJpYXQiOjE0NTk2ODIyNzJ9.NdS8e6FAa06qqETad4EL0A4Z816DIQbd2Ya7Z2e9zwA\"){id username name email token}}"
  }
 
  // delete user
  {
- "query": "mutation deleteUserTest {deleteUser (jwt: \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImVhaGVmbmF3eSIsImlkIjoiZDg2N2RhNzAtZjRkZS0xMWU1LTk0ZDgtNmZjZDY3ZWM2MjMwIiwiZW1haWwiOiJlYWhlZm5hd3lAZ21haWwuY29tIiwibmFtZSI6IkVzbGFtIEEuIEhlZm5hd3kiLCJpYXQiOjE0NTkxNjc0MzF9.XfA_B-ufkNHhjw3IWoQZ-hQE1kxMgs1OTfP-TMT436A\"){id username name email jwt}}"
+ "query": "mutation deleteUserTest {deleteUser (token: \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImVhaGVmbmF3eSIsImlkIjoiYzU1YTg2NTAtZjk4Yy0xMWU1LWI0ZGQtZWJlMTMzYmNkNDJjIiwiZW1haWwiOiJlc2xhbUBzZXJ2ZXJsZXNzLmNvbSIsIm5hbWUiOiJFc2xhbSBBLiBIZWZuYXd5IiwicGVybWlzc2lvbnMiOlsiVVBEQVRFX1VTRVIiLCJERUxFVEVfVVNFUiJdLCJpYXQiOjE0NTk2ODIyNzJ9.NdS8e6FAa06qqETad4EL0A4Z816DIQbd2Ya7Z2e9zwA\"){id username name email token}}"
  }
 
 */

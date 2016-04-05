@@ -19,6 +19,8 @@
     "serverless-runtime-babel",
     "serverless-meta-sync",
     "serverless-cors-plugin",
-    "serverless-client-s3"
+    "serverless-client-s3",
+    "serverless-offline",
+    "./plugins/setupdb.js"
   ]
 }

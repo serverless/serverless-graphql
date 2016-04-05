@@ -5,7 +5,8 @@ import {
 } from 'graphql';
 
 import UserType from './type';
-import {get, getAll} from './source';
+import validate from './validate';
+import {get, getAll} from './resolves';
 
 export default {
   users: {
@@ -21,8 +22,8 @@ export default {
     args: {
       username: {type: new GraphQLNonNull(GraphQLString)}
     },
-    resolve: function(source, {username}) {
-      return get(username);
+    resolve: function(source, args) {
+      return validate(args).then(() => get(args.username));
     }
   }
 }
