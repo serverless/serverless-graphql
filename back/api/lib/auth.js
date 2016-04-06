@@ -1,7 +1,9 @@
-import Promise from 'bluebird';
-import jwt from 'jsonwebtoken';
+'use strict';
 
-export function authorize(token, requiredPermissions) {
+const Promise = require('bluebird');
+const jwt = require('jsonwebtoken');
+
+function authorize(token, requiredPermissions) {
 
   // make sure user is logged in
   try {
@@ -18,6 +20,8 @@ export function authorize(token, requiredPermissions) {
   return Promise.resolve(user);
 }
 
-export function authenticate(user) {
+function authenticate(user) {
   return jwt.sign(user, process.env.AUTH_TOKEN_SECRET);
 }
+
+module.exports = {authenticate, authorize};

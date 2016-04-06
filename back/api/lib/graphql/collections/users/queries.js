@@ -1,19 +1,19 @@
-import {
-  GraphQLList,
-  GraphQLString,
-  GraphQLNonNull
-} from 'graphql';
+'use strict';
 
-import UserType from './type';
-import validate from './validate';
-import {get, getAll} from './resolves';
+const GraphQLList = require('graphql').GraphQLList;
+const GraphQLString = require('graphql').GraphQLString;
+const GraphQLNonNull = require('graphql').GraphQLNonNull;
 
-export default {
+const UserType = require('./type');
+const validate = require('./validate');
+const resolves = require('./resolves');
+
+module.exports = {
   users: {
     type: new GraphQLList(UserType),
     description: 'List of users',
     resolve: function(source, args) {
-      return getAll();
+      return resolves.getAll();
     }
   },
   user: {
@@ -23,7 +23,7 @@ export default {
       username: {type: new GraphQLNonNull(GraphQLString)}
     },
     resolve: function(source, args) {
-      return validate(args).then(() => get(args.username));
+      return validate(args).then(() => resolves.get(args.username));
     }
   }
 }

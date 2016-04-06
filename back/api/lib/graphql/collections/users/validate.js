@@ -1,9 +1,6 @@
-import Promise from 'bluebird';
+'use strict';
 
-export default function(data) {
-  Object.keys(data).forEach((d) => {validate[d](data[d])});
-  return Promise.resolve();
-}
+const Promise = require('bluebird');
 
 let validate = {
   username: (username) => {
@@ -25,3 +22,9 @@ let validate = {
     return;
   }
 };
+
+
+module.exports = (data) => {
+  Object.keys(data).forEach((d) => {validate[d](data[d])});
+  return Promise.resolve();
+}

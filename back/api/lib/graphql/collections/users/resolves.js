@@ -1,96 +1,104 @@
-import Promise from 'bluebird';
-import uuid from 'uuid';
-import bcryptjs from 'bcryptjs';
-import db from '../../../dynamodb';
-import {authenticate} from '../../../auth';
+'use strict';
+
+const Promise = require('bluebird');
+const uuid = require('uuid');
+const bcryptjs = require('bcryptjs');
+const db = require('../../../dynamodb');
+const authenticate = require('../../../auth').authenticate;
 
 const stage = process.env.SERVERLESS_STAGE;
 const projectName = process.env.SERVERLESS_PROJECT;
 const usersTable = projectName + '-users-' + stage;
 
-export function create(user) {
-  user.id = uuid.v1();
-  user.permissions = ['UPDATE_USER', 'DELETE_USER'];
+module.exports = {
+  create(user) {
+    user.id = uuid.v1();
+    user.permissions = ['UPDATE_USER', 'DELETE_USER'];
 
-  // generated salted hash with bcryptjs with 10 work factor
-  user.password_hash = bcryptjs.hashSync(user.password, 10);
+    // generated salted hash with bcryptjs with 10 work factor
+    user.password_hash = bcryptjs.hashSync(user.password, 10);
 
-  delete user.password; // don't save plain password!
+    delete user.password; // don't save plain password!
 
-  return db('put', {
-    TableName: usersTable,
-    Item: user
-  }).then(() => user);
-}
+    return db('put', {
+      TableName: usersTable,
+      Item: user
+    }).then(() => user);
+  },
 
-export function login({username, password}) {
-  return db('get', {
+  login(args) {
+    const username = args.username;
+    const password = args.password;
+
+    return db('get', {
+        TableName: usersTable,
+        Key: {username},
+        AttributesToGet: [
+          'id',
+          'name',
+          'username',
+          'email',
+          'permissions',
+          'password_hash'
+        ]
+      })
+      .then(reply => {
+        const Item = reply.Item;
+        if (!Item) return Promise.reject('User not found');
+
+        let match = bcryptjs.compareSync(password, Item.password_hash);
+        if (!match) return Promise.reject('invalid password');
+
+        delete Item.password_hash;
+
+        Item.token = authenticate(Item);
+
+        return Item;
+      });
+  },
+
+  get(username) {
+    return db('get', {
       TableName: usersTable,
       Key: {username},
       AttributesToGet: [
         'id',
-        'name',
         'username',
-        'email',
-        'permissions',
-        'password_hash'
+        'name',
+        'email'
       ]
-    })
-    .then(({Item}) => {
-      if (!Item) return Promise.reject('User not found');
+    }).then(reply => reply.Item);
+  },
 
-      let match = bcryptjs.compareSync(password, Item.password_hash);
-      if (!match) return Promise.reject('invalid password');
+  getAll() {
+    return db('scan', {
+      TableName: usersTable,
+      AttributesToGet: [
+        'id',
+        'username',
+        'name',
+        'email'
+      ]
+    }).then(reply => reply.Items);
+  },
 
-      delete Item.password_hash;
+  update(user, obj) {
 
-      Item.token = authenticate(Item);
+    // update data
+    user.email = obj.email || user.email;
+    user.name = obj.name || user.name;
+    user.password_hash = bcryptjs.hashSync(obj.password, 10);
 
-      return Item;
+    return db('put', {
+      TableName: usersTable,
+      Item: user
+    }).then(() => user);
+  },
+
+  remove(user) {
+    return db('delete', {
+      TableName: usersTable,
+      Key: { username: user.username }
     });
-}
-
-export function get(username) {
-  return db('get', {
-    TableName: usersTable,
-    Key: {username},
-    AttributesToGet: [
-      'id',
-      'username',
-      'name',
-      'email'
-    ]
-  }).then(({Item}) => Item);
-}
-
-export function getAll() {
-  return db('scan', {
-    TableName: usersTable,
-    AttributesToGet: [
-      'id',
-      'username',
-      'name',
-      'email'
-    ]
-  }).then(({Items}) => Items);
-}
-
-export function update(user, obj) {
-
-  // update data
-  user.email = obj.email || user.email;
-  user.name = obj.name || user.name;
-  user.password_hash = bcryptjs.hashSync(obj.password, 10);
-
-  return db('put', {
-    TableName: usersTable,
-    Item: user
-  }).then(() => user);
-}
-
-export function remove(user) {
-  return db('delete', {
-    TableName: usersTable,
-    Key: { username: user.username }
-  });
-}
+  }
+};

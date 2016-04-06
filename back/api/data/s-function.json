@@ -1,10 +1,10 @@
 {
   "name": "data",
-  "runtime": "babel",
+  "runtime": "nodejs4.3",
   "description": "Serverless Lambda function for project: serverless-boilerplate",
   "customName": false,
   "customRole": false,
-  "handler": "data/handler.default",
+  "handler": "data/handler.handler",
   "timeout": 6,
   "memorySize": 1024,
   "authorizer": {},

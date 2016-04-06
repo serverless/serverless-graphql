@@ -16,7 +16,6 @@
     }
   },
   "plugins": [
-    "serverless-runtime-babel",
     "serverless-meta-sync",
     "serverless-cors-plugin",
     "serverless-client-s3",
