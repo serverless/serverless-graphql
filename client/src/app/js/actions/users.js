@@ -1,5 +1,7 @@
 import 'whatwg-fetch';
 import { API_URL } from './index';
+import _ from 'lodash';
+import resetError from './error';
 
 import {
   ERROR,
@@ -49,10 +51,10 @@ export function getUsers() {
   const query = { "query":
     `{
       users {
-        id
-        name
         username
+        name
         email
+        token
       }
     }`
   };
@@ -80,7 +82,8 @@ export function getUser(username) {
         id
         name
         username
-        email
+        email,
+        token
       }
     }`
   };
@@ -101,17 +104,16 @@ export function getUser(username) {
 }
 
 export function updateUser(user) {
+  console.log(user)
   const query = { "query":
     `mutation updateExistingUser {
       user: updateUser (
-        id: "${user.id}"
         name: "${user.name}"
-        username: "${user.username}"
         email: "${user.email}"
         password: "${user.password}"
+        token: "${user.token}"
       )
       {
-        id
         name
         email
       }
@@ -172,24 +174,29 @@ export function loginUser(user) {
         username
         name
         email
-        jwt
+        token
       }
     }`
   };
 
-  return (dispatch) => fetch(`${API_URL}/data/`, {
-    method: 'POST',
-    body: JSON.stringify(query)
-  })
-  .then(response => response.json())
-  .then(json => dispatch({
-    type: LOGIN_USER,
-    payload: json
-  }))
-  .catch(exception => dispatch({
-    type: ERROR,
-    payload: exception.message
-  }));
+  return (dispatch) => {
+    dispatch(resetError());
+
+    return fetch(`${API_URL}/data/`, {
+      method: 'POST',
+      body: JSON.stringify(query)
+    })
+    .then(response => response.json())
+    .then(json => _.isEmpty(json.errors) ? json : Promise.reject(json.errors[0]))
+    .then(payload => {
+      dispatch({payload, type: LOGIN_USER})
+    })
+    .catch(exception => dispatch({
+      type: ERROR,
+      payload: exception.message
+    }));
+
+  }
 }
 
 export function logoutUser() {

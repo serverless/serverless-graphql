@@ -9,7 +9,7 @@ export default function(state = INITIAL_STATE, action) {
     case GET_USER:
       return { ...state, user: action.payload.data.user };
     case LOGIN_USER:
-      localStorage.setItem('jwt', action.payload.data.user.jwt);
+      localStorage.setItem('token', action.payload.data.user.token);
       return { ...state, loggedInUsername: action.payload.data.user.username };
     case LOGOUT_USER:
       localStorage.removeItem('jwt');
