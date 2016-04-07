@@ -37,6 +37,13 @@ npm install
 npm start
 ```
 
+### Deploying to S3 bucket
+```
+cd client/src
+npm run build
+sls client deploy
+```
+
 ### Testing With A Local DynamoDB Instance
 - Install [Docker](https://www.docker.com/)
 - Run `docker-compose up` to install and run DynamoDB.

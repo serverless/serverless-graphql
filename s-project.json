@@ -5,6 +5,9 @@
       "name": "${meta_bucket}",
       "region": "${meta_bucket_region}"
     },
+    "client": {
+      "bucketName": "boilerplate.${stage}.${region}"
+    },
     "cors": {
       "allowOrigin": "*",
       "allowHeaders": [
