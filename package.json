@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "aws-sdk": "^2.3.0",
+    "babel-plugin-transform-class-properties": "^6.6.0",
+    "babel-plugin-transform-object-rest-spread": "^6.6.5",
     "jsonwebtoken": "^5.7.0",
     "lodash": "^4.6.1",
     "serverless-client-s3": "^2.0.0",
