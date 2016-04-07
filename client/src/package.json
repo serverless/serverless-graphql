@@ -28,6 +28,8 @@
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
+    "babel-plugin-transform-class-properties": "^6.6.0",
+    "babel-plugin-transform-object-rest-spread": "^6.6.5",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "react-mixin": "^3.0.3",
