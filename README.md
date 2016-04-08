@@ -12,17 +12,20 @@ This boilerplate application features a serverless architecture that leverages n
 
 ## Setup
 
+If you haven't yet installed `serverless` on your machin, run:
+
+```
+npm install -g serverless
+```
+then install the GraphQL Boilerplate in the CWD by running:
+
+```
+serverless project install serverless-boilerplate-graphql
+cd serverless-boilerplate-graphql
+```
+
 ### Back
-If you haven't yet installed `serverless` on your machine, run `npm install -g serverless`. Then:
-
-```
-git clone https://github.com/serverless/serverless-boilerplate.git
-cd serverless-boilerplate
-npm install
-serverless project init
-```
-
-After following the setup instructions, add the `authTokenSecret` variable to `_meta/variables/s-variables-STAGE-REGION.json` and give it a strong value. This is the secret used to generate JSON web tokens. Then:
+Add the `authTokenSecret` variable to `_meta/variables/s-variables-STAGE-REGION.json` and give it a strong value. This is the secret used to generate JSON web tokens. Then:
 
 ```
 cd back/api
@@ -40,8 +43,9 @@ npm start
 ```
 
 ### Deploying to S3 bucket
+Make sure you're still in the `client/src` folder mentioned above, then run:
+
 ```
-cd client/src
 npm run build
 sls client deploy
 ```
