@@ -20,7 +20,7 @@ npm install -g serverless
 then install the GraphQL Boilerplate in the CWD by running:
 
 ```
-serverless project install serverless-boilerplate-graphql
+sls project install serverless-boilerplate-graphql
 cd serverless-boilerplate-graphql
 ```
 
@@ -30,7 +30,7 @@ Add the `authTokenSecret` variable to `_meta/variables/s-variables-STAGE-REGION.
 ```
 cd back/api
 npm install
-serverless dash deploy
+sls dash deploy
 ```
 
 ### Client
@@ -40,6 +40,13 @@ Set `API_URL` in `client/src/app/js/actions/index.js`. Then:
 cd ../../client/src
 npm install
 npm start
+```
+
+This will runs the client locally. You can then deploy the client to an S3 bucket with:
+
+```
+npm run build
+sls client deploy
 ```
 
 ### Deploying to S3 bucket
@@ -63,7 +70,7 @@ If you're running OSX, you can use the [GraphiQL Electron App](https://github.co
 - Install [brew cask](https://caskroom.github.io) for easy installation: `brew tap caskroom/cask`
 - Install GraphiQL App: `brew cask install graphiql`
 - Open GraphiQL application. Just search for `GraphiQL` using OSX Spotlight Search!
-- Add your data endpoint to the "GraphQL Endpoint" text field, and make sure the "Method" is set to `POST`.
+- Add your `data` endpoint to the "GraphQL Endpoint" text field, and make sure the "Method" is set to `POST`.
 - Try this mutation to create the first user:
 
 
@@ -110,6 +117,13 @@ query getUsersTest {
 }
 ```
 
+### Team Workflow with Meta Sync Plugin
+This boilerplate includes the [Meta Sync Plugin](https://github.com/serverless/serverless-meta-sync). To start using it you need to add the following serverless variables to `_meta/variables/s-variables-common.json`:
+
+```js
+"meta_bucket" : "SOME_BUCKET_NAME",
+"meta_bucket_region" : "us-east-1" // or any other region
+```
 ---
 
 ## Team
