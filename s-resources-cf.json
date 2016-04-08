@@ -46,6 +46,13 @@
                 "*"
               ],
               "Resource": "arn:aws:dynamodb:${region}:*:table/${project}-users-${stage}"
+            },
+            {
+              "Effect": "Allow",
+              "Action": [
+                "lambda:InvokeFunction"
+              ],
+              "Resource": "*"
             }
           ]
         },
