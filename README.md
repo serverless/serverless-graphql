@@ -1,7 +1,7 @@
-# Serverless Boilerplate
+# Serverless GraphQL Boilerplate
 [![serverless](http://public.serverless.com/badges/v3.svg)](http://www.serverless.com)
 
-This boilerplate application features a monolithic architecture that leverages new technologies (Lambda, GraphQL) to reach a very low *total cost of ownership* (i.e., least amount of code, administration, cost).  This is ideal for smaller projects.
+This boilerplate application features a serverless architecture that leverages new technologies (Lambda, GraphQL) to reach a very low *total cost of ownership* (i.e., least amount of code, administration, cost).
 
 - [Setup](#setup)
 - [Team](#team)
@@ -10,7 +10,7 @@ This boilerplate application features a monolithic architecture that leverages n
 
 ## Setup
 
-### Serverless
+### Backj
 If you haven't yet installed `serverless` on your machine, run `npm install -g serverless`. Then:
 
 ```
