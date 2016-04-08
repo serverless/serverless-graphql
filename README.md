@@ -1,3 +1,5 @@
+![Serverless GraphQL Architecture Application Boilerplate](/readme_boilerplate_graphql.gif)
+
 # Serverless GraphQL Boilerplate
 [![serverless](http://public.serverless.com/badges/v3.svg)](http://www.serverless.com)
 
@@ -10,7 +12,7 @@ This boilerplate application features a serverless architecture that leverages n
 
 ## Setup
 
-### Backj
+### Back
 If you haven't yet installed `serverless` on your machine, run `npm install -g serverless`. Then:
 
 ```
