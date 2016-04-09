@@ -30,7 +30,8 @@ Add the `authTokenSecret` variable to `_meta/variables/s-variables-STAGE-REGION.
 ```
 cd back/api
 npm install
-sls dash deploy
+sls function deploy --all
+sls endpoint deploy --all
 ```
 
 ### Client
