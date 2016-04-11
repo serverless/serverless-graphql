@@ -1,7 +1,7 @@
 import 'whatwg-fetch';
 import { API_URL } from './index';
 import _ from 'lodash';
-import resetError from './error';
+import {resetError} from './error';
 
 import {
   ERROR,
