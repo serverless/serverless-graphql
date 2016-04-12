@@ -158,7 +158,7 @@ They both achieve the same goal. However, Installing the boilerplate with `sls p
 Because we're dealing with isolated micro services architecture, we have some separation of concerns around different areas of the project. So dependencies are managed at three levels:
 - Project Dependencies: by running `npm install` in the root of the project. This is done for your automatically when you run `sls project install`. This mostly handles installing the plugins.
 - Backend Dependencies: by running `npm install` in the root of the `data/api` directory. This makes all the `node_modules` required by the boilerplate available for deployment with your functions.
-- Frontend Dependencies:by running `npm install` in the root of the `client/src` directory. This installs all the client side dependencies to make your React application work.
+- Frontend Dependencies: by running `npm install` in the root of the `client/src` directory. This installs all the client side dependencies to make your React application work.
 
 ### Why can't we deploy with `sls dash deploy`?
 You can deploy with `sls dash deploy`, however the Serverless CORS Plugin requires that you deploy your endpoints with `sls endpoint deploy` so that it can fire the necessary pre hooks that will enable CORS.
