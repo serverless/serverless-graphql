@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
+import {routerReducer } from 'react-router-redux'
+
 import UsersReducer from './users';
 import ErrorReducer from './error';
 
-const rootReducer = combineReducers({
+export default combineReducers({
   users: UsersReducer,
-  error: ErrorReducer
-
-  // TODO: Add additional reducers here
+  error: ErrorReducer,
+  routing: routerReducer
 });
 
-export default rootReducer;

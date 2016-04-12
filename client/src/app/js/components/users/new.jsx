@@ -11,23 +11,20 @@ class UsersNew extends Component {
   handleSubmit(event) {
     event.preventDefault();
 
-    let name = this.refs.name.value;
-    let username = this.refs.username.value;
-    let email = this.refs.email.value;
-    let password = this.refs.password.value;
+    const name = this.refs.name.value;
+    const username = this.refs.username.value;
+    const email = this.refs.email.value;
+    const password = this.refs.password.value;
 
     if (name.length !== 0 && username.length !== 0 && email.length !== 0 && password.length !== 0) {
-      let user = {
-        name: name,
-        username: username,
-        email: email,
-        password: password
+      const user = {
+        name,
+        username,
+        email,
+        password
       };
 
-      this.props.createUser(user)
-        .then(() => {
-          this.context.router.push('/');
-        });
+      this.props.createUser(user);
     } else {
       alert('Please fill out all fields');
     }

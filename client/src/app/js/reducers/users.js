@@ -1,6 +1,6 @@
-import { GET_USERS, GET_USER, LOGIN_USER, LOGOUT_USER } from '../actions/constants';
+import { GET_USERS, GET_USER, LOGIN_USER, LOGOUT_USER, UPDATE_USER} from '../actions/constants';
 
-const INITIAL_STATE = { all: [], user: null, loggedInUsername: null };
+const INITIAL_STATE = { all: [], user: null, currentUser: null };
 
 export default function(state = INITIAL_STATE, action) {
   switch(action.type) {
@@ -9,11 +9,11 @@ export default function(state = INITIAL_STATE, action) {
     case GET_USER:
       return { ...state, user: action.payload.data.user };
     case LOGIN_USER:
-      localStorage.setItem('token', action.payload.data.user.token);
-      return { ...state, loggedInUsername: action.payload.data.user.username };
+      return { ...state, currentUser: action.payload.data.user };
+    case UPDATE_USER:
+      return { ...state, currentUser: action.payload.data.user };
     case LOGOUT_USER:
-      localStorage.removeItem('jwt');
-      return { ...state, loggedInUsername: null };
+      return { ...state, currentUser: null };
     default:
       return state;
   }

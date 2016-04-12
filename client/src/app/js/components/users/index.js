@@ -23,7 +23,6 @@ class UsersIndex extends Component {
                   <th>Username</th>
                   <th>Name</th>
                   <th>E-Mail</th>
-                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -35,14 +34,13 @@ class UsersIndex extends Component {
                     </td>
                     <td>{user.name}</td>
                     <td>{user.email}</td>
-                    <td><Link to={ 'users/' + user.username + '/edit' }>Edit</Link></td>
                   </tr>
                 )}
               )}
               </tbody>
             </table>
           ) : <div>There are currently no users available to display<hr /></div> }
-          <Link to={ 'users/new' } className="button button-primary">Add</Link>
+          <Link to={ 'users/new' } className="button button-primary">Create New User</Link>
         </div>
       </div>
     );

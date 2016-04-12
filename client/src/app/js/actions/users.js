@@ -1,6 +1,8 @@
 import 'whatwg-fetch';
-import { API_URL } from './index';
 import _ from 'lodash';
+import { push } from 'react-router-redux';
+
+import { API_URL } from './index';
 import {resetError} from './error';
 
 import {
@@ -41,6 +43,7 @@ export function createUser(user) {
     type: CREATE_USER,
     payload: json
   }))
+  .then(() => dispatch(push('/')))
   .catch(exception => dispatch({
     type: ERROR,
     payload: exception.message
@@ -104,7 +107,6 @@ export function getUser(username) {
 }
 
 export function updateUser(user) {
-  console.log(user)
   const query = { "query":
     `mutation updateExistingUser {
       user: updateUser (
@@ -114,8 +116,11 @@ export function updateUser(user) {
         token: "${user.token}"
       )
       {
-        name
-        email
+        id,
+        name,
+        username,
+        email,
+        token
       }
     }`
   };
@@ -125,24 +130,22 @@ export function updateUser(user) {
     body: JSON.stringify(query)
   })
   .then(response => response.json())
-  .then(json => dispatch({
-    type: UPDATE_USER,
-    payload: json
-  }))
+  .then(payload => dispatch({payload, type: UPDATE_USER}))
+  .then(() => dispatch(push('/')))
   .catch(exception => dispatch({
     type: ERROR,
     payload: exception.message
   }));
 }
 
-export function deleteUser(id) {
+export function deleteUser(token) {
   const query = { "query":
     `mutation deleteExistingUser {
       user: deleteUser (
-        id: "${id}"
+        token: "${token}"
       )
       {
-        id
+        username
       }
     }`
   };
@@ -200,7 +203,8 @@ export function loginUser(user) {
 }
 
 export function logoutUser() {
-  return {
-    type: LOGOUT_USER
+  return dispatch => {
+    dispatch({type: LOGOUT_USER});
+    dispatch(push('/'));
   }
 }

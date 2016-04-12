@@ -1,11 +1,14 @@
 module.exports = {
   entry: {
-    javascript: "./app/js/app.js",
+    javascript: "./app/js/app.jsx",
     html: "./app/index.html"
   },
   output: {
     path: __dirname + "/../dist",
     filename: "/js/app.js"
+  },
+  resolve: {
+    extensions: ["", ".webpack.js", ".web.js", ".js", ".jsx"]
   },
   module: {
     loaders: [

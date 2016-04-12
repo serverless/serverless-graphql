@@ -11,7 +11,7 @@ export default (
   <Route path="/" component={App}>
     <IndexRoute component={UsersIndex} />
     <Route path="users/:username/show" component={UsersShow} />
-    <Route path="users/:username/edit" component={UsersEdit} />
+    <Route path="profile" component={UsersEdit} />
     <Route path="users/new" component={UsersNew} />
   </Route>
 );

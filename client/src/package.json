@@ -35,7 +35,9 @@
     "react-mixin": "^3.0.3",
     "react-redux": "^4.4.0",
     "react-router": "^2.1.1",
+    "react-router-redux": "^4.0.2",
     "redux": "^3.3.1",
+    "redux-logger": "^2.6.1",
     "redux-thunk": "^2.0.1",
     "whatwg-fetch": "^0.11.0"
   }
