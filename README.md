@@ -7,6 +7,7 @@ This boilerplate application features a serverless architecture that leverages n
 
 - [Setup](#setup)
 - [Team](#team)
+- [FAQs](./FAQs)
 
 ---
 
