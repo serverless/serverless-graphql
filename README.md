@@ -13,7 +13,7 @@ This boilerplate application features a serverless architecture that leverages n
 
 ## Setup
 
-If you haven't yet installed `serverless` on your machin, run:
+If you haven't yet installed `serverless` on your machine, run:
 
 ```
 npm install -g serverless
@@ -44,7 +44,7 @@ npm install
 npm start
 ```
 
-This will runs the client locally. You can then deploy the client to an S3 bucket with:
+This will run the client locally. You can then deploy the client to an S3 bucket with:
 
 ```
 npm run build
@@ -141,7 +141,7 @@ In this boilerplate, we're managing all data records using GraphQL. Currently th
 Each data collection has a `validate.js` file. This is where you should keep your validation logic, and call the validation functions on the data received from GraphQL before you resolve them. GraphQL has its own validation implementation, but it's at a very early stage at this point.
 
 ### How does authentication work with GraphQL?
-In this boilerplate, we're using JSON Web Token for authentication. You can find this logic in the `back/api/lib/auth.js` file. You can simply switch another authentication mechanism by editing this file.
+In this boilerplate, we're using JSON Web Token for authentication. You can find this logic in the `back/api/lib/auth.js` file. You can simply switch to another authentication mechanism by editing this file.
 
 ### Where to put the business logic of my project?
 
@@ -150,7 +150,7 @@ In this boilerplate, we're using JSON Web Token for authentication. You can find
 - [serverless-cors-plugin](https://github.com/joostfarla/serverless-cors-plugin): To enable CORS for your data endpoint and give the client access to your backend.
 - [serverless-meta-sync](https://github.com/serverless/serverless-meta-sync): To collaborate with your teammates and sync your `_meta` folder with them securely using an S3 bucket.
 - [serverless-offline](https://github.com/dherault/serverless-offline): To test your project locally during development. That also includes a local dynamoDB instance.
-- 
+
 ### What's the difference between installing vs cloning & initing the boilerplate?
 They both achieve the same goal. However, Installing the boilerplate with `sls project install` is simpler because it also handles installing the project dependencies. We recommend using `sls project init` only if you clone the project to contribute/make a PR.
 
@@ -158,9 +158,11 @@ They both achieve the same goal. However, Installing the boilerplate with `sls p
 Because we're dealing with isolated micro services architecture, we have some separation of concerns around different areas of the project. So dependencies are managed at three levels:
 - Project Dependencies: by running `npm install` in the root of the project. This is done for your automatically when you run `sls project install`. This mostly handles installing the plugins.
 - Backend Dependencies: by running `npm install` in the root of the `data/api` directory. This makes all the `node_modules` required by the boilerplate available for deployment with your functions.
-- Frontend Dependencies:by running `nam install` in the root of the `client/src` directory. This installs all the client side dependencies to make your React application work.
+- Frontend Dependencies: by running `npm install` in the root of the `client/src` directory. This installs all the client side dependencies to make your React application work.
+
 ### Why can't we deploy with `sls dash deploy`?
-You can deploy with `sls dash deploy`, however the Serverless CORS Plugin requires that you deploy your endpoints with `sls endpoint deploy` so that it could fire the necessary pre hooks that will enable CORS.
+You can deploy with `sls dash deploy`, however the Serverless CORS Plugin requires that you deploy your endpoints with `sls endpoint deploy` so that it can fire the necessary pre hooks that will enable CORS.
+
 ### How to connect the client to the Serverless backend?
 By setting the `API_URL` variable in `client/src/app/js/actions/index.js` Please keep in mind that this is the **root of your API** not the endpoint url you get from `sls endpoint deploy`
 
