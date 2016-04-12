@@ -29,7 +29,7 @@ class UsersIndex extends Component {
               <tbody>
               {users.map((user) => {
                 return (
-                  <tr key={user.id}>
+                  <tr key={'user-' + user.username}>
                     <td>
                       <Link to={ 'users/' + user.username + '/show' }>{user.username}</Link>
                     </td>
