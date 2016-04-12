@@ -50,9 +50,22 @@ module.exports = function(S) {
 
       if (!stage || !region) return BbPromise.reject(new SError("stage and region are required parameters"));
 
-      const credentials = S.getProvider('aws').getCredentials(stage, region);
+      return S.getProvider('aws').getCredentials(stage, region)
+        .then((credentials) => {
+          evt.data.credentials = credentials;
+          return this._setupDb(evt);
+        });
+    }
+
+
+    _setupDb(evt) {
+      const stage = evt.options.stage;
+      const region = evt.options.region;
+      const credentials = evt.data.credentials;
+
       const endpoint = S.getProject().getVariablesObject(stage, region).localDynamoDbEndpoint;
       const dynamoConfig = _.merge({endpoint}, credentials);
+
       const client = new DynamoDB(dynamoConfig);
 
       const db = (method, params) => {
