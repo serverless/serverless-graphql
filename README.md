@@ -3,7 +3,7 @@
 # Serverless GraphQL Boilerplate
 [![serverless](http://public.serverless.com/badges/v3.svg)](http://www.serverless.com)
 
-This is a web application boilerplate for a remarkably efficent Graph API.  This Graph API is powered by a single AWS Lambda function containing GraphQL.  It's accessible via one HTTP endpoint.  Through this endpoint, you can request any custom shape of data, across records stored in multiple DynamoDB tables, and GraphQL will return it.  The result is a very low *total cost of ownership* (i.e., least amount of code, administration, cost).  
+This is a web application boilerplate for a remarkably efficent Graph API.  This Graph API is powered by a single AWS Lambda function containing GraphQL, accessible via one HTTP endpoint.  Through this endpoint, you can request any custom shape of data, across records stored in multiple DynamoDB tables, and GraphQL will return it.  The result is a very low *total cost of ownership* (i.e., least amount of code, administration, cost).  
 
 Users CRUD has been implemented, as well as authentication and authorization via JSON webtokens.  Also provided is an entire front-end built in React.  You can deploy everything easily via the [Serverless Framework](http://www.serverless.com).  A plugin for the Framework allowing you to easily deploy your front-end assets to S3 is also included.   
 
