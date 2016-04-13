@@ -149,6 +149,8 @@ This is a new architecture and there are still some questions left unanswered.  
 * **Monolithic** - Add business logic into the single AWS Lambda function and build out a monolithic Lambda.
 * **Microservices** - Add business logic in separate Lambda functions which you can invoke asynchronously.  In the GraphQL `resolve` functions is where you should make these calls.  And you can store these extra Lambda functions in `api/events`.  Doing synchronous calls to other Lambda functions will likely result in too much latency.  But logic that can be done in the background can easily be isolated in separate Lambda functions.  We've included some code to help you invoke separate Lambda functions and we've even added it already to the `users create` resolve function.
 
+There are some challenges here.  However, building and maintaining another large REST API requires a lot of time and effort.  This requires significantly less.
+
 ### What plugins are included with this boilerplate?
 - [serverless-client-s3](https://github.com/serverless/serverless-client-s3): To deploy front end assets to S3
 - [serverless-cors-plugin](https://github.com/joostfarla/serverless-cors-plugin): To enable CORS for your data endpoint and give the client access to your backend.
