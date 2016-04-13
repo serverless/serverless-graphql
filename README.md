@@ -143,7 +143,11 @@ Each data collection has a `validate.js` file. This is where you should keep you
 ### How does authentication work with GraphQL?
 In this boilerplate, we're using JSON Web Token for authentication. You can find this logic in the `back/api/lib/auth.js` file. You can simply switch to another authentication mechanism by editing this file.
 
-### Where to put the business logic of my project?
+### Where to add more business logic?
+This is a new architecture and there are still some questions left unresolved.  The biggest question is where should further business logic go (e.g., sending transactional email after a user is created)?  We have two answers for that:
+
+* **Monolithic** - Add business logic into the single AWS Lambda function and build out a monolithic Lambda.
+* **Microservices** - Add business logic in separate Lambda functions which you can invoke asynchronously.  In the GraphQL `resolve` functions is where you should make these calls.  And you can store these extra Lambda functions in `api/events`.  Doing synchronous calls to other Lambda functions will likely result in too much latency.  But logic that can be done in the background can easily be isolated in separate Lambda functions.
 
 ### What plugins are included with this boilerplate?
 - [serverless-client-s3](https://github.com/serverless/serverless-client-s3): To deploy front end assets to S3
