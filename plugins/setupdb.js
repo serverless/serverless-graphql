@@ -31,10 +31,10 @@ module.exports = function(S) {
         options:       [
           {
             option:      'stage',
-            shortcut:    's',
+            shortcut:    's'
           }, {
             option:      'region',
-            shortcut:    'r',
+            shortcut:    'r'
           }
         ],
         parameters: []
@@ -70,7 +70,7 @@ module.exports = function(S) {
 
       const db = (method, params) => {
         return BbPromise.fromCallback(cb => client[method](params, cb));
-      }
+      };
 
       const resources = S.getProject()
         .getResources()
@@ -101,7 +101,5 @@ module.exports = function(S) {
           return evt;
         })
     }
-
-
   }
 };

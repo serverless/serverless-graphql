@@ -14,4 +14,4 @@ const client = new DynamoDB.DocumentClient(dynamoConfig);
 
 module.exports = (method, params) => {
   return Promise.fromCallback(cb => client[method](params, cb));
-}
+};
