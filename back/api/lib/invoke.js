@@ -38,4 +38,4 @@ module.exports = (name, data, responseHandler) => {
     .fromCallback(cb => lambda.invoke(params, cb))
     .then(reply => reply.Payload ? JSON.parse(reply.Payload) : {})
     .then(responseHandler);
-}
+};
