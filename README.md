@@ -132,9 +132,9 @@ This boilerplate includes the [Meta Sync Plugin](https://github.com/serverless/s
 ### Why use GraphQL + Lambda?
 Lambda is a revolutionary compute service that makes it really easy to build and maintain microservices at a fraction of the cost. GraphQL is equally revolutionary in its ability to receive and return requests for custom data shapes from records across different data sources.  We thought these two technologies would work well together.
 
-GraphQL reduces the amount of endpoints required in a traditional REST API back-end, to 1-2 graph API endpoints, significantly reducing development and maintenance time, as well as network overhead.  Further, multiple client applications (and their many versions) can request any data they need to populate their views via these same API endpoints.  It's incredible efficiency.
+GraphQL reduces the amount of endpoints required in a traditional REST API back-end, to 1-2 graph API endpoints, significantly reducing development and maintenance time, as well as network overhead.  Multiple client applications (and their many versions) can request any data they need to populate their views via these same API endpoints.  Also, offering a single Lambda-based back-end improves Lambda performance, since it is usually already warm and doesn't require a cold start.
 
-Putting GraphQL in AWS Lambda means simple Graph APIs, requiring zero administration, and you only get charged when that API is used.
+Putting GraphQL in AWS Lambda means simple Graph APIs, requiring zero administration, and you only get charged when that API is used.  It's incredible efficiency.
 
 ### How to add more data records?
 In this boilerplate, we're managing all data records using GraphQL. Currently the boilerplate only has a Users record/collection. But you can easily add any other data collection (i.e.. `Posts`) in the `back/api/lib/graphql/collections` directory. Just follow the same pattern in the `Users` collection.
