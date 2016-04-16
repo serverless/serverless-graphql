@@ -51,6 +51,34 @@
       }
     },
     {
+      "path": "data",
+      "method": "GET",
+      "type": "AWS",
+      "authorizationType": "none",
+      "authorizerFunction": false,
+      "apiKeyRequired": false,
+      "requestParameters": {
+        "integration.request.querystring.query": "method.request.querystring.query"
+      },
+      "requestTemplates": {
+        "application/json": "{\"query\" : \"$util.urlDecode($input.params('query'))\"}"
+      },
+      "cacheKeyParameters": ["method.request.querystring.query"],
+      "responses": {
+        "400": {
+          "statusCode": "400"
+        },
+        "default": {
+          "statusCode": "200",
+          "responseParameters": {},
+          "responseModels": {},
+          "responseTemplates": {
+            "application/json": ""
+          }
+        }
+      }
+    },
+    {
       "path": "schema",
       "method": "GET",
       "type": "AWS",
