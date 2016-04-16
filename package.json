@@ -24,6 +24,6 @@
     "mocha": "^2.4.5"
   },
   "scripts": {
-    "test": "SERVERLESS_STAGE=tests SERVERLESS_REGION=eu-west-1 ./node_modules/.bin/mocha -t 10000 tests/"
+    "test": "SERVERLESS_STAGE=dev SERVERLESS_REGION=us-east-1 ./node_modules/.bin/mocha tests/"
   }
 }

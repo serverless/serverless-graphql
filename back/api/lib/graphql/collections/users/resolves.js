@@ -5,7 +5,7 @@ const uuid = require('uuid');
 const bcryptjs = require('bcryptjs');
 const db = require('../../../dynamodb');
 const authenticate = require('../../../auth').authenticate;
-const invoke = require('../../../invoke')
+const invoke = require('../../../invoke');
 const _ = require('lodash');
 
 const stage = process.env.SERVERLESS_STAGE;

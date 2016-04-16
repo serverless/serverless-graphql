@@ -4,6 +4,7 @@ const handler = require('../back/api/data/handler').handler;
 
 describe('Users', () => {
   let token;
+
   describe('Create', () => {
     it('should create a user', (done) => {
       let event = {
@@ -11,7 +12,7 @@ describe('Users', () => {
       };
 
       handler(event, null, (error, response) => {
-        expect(response.data.createUser).to.be.null;
+        //expect(response.errors).to.be.empty;
         done(error);
       });
     });
@@ -25,6 +26,7 @@ describe('Users', () => {
   
       handler(event, null, (error, response) => {
         expect(response.data.users).to.have.lengthOf(1);
+        expect(response.errors).to.be.empty;
         done(error);
       });
     });
@@ -40,6 +42,7 @@ describe('Users', () => {
         expect(user.name).to.equal('Test User');
         expect(user.email).to.equal('testuser@serverless.com');
         expect(user.token).to.be.null;
+        expect(response.errors).to.be.empty;
         done(error);
       });
     });
@@ -53,7 +56,7 @@ describe('Users', () => {
 
       handler(event, null, (error, response) => {
         expect(response.errors[0].message).to.equal('User not found');
-        done(null);
+        done(error);
       });
     });
 
@@ -64,7 +67,7 @@ describe('Users', () => {
 
       handler(event, null, (error, response) => {
         expect(response.errors[0].message).to.equal('invalid password');
-        done(null);
+        done(error);
       });
     });
 
@@ -80,6 +83,7 @@ describe('Users', () => {
         expect(user.name).to.equal('Test User');
         expect(user.email).to.equal('testuser@serverless.com');
         expect(user.token).not.to.be.null;
+        expect(response.errors).to.be.empty;
         done(error);
       });
     });
@@ -99,13 +103,14 @@ describe('Users', () => {
 
     it('should update name and email', (done) => {
       let event = {
-        "query": "mutation updateUserTest {updateUser (name: \"User New Name\", email: \"newtestuser@serverless.com\", password: \"secret\", token: \""+token+"\"){id username name email token}}"
+        "query": "mutation updateUserTest {updateUser (name: \"New Name\", email: \"newuser@serverless.com\", password: \"secret\", token: \""+token+"\"){id username name email token}}"
       };
 
       handler(event, null, (error, response) => {
         let user = response.data.updateUser;
-        expect(user.name).to.equal('User New Name');
-        expect(user.email).to.equal('newtestuser@serverless.com');
+        expect(user.name).to.equal('New Name');
+        expect(user.email).to.equal('newuser@serverless.com');
+        expect(response.errors).to.be.empty;
         done(error);
       });
     });
@@ -135,6 +140,7 @@ describe('Users', () => {
         expect(user.name).to.be.null;
         expect(user.email).to.be.null;
         expect(user.token).to.be.null;
+        expect(response.errors).to.be.empty;
         done(error);
       });
     });
@@ -146,6 +152,7 @@ describe('Users', () => {
 
       handler(event, null, (error, response) => {``
         expect(response.data.users).to.be.empty;
+        expect(response.errors).to.be.empty;
         done(error);
       });
     });
