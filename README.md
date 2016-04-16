@@ -1,6 +1,6 @@
-![Serverless GraphQL Architecture Application Boilerplate](/readme_boilerplate_graphql.gif)
+![Serverless Architecture GraphQL Application Boilerplate](/readme_boilerplate_graphql.gif)
 
-# Serverless GraphQL Boilerplate
+# Serverless GraphQL
 [![serverless](http://public.serverless.com/badges/v3.svg)](http://www.serverless.com)
 
 This is a web application boilerplate for a remarkably efficent Graph API.  This Graph API is powered by a single AWS Lambda function containing GraphQL, accessible via one HTTP endpoint.  Through this endpoint, you can request any custom shape of data, across records stored in multiple DynamoDB tables, and GraphQL will return it.  The result is a very low *total cost of ownership* (i.e., least amount of code, administration, cost).  
@@ -16,11 +16,11 @@ If you haven't yet installed `serverless` on your machine, run:
 ```
 npm install -g serverless
 ```
-then install the GraphQL Boilerplate in the CWD by running:
+then install serverless graphql in the CWD by running:
 
 ```
-sls project install serverless-boilerplate-graphql
-cd serverless-boilerplate-graphql
+sls project install serverless-graphql
+cd serverless-graphql
 ```
 
 ### Back
