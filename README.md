@@ -9,6 +9,8 @@ Users CRUD has been implemented, as well as authentication and authorization via
 
 For more information, please read the [**FAQ**](#faq) at the bottom, and be sure to enjoy! - serverless.com
 
+![Serverless GraphQL Architecture Application Boilerplate diagram](/serverless_graphql_diagram.png)
+
 ## Setup
 
 If you haven't yet installed `serverless` on your machine, run:
