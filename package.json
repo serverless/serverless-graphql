@@ -1,13 +1,13 @@
 {
-  "name": "serverless-boilerplate-graphql",
-  "version": "0.0.3",
+  "name": "serverless-graphql",
+  "version": "0.0.1",
   "description": "The Serverless GraphQL Application Boilerplate",
   "author": "me",
   "license": "MIT",
   "private": false,
   "repository": {
     "type": "git",
-    "url": "git://github.com/serverless/boilerplate-graphql"
+    "url": "git://github.com/serverless/serverless-graphql"
   },
   "dependencies": {
     "aws-sdk": "^2.3.0",
