@@ -1,6 +1,6 @@
-![Serverless GraphQL Architecture Application Boilerplate](/readme_boilerplate_graphql.gif)
+![Serverless Architecture GraphQL Application Boilerplate](/readme_boilerplate_graphql.gif)
 
-# Serverless GraphQL Boilerplate
+# Serverless GraphQL
 [![serverless](http://public.serverless.com/badges/v3.svg)](http://www.serverless.com)
 
 This is a web application boilerplate for a remarkably efficent Graph API.  This Graph API is powered by a single AWS Lambda function containing GraphQL, accessible via one HTTP endpoint.  Through this endpoint, you can request any custom shape of data, across records stored in multiple DynamoDB tables, and GraphQL will return it.  The result is a very low *total cost of ownership* (i.e., least amount of code, administration, cost).  
@@ -9,6 +9,8 @@ Users CRUD has been implemented, as well as authentication and authorization via
 
 For more information, please read the [**FAQ**](#faq) at the bottom, and be sure to enjoy! - serverless.com
 
+![Serverless GraphQL Architecture Application Boilerplate diagram](/serverless_graphql_diagram.png)
+
 ## Setup
 
 If you haven't yet installed `serverless` on your machine, run:
@@ -16,11 +18,11 @@ If you haven't yet installed `serverless` on your machine, run:
 ```
 npm install -g serverless
 ```
-then install the GraphQL Boilerplate in the CWD by running:
+then install serverless graphql in the CWD by running:
 
 ```
-sls project install serverless-boilerplate-graphql
-cd serverless-boilerplate-graphql
+sls project install serverless-graphql
+cd serverless-graphql
 ```
 
 ### Back
@@ -135,9 +137,9 @@ This boilerplate includes the [Meta Sync Plugin](https://github.com/serverless/s
 ### Why use GraphQL + Lambda?
 Lambda is a revolutionary compute service that makes it really easy to build and maintain microservices at a fraction of the cost. GraphQL is equally revolutionary in its ability to receive and return requests for custom data shapes from records across different data sources.  We thought these two technologies would work well together.
 
-GraphQL reduces the amount of endpoints required in a traditional REST API back-end, to 1-2 graph API endpoints, significantly reducing development and maintenance time, as well as network overhead.  Further, multiple client applications (and their many versions) can request any data they need to populate their views via these same API endpoints.  It's incredible efficiency.
+GraphQL reduces the amount of endpoints required in a traditional REST API back-end, to 1-2 graph API endpoints, significantly reducing development and maintenance time, as well as network overhead.  Multiple client applications (and their many versions) can request any data they need to populate their views via these same API endpoints.  Also, offering a single Lambda-based back-end improves Lambda performance, since it is usually already warm and doesn't require a cold start.
 
-Putting GraphQL in AWS Lambda means simple Graph APIs, requiring zero administration, and you only get charged when that API is used.
+Putting GraphQL in AWS Lambda means simple Graph APIs, requiring zero administration, and you only get charged when that API is used.  It's incredible efficiency.
 
 ### How to add more data records?
 In this boilerplate, we're managing all data records using GraphQL. Currently the boilerplate only has a Users record/collection. But you can easily add any other data collection (i.e.. `Posts`) in the `back/api/lib/graphql/collections` directory. Just follow the same pattern in the `Users` collection.
