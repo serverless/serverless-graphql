@@ -1,6 +1,6 @@
 {
   "name": "serverless-graphql",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "description": "The Serverless GraphQL Application Boilerplate",
   "author": "me",
   "license": "MIT",
