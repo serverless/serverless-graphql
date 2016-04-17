@@ -1,6 +1,7 @@
 'use strict';
 
 const handler = require('../back/api/data/handler').handler;
+const _ = require('lodash');
 
 describe('Users', () => {
   let token;
@@ -12,7 +13,15 @@ describe('Users', () => {
       };
 
       handler(event, null, (error, response) => {
-        //expect(response.errors).to.be.empty;
+        // filter out timeout function lambda.invoke error
+        let regexp = new RegExp('Function not found: arn:aws:lambda:' + process.env.SERVERLESS_REGION + ':(\\d){12}:function:' + process.env.SERVERLESS_PROJECT + '-timeout:' + process.env.SERVERLESS_STAGE);
+
+        let errors =
+          _.filter(response.errors, (error) => {
+            return !regexp.test(error.message);
+          });
+
+        expect(errors).to.be.empty;
         done(error);
       });
     });
@@ -20,22 +29,22 @@ describe('Users', () => {
 
   describe('Read', () => {
     it('should get users', (done) => {
-      let event =  {
+      let event = {
         "query": "query getUsersTest { users {id username name email token} }"
       };
-  
+
       handler(event, null, (error, response) => {
         expect(response.data.users).to.have.lengthOf(1);
         expect(response.errors).to.be.empty;
         done(error);
       });
     });
-  
+
     it('should get a user', (done) => {
-      let event =   {
+      let event = {
         "query": "query getUserTest { user (username: \"testuser\") {id username name email token} }"
       };
-  
+
       handler(event, null, (error, response) => {
         let user = response.data.user;
         expect(user.username).to.equal('testuser');
@@ -103,7 +112,7 @@ describe('Users', () => {
 
     it('should update name and email', (done) => {
       let event = {
-        "query": "mutation updateUserTest {updateUser (name: \"New Name\", email: \"newuser@serverless.com\", password: \"secret\", token: \""+token+"\"){id username name email token}}"
+        "query": "mutation updateUserTest {updateUser (name: \"New Name\", email: \"newuser@serverless.com\", password: \"secret\", token: \"" + token + "\"){id username name email token}}"
       };
 
       handler(event, null, (error, response) => {
@@ -118,7 +127,7 @@ describe('Users', () => {
 
   describe('Delete', () => {
     it('should fail to delete the user with bad token', (done) => {
-      let event =  {
+      let event = {
         "query": "mutation deleteUserTest {deleteUser (token: \"bad-token\"){id username name email token}}"
       };
 
@@ -129,8 +138,8 @@ describe('Users', () => {
     });
 
     it('should delete the user', (done) => {
-      let event =  {
-        "query": "mutation deleteUserTest {deleteUser (token: \""+token+"\"){id username name email token}}"
+      let event = {
+        "query": "mutation deleteUserTest {deleteUser (token: \"" + token + "\"){id username name email token}}"
       };
 
       handler(event, null, (error, response) => {
@@ -146,11 +155,11 @@ describe('Users', () => {
     });
 
     it('should get empty users response', (done) => {
-      let event =  {
+      let event = {
         "query": "query getUsersTest { users {id username name email token} }"
       };
 
-      handler(event, null, (error, response) => {``
+      handler(event, null, (error, response) => {
         expect(response.data.users).to.be.empty;
         expect(response.errors).to.be.empty;
         done(error);
