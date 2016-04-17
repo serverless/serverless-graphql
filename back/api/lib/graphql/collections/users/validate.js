@@ -27,4 +27,4 @@ let validate = {
 module.exports = (data) => {
   Object.keys(data).forEach((d) => {validate[d](data[d])});
   return Promise.resolve();
-}
+};

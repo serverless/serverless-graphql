@@ -26,4 +26,4 @@ module.exports = {
       return validate(args).then(() => resolves.get(args.username));
     }
   }
-}
+};

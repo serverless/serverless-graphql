@@ -18,5 +18,12 @@
     "serverless-cors-plugin": "^0.4.1",
     "serverless-meta-sync": "^0.1.0",
     "serverless-offline": "^2.2.4"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5"
+  },
+  "scripts": {
+    "test": "SERVERLESS_STAGE=dev SERVERLESS_REGION=us-east-1 ./node_modules/.bin/mocha tests/"
   }
 }

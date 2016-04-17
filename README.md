@@ -127,6 +127,11 @@ This boilerplate includes the [Meta Sync Plugin](https://github.com/serverless/s
 - Run `sls setup db -s <stage> -r <region>` to create tables in the local DynamoDB instance.
 - Run `sls offline start` to start [the offline server](https://github.com/dherault/serverless-offline).
 
+### Running Tests
+- Follow the _Testing With A Local DynamoDB Instance_ instructions. Starting the offline server is not necessary.
+- Check that package.json script/test has the same stage and region defined as the DynamoDb table created in the last step.
+- Run `npm test`.
+
 ## <a name="faq"></a>FAQ
 
 ### Why use GraphQL + Lambda?
@@ -177,6 +182,7 @@ By setting the `API_URL` variable in `client/src/app/js/actions/index.js` Please
 ---
 
 ## Team
+* [@laardee](https://github.com/laardee)
 * [@kevinold](https://github.com/kevinold)
 * [@pmuens](https://github.com/pmuens)
 * [@breandr](https://github.com/breandr)

@@ -12,4 +12,4 @@ module.exports = (query) => {
   }
 
   return graphql(Schema, query);
-}
+};

@@ -56,4 +56,4 @@ module.exports = {
       return validate(args).then(() => authorize(args.token, ['DELETE_USER'])).then((user) => resolves.remove(user));
     }
   }
-}
+};
