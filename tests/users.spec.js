@@ -13,15 +13,12 @@ describe('Users', () => {
       };
 
       handler(event, null, (error, response) => {
-        // filter out timeout function lambda.invoke error
-        let regexp = new RegExp('Function not found: arn:aws:lambda:' + process.env.SERVERLESS_REGION + ':(\\d){12}:function:' + process.env.SERVERLESS_PROJECT + '-timeout:' + process.env.SERVERLESS_STAGE);
-
-        let errors =
-          _.filter(response.errors, (error) => {
-            return !regexp.test(error.message);
-          });
-
-        expect(errors).to.be.empty;
+        let user = response.data.createUser;
+        expect(user.username).to.equal('testuser');
+        expect(user.name).to.equal('Test User');
+        expect(user.email).to.equal('testuser@serverless.com');
+        expect(user.token).to.be.null;
+        expect(response.errors).to.be.empty;
         done(error);
       });
     });
