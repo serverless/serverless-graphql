@@ -128,7 +128,7 @@ This boilerplate includes the [Meta Sync Plugin](https://github.com/serverless/s
 - Run `sls offline start` to start [the offline server](https://github.com/dherault/serverless-offline).
 
 ### Running Tests
-- Follow the _Testing With A Local DynamoDB Instance_ instructions. Starting the offline server is not necessary.
+- Follow the _Testing With A Local DynamoDB Instance_ instructions. Starting the offline server is not necessary. Notice that local DynamoDB is started with -inMemory parameter and no data will be saved when it is stopped.
 - Check that package.json script/test has the same stage and region defined as the DynamoDb table created in the last step.
 - Run `npm test`.
 

@@ -1,7 +1,6 @@
 'use strict';
 
 const handler = require('../back/api/data/handler').handler;
-const _ = require('lodash');
 
 describe('Users', () => {
   let token;
@@ -13,13 +12,19 @@ describe('Users', () => {
       };
 
       handler(event, null, (error, response) => {
-        let user = response.data.createUser;
-        expect(user.username).to.equal('testuser');
-        expect(user.name).to.equal('Test User');
-        expect(user.email).to.equal('testuser@serverless.com');
-        expect(user.token).to.be.null;
-        expect(response.errors).to.be.empty;
-        done(error);
+        let errors = combineErrors(response.errors, error);
+        if (!errors) {
+          try {
+            let user = response.data.createUser;
+            expect(user.username).to.equal('testuser');
+            expect(user.name).to.equal('Test User');
+            expect(user.email).to.equal('testuser@serverless.com');
+            expect(user.token).to.be.null;
+          } catch (exception) {
+            errors = exception;
+          }
+        }
+        done(errors);
       });
     });
   });
@@ -31,9 +36,15 @@ describe('Users', () => {
       };
 
       handler(event, null, (error, response) => {
-        expect(response.data.users).to.have.lengthOf(1);
-        expect(response.errors).to.be.empty;
-        done(error);
+        let errors = combineErrors(response.errors, error);
+        if (!errors) {
+          try {
+            expect(response.data.users).to.have.lengthOf(1);
+          } catch (exception) {
+            errors = exception;
+          }
+        }
+        done(errors);
       });
     });
 
@@ -43,13 +54,19 @@ describe('Users', () => {
       };
 
       handler(event, null, (error, response) => {
-        let user = response.data.user;
-        expect(user.username).to.equal('testuser');
-        expect(user.name).to.equal('Test User');
-        expect(user.email).to.equal('testuser@serverless.com');
-        expect(user.token).to.be.null;
-        expect(response.errors).to.be.empty;
-        done(error);
+        let errors = combineErrors(response.errors, error);
+        if (!errors) {
+          try {
+            let user = response.data.user;
+            expect(user.username).to.equal('testuser');
+            expect(user.name).to.equal('Test User');
+            expect(user.email).to.equal('testuser@serverless.com');
+            expect(user.token).to.be.null;
+          } catch (exception) {
+            errors = exception;
+          }
+        }
+        done(errors);
       });
     });
   });
@@ -61,8 +78,13 @@ describe('Users', () => {
       };
 
       handler(event, null, (error, response) => {
-        expect(response.errors[0].message).to.equal('User not found');
-        done(error);
+        let expectedError = response.errors[0];
+        let errors = combineErrors(response.errors, error);
+        if (!error && expectedError.message === 'User not found') {
+          done(null);
+        } else {
+          done(errors);
+        }
       });
     });
 
@@ -72,8 +94,13 @@ describe('Users', () => {
       };
 
       handler(event, null, (error, response) => {
-        expect(response.errors[0].message).to.equal('invalid password');
-        done(error);
+        let expectedError = response.errors[0];
+        let errors = combineErrors(response.errors, error);
+        if (!error && expectedError.message === 'invalid password') {
+          done(null);
+        } else {
+          done(errors);
+        }
       });
     });
 
@@ -83,14 +110,20 @@ describe('Users', () => {
       };
 
       handler(event, null, (error, response) => {
-        let user = response.data.loginUser;
-        token = user.token;
-        expect(user.username).to.equal('testuser');
-        expect(user.name).to.equal('Test User');
-        expect(user.email).to.equal('testuser@serverless.com');
-        expect(user.token).not.to.be.null;
-        expect(response.errors).to.be.empty;
-        done(error);
+        let errors = combineErrors(response.errors, error);
+        if (!errors) {
+          try {
+            let user = response.data.loginUser;
+            token = user.token;
+            expect(user.username).to.equal('testuser');
+            expect(user.name).to.equal('Test User');
+            expect(user.email).to.equal('testuser@serverless.com');
+            expect(user.token).not.to.be.null;
+          } catch (exception) {
+            errors = exception;
+          }
+        }
+        done(errors);
       });
     });
   });
@@ -98,12 +131,17 @@ describe('Users', () => {
   describe('Update', () => {
     it('should not update name and email with bad token', (done) => {
       let event = {
-        "query": "mutation updateUserTest {updateUser (name: \"User New Name\", email: \"newtestuser@serverless.com\", password: \"secret\", token: \"bad-token\"){id username name email token}}"
+        "query": "mutation updateUserTest {updateUser (name: \"New Name\", email: \"newuser@serverless.com\", password: \"secret\", token: \"bad-token\"){id username name email token}}"
       };
 
       handler(event, null, (error, response) => {
-        expect(response.errors[0].message).to.equal('Invalid Token');
-        done(error);
+        let expectedError = response.errors[0];
+        let errors = combineErrors(response.errors, error);
+        if (!error && expectedError.message === 'Invalid Token') {
+          done(null);
+        } else {
+          done(errors);
+        }
       });
     });
 
@@ -113,11 +151,17 @@ describe('Users', () => {
       };
 
       handler(event, null, (error, response) => {
-        let user = response.data.updateUser;
-        expect(user.name).to.equal('New Name');
-        expect(user.email).to.equal('newuser@serverless.com');
-        expect(response.errors).to.be.empty;
-        done(error);
+        let errors = combineErrors(response.errors, error);
+        if (!errors) {
+          try {
+            let user = response.data.updateUser;
+            expect(user.name).to.equal('New Name');
+            expect(user.email).to.equal('newuser@serverless.com');
+          } catch (exception) {
+            errors = exception;
+          }
+        }
+        done(errors);
       });
     });
   });
@@ -129,8 +173,13 @@ describe('Users', () => {
       };
 
       handler(event, null, (error, response) => {
-        expect(response.errors[0].message).to.equal('Invalid Token');
-        done(error);
+        let expectedError = response.errors[0];
+        let errors = combineErrors(response.errors, error);
+        if (!error && expectedError.message === 'Invalid Token') {
+          done(null);
+        } else {
+          done(errors);
+        }
       });
     });
 
@@ -140,14 +189,20 @@ describe('Users', () => {
       };
 
       handler(event, null, (error, response) => {
-        let user = response.data.deleteUser;
-        expect(user.id).to.be.null;
-        expect(user.username).to.be.null;
-        expect(user.name).to.be.null;
-        expect(user.email).to.be.null;
-        expect(user.token).to.be.null;
-        expect(response.errors).to.be.empty;
-        done(error);
+        let errors = combineErrors(response.errors, error);
+        if (!errors) {
+          try {
+            let user = response.data.deleteUser;
+            expect(user.id).to.be.null;
+            expect(user.username).to.be.null;
+            expect(user.name).to.be.null;
+            expect(user.email).to.be.null;
+            expect(user.token).to.be.null;
+          } catch (exception) {
+            errors = exception;
+          }
+        }
+        done(errors);
       });
     });
 
@@ -157,9 +212,15 @@ describe('Users', () => {
       };
 
       handler(event, null, (error, response) => {
-        expect(response.data.users).to.be.empty;
-        expect(response.errors).to.be.empty;
-        done(error);
+        let errors = combineErrors(response.errors, error);
+        if (!errors) {
+          try {
+            expect(response.data.users).to.be.empty;
+          } catch (exception) {
+            errors = exception;
+          }
+        }
+        done(errors);
       });
     });
   });
