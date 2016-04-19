@@ -124,11 +124,11 @@ This boilerplate includes the [Meta Sync Plugin](https://github.com/serverless/s
 - Install [Docker](https://www.docker.com/)
 - Run `docker-compose up` to install and run DynamoDB.
 - Add the `localDynamoDbEndpoint` variable with the value `http://<DOCKER-MACHINE-IP>:8000` to `_meta/variables/s-variables-common.json`. Example value:  `http://192.168.99.100:8000`.
-- Run `sls setup db -s <stage> -r <region>` to create tables in the local DynamoDB instance. Notice that local DynamoDB is started with -inMemory parameter and when it is stopped no data will be saved.
+- Run `sls setup db -s <stage> -r <region>` to create tables in the local DynamoDB instance.
 - Run `sls offline start` to start [the offline server](https://github.com/dherault/serverless-offline).
 
 ### Running Tests
-- Follow the _Testing With A Local DynamoDB Instance_ instructions. Starting the offline server is not necessary.
+- Follow the _Testing With A Local DynamoDB Instance_ instructions. Starting the offline server is not necessary. Notice that local DynamoDB is started with -inMemory parameter and no data will be saved when it is stopped.
 - Check that package.json script/test has the same stage and region defined as the DynamoDb table created in the last step.
 - Run `npm test`.
 
