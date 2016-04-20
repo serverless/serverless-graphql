@@ -4,12 +4,11 @@ import { resetError } from '../../actions/error';
 
 const styles = {
   backgroundColor: "#FC9D9A",
-  // color: "#FE4365",
-  fontWeight: 'bold',
+  fontWeight: "bold",
   padding: "1em",
   borderRadius: "4px",
   marginBottom: "1em"
-}
+};
 
 class Error extends Component {
 
@@ -36,6 +35,6 @@ class Error extends Component {
   }
 }
 
-const mapStateToProps = ({error}) => ({ message: error.message })
+const mapStateToProps = ({error}) => ({ message: error.message });
 
 export default connect(mapStateToProps, { resetError })(Error);

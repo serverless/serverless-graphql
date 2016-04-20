@@ -1,6 +1,6 @@
 'use strict';
 
-const GraphQL = require('graphql')
+const GraphQL = require('graphql');
 const GraphQLObjectType = GraphQL.GraphQLObjectType;
 const GraphQLSchema = GraphQL.GraphQLSchema;
 const _ = require('lodash');

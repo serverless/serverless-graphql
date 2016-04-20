@@ -1,5 +1,5 @@
 {
-  "name": "serverless-boilerplate",
+  "name": "serverless-graphql",
   "version": "0.0.1",
   "description": "The Serverless Application Boilerplate API Dependencies",
   "author": "me",
@@ -7,7 +7,7 @@
   "private": false,
   "repository": {
     "type": "git",
-    "url": "git://github.com/serverless/serverless-boilerplate"
+    "url": "git://github.com/serverless/serverless-graphql"
   },
   "dependencies": {
     "aws-sdk": "^2.2.43",

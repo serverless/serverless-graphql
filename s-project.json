@@ -1,5 +1,5 @@
 {
-  "name": "serverless-boilerplate",
+  "name": "serverless-graphql",
   "custom": {
     "meta": {
       "name": "${meta_bucket}",

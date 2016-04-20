@@ -1,7 +1,7 @@
 {
   "name": "data",
   "runtime": "nodejs4.3",
-  "description": "Serverless Lambda function for project: serverless-boilerplate",
+  "description": "Serverless Lambda function for project: serverless-graphql",
   "customName": false,
   "customRole": false,
   "handler": "data/handler.handler",
