@@ -153,6 +153,9 @@ In this boilerplate, we're using JSON Web Token for authentication. You can find
 ### Where to add more business logic?
 This is a new architecture and there are still some questions left unanswered.  The biggest question is where should further business logic go (e.g., sending transactional email after a user is created)?  We have two answers for that:
 
+### How can I enable API Gateway caching?
+The `GET /data` endpoint's `query` parameter is preconfigured for caching, but it has not been enabled on the stage by default, as this incurs additional fees. You can turn caching on by following [API Gateway's caching documentation](http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-caching.html)
+
 * **Monolithic** - Add business logic into the single AWS Lambda function and build out a monolithic Lambda.
 * **Microservices** - Add business logic in separate Lambda functions which you can invoke asynchronously.  In the GraphQL `resolve` functions is where you should make these calls.  And you can store these extra Lambda functions in `api/events`.  Doing synchronous calls to other Lambda functions will likely result in too much latency.  But logic that can be done in the background can easily be isolated in separate Lambda functions.  We've included some code to help you invoke separate Lambda functions and we've even added it already to the `users create` resolve function.
 
