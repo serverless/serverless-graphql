@@ -3,13 +3,19 @@
 const graphql = require('graphql').graphql;
 const Schema = require('./schema');
 
-module.exports = (query) => {
+module.exports = (eventQuery) => {
 
   // patch to allow queries from GraphiQL
   // like the initial introspectionQuery
-  if (query && query.hasOwnProperty('query')) {
-    query = query.query.replace("\n", ' ', "g");
+  let query, variables;
+
+  if (eventQuery && eventQuery.hasOwnProperty('query')) {
+    query = eventQuery.query.replace("\n", ' ', "g");
   }
 
-  return graphql(Schema, query);
+  if (eventQuery && eventQuery.hasOwnProperty('variables')) {
+    variables = JSON.parse(eventQuery.variables);
+  }
+
+  return graphql(Schema, query, null, variables);
 };
