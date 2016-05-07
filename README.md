@@ -3,9 +3,9 @@
 # Serverless GraphQL
 [![serverless](http://public.serverless.com/badges/v3.svg)](http://www.serverless.com)
 
-This is a web application boilerplate for a remarkably efficent Graph API.  This Graph API is powered by a single AWS Lambda function containing GraphQL, accessible via one HTTP endpoint.  Through this endpoint, you can request any custom shape of data, across records stored in multiple DynamoDB tables, and GraphQL will return it.  The result is a very low *total cost of ownership* (i.e., least amount of code, administration, cost).  
+This is a web application boilerplate for a remarkably efficent Graph API.  This Graph API is powered by a single AWS Lambda function containing GraphQL, accessible via one HTTP endpoint.  Through this endpoint, you can request any custom shape of data, across records stored in multiple DynamoDB tables, and GraphQL will return it.  The result is a very low *total cost of ownership* (i.e., least amount of code, administration, cost).
 
-Users CRUD has been implemented, as well as authentication and authorization via JSON webtokens.  Also provided is an entire front-end built in React.  You can deploy everything easily via the [**Serverless Framework**](http://www.serverless.com).  A plugin for the Framework allowing you to easily deploy your front-end assets to S3 is also included.   
+Users CRUD has been implemented, as well as authentication and authorization via JSON webtokens.  Also provided is an entire front-end built in React.  You can deploy everything easily via the [**Serverless Framework**](http://www.serverless.com).  A plugin for the Framework allowing you to easily deploy your front-end assets to S3 is also included.
 
 For more information, please read the [**FAQ**](#faq) at the bottom, and be sure to enjoy! - serverless.com
 
@@ -18,12 +18,14 @@ If you haven't yet installed `serverless` on your machine, run:
 ```
 npm install -g serverless
 ```
-then install serverless graphql in the CWD by running:
+then install serverless-graphql by running:
 
 ```
 sls project install serverless-graphql
 cd serverless-graphql
 ```
+
+**Note:** to use a different name for your project, add `-n` followed by your name to the `sls` command.
 
 ### Back
 Add the `authTokenSecret` variable to `_meta/variables/s-variables-STAGE-REGION.json` and give it a strong value. This is the secret used to generate JSON web tokens. Then:
@@ -44,15 +46,7 @@ npm install
 npm start
 ```
 
-This will run the client locally. You can then deploy the client to an S3 bucket with:
-
-```
-npm run build
-sls client deploy
-```
-
-### Deploying to S3 bucket
-Make sure you're still in the `client/src` folder mentioned above, then run:
+This will run the client locally. You can then deploy the client to an S3 bucket. You will need to open `s-project.json` and under `bucketName` change `boilerplate` to something that is unique among S3 bucket names (perhaps your project name), and then run:
 
 ```
 npm run build
@@ -72,10 +66,10 @@ If you're running OSX, you can use the [GraphiQL Electron App](https://github.co
 ```
 mutation createUserTest {
   createUser (username: "serverless", name: "Serverless Inc.", email: "hello@serverless.com", password: "secret") {
-    id 
-    username 
-    name 
-    email  
+    id
+    username
+    name
+    email
   }
 }
 ```
@@ -84,13 +78,13 @@ mutation createUserTest {
 
 
 ```
-query getUsersTest { 
+query getUsersTest {
   users {
     id
     username
     name
     email
-  } 
+  }
 }
 ```
 
