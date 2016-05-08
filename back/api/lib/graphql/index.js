@@ -13,7 +13,7 @@ module.exports = (eventQuery) => {
     query = eventQuery.query.replace("\n", ' ', "g");
   }
 
-  if (eventQuery && eventQuery.hasOwnProperty('variables')) {
+  if (eventQuery && eventQuery.variables) {
     variables = JSON.parse(eventQuery.variables);
   }
 
