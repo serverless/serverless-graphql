@@ -43,7 +43,7 @@ sls function deploy --all
 sls endpoint deploy --all
 ```
 
-The output from `sls endpoint deploy --all` returns the `POST - data` enpoint which is the `data` endpoint you use for GraphiQL below.
+The output from `sls endpoint deploy --all` returns the `POST - data` endpoint which is the `data` endpoint you use for GraphiQL below.
 
 ### Client
 Set `API_URL` in `client/src/app/js/actions/index.js`. Then:
