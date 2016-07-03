@@ -13,6 +13,12 @@ For more information, please read the [**FAQ**](#faq) at the bottom, and be sure
 
 ## Setup
 
+If you haven't yet installed `awscli` on your machine, run:
+
+```
+brew install awscli
+```
+
 If you haven't yet installed `serverless` on your machine, run:
 
 ```
@@ -36,6 +42,8 @@ npm install
 sls function deploy --all
 sls endpoint deploy --all
 ```
+
+The output from `sls endpoint deploy --all` returns the `POST - data` endpoint which is the `data` endpoint you use for GraphiQL below.
 
 ### Client
 Set `API_URL` in `client/src/app/js/actions/index.js`. Then:
