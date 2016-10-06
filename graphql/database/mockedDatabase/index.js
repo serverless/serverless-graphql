@@ -7,10 +7,9 @@ import wrapPromise from '../../utils/wrapPromise';
 import type { Database } from '../type';
 
 const database: Database = {
-  getViewer: (params, { authId }) => ({
+  getViewer: (_params) => ({
     id: uuid.create().toString(),
     name: 'Ada Lovelace',
-    authId,
   }),
 };
 

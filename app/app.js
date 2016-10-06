@@ -15,25 +15,13 @@ import {
   applyRouterMiddleware,
 } from 'react-router';
 import AppLoading from './components/AppLoading';
-import SignIn from './components/SignIn';
-import SignUp from './components/SignUp';
-import Welcome from './components/Welcome';
-import VerifyEmail from './components/VerifyEmail';
 import App from './containers/App';
 import Dashboard from './containers/Dashboard';
 import {
-  initializeAuth0Lock,
-  initializeXsrfToken,
-  parseAuthHash,
-  isAuthenticated,
   setRelayNetworkLayer,
-  setRedirectLocation,
-  getRedirectLocation,
 } from './utils';
 
-initializeXsrfToken();
 setRelayNetworkLayer();
-const auth0Lock = initializeAuth0Lock();
 
 const DashboardQueries = {
   viewer: () => Relay.QL`query { viewer }`,
@@ -55,29 +43,6 @@ function renderAppRoute({ done, props, element }) {
   return <AppLoading />;
 }
 
-function handleAuth({ location }, replace) {
-  const { authenticated, reason } = parseAuthHash(location.hash);
-  if (authenticated) {
-    setRelayNetworkLayer();
-    replace(getRedirectLocation());
-  } else if (reason === 'email-not-verified') {
-    replace({ pathname: '/verify-email' });
-  } else {
-    replace({ pathname: '/sign-in' });
-  }
-}
-
-function requireAuth({ location }, replace) {
-  if (!isAuthenticated()) {
-    setRedirectLocation(location);
-    if (location.pathname === '/') {
-      replace({ pathname: '/welcome' });
-    } else {
-      replace({ pathname: '/sign-in' });
-    }
-  }
-}
-
 ReactDOM.render(
   <Router
     history={browserHistory}
@@ -85,33 +50,9 @@ ReactDOM.render(
     environment={Relay.Store}
   >
     <Route
-      path="/sign-in-success"
-      component={() => (<div>Authenticating …</div>)}
-      onEnter={handleAuth}
-    />
-    <Route
-      path="/welcome"
-      component={Welcome}
-    />
-    <Route
-      path="/verify-email"
-      component={VerifyEmail}
-    />
-    <Route
-      path="/sign-in"
-      component={SignIn}
-      auth0Lock={auth0Lock}
-    />
-    <Route
-      path="/sign-up"
-      component={SignUp}
-      auth0Lock={auth0Lock}
-    />
-    <Route
       path="/"
       component={App}
       render={renderAppRoute}
-      onEnter={requireAuth}
     >
       <IndexRoute
         component={Dashboard}

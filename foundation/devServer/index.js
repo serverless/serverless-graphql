@@ -28,7 +28,7 @@ app.use((req, res, next) => {
 });
 
 app.post('/graphql', (req, res) => {
-  graphQLHandler(req.body.query, req.body.variables, req.get('authorization'))
+  graphQLHandler(req.body.query, req.body.variables)
     .then(result => {
       res.setHeader('Content-Type', 'application/json; charset=utf-8');
       res.end(JSON.stringify(result, null, 2));
