@@ -2,7 +2,6 @@ import {
   GraphQLObjectType,
 } from 'graphql';
 import UserType from './user';
-import { nodeField } from '../node';
 import db from '../database';
 
 /**
@@ -12,7 +11,6 @@ import db from '../database';
 const QueryType = new GraphQLObjectType({
   name: 'Query',
   fields: () => ({
-    node: nodeField,
     // Add your own root fields here
     viewer: {
       type: UserType,
