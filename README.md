@@ -1,5 +1,7 @@
 # Serverless GraphQL
 
+NOTE: Please don't tweet or share this yet! The static resource setup is not yet done.
+
 This starter kit is an opinionated set of tools combined to help you get started building a Serverless application with an GraphQL endpoint and deploy them to production in minutes.
 
 This example uses the following technologies:
