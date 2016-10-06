@@ -2,6 +2,9 @@
 node_modules
 npm-debug.log
 
+# serverless zip
+.serverless
+
 # generated schema files
 graphql/schema.json
 graphql/schema.graphql
