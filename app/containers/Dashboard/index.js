@@ -9,7 +9,7 @@ import styles from './styles.css';
 const Dashboard = (props) => (
   <Content compact className={styles.root}>
     <Block>
-      Welcome {props.name}!
+      { props.data.loading ? '... ' : `Welcome ${props.data.viewer.name}!` }
     </Block>
   </Content>
 );

@@ -11,7 +11,6 @@ module.exports = require('./webpack.base')({
   // Add hot reloading in development
   entry: [
     'webpack-hot-middleware/client',
-    'whatwg-fetch',
     path.join(process.cwd(), 'app/app.js'), // Start with js/app.js
   ],
 
