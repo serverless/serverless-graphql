@@ -26,11 +26,11 @@ resources:
     WebsiteS3Bucket:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: serverless-graphql-${opt:stage}
+        BucketName: <your-s3-bucket-name>
         AccessControl: PublicRead
         WebsiteConfiguration:
           IndexDocument: index.html
-          ErrorDocument: 404.html
+          ErrorDocument: index.html
     WebsiteS3BucketPolicy:
       Type: AWS::S3::BucketPolicy
       Properties:

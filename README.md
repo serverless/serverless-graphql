@@ -1,7 +1,5 @@
 # Serverless GraphQL
 
-NOTE: Please don't tweet or share this yet! The static resource setup is not yet done.
-
 This starter kit is an opinionated set of tools combined to help you get started building a Serverless application with an GraphQL endpoint and deploy them to production in minutes.
 
 This example uses the following technologies:
@@ -12,8 +10,8 @@ This example uses the following technologies:
 - React
 - CSSModules
 - Flowtype
-- Jest
 - Webpack
+- Jest
 
 ## Install & Run
 
@@ -31,7 +29,7 @@ npm start
 # visit http://localhost:3000 in your browser
 ```
 
-Use live data from the development environment. You need to make sure you have access to your deployed lambda functions.
+Use live data from the development environment. You need to make sure you have access to your deployed lambda functions. This works only after you deployed it to production.
 
 ```
 npm run update-schema
@@ -41,7 +39,9 @@ npm run start:remote
 
 ## Setup for Production
 
-Since we don't know the URL of the API Gateway nor CloudFront URL for the static assets we need to deploy once without expecting the application to work using `npm run deploy`. After the initial deploy we will know both Urls. The API url you need to provide in the `security.env.prod` in order for Relay to know the location of the GraphQL endpoint.
+AWS has global unique bucket names. You need to replace `<your-s3-bucket-name>` in package.json as well as in the serverless.yml with your own custom name.
+
+Since the URL of the API is unknown until you create a stack, you need to deploy once without expecting the application to work using `npm run deploy`. After the initial deploy you can see the API url which you need to provide to the URL entry in `security.env.prod`.
 
 After these steps you are good to go and with your next `npm run deploy` your infrastructure should up and running.
 
