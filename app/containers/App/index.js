@@ -1,22 +1,11 @@
-/* @flow */
-
 import 'sanitize.css/sanitize.css';
 import React from 'react';
 import { compose } from 'recompose';
 import { withRouter, Link } from 'react-router';
 import styles from './styles.css';
 import Progress from '../../components/Progress';
-import type { ReactChildren } from '../../types/react';
-import type { Router, Location } from '../../types/reactRouter';
 
-type Props = {
-  router: Router,
-  location: Location,
-  children?: ReactChildren,
-  loading: boolean,
-};
-
-const App = (props: Props) => (
+const App = (props) => (
   <div className={styles.root}>
     <div className={styles.header}>
       <Link to={{ pathname: '/' }} className={styles.logo} >

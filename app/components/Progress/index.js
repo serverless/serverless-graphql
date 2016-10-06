@@ -1,14 +1,7 @@
-/* @flow */
-
 import React from 'react';
 import styles from './styles.css';
 
-type Props = {
-  loading: boolean,
-  speed?: number, // seconds
-};
-
-export default (props: Props) => {
+export default (props) => {
   const {
     speed = 1.4,
     loading,

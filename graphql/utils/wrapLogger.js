@@ -2,8 +2,8 @@
 
 import { mapValues } from 'lodash';
 
-export default (db: Object): Object => (
-  mapValues(db, (value, key: string) => (
+export default (db) => (
+  mapValues(db, (value, key) => (
     (payload, context) => {
       if (process.env.NODE_ENV !== 'test') {
         console.log(`----> ${key} - ${JSON.stringify(payload)}`);

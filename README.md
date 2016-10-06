@@ -9,7 +9,6 @@ This example uses the following technologies:
 - Relay
 - React
 - CSSModules
-- Flowtype
 - Webpack
 - Jest
 
