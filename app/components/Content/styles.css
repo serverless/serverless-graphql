@@ -1,0 +1,10 @@
+.main {
+  position: relative;
+  margin: auto;
+  padding: 0 1rem;
+}
+
+.compact {
+  width: 400px;
+  min-width: auto;
+}

@@ -1,0 +1,8 @@
+declare module 'auth0-js' {
+  declare class Auth0 {
+
+    parseHash(hash: string): Object;
+  }
+
+  declare export default typeof Auth0
+}

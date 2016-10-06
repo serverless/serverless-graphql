@@ -1,0 +1,17 @@
+{
+  "name": "serverless-graphql",
+  "version": "0.0.0",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:serverless/serverless-graphql.git"
+  },
+  "dependencies": {
+    "babel-polyfill": "6.13.0",
+    "graphql": "0.6.2",
+    "graphql-relay": "0.4.2",
+    "jsonwebtoken": "^7.1.9",
+    "lodash": "^4.13.1",
+    "require-clean": "0.1.3"
+  }
+}

@@ -1,0 +1,59 @@
+:global {
+  html {
+    height: 100%;
+  }
+
+  body {
+    font: 14px / 20px sans-serif;
+    background: #FFF;
+    color: #1C1C1C;
+    height: 100%;
+  }
+
+  #root {
+    height: 100%;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  animation: fadeIn 1s;
+}
+
+.logo {
+  display: flex;
+  width: 66px;
+  height: 66px;
+  background: #FFD426;
+  margin-right: 1.75em;
+
+  svg {
+    margin: auto;
+  }
+}
+
+.header {
+  display: flex;
+  flex: 0 0 auto;
+  background: #1C1C1C;
+  color: #FFF;
+}
+
+.rightMenu {
+  position: absolute;
+  right: 1rem;
+  align-self: center;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}

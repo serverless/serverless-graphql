@@ -1,0 +1,103 @@
+.root {
+  text-align: center;
+}
+
+.headline {
+  margin-top: 8rem;
+  margin-bottom: 4rem;
+}
+
+.signUp {
+  display: block;
+  width: 16rem;
+  box-sizing: border-box;
+  margin: 0 auto;
+  text-align: none;
+  font-size: 1.5rem;
+  border-radius: 3px;
+  padding: 1rem;
+  background: #1C1C1C;
+  outline: none;
+  color: #FFF;
+  cursor: pointer;
+  text-decoration: none;
+
+  &:hover {
+    background: #3C3C3C;
+  }
+
+  &:focus {
+    background: #191919;
+    outline: 0;
+  }
+}
+
+.or {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.signIn {
+  color: #666;
+  text-decoration: none;
+
+  &:hover {
+    color: #999;
+  }
+
+  &:focus {
+    color: #999;
+    outline: 0;
+  }
+}
+
+:global {
+  .auth0-lock.auth0-lock .auth0-lock-center {
+    display: block !important;
+    margin: 100px auto !important;
+  }
+
+  .auth0-lock.auth0-lock .auth0-lock-widget-container {
+    border: 1px solid #1C1C1C !important;
+    border-radius: 5px;
+  }
+
+  .auth0-lock.auth0-lock .auth0-lock-header-logo {
+    width: 189px !important;
+    margin: 0 !important;
+    height: auto !important;
+  }
+
+  .auth0-lock.auth0-lock .auth0-lock-header-bg {
+    background: #000 !important;
+  }
+
+  .auth0-lock.auth0-lock .auth0-lock-header {
+    color: #FFF !important;
+    background: black !important;
+  }
+
+  .auth0-lock-header-bg-blur {
+    display: none !important;
+  }
+
+  .auth0-lock.auth0-lock .auth0-lock-header-welcome {
+    height: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  .auth0-lock-widget {
+    box-shadow: 0 0 0 0 #000 !important;
+    transition: none !important;
+  }
+
+  .auth0-lock-overlay {
+    display: none !important;
+  }
+
+  .auth0-lock-badge-bottom {
+    display: none;
+  }
+}

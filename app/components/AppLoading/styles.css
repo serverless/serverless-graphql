@@ -1,0 +1,10 @@
+.root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  opacity: 0;
+  animation: fadein 3s;
+  color: #9B9B9B;
+  font-size: 1.1rem;
+}

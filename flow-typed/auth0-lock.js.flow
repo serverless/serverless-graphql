@@ -1,0 +1,11 @@
+declare module 'auth0-lock' {
+  declare class Auth0Lock {
+    static Auth0Lock: typeof Auth0Lock;
+
+    show(): void;
+    hide(): void;
+  }
+
+  declare export var Auth0Lock: typeof Auth0Lock
+  declare export default typeof Auth0Lock
+}

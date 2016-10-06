@@ -1,0 +1,33 @@
+.dot {
+  animation: pulse 2s infinite ease-in-out;
+}
+
+.dotTwo {
+  animation-delay: 400ms;
+}
+
+.dotThree {
+  animation-delay: 800ms;
+}
+
+@keyframes pulse {
+  0%,
+  90%,
+  100% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

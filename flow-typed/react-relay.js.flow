@@ -1,0 +1,11 @@
+declare module 'react-relay' {
+  declare var QL: any;
+  declare function createContainer(component: any, fragments: any): any;
+  declare var Route: any;
+  declare var Mutation: any;
+  declare var Store: any;
+  declare function injectNetworkLayer(networkLayer: Object) : void
+  declare class DefaultNetworkLayer {
+    constructor(graphqlUrl: string): void;
+  }
+}

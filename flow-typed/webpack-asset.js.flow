@@ -1,0 +1,3 @@
+declare module WebpackAsset {
+  declare var exports: string;
+}
