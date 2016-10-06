@@ -1,0 +1,51 @@
+service: serverless-graphql
+
+provider:
+  name: aws
+  runtime: nodejs4.3
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "lambda:InvokeFunction"
+      Resource: "*"
+
+functions:
+  api:
+    handler: handler.graphql
+    events:
+    - http:
+        path: graphql
+        method: post
+        cors: true
+        response:
+          headers:
+            Access-Control-Allow-Origin: "*"
+
+resources:
+  Resources:
+    WebsiteS3Bucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: <your-s3-bucket-name>
+        AccessControl: PublicRead
+        WebsiteConfiguration:
+          IndexDocument: index.html
+          ErrorDocument: index.html
+    WebsiteS3BucketPolicy:
+      Type: AWS::S3::BucketPolicy
+      Properties:
+        Bucket:
+          Ref: WebsiteS3Bucket
+        PolicyDocument:
+          Statement:
+            - Sid: PublicReadGetObject
+              Effect: Allow
+              Principal: "*"
+              Action:
+              - s3:GetObject
+              Resource:
+              - Fn::Join:
+                - ''
+                - - 'arn:aws:s3:::'
+                  - Ref: WebsiteS3Bucket
+                  - "/*"

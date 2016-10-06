@@ -1,0 +1,15 @@
+.root {
+  transition: 0.3s opacity;
+}
+
+.bar {
+  position: fixed;
+  display: inline-block;
+  top: 0;
+  left: 0;
+  height: 2px;
+  border-radius: 0 1px 1px 0;
+  max-width: 100%;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+  background-color: #FFD426;
+}

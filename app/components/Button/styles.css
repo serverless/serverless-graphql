@@ -1,0 +1,19 @@
+.root {
+  border-radius: 3px;
+  padding: 1rem;
+  width: 100%;
+  background: #1C1C1C;
+  outline: none;
+  color: #FFF;
+  font-weight: 500;
+  cursor: pointer;
+
+  &:hover {
+    background: #3C3C3C;
+  }
+
+  &:focus {
+    background: #191919;
+    outline: 0;
+  }
+}
