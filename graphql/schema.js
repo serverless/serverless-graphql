@@ -1,5 +1,3 @@
-/* @flow */
-
 import 'babel-polyfill'; // needed to for async/await
 
 import { GraphQLSchema } from 'graphql';

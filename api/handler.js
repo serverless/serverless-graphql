@@ -1,5 +1,3 @@
-/* eslint-disable flowtype/require-valid-file-annotation */
-
 'use strict'; // eslint-disable-line strict
 
 const handle = require('./graphql/index').default;

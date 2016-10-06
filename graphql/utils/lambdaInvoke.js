@@ -1,5 +1,3 @@
-/* @flow */
-
 import aws from 'aws-sdk';
 import isLambdaEnvironment from './isLambdaEnvironment';
 
@@ -9,7 +7,7 @@ const LAMBDA_CONFIG = isLambdaEnvironment() ?
 
 const lambda = new aws.Lambda(LAMBDA_CONFIG);
 
-export default (functionName: string, payload: Object): Promise<any> => {
+export default (functionName, payload) => {
   const params = {
     FunctionName: functionName,
     Payload: JSON.stringify(payload),

@@ -1,5 +1,3 @@
-/* eslint-disable flowtype/require-valid-file-annotation */
-
 import path from 'path';
 import fs from 'fs';
 import webpack from 'webpack';

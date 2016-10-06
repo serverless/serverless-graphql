@@ -1,5 +1,3 @@
-/* @flow */
-
 import Relay from 'react-relay';
 import createHelper from 'recompose/createHelper';
 

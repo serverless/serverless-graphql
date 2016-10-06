@@ -18,7 +18,6 @@
     "react",
     "import",
     "jsx-a11y",
-    "flowtype",
   ],
   "rules": {
     "max-len": 0,
@@ -28,9 +27,6 @@
     "lines-around-directive": 0,
     "jsx-a11y/no-static-element-interactions": 0,
     "no-unused-vars": [2, { "argsIgnorePattern": "^_" }],
-    "flowtype/define-flow-type": 2,
-    "flowtype/use-flow-type": 2,
-    "flowtype/require-valid-file-annotation": [ 2, "always" ],
     "import/no-extraneous-dependencies": [2, {
       "devDependencies": ["**/graphql/**/*.js", "**/foundation/**/*.js"]
     }],

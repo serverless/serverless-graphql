@@ -1,3 +1,3 @@
 /* @flow */
 
-export default (): boolean => Boolean(process.env.AWS_REGION);
+export default () => Boolean(process.env.AWS_REGION);

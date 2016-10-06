@@ -1,5 +1,3 @@
-/* @flow */
-
 import wrapLogger from '../wrapLogger';
 
 describe('wrapLogger', () => {

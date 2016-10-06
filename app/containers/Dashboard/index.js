@@ -1,5 +1,3 @@
-/* @flow */
-
 import React from 'react';
 import Relay from 'react-relay';
 import compose from 'recompose/compose';
@@ -10,13 +8,7 @@ import {
   createContainer,
 } from '../../utils';
 
-type Props = {
-  viewer: {
-    name: string,
-  }
-}
-
-const Dashboard = (props: Props) => (
+const Dashboard = (props) => (
   <Content compact className={styles.root}>
     <Block>
       Welcome {props.viewer.name}!
