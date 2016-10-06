@@ -21,6 +21,7 @@ function templateContent() {
 module.exports = require('./webpack.base')({
   // In production, we skip all hot-reloading stuff.
   entry: [
+    'whatwg-fetch',
     path.join(process.cwd(), 'app/app.js'), // Start with js/app.js
   ],
 
@@ -89,10 +90,4 @@ module.exports = require('./webpack.base')({
     notExtractLoader: 'style-loader',
     loader: 'css-loader?modules&importLoaders=1!postcss-loader',
   }),
-
-  babelQuery: {
-    // Load the babel relay plugin and initialize it with the GraphQL schema
-    // from our server.
-    plugins: [path.resolve(process.cwd(), 'foundation', 'relay', 'babelRelayPlugin')],
-  },
 });

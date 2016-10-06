@@ -11,6 +11,7 @@ module.exports = require('./webpack.base')({
   // Add hot reloading in development
   entry: [
     'webpack-hot-middleware/client',
+    'whatwg-fetch',
     path.join(process.cwd(), 'app/app.js'), // Start with js/app.js
   ],
 
@@ -43,14 +44,6 @@ module.exports = require('./webpack.base')({
     }),
     postcssNested(),
   ],
-
-  // Tell babel that we want to hot-reload
-  babelQuery: {
-    // TODO fix hmre (probably wait until hot reloader v3 is out)
-    // presets: ['react-hmre'],
-    // Load the babel relay plugin and initialize it with the GraphQL schema
-    plugins: [path.resolve(process.cwd(), 'foundation', 'relay', 'babelRelayPlugin')],
-  },
 
   // Emit a source map for easier debugging
   devtool: 'cheap-module-eval-source-map',
