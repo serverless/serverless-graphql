@@ -1,7 +1,0 @@
-version: '2'
-services:
-  dynamodb:
-    image: tray/dynamodb-local
-    ports:
-     - "8000:8000"
-    command: -sharedDb -inMemory -cors '*'
