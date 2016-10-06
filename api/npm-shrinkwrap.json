@@ -229,6 +229,11 @@
       "from": "typedarray@>=0.0.5 <0.1.0",
       "resolved": "https://registry.npmjs.org/typedarray/-/typedarray-0.0.6.tgz"
     },
+    "uuid-js": {
+      "version": "0.7.5",
+      "from": "uuid-js@>=0.7.5 <0.8.0",
+      "resolved": "https://registry.npmjs.org/uuid-js/-/uuid-js-0.7.5.tgz"
+    },
     "xtend": {
       "version": "4.0.1",
       "from": "xtend@>=4.0.1 <5.0.0",

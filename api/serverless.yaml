@@ -26,7 +26,7 @@ resources:
     WebsiteS3Bucket:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: serverless-graphql-raffle
+        BucketName: serverless-graphql-${opt:stage}
         AccessControl: PublicRead
         WebsiteConfiguration:
           IndexDocument: index.html
