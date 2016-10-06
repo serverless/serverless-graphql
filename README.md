@@ -43,11 +43,6 @@ npm run start:remote
 
 Since we don't know the URL of the API Gateway nor CloudFront URL for the static assets we need to deploy once without expecting the application to work using `npm run deploy`. After the initial deploy we will know both Urls. The API url you need to provide in the `security.env.prod` in order for Relay to know the location of the GraphQL endpoint.
 
-```
-http://localhost:3000/sign-in-success,
-http://<cloudforn_url>/sign-in-success
-```
-
 After these steps you are good to go and with your next `npm run deploy` your infrastructure should up and running.
 
 ## Developing
