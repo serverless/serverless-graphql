@@ -14,7 +14,6 @@ This example uses the following technologies:
 - Flowtype
 - Jest
 - Webpack
-- Auth0
 
 ## Install & Run
 
@@ -42,8 +41,7 @@ npm run start:remote
 
 ## Setup for Production
 
-Since we don't know the URL of the API Gateway nor CloudFront URL for the static assets we need to deploy once without expecting the application to work using `npm run deploy`. After the initial deploy we will know both Urls. The API url you need to provide in the `security.env.prod` file in order for Relay to know the location of the GraphQL endpoint. In addition you need to provide the Auth0 domain, client id and client secret.
-In the Auth0 interface you need to set the following callback urls:
+Since we don't know the URL of the API Gateway nor CloudFront URL for the static assets we need to deploy once without expecting the application to work using `npm run deploy`. After the initial deploy we will know both Urls. The API url you need to provide in the `security.env.prod` in order for Relay to know the location of the GraphQL endpoint.
 
 ```
 http://localhost:3000/sign-in-success,
@@ -91,35 +89,3 @@ In order to keep the total amount of code uploaded to AWS Lambda small the `api`
 ### `api/package.json`
 
 - depdendencies: depdendencies used on AWS Lambda
-
-## Authentication Flows
-
-### New User using a Provider e.g. Github, Google
-
-1. Visit the root site `/` [redirect to `/welcome`]
-2. Click on `Try for Free` [redirect to `/sign-up` and see the signup widget]
-3. Click on a a Provider Button [redirect to Github/Google]
-4. Sign in at a Provider [redirect to `/sign-in-success#auth0-token`, verify & redirect to the Dashboard at `/`]
-
-### New User using Email/Password
-
-1. Visit the root site `/` [redirect to `/welcome`]
-2. Click on `Try for Free` [redirect to `/sign-up` and see the signup widget]
-3. Provide Email/Password and click Sign up button [redirect to `/sign-in-success#auth0-token`, verify & redirect to `/verify-email`]
-4. Check your email account and verify the email.
-5. Visit the root site `/` [redirect to `/welcome`]
-6. Click on `Sign in` [redirect to `/sign-in` and see the signup widget]
-7. Provide Email/Password and click Sign in button [redirect to `/sign-in-success#auth0-token`, verify & redirect to the Dashboard at `/`]
-
-### Existing User using Email/Password, Google or Github on `/`
-
-1. Visit the root site `/` [redirect to `/welcome`]
-2. Click on `Sign in` [redirect to `/sign-in` and see the signup widget]
-3. Sign in via Email/Password or a Provider e.g. Github, Google
-[redirect to `/sign-in-success#auth0-token`, verify and redirect to Dashboard at `/`].
-
-### Existing User using Email/Password, Google or Github on some internal URL e.g. `/some/path`
-
-1. Visit the root site `/` [redirect to `/sign-in`]
-2. Sign in via Email/Password or a Provider e.g Github, Google
-[redirect to original url `/sign-in-success#auth0-token`, verify &  redirect to the original Url eg. `/some/path`]

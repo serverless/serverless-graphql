@@ -35,8 +35,6 @@
   },
   "pre-commit": "lint:staged",
   "dependencies": {
-    "auth0-js": "^7.1.0",
-    "auth0-lock": "^10.2.2",
     "babel-polyfill": "^6.16.0",
     "classnames": "2.2.5",
     "graphql-relay": "^0.4.3",

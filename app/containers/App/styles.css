@@ -46,12 +46,6 @@
   color: #FFF;
 }
 
-.rightMenu {
-  position: absolute;
-  right: 1rem;
-  align-self: center;
-}
-
 .main {
   flex: 1;
   display: flex;

@@ -5,11 +5,7 @@ import React from 'react';
 import { compose } from 'recompose';
 import { withRouter, Link } from 'react-router';
 import styles from './styles.css';
-import {
-  clearAuthToken,
-} from '../../utils';
 import Progress from '../../components/Progress';
-import Logout from '../../components/Logout';
 import type { ReactChildren } from '../../types/react';
 import type { Router, Location } from '../../types/reactRouter';
 
@@ -18,9 +14,6 @@ type Props = {
   location: Location,
   children?: ReactChildren,
   loading: boolean,
-  route: {
-    auth: Object,
-  }
 };
 
 const App = (props: Props) => (
@@ -38,14 +31,6 @@ const App = (props: Props) => (
           </g>
         </svg>
       </Link>
-      <div className={styles.rightMenu}>
-        <Logout
-          onLogout={() => {
-            clearAuthToken();
-            props.router.push('/welcome');
-          }}
-        />
-      </div>
       <div>
         <Progress loading={props.loading} />
       </div>

@@ -51,8 +51,6 @@ module.exports = (options) => ({
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV) || JSON.stringify('DEVELOPMENT'),
         GRAPHQL_ENDPOINT: process.env.URL,
-        AUTH_CLIENT_ID: process.env.AUTH_CLIENT_ID,
-        AUTH_DOMAIN: process.env.AUTH_DOMAIN,
       },
     }),
   ]),
