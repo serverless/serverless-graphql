@@ -43,7 +43,9 @@ AWS has global unique bucket names. You need to replace `<your-s3-bucket-name>` 
 
 Since the URL of the API is unknown until you create a stack, you need to deploy once without expecting the application to work using `npm run deploy`. After the initial deploy you can see the API url which you need to provide to the URL entry in `security.env.prod`.
 
-After these steps you are good to go and with your next `npm run deploy` your infrastructure should up and running.
+![deploy feedback](https://cloud.githubusercontent.com/assets/223045/19171420/6e271150-8bd1-11e6-9b49-e9fa88cac379.png)
+
+After these steps you are good to go and with your next `npm run deploy` your infrastructure should up and running. Visit `http://<your-s3-bucket-name>.s3-website-us-east-1.amazonaws.com` in your browser.
 
 ## Developing
 
