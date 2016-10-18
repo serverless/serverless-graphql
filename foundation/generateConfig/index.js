@@ -2,8 +2,8 @@ const fs = require('fs');
 const path = require('path');
 
 const content = `module.exports = {
-  AUTH_CLIENT_SECRET: ${process.env.AUTH_CLIENT_SECRET},
-  AUTH_CLIENT_ID: ${process.env.AUTH_CLIENT_ID},
+  AUTH_CLIENT_SECRET: '${process.env.AUTH_CLIENT_SECRET}',
+  AUTH_CLIENT_ID: '${process.env.AUTH_CLIENT_ID}',
 };
 `;
 
