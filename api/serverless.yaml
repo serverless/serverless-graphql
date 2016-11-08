@@ -19,7 +19,7 @@ functions:
         cors: true
         response:
           headers:
-            Access-Control-Allow-Origin: "*"
+            Access-Control-Allow-Origin: "'*'"
 
 resources:
   Resources:
