@@ -79,9 +79,9 @@ In order to keep the total amount of code uploaded to AWS Lambda small the `api`
 
 ### `package.json`
 
-- depdendencies: depdendencies used by the front-end
-- devDepdendencies: depdendencies used to package the front-end application & running the local environment
+- dependencies: dependencies used by the front-end
+- devDependencies: dependencies used to package the front-end application & running the local environment
 
 ### `api/package.json`
 
-- depdendencies: depdendencies used on AWS Lambda
+- dependencies: dependencies used on AWS Lambda
