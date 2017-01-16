@@ -24,7 +24,6 @@ yarn # installs all the node_modules
 
 Use mocked data (keep in mind due hard-coded data the interface might behave not as expected)
 ```
-npm run update-schema
 npm start
 # visit http://localhost:3000 in your browser
 ```
@@ -32,7 +31,6 @@ npm start
 Use live data from the development environment. You need to make sure you have access to your deployed lambda functions. This works only after you deployed it to production.
 
 ```
-npm run update-schema
 npm run start:remote
 # visit http://localhost:3000 in your browser
 ```
