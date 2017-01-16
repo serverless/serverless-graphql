@@ -18,7 +18,8 @@ You need to have node 6 or higher installed.
 
 ```
 npm install -g serverless
-npm install
+npm install -g yarn
+yarn # installs all the node_modules
 ```
 
 Use mocked data (keep in mind due hard-coded data the interface might behave not as expected)
