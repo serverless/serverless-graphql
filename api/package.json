@@ -1,10 +1,10 @@
 {
-  "name": "serverless-graphql",
+  "name": "serverless-graphql-apollo",
   "version": "0.0.0",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git@github.com:serverless/serverless-graphql.git"
+    "url": "git@github.com:serverless/serverless-graphql-apollo.git"
   },
   "dependencies": {
     "babel-polyfill": "6.13.0",
