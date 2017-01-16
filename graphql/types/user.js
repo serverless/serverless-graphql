@@ -7,7 +7,6 @@ import {
 import {
   globalIdField,
 } from 'graphql-relay';
-import { nodeInterface } from '../node';
 
 const UserType = new GraphQLObjectType({
   name: 'User',
@@ -19,7 +18,6 @@ const UserType = new GraphQLObjectType({
       description: 'The name of the user',
     },
   }),
-  interfaces: [nodeInterface],
 });
 
 export default UserType;

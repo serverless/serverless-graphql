@@ -2,27 +2,19 @@ import 'babel-polyfill';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Relay from 'react-relay';
-import useRelay from 'react-router-relay';
+import ApolloClient, {
+  createNetworkInterface,
+} from 'apollo-client';
+import { ApolloProvider } from 'react-apollo';
 import {
   Router,
   Route,
   IndexRoute,
   browserHistory,
-  applyRouterMiddleware,
 } from 'react-router';
 import AppLoading from './components/AppLoading';
 import App from './containers/App';
 import Dashboard from './containers/Dashboard';
-import {
-  setRelayNetworkLayer,
-} from './utils';
-
-setRelayNetworkLayer();
-
-const DashboardQueries = {
-  viewer: () => Relay.QL`query { viewer }`,
-};
 
 let previousAppProps = null;
 
@@ -40,22 +32,25 @@ function renderAppRoute({ done, props, element }) {
   return <AppLoading />;
 }
 
+const client = new ApolloClient({
+  networkInterface: createNetworkInterface('http://localhost:3000/graphql'),
+});
+
 ReactDOM.render(
-  <Router
-    history={browserHistory}
-    render={applyRouterMiddleware(useRelay.default)}
-    environment={Relay.Store}
-  >
-    <Route
-      path="/"
-      component={App}
-      render={renderAppRoute}
+  <ApolloProvider client={client}>
+    <Router
+      history={browserHistory}
     >
-      <IndexRoute
-        component={Dashboard}
-        queries={DashboardQueries}
-      />
-    </Route>
-  </Router>,
+      <Route
+        path="/"
+        component={App}
+        render={renderAppRoute}
+      >
+        <IndexRoute
+          component={Dashboard}
+        />
+      </Route>
+    </Router>
+  </ApolloProvider>,
   document.getElementById('root')
 );

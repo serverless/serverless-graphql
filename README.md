@@ -6,7 +6,7 @@ This example uses the following technologies:
 
 - Serverless
 - GraphQL-js
-- Relay
+- Apollo CLient
 - React
 - CSSModules
 - Webpack
