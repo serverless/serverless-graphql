@@ -5,11 +5,6 @@ frameworkVersion: ">=1.5.0 <2.0.0"
 provider:
   name: aws
   runtime: nodejs4.3
-  iamRoleStatements:
-    - Effect: "Allow"
-      Action:
-        - "lambda:InvokeFunction"
-      Resource: "*"
 
 functions:
   api:
