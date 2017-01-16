@@ -50,7 +50,6 @@ After these steps you are good to go and with your next `npm run deploy` your in
 If you make changes to the GraphQL schema stop the server, regenerate it and restart the server:
 
 ```
-npm run update-schema
 npm start
 ```
 
