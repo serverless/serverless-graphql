@@ -37,9 +37,9 @@ module.exports = require('./webpack.base')({
       loader: 'css-loader',
       options: {
         localIdentName: '[path][local]',
-        modules: 1,
-        importLoaders: 1,
-        sourceMap: 1,
+        modules: true,
+        importLoaders: true,
+        sourceMap: true,
       },
     },
     {

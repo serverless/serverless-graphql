@@ -4,18 +4,18 @@ const webpack = require('webpack');
 module.exports = (options) => ({
   entry: options.entry,
 
-  // TODO use ... notation
-  output: Object.assign({ // Compile into js/build.js
+  // Compile into js/build.js
+  output: {
     path: path.resolve(process.cwd(), 'build'),
     publicPath: '/',
-  }, options.output), // Merge with env dependent settings
+    ...options.output, // Merge with env dependent settings
+  },
 
   module: {
     rules: [{
       test: /\.js$/, // Transform all .js files required somewhere with Babel
       loader: 'babel-loader',
       exclude: /node_modules/,
-      options: options.babelOptions,
     }, {
       // Transform our own .css files with PostCSS and CSS-modules
       test: /\.css$/,

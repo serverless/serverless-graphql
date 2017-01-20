@@ -81,8 +81,8 @@ module.exports = require('./webpack.base')({
       {
         loader: 'css-loader',
         options: {
-          modules: 1,
-          importLoaders: 1,
+          modules: true,
+          importLoaders: true,
         },
       },
       {
