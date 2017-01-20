@@ -11,35 +11,45 @@ module.exports = (options) => ({
   }, options.output), // Merge with env dependent settings
 
   module: {
-    loaders: [{
+    rules: [{
       test: /\.js$/, // Transform all .js files required somewhere with Babel
-      loader: 'babel',
+      loader: 'babel-loader',
       exclude: /node_modules/,
-      query: options.babelQuery,
+      options: options.babelOptions,
     }, {
       // Transform our own .css files with PostCSS and CSS-modules
       test: /\.css$/,
       exclude: /node_modules/,
-      loader: options.cssLoaders,
+      use: options.cssLoaders,
     }, {
       // Avoid transforming vendor CSS with CSS-modules
       // They should remain in global CSS scope.
       test: /\.css$/,
       include: /node_modules/,
-      loaders: ['style-loader', 'css-loader'],
+      use: ['style-loader', 'css-loader'],
     }, {
       test: /\.png$/,
-      loaders: ['url?limit=10000'],
+      use: [{
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+        },
+      }],
     }, {
       test: /\.svg$/,
-      loaders: ['url?limit=0'],
+      use: [{
+        loader: 'url-loader',
+        options: {
+          limit: 0,
+        },
+      }],
     }],
   },
 
   plugins: options.plugins.concat([
     new webpack.ProvidePlugin({
       // make fetch available
-      fetch: 'exports?self.fetch!whatwg-fetch',
+      fetch: 'exports-loader?self.fetch!whatwg-fetch',
     }),
 
     // Always expose NODE_ENV to webpack, in order to use `process.env.NODE_ENV`
@@ -53,15 +63,12 @@ module.exports = (options) => ({
     }),
   ]),
 
-  postcss: () => options.postcssPlugins,
-
   resolve: {
     modules: ['app', 'node_modules'],
     extensions: [
-      '',
       '.js',
     ],
-    packageMains: [
+    mainFields: [
       'main',
     ],
   },
@@ -69,5 +76,4 @@ module.exports = (options) => ({
   devtool: options.devtool,
   target: 'web', // Make web variables accessible to webpack, e.g. window
   stats: false, // Don't show stats in the console
-  progress: true,
 });

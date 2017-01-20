@@ -73,7 +73,7 @@
     "eslint-plugin-react": "^6.2.0",
     "exports-loader": "^0.6.3",
     "express": "4.14.0",
-    "extract-text-webpack-plugin": "^2.0.0-beta.1",
+    "extract-text-webpack-plugin": "beta",
     "file-loader": "^0.9.0",
     "flow-bin": "^0.37.4",
     "graphql": "^0.8.2",
@@ -97,7 +97,7 @@
     "stylelint-config-standard": "^15.0.1",
     "url-loader": "^0.5.7",
     "uuid-js": "^0.7.5",
-    "webpack": "=2.2.0-rc.6",
+    "webpack": "^2.2.0",
     "webpack-dev-middleware": "^1.6.1",
     "webpack-hot-middleware": "^2.11.0",
     "webpack-md5-hash": "0.0.5"

@@ -34,17 +34,6 @@ module.exports = require('./webpack.base')({
     publicPath: '/',
   },
 
-  // In production, we minify our CSS with cssnano.
-  postcssPlugins: [
-    cssNext({
-      browsers: ['last 2 versions', 'IE > 10'],
-    }),
-    postCssReporter({
-      clearMessages: true,
-    }),
-    postCssNested(),
-  ],
-
   plugins: [
     new WebpackMd5Hash(),
 
@@ -87,7 +76,32 @@ module.exports = require('./webpack.base')({
   // We use ExtractTextPlugin so we get a seperate CSS file instead
   // of the CSS being in the JS and injected as a style tag
   cssLoaders: ExtractTextPlugin.extract({
-    notExtractLoader: 'style-loader',
-    loader: 'css-loader?modules&importLoaders=1!postcss-loader',
+    fallbackLoader: 'style-loader',
+    loader: [
+      {
+        loader: 'css-loader',
+        options: {
+          modules: 1,
+          importLoaders: 1,
+        },
+      },
+      {
+        loader: 'postcss-loader',
+        options: {
+          plugins: function () {
+            // In production, we minify our CSS with cssnano.
+            return [
+              cssnext({
+                browsers: ['last 2 versions', 'IE > 10'],
+              }),
+              postcssReporter({
+                clearMessages: true,
+              }),
+              postcssNested(),
+            ];
+          }
+        }
+      }
+    ],
   }),
 });
