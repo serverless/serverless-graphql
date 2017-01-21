@@ -9,9 +9,7 @@ const WebpackMd5Hash = require('webpack-md5-hash');
 
 // TODO export this function and use in dev & prod
 function templateContent() {
-  return fs.readFileSync(
-    path.resolve(process.cwd(), 'app/index.html'),
-  ).toString();
+  return fs.readFileSync(path.resolve(process.cwd(), 'app/index.html')).toString();
 }
 
 module.exports = require('./webpack.base')({
