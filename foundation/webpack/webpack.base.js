@@ -4,12 +4,11 @@ const webpack = require('webpack');
 module.exports = (options) => ({
   entry: options.entry,
 
-  // Compile into js/build.js
-  output: {
+  // TODO use ... notation
+  output: Object.assign({ // Compile into js/build.js
     path: path.resolve(process.cwd(), 'build'),
     publicPath: '/',
-    ...options.output, // Merge with env dependent settings
-  },
+  }, options.output), // Merge with env dependent settings
 
   module: {
     rules: [{

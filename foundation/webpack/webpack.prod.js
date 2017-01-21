@@ -6,10 +6,6 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
-// PostCSS plugins
-const cssNext = require('postcss-cssnext');
-const postCssNested = require('postcss-nested');
-const postCssReporter = require('postcss-reporter');
 
 // TODO export this function and use in dev & prod
 function templateContent() {
@@ -85,23 +81,7 @@ module.exports = require('./webpack.base')({
           importLoaders: true,
         },
       },
-      {
-        loader: 'postcss-loader',
-        options: {
-          plugins: function () {
-            // In production, we minify our CSS with cssnano.
-            return [
-              cssnext({
-                browsers: ['last 2 versions', 'IE > 10'],
-              }),
-              postcssReporter({
-                clearMessages: true,
-              }),
-              postcssNested(),
-            ];
-          }
-        }
-      }
+      { loader: 'postcss-loader' },
     ],
   }),
 });

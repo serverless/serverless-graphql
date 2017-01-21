@@ -2,10 +2,6 @@ import path from 'path';
 import fs from 'fs';
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-// PostCSS plugins
-import cssnext from 'postcss-cssnext';
-import postcssNested from 'postcss-nested';
-import postcssReporter from 'postcss-reporter';
 
 module.exports = require('./webpack.base')({
   // Add hot reloading in development
@@ -42,23 +38,7 @@ module.exports = require('./webpack.base')({
         sourceMap: true,
       },
     },
-    {
-      loader: 'postcss-loader',
-      options: {
-        plugins: function () {
-          // Process the CSS with PostCSS
-          return [
-            cssnext({ // Allow future CSS features to be used, also auto-prefixes the CSS...
-              browsers: ['last 2 versions', 'IE > 10'], // ...based on this browser list
-            }),
-            postcssReporter({ // Posts messages from plugins to the terminal
-              clearMessages: true,
-            }),
-            postcssNested(),
-          ];
-        }
-      }
-    }
+    { loader: 'postcss-loader' }
   ],
 
   // Emit a source map for easier debugging
