@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 const cssNext = require('postcss-cssnext');
 const postCssReporter = require('postcss-reporter');
 const postCssNested = require('postcss-nested');

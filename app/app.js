@@ -52,5 +52,5 @@ ReactDOM.render(
       </Route>
     </Router>
   </ApolloProvider>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );

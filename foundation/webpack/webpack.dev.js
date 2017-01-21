@@ -38,7 +38,7 @@ module.exports = require('./webpack.base')({
         sourceMap: true,
       },
     },
-    { loader: 'postcss-loader' }
+    { loader: 'postcss-loader' },
   ],
 
   // Emit a source map for easier debugging
@@ -47,6 +47,6 @@ module.exports = require('./webpack.base')({
 
 function templateContent() {
   return fs.readFileSync(
-    path.resolve(process.cwd(), 'app/index.html')
+    path.resolve(process.cwd(), 'app/index.html'),
   ).toString();
 }
