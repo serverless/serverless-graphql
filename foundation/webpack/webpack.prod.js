@@ -31,9 +31,6 @@ module.exports = require('./webpack.base')({
   plugins: [
     new WebpackMd5Hash(),
 
-    // Merge all duplicate modules.
-    new webpack.optimize.DedupePlugin(),
-
     // TODO minify again
     // Minify and optimize the JavaScript.
     // new webpack.optimize.UglifyJsPlugin({
