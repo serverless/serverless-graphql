@@ -33,7 +33,9 @@ function renderAppRoute({ done, props, element }) {
 }
 
 const client = new ApolloClient({
-  networkInterface: createNetworkInterface('http://localhost:3000/graphql'),
+  networkInterface: createNetworkInterface({
+    uri: 'http://localhost:3000/graphql',
+  }),
 });
 
 ReactDOM.render(
