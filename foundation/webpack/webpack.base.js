@@ -25,10 +25,10 @@ module.exports = (options) => ({
       // They should remain in global CSS scope.
       test: /\.css$/,
       include: /node_modules/,
-      use: ['style-loader', 'css-loader'],
+      loader: ['style-loader', 'css-loader'],
     }, {
       test: /\.png$/,
-      use: [{
+      loader: [{
         loader: 'url-loader',
         options: {
           limit: 10000,
@@ -36,7 +36,7 @@ module.exports = (options) => ({
       }],
     }, {
       test: /\.svg$/,
-      use: [{
+      loader: [{
         loader: 'url-loader',
         options: {
           limit: 0,
