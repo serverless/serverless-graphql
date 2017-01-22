@@ -13,7 +13,7 @@
     "generate:config:local": "env-cmd foundation/environment/security.env.local npm run generate:config",
     "generate:config:prod": "env-cmd foundation/environment/security.env.prod npm run generate:config",
     "update-schema": "babel-node foundation/graphql/updateSchema.js",
-    "build:frontend": "NODE_ENV=production env-cmd foundation/environment/security.env.prod webpack --config foundation/webpack/webpack.prod.js -p && cp ./app/favicon.ico ./build/frontend/favicon.ico",
+    "build:frontend": "NODE_ENV=production env-cmd foundation/environment/security.env.prod webpack --progress --config foundation/webpack/webpack.prod.js -p && cp ./app/favicon.ico ./build/frontend/favicon.ico",
     "build:api": "npm run generate:config:prod && NODE_ENV=production babel --out-dir='api/graphql' --ignore='__tests__/*' ./graphql",
     "build:api:node_modules": "cd api && yarn && cd ..",
     "deploy": "npm run deploy:api && npm run deploy:frontend",

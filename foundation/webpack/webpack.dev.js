@@ -3,6 +3,11 @@ import fs from 'fs';
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 
+// TODO export this function and use in dev & prod
+function templateContent() {
+  return fs.readFileSync(path.resolve(process.cwd(), 'app/index.html')).toString();
+}
+
 module.exports = require('./webpack.base')({
   // Add hot reloading in development
   entry: [
@@ -44,9 +49,3 @@ module.exports = require('./webpack.base')({
   // Emit a source map for easier debugging
   devtool: 'cheap-module-eval-source-map',
 });
-
-function templateContent() {
-  return fs.readFileSync(
-    path.resolve(process.cwd(), 'app/index.html'),
-  ).toString();
-}

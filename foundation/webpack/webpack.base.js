@@ -19,7 +19,7 @@ module.exports = (options) => ({
       // Transform our own .css files with PostCSS and CSS-modules
       test: /\.css$/,
       exclude: /node_modules/,
-      use: options.cssLoaders,
+      loader: options.cssLoaders,
     }, {
       // Avoid transforming vendor CSS with CSS-modules
       // They should remain in global CSS scope.
