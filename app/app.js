@@ -32,8 +32,13 @@ function renderAppRoute({ done, props, element }) {
   return <AppLoading />;
 }
 
+if (!process.env.GRAPHQL_ENDPOINT) {
+  throw new Error('GRAPHQL_ENDPOINT is not defined');
+}
 const client = new ApolloClient({
-  networkInterface: createNetworkInterface('http://localhost:3000/graphql'),
+  networkInterface: createNetworkInterface({
+    uri: process.env.GRAPHQL_ENDPOINT,
+  }),
 });
 
 ReactDOM.render(
@@ -52,5 +57,5 @@ ReactDOM.render(
       </Route>
     </Router>
   </ApolloProvider>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );

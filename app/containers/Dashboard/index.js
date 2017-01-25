@@ -21,5 +21,5 @@ export default graphql(
         name
       }
     }
-  `
+  `,
 )(Dashboard);
