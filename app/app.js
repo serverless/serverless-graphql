@@ -32,9 +32,12 @@ function renderAppRoute({ done, props, element }) {
   return <AppLoading />;
 }
 
+if (!process.env.GRAPHQL_ENDPOINT) {
+  throw new Error('GRAPHQL_ENDPOINT is not defined');
+}
 const client = new ApolloClient({
   networkInterface: createNetworkInterface({
-    uri: 'http://localhost:3000/graphql',
+    uri: process.env.GRAPHQL_ENDPOINT,
   }),
 });
 

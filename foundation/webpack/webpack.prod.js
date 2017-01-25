@@ -2,7 +2,6 @@
 
 const fs = require('fs');
 const path = require('path');
-const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
