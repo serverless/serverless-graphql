@@ -17,7 +17,7 @@
     "build:api": "npm run generate:config:prod && NODE_ENV=production babel --out-dir='api/graphql' --ignore='__tests__/*' ./graphql",
     "build:api:node_modules": "cd api && yarn && cd ..",
     "deploy": "npm run deploy:api && npm run deploy:frontend",
-    "deploy:frontend": "npm run build:frontend && aws s3 sync build/frontend/ s3://serverless-fauna-graphql-apollo/",
+    "deploy:frontend": "npm run build:frontend && aws s3 sync build/frontend/ s3://<your-s3-bucket-name>/",
     "deploy:api": "npm run build:api && npm run build:api:node_modules && cd api && serverless --stage=production deploy",
     "lint": "npm run generate:config:local && npm run lint:eslint && npm run lint:css",
     "lint:eslint": "eslint .",
