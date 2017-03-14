@@ -1,20 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`Block renders the content 1`] = `
 <div
-  className="main">
+  className="main"
+>
   Content
 </div>
 `;
 
 exports[`Block renders the content with a custom provided className 1`] = `
 <div
-  className="main test">
+  className="main test"
+>
   Content
 </div>
 `;
 
 exports[`Block renders the content with the padding className 1`] = `
 <div
-  className="main padding">
+  className="main padding"
+>
   Content
 </div>
 `;
