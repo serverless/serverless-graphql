@@ -14,10 +14,7 @@ functions:
         path: graphql
         method: post
         cors: true
-        integration: lambda
-        response:
-          headers:
-            Access-Control-Allow-Origin: "'*'"
+        integration: lambda-proxy
 
 resources:
   Resources:

@@ -7,30 +7,13 @@ import ApolloClient, {
 } from 'apollo-client';
 import { ApolloProvider } from 'react-apollo';
 import {
-  Router,
+  BrowserRouter as Router,
   Route,
-  IndexRoute,
-  browserHistory,
-} from 'react-router';
-import AppLoading from './components/AppLoading';
+} from 'react-router-dom';
 import App from './containers/App';
 import Dashboard from './containers/Dashboard';
 
 let previousAppProps = null;
-
-function renderAppRoute({ done, props, element }) {
-  if (done) {
-    previousAppProps = props;
-    return React.cloneElement(element, { ...props, loading: false });
-  }
-  // By rendering this route with the previous props the UI shows the same view
-  // until it's finished fetching the new data.
-  if (previousAppProps) {
-    return React.cloneElement(element, { ...previousAppProps, loading: true });
-  }
-
-  return <AppLoading />;
-}
 
 if (!process.env.GRAPHQL_ENDPOINT) {
   throw new Error('GRAPHQL_ENDPOINT is not defined');
@@ -43,18 +26,13 @@ const client = new ApolloClient({
 
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <Router
-      history={browserHistory}
-    >
-      <Route
-        path="/"
-        component={App}
-        render={renderAppRoute}
-      >
-        <IndexRoute
+    <Router>
+      <App>
+        <Route
+          path="/"
           component={Dashboard}
         />
-      </Route>
+      </App>
     </Router>
   </ApolloProvider>,
   document.getElementById('root'),
