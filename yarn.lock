@@ -1007,13 +1007,7 @@ babel-register@^6.24.0:
     mkdirp "^0.5.1"
     source-map-support "^0.4.2"
 
-babel-relay-plugin@0.11.0:
-  version "0.11.0"
-  resolved "https://registry.yarnpkg.com/babel-relay-plugin/-/babel-relay-plugin-0.11.0.tgz#3ca99a395e40ac10050ca25c1200ea4706b2d8a5"
-  dependencies:
-    graphql "0.9.1"
-
-babel-runtime@^6.18.0, babel-runtime@^6.22.0, babel-runtime@^6.6.1:
+babel-runtime@^6.18.0, babel-runtime@^6.22.0:
   version "6.23.0"
   resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.23.0.tgz#0a9489f144de70efb3ce4300accdb329e2fc543b"
   dependencies:
@@ -2860,15 +2854,11 @@ graphql-anywhere@^3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/graphql-anywhere/-/graphql-anywhere-3.0.1.tgz#73531db861174c8f212eafb9f8e84944b38b4e5a"
 
-graphql-relay@^0.5.1:
-  version "0.5.1"
-  resolved "https://registry.yarnpkg.com/graphql-relay/-/graphql-relay-0.5.1.tgz#3b3e44430a24c0f636e713f43f65bd542fe02ac9"
-
 graphql-tag@^1.2.3, graphql-tag@^1.3.1:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/graphql-tag/-/graphql-tag-1.3.1.tgz#16cdf13635f10bbc968c6f2c6265ffe883a906da"
 
-graphql@0.9.1, graphql@^0.9.1:
+graphql@^0.9.1:
   version "0.9.1"
   resolved "https://registry.yarnpkg.com/graphql/-/graphql-0.9.1.tgz#f4d154cbec054d4a5d3b1be95f23435c09aa86c8"
   dependencies:
@@ -5508,14 +5498,6 @@ react-apollo@^1.0.0-rc.2:
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
 
-react-relay@^0.10.0:
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/react-relay/-/react-relay-0.10.0.tgz#4b19c4450e0140b9f04fd6fe96d8f451f0804078"
-  dependencies:
-    babel-runtime "^6.6.1"
-    fbjs "^0.8.1"
-    react-static-container "^1.0.1"
-
 react-router-dom@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-4.0.0.tgz#4fa4418e14b8cfc5bcc0bdea0c4083fb8c2aef10"
@@ -5532,10 +5514,6 @@ react-router@^4.0.0:
     loose-envify "^1.3.1"
     path-to-regexp "^1.5.3"
     warning "^3.0.0"
-
-react-static-container@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/react-static-container/-/react-static-container-1.0.1.tgz#694c0dd68a896b879519afb548399cc1989c9ab0"
 
 react-test-renderer@^15.3.1:
   version "15.4.2"
