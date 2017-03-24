@@ -1,7 +1,8 @@
 import 'sanitize.css/sanitize.css';
 import React from 'react';
 import { compose } from 'recompose';
-import { withRouter, Link } from 'react-router';
+import { withRouter } from 'react-router';
+import { Link } from 'react-router-dom';
 import styles from './styles.css';
 import Progress from '../../components/Progress';
 
