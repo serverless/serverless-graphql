@@ -13,8 +13,6 @@ import {
 import App from './containers/App';
 import Dashboard from './containers/Dashboard';
 
-let previousAppProps = null;
-
 if (!process.env.GRAPHQL_ENDPOINT) {
   throw new Error('GRAPHQL_ENDPOINT is not defined');
 }

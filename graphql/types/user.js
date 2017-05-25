@@ -4,15 +4,15 @@ import {
   GraphQLObjectType,
   GraphQLString,
 } from 'graphql';
-import {
-  globalIdField,
-} from 'graphql-relay';
 
 const UserType = new GraphQLObjectType({
   name: 'User',
   description: 'A person who uses our app',
   fields: () => ({
-    id: globalIdField('User'),
+    id: {
+      type: GraphQLString,
+      description: 'The unique Identifier of the user',
+    },
     name: {
       type: GraphQLString,
       description: 'The name of the user',
