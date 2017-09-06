@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "npm run generate:config:local && MOCKED_DATABASE=true env-cmd foundation/environment/security.env.local nodemon ./foundation/devServer --ignore app --exec babel-node",
-    "start:remote": "npm run generate:config:local && MOCKED_DATABASE=false env-cmd foundation/environment/security.env.local nodemon ./foundation/devServer --ignore app --exec babel-node",
+    "start:remote": "npm run generate:config:local && MOCKED_DATABASE=false env-cmd foundation/environment/security.env.prod nodemon ./foundation/devServer --ignore app --exec babel-node",
     "generate:config": "node foundation/generateConfig/index.js",
     "generate:config:local": "env-cmd foundation/environment/security.env.local npm run generate:config",
     "generate:config:prod": "env-cmd foundation/environment/security.env.prod npm run generate:config",
