@@ -5,14 +5,14 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 // TODO export this function and use in dev & prod
 function templateContent() {
-  return fs.readFileSync(path.resolve(process.cwd(), 'app/index.html')).toString();
+  return fs.readFileSync(path.resolve(process.cwd(), 'app-client/public/index.html')).toString();
 }
 
 module.exports = require('./webpack.base')({
   // Add hot reloading in development
   entry: [
     'webpack-hot-middleware/client',
-    path.join(process.cwd(), 'app/app.js'), // Start with js/app.js
+    path.join(process.cwd(), 'app-client/src/App.js'), // Start with js/app.js
   ],
 
   // Don't use hashes in dev mode for better performance

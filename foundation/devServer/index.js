@@ -8,7 +8,7 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 import graphQLHandler from '../../graphql';
 import webpackConfig from '../webpack/webpack.dev';
 
-const APP_PORT = 3000;
+const APP_PORT = 4000;
 const app = express();
 const compiler = webpack(webpackConfig);
 const middleware = webpackDevMiddleware(compiler, {
@@ -36,7 +36,7 @@ app.post('/graphql', (req, res) => {
 
 app.use(middleware);
 app.use(webpackHotMiddleware(compiler));
-app.use(favicon(path.resolve(process.cwd(), 'app/favicon.ico')));
+app.use(favicon(path.resolve(process.cwd(), 'app-client/public/favicon.ico')));
 
 app.get('*', (req, res) => {
   const indexFilePath = path.join(compiler.outputPath, 'index.html');
