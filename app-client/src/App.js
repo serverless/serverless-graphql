@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
+import Contributors from './components/Contributors'
+import logo from './logo.svg';
 import './App.css';
-import Dashboard from './containers/Dashboard';
-import {
-    BrowserRouter as Router,
-    Route,
-} from 'react-router-dom';
 
 import {
     ApolloClient,
@@ -14,10 +11,6 @@ import {
 
 const networkInterface = createNetworkInterface({ uri: 'http://localhost:4000/graphql' });
 
-// if (!process.env.GRAPHQL_ENDPOINT) {
-//     throw new Error('GRAPHQL_ENDPOINT is not defined');
-// }
-
 const client = new ApolloClient({
     networkInterface,
 });
@@ -26,16 +19,19 @@ class App extends Component {
     render() {
         return (
             <ApolloProvider client={client}>
-                <Router>
-                    <App>
-                        <Route
-                            path="/"
-                            component={Dashboard}
-                        />
-                    </App>
-                </Router>
-            </ApolloProvider>,
-                document.getElementById('root')
+                <div className="App">
+                    <div className="App-header">
+                        <img src={logo} className="App-logo" alt="logo" />
+                        <h2>Serverless GraphQL Apollo </h2>
+                    </div>
+                    <p className="App-intro">
+                        Welcome to the world of <code>Serverless</code> and <code>GraphQL</code>.
+                    </p>
+                    <p className="App-Contributors">
+                        <Contributors/>
+                    </p>
+                </div>
+            </ApolloProvider>
         );
     }
 }

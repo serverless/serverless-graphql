@@ -5,7 +5,8 @@
   "dependencies": {
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "react-scripts": "1.0.13"
+    "react-scripts": "1.0.13",
+    "react-apollo": "^0.13.2"
   },
   "scripts": {
     "start": "react-scripts start",
