@@ -8,8 +8,6 @@ This example uses the following technologies:
 - GraphQL-js
 - Apollo CLient
 - React
-- CSSModules
-- Webpack
 - Jest
 
 ## Install & Run
