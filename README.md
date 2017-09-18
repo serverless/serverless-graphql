@@ -30,11 +30,18 @@ npm install -g yarn
 yarn # installs all the node_modules
 ```
 
-Test Locally - Use Express Server
+Test Locally - Use Apollo Express Server
 ```
 # Start Server http://localhost:4000/graphql
 cd foundation/app-server
 npm start
+```
+
+Test Locally - Use Apollo Lambda Server
+```
+# Start Server http://localhost:4000/graphql
+cd foundation/app-server
+npm run start-offline
 ```
 
 ```

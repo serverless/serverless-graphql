@@ -6,9 +6,7 @@
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-scripts": "1.0.13",
-    "react-apollo": "^0.13.2",
-    "graphql-tools": "^0.10.0",
-    "apollo-test-utils": "^0.1.1"
+    "react-apollo": "^0.13.2"
   },
   "scripts": {
     "start": "react-scripts start",
