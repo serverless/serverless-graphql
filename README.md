@@ -14,12 +14,6 @@ This example uses the following technologies:
 - AWS API Gateway
 - Jest
 
-## Architecture
-
-
-![Architecture](apollo-lambda.png)
-
-
 ## Install & Run
 
 You need to have node 6 or higher installed.
