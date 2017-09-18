@@ -11,7 +11,7 @@
     "start-offline": "serverless offline start",
     "build:node_modules": "npm install && cd ../../app-client && npm install && cd .. && cd foundation/app-server",
     "deploy": "npm run build:node_modules && serverless --stage=production deploy",
-    "lint": "npm run generate:config:local && npm run lint:eslint && npm run lint:css",
+    "lint": "npm run lint:eslint && npm run lint:css",
     "lint:eslint": "eslint .",
     "lint:eslint:fix": "eslint . --fix",
     "lint:css": "stylelint ./app/**/*.css",

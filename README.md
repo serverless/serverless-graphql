@@ -54,7 +54,7 @@ npm run deploy
 
 AWS has global unique bucket names. You need to replace `<your-s3-bucket-name>` in package.json as well as in the serverless.yml with your own custom name.
 
-Since the URL of the API is unknown until you create a stack, you need to deploy once without expecting the application to work using `npm run deploy`. After the initial deploy you can see the API url which you need to provide to the URL entry in `security.env.prod`.
+Since the URL of the API is unknown until you create a stack, you need to deploy once without expecting the application to work using `npm run deploy`.
 
 ![deploy feedback](https://cloud.githubusercontent.com/assets/223045/19171420/6e271150-8bd1-11e6-9b49-e9fa88cac379.png)
 
@@ -82,10 +82,6 @@ To update component snapshots after updating a component use
 ```
 npm run test:update
 ```
-
-## Security
-
-At Serverless we keep our keys encrypted in the repository. We recommend you to do the same. In our case deploying to a staging and production system is done via a continuous integration system which has the secret to decrypt the necessary file with the environment variables. For demo purposes this repository has an unencrypted file for environment variables at `foundation/environment/security.env.local` and `foundation/environment/security.env.prod`.
 
 ## Multiple package.json
 
