@@ -5,10 +5,20 @@ This starter kit is an opinionated set of tools combined to help you get started
 This example uses the following technologies:
 
 - Serverless
-- GraphQL-js
-- Apollo CLient
+- Apollo Lambda Server
+- Apollo Client
 - React
+- Serverless Webpack
+- Serverless Offline
+- AWS Lambda
+- AWS API Gateway
 - Jest
+
+## Architecture
+
+
+![Architecture](apollo-lambda.png)
+
 
 ## Install & Run
 
