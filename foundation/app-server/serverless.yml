@@ -8,12 +8,14 @@ provider:
 
 plugins:
   - serverless-offline
+  - serverless-webpack
 
 custom:
   serverless-offline:
     port: 4000
     babelOptions:
       presets: ["es2015", "stage-2"]
+  webpackIncludeModules: true
 
 functions:
   graphql:
