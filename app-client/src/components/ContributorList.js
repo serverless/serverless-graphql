@@ -1,43 +1,36 @@
 import React, { Component } from 'react'
 import Contributor from './Contributor'
-import { graphql, gql } from 'react-apollo'
+import {
+    gql,
+    graphql,
+} from 'react-apollo';
 
-class ContributorList extends Component {
 
-    render() {
+const ContributorList = ({ data: {loading, error, getContributorFeed }}) => {
 
-        // // 1
-        // if (this.props.allLinksQuery && this.props.allLinksQuery.loading) {
-        //     return <div>Loading</div>
-        // }
-        //
-        // // 2
-        // if (this.props.allLinksQuery && this.props.allLinksQuery.error) {
-        //     return <div>Error</div>
-        // }
-
-        // 3
-        const linksToRender = this.props.allLinksQuery.getViewer
-
-        return (
-            <div>
-                {linksToRender.map(link => (
-                    <Contributor key={link.id} link={link}/>
-                ))}
-            </div>
-        )
+    if (loading) {
+        return <p>Loading ...</p>;
+    }
+    if (error) {
+        return <p>{error.message}</p>;
     }
 
-}
+    return (
+        <div>
+            {getContributorFeed.map(user => (
+                <Contributor key={user.name} user={user}/>
+            ))}
+        </div>
+    );
+};
 
-const ALL_LINKS_QUERY = gql`
-  # 2
-  query getViewer {
-    viewer {
+export const ContributorQuery = gql`
+  query ContributorQuery {
+    getContributorFeed {
       name
+      location
     }
   }
-`
+`;
 
-// 3
-export default graphql(ALL_LINKS_QUERY, { name: 'allLinksQuery' }) (ContributorList)
+export default graphql(ContributorQuery,)(ContributorList);

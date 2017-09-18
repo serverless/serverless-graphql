@@ -6,9 +6,18 @@ provider:
   name: aws
   runtime: nodejs4.3
 
+plugins:
+  - serverless-offline
+
+custom:
+  serverless-offline:
+    port: 4000
+    babelOptions:
+      presets: ["es2015", "stage-2"]
+
 functions:
   api:
-    handler: handler.graphql
+    handler: handler.graphqlHandler
     events:
     - http:
         path: graphql
@@ -21,7 +30,7 @@ resources:
     WebsiteS3Bucket:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: <your-s3-bucket-name>
+        BucketName: testGraphQL
         AccessControl: PublicRead
         WebsiteConfiguration:
           IndexDocument: index.html

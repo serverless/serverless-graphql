@@ -4,7 +4,7 @@ class Contributor extends Component {
     render() {
         return (
             <div>
-                <div>{this.props.link.name}</div>
+                <div>{this.props.user.name}</div>
             </div>
         );
     }

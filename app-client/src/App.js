@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ContributorList from './components/ContributorList'
+import ContributorList from './components/ContributorList';
 import logo from './logo.svg';
 import './App.css';
 
