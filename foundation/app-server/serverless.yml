@@ -1,10 +1,10 @@
 service: serverless-graphql-apollo
 
-frameworkVersion: ">=1.5.0 <2.0.0"
-
 provider:
   name: aws
-  runtime: nodejs4.3
+  runtime: nodejs6.10
+  stage: dev
+  region: us-east-1
 
 plugins:
   - serverless-offline
@@ -16,7 +16,7 @@ custom:
       presets: ["es2015", "stage-2"]
 
 functions:
-  api:
+  graphql:
     handler: handler.graphqlHandler
     events:
     - http:
@@ -30,7 +30,7 @@ resources:
     WebsiteS3Bucket:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: testGraphQL
+        BucketName: testgraphql
         AccessControl: PublicRead
         WebsiteConfiguration:
           IndexDocument: index.html
