@@ -1,8 +1,6 @@
 'use strict'; // eslint-disable-line strict
 
-import bodyParser from 'body-parser';
 import { makeExecutableSchema } from 'graphql-tools';
-import cors from 'cors';
 import { schema } from './schema';
 import { resolvers } from './resolvers';
 
