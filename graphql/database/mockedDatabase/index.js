@@ -5,7 +5,7 @@ import wrapPromise from '../../utils/wrapPromise';
 const database = {
   getViewer: (_params) => ({
     id: uuid.create().toString(),
-    name: 'Ada Lovelace',
+    name: 'Siddharth Gupta',
   }),
 };
 

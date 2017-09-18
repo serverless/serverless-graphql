@@ -94,7 +94,11 @@
     "stylelint": "^7.3.1",
     "stylelint-config-standard": "^16.0.0",
     "url-loader": "^0.5.7",
-    "uuid-js": "^0.7.5"
+    "uuid-js": "^0.7.5",
+    "webpack": "^2.2.0",
+    "webpack-dev-middleware": "^1.6.1",
+    "webpack-hot-middleware": "^2.11.0",
+    "webpack-md5-hash": "0.0.5"
   },
   "jest": {
     "moduleNameMapper": {
