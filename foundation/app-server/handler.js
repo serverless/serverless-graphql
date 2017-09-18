@@ -17,11 +17,9 @@ const myGraphQLSchema = makeExecutableSchema({
 exports.graphqlHandler = server.graphqlLambda((event, context) => {
     const headers = event.headers,
     functionName = context.functionName;
-    console.log("yay hey");
     console.log(headers);
     console.log(functionName);
     console.log(event);
-    console.log("yay bye");
 
     return {
         schema: myGraphQLSchema,
