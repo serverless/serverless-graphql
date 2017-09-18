@@ -30,17 +30,24 @@ npm install -g yarn
 yarn # installs all the node_modules
 ```
 
-Use mocked data (keep in mind due hard-coded data the interface might behave not as expected)
+Test Locally - Use Express Server
 ```
+# Start Server http://localhost:4000/graphql
+cd foundation/app-server
 npm start
-# visit http://localhost:3000 in your browser
+```
+
+```
+# Start Client http://localhost:3000
+cd app-client
+npm start
 ```
 
 Use live data from the development environment. You need to make sure you have access to your deployed lambda functions. This works only after you deployed it to production.
 
 ```
-npm run start:remote
-# visit http://localhost:3000 in your browser
+cd foundation/app-server
+npm run deploy
 ```
 
 ## Setup for Production
@@ -58,6 +65,7 @@ After these steps you are good to go and with your next `npm run deploy` your in
 If you make changes to the GraphQL schema stop the server, regenerate it and restart the server:
 
 ```
+cd foundation/app-server
 npm start
 ```
 
@@ -81,13 +89,13 @@ At Serverless we keep our keys encrypted in the repository. We recommend you to 
 
 ## Multiple package.json
 
-In order to keep the total amount of code uploaded to AWS Lambda small the `api` directory containing the Serverless service has it's own `package.json`. This speeds up uploading and also should reduce the cold start time of Lambda functions. You don't have to run `npm install` manually at any point. It will only happen during deploy, but you need make sure every library you are consuming in your GraphQL endpoint is added as a dependency there.
+In order to keep the total amount of code uploaded to AWS Lambda small the `foundation/app-server` directory containing the Serverless service has it's own `package.json`. This speeds up uploading and also should reduce the cold start time of Lambda functions. You don't have to run `npm install` manually at any point. It will only happen during deploy, but you need make sure every library you are consuming in your GraphQL endpoint is added as a dependency there.
 
-### `package.json`
+### `app-client/package.json`
 
 - dependencies: dependencies used by the front-end
 - devDependencies: dependencies used to package the front-end application & running the local environment
 
-### `api/package.json`
+### `foundation/app-server/package.json`
 
 - dependencies: dependencies used on AWS Lambda
