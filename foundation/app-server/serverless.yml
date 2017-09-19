@@ -32,7 +32,7 @@ resources:
     WebsiteS3Bucket:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: testgraphql
+        BucketName: newstackgqltest
         AccessControl: PublicRead
         WebsiteConfiguration:
           IndexDocument: index.html

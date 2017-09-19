@@ -26,6 +26,8 @@
   },
   "pre-commit": "lint:staged",
   "dependencies": {
+    "babel-runtime": "^6.25.0",
+    "graphql": "^0.10.5",
     "babel-polyfill": "^6.16.0",
     "graphql-tools": "^1.0.0",
     "apollo-server-lambda": "1.1.2",
@@ -51,7 +53,6 @@
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.2.0",
     "express": "^4.15.0",
-    "graphql": "^0.10.0",
     "jest-cli": "^19.0.0",
     "lint-staged": "^3.0.3",
     "nodemon": "^1.10.0",
@@ -59,9 +60,10 @@
     "postcss-nested": "^1.0.0",
     "postcss-reporter": "^3.0.0",
     "serverless-offline": "^3.15.3",
-    "serverless-webpack": "*",
-    "webpack-node-externals": "*",
-    "webpack": "^2.2.0"
+    "serverless-webpack": "^2.2.0",
+    "webpack-node-externals": "^1.6.0",
+    "webpack": "^2.2.0",
+    "imports-loader": "^0.7.1"
   },
   "jest": {
     "moduleNameMapper": {
