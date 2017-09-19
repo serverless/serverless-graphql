@@ -53,13 +53,13 @@ npm run deploy
 
 ## Setup for Production
 
-AWS has global unique bucket names. You need to replace `<your-s3-bucket-name>` in package.json as well as in the serverless.yml with your own custom name.
-
-Since the URL of the API is unknown until you create a stack, you need to deploy once without expecting the application to work using `npm run deploy`.
+```
+cd foundation/app-server
+npm run deploy
+```
 
 ![deploy feedback](https://cloud.githubusercontent.com/assets/223045/19171420/6e271150-8bd1-11e6-9b49-e9fa88cac379.png)
 
-After these steps you are good to go and with your next `npm run deploy` your infrastructure should up and running. Visit `http://<your-s3-bucket-name>.s3-website-us-east-1.amazonaws.com` in your browser.
 
 ## Developing
 
