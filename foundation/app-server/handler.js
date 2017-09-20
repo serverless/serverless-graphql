@@ -12,23 +12,15 @@ const myGraphQLSchema = makeExecutableSchema({
     logger: console,
 });
 
-exports.graphqlHandler = server.graphqlLambda((event, context) => {
-    const headers = event.headers,
-    functionName = context.functionName;
-    console.log(headers);
-    console.log(functionName);
-    console.log(event);
-
-    return {
-        schema: myGraphQLSchema,
-        context: {
-            headers,
-            functionName,
-            event,
-            context
-        }
-
+exports.graphqlHandler = function(event, context, callback)  {
+    const callbackFilter = function(error, output) {
+        output.headers['Access-Control-Allow-Origin'] = '*';
+        callback(error, output);
     };
-});
 
-// exports.graphiqlHandler = server.graphiqlLambda({ endpointURL: '/graphql' });
+    const handler = server.graphqlLambda({ schema: myGraphQLSchema });
+
+    return handler(event, context, callbackFilter);
+};
+
+//exports.graphiqlHandler = server.graphiqlLambda({ endpointURL: '/graphql' });
