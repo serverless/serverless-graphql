@@ -7,13 +7,14 @@
     "url": "git@github.com:serverless/serverless-graphql-apollo.git"
   },
   "scripts": {
+    "start-client-local": "cd ../../app-client/ && npm start",
     "start-server-express": "npm run generate:config:local && env-cmd ../environment/security.env.local nodemon ./server.js --ignore app --exec babel-node",
     "start-server-lambda:offline": "npm run generate:config:local && env-cmd ../environment/security.env.prod serverless offline start",
     "generate:config": "node ../generateConfig/index.js",
     "generate:config:local": "env-cmd ../environment/security.env.local npm run generate:config",
     "generate:config:prod": "env-cmd ../environment/security.env.prod npm run generate:config",
     "build:node_modules": "npm install && cd ../../app-client && npm install && cd .. && cd foundation/app-server",
-    "deploy-server-lambda-prod": "npm run generate:config:prod && export SLS_DEBUG=* && serverless --stage=stagev3 deploy",
+    "deploy-server-lambda-prod": "npm run generate:config:prod && export SLS_DEBUG=* && serverless --stage=stage deploy",
     "lint": "npm run lint:eslint && npm run lint:css",
     "lint:eslint": "eslint .",
     "lint:eslint:fix": "eslint . --fix",

@@ -14,7 +14,7 @@ This example uses the following technologies:
 - AWS API Gateway
 - Jest
 
-## Install & Run
+## Start Server
 
 You need to have node 6 or higher installed.
 
@@ -50,6 +50,24 @@ cd app-client
 npm start
 ```
 
+## Start Client
+
+```
+# Start Client http://localhost:3000
+cd app-client
+npm start
+```
+
+OR
+
+```
+# Start Client http://localhost:3000
+cd foundation/app-server
+npm run start-client-local
+```
+
+## Setup for Production
+
 Use live data from the development environment. You need to make sure you have access to your deployed lambda functions. This works only after you deployed it to production.
 
 ```
@@ -57,24 +75,8 @@ cd foundation/app-server
 npm run deploy-server-lambda-prod
 ```
 
-## Setup for Production
-
-```
-cd foundation/app-server
-npm run deploy
-```
-
 ![deploy feedback](https://cloud.githubusercontent.com/assets/223045/19171420/6e271150-8bd1-11e6-9b49-e9fa88cac379.png)
 
-
-## Developing
-
-If you make changes to the GraphQL schema stop the server, regenerate it and restart the server:
-
-```
-cd foundation/app-server
-npm start
-```
 
 ## Testing
 
