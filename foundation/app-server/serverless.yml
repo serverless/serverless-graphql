@@ -26,32 +26,3 @@ functions:
         method: post
         cors: true
         integration: lambda-proxy
-
-resources:
-  Resources:
-    WebsiteS3Bucket:
-      Type: AWS::S3::Bucket
-      Properties:
-        BucketName: serverlessgraphqltest
-        AccessControl: PublicRead
-        WebsiteConfiguration:
-          IndexDocument: index.html
-          ErrorDocument: index.html
-    WebsiteS3BucketPolicy:
-      Type: AWS::S3::BucketPolicy
-      Properties:
-        Bucket:
-          Ref: WebsiteS3Bucket
-        PolicyDocument:
-          Statement:
-            - Sid: PublicReadGetObject
-              Effect: Allow
-              Principal: "*"
-              Action:
-              - s3:GetObject
-              Resource:
-              - Fn::Join:
-                - ''
-                - - 'arn:aws:s3:::'
-                  - Ref: WebsiteS3Bucket
-                  - "/*"

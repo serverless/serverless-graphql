@@ -24,18 +24,24 @@ npm install -g yarn
 yarn # installs all the node_modules
 ```
 
+Build Node Modules
+```
+cd foundation/app-server
+npm run build:node_modules
+```
+
 Test Locally - Use Apollo Express Server
 ```
 # Start Server http://localhost:4000/graphql
 cd foundation/app-server
-npm start
+npm run start-server-express
 ```
 
 Test Locally - Use Apollo Lambda Server
 ```
 # Start Server http://localhost:4000/graphql
 cd foundation/app-server
-npm run start-offline
+npm run start-server-lambda:offline
 ```
 
 ```
@@ -48,7 +54,7 @@ Use live data from the development environment. You need to make sure you have a
 
 ```
 cd foundation/app-server
-npm run deploy
+npm run deploy-server-lambda-prod
 ```
 
 ## Setup for Production
