@@ -4,15 +4,15 @@ This starter kit is an opinionated set of tools combined to help you get started
 
 This example uses the following technologies:
 
-- Serverless
-- Apollo Lambda Server
-- Apollo Client
-- React
-- Serverless Webpack
-- Serverless Offline
-- AWS Lambda
-- AWS API Gateway
-- Jest
+- Frontend
+	- Apollo Client
+	- React
+
+- Backend
+	- Serverless
+	- Apollo Lambda Server
+	- Serverless Webpack
+	- Serverless Offline
 
 ## System Architecture
 
@@ -56,25 +56,16 @@ This example uses the following technologies:
 
 ## Start Server
 
-You need to have node 6 or higher installed.
+You need to have Node 6 or higher installed.
 
 ```
 npm install -g serverless
-npm install -g yarn
-yarn # installs all the node_modules
 ```
 
 Build Node Modules
 ```
 cd foundation/app-server
 npm run build:node_modules
-```
-
-Test Locally - Use Apollo Express Server
-```
-# Start Server http://localhost:4000/graphql
-cd foundation/app-server
-npm run start-server-express
 ```
 
 Test Locally - Use Apollo Lambda Server
