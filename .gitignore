@@ -4,17 +4,8 @@ npm-debug.log
 
 # serverless zip
 .serverless
-
-# generated schema.js files
-graphql/schema.json
-graphql/schema.graphql
-
-coverage/
-
-# build
-build/
-api/graphql
-api/config.js
+# webpack build files
+.webpack
 
 # vim
 *.swp
