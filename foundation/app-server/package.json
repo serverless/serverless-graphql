@@ -9,7 +9,6 @@
   "scripts": {
     "start-client-local": "cd ../../app-client/ && npm start",
     "start-server-lambda:offline": "env-cmd ../environment/security.env.prod serverless offline start",
-    "build:node_modules": "npm install && cd ../../app-client && npm install && cd .. && cd foundation/app-server",
     "deploy-server-lambda-prod": "npm run generate:config:prod && serverless --stage=production deploy"
   },
   "dependencies": {
