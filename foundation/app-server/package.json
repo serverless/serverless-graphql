@@ -8,18 +8,8 @@
   },
   "scripts": {
     "start-client-local": "cd ../../app-client/ && npm start",
-    "start-server-lambda:offline": "npm run generate:config:local && env-cmd ../environment/security.env.prod serverless offline start",
-    "generate:config": "node ../generateConfig/index.js",
-    "generate:config:local": "env-cmd ../environment/security.env.local npm run generate:config",
-    "generate:config:prod": "env-cmd ../environment/security.env.prod npm run generate:config",
-    "build:node_modules": "npm install && cd ../../app-client && npm install && cd .. && cd foundation/app-server",
-    "deploy-server-lambda-prod": "npm run generate:config:prod && export SLS_DEBUG=* && serverless --stage=stage deploy",
-    "lint": "npm run lint:eslint",
-    "lint:eslint": "eslint .",
-    "lint:eslint:fix": "eslint . --fix",
-    "test": "NODE_ENV=test jest",
-    "test:watch": "NODE_ENV=test jest --watch",
-    "test:coverage": "npm test -- --coverage --collectCoverageFrom 'app/**/*.js' --collectCoverageFrom 'graphql/**/*.js'"
+    "start-server-lambda:offline": "env-cmd ../environment/security.env.prod serverless offline start",
+    "deploy-server-lambda-prod": "npm run generate:config:prod && serverless --stage=production deploy"
   },
   "dependencies": {
     "babel-runtime": "^6.25.0",
@@ -33,8 +23,6 @@
     "aws-sdk": "^2.4.8",
     "babel-cli": "^6.16.0",
     "babel-core": "^6.17.0",
-    "babel-eslint": "^7.0.0",
-    "babel-jest": "^19.0.0",
     "babel-loader": "^6.4.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.16.0",
@@ -48,17 +36,10 @@
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.2.0",
     "env-cmd": "^5.0.0",
-    "jest-cli": "^19.0.0",
     "serverless-offline": "^3.15.3",
     "serverless-webpack": "^2.2.0",
     "webpack-node-externals": "^1.6.0",
     "webpack": "^2.2.0",
     "imports-loader": "^0.7.1"
-  },
-  "jest": {
-    "moduleNameMapper": {
-      "^.+\\.(jpg|png|gif|eot|svg|ttf|woff|woff2|mp4|webm)$": "<rootDir>/foundation/jest/fileMock.js",
-      "^.+\\.css$": "<rootDir>/foundation/jest/cssMock.js"
-    }
   }
 }

@@ -62,10 +62,12 @@ You need to have Node 6 or higher installed.
 npm install -g serverless
 ```
 
-Build Node Modules
+Install Front and Backend
 ```
 cd foundation/app-server
-npm run build:node_modules
+npm install
+cd ../../app-client
+npm install
 ```
 
 Test Locally - Use Apollo Lambda Server
