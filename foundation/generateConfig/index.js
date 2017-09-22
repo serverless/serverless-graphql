@@ -7,13 +7,13 @@ const content = `module.exports = {
 };
 `;
 
-const configPath = path.join(__dirname, '../../api/config.js');
+const configPath = path.join(__dirname, '../app-server/config.js');
 
 fs.writeFile(configPath, content, (err) => {
   if (err) {
     console.log(err);
     process.exit(1);
   } else {
-    console.log('api/config.js file was generated');
+    console.log('app-server/config.js file was generated');
   }
 });

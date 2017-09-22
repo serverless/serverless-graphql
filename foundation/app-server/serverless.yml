@@ -1,0 +1,28 @@
+service: serverless-graphql-apollo
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  stage: dev
+  region: us-east-1
+
+plugins:
+  - serverless-offline
+  - serverless-webpack
+
+custom:
+  serverless-offline:
+    port: 4000
+    babelOptions:
+      presets: ["es2015", "stage-2"]
+  webpackIncludeModules: true
+
+functions:
+  graphql:
+    handler: handler.graphqlHandler
+    events:
+    - http:
+        path: graphql
+        method: post
+        cors: true
+        integration: lambda-proxy
