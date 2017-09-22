@@ -18,7 +18,7 @@
     "lint": "npm run lint:eslint && npm run lint:css",
     "lint:eslint": "eslint .",
     "lint:eslint:fix": "eslint . --fix",
-    "lint:css": "stylelint ./app/**/*.css",
+    "lint:css": "stylelint ../../app-client/src/**/*.css",
     "lint:staged": "lint-staged",
     "test": "NODE_ENV=test jest",
     "test:watch": "NODE_ENV=test jest --watch",
