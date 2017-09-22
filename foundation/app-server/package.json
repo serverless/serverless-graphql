@@ -8,7 +8,6 @@
   },
   "scripts": {
     "start-client-local": "cd ../../app-client/ && npm start",
-    "start-server-express": "npm run generate:config:local && env-cmd ../environment/security.env.local nodemon ./server.js --ignore app --exec babel-node",
     "start-server-lambda:offline": "npm run generate:config:local && env-cmd ../environment/security.env.prod serverless offline start",
     "generate:config": "node ../generateConfig/index.js",
     "generate:config:local": "env-cmd ../environment/security.env.local npm run generate:config",
@@ -38,7 +37,6 @@
     "apollo-server-module-graphiql": "^1.1.2"
   },
   "devDependencies": {
-    "apollo-server-express": "^1.0.2",
     "aws-sdk": "^2.4.8",
     "babel-cli": "^6.16.0",
     "babel-core": "^6.17.0",
@@ -56,11 +54,9 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.2.0",
-    "express": "^4.15.0",
     "env-cmd": "^5.0.0",
     "jest-cli": "^19.0.0",
     "lint-staged": "^3.0.3",
-    "nodemon": "^1.10.0",
     "postcss-cssnext": "^2.6.0",
     "postcss-nested": "^1.0.0",
     "postcss-reporter": "^3.0.0",
