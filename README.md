@@ -14,6 +14,46 @@ This example uses the following technologies:
 - AWS API Gateway
 - Jest
 
+## System Architecture
+
+![serverless application architecture v2](https://user-images.githubusercontent.com/1587005/30748634-c155b978-9f65-11e7-99d1-ebe7dafd0d6b.png)
+
+## Directory Layout
+
+```bash
+.
+├── /app-client/                     # React Client with Apollo Integration
+│   ├── /public/                     # front End Utils
+│   │   ├── /index.html              # main html file to render react app
+│   │   ├── /...                     # front end metadata
+│   ├── /src/                        # react app code logic
+│   │   ├── /componenets/            # react componenets
+│   │   ├── /App.js                  # react application logic
+│   │   ├── /index.js                # react dom render
+│   │   ├── /...                     # etc.
+│   ├── /package.json                # react app dependencies
+├── /foundation/                     # Server Side Utils
+│   ├── /app-server/                 # Serverless with Apollo Integration
+│   │   ├── /handler.js              # AWS Lambda - Apollo Lambda Server
+│   │   ├── /package.json            # server side dependencies
+│   │   ├── /resolvers.js            # graphql resolvers
+│   │   ├── /schema.js               # graphql schema
+│   │   └── /server.js               # Express server - Apollo Express
+│   │   └── /serverless.yaml         # Serverless yaml for AWS deployment
+│   │   └── /webpack.config.js       # Webpack server side code with ES6
+│   ├── /environment/                # Configuration files
+│   │   └── /security.env.local      # local
+│   │   └── /security.env.prod       # production
+│   ├── /generateConfig/             # Authentication Configuration files
+│   │   └── /index.js                # configs
+│   ├── /jest/                       # Unit Testing
+│   │   ├── /cssMock.js              # tests
+│   │   ├── /fileMock.js             # tests
+└── README.MD                        # information
+```
+
+
+
 ## Start Server
 
 You need to have node 6 or higher installed.
