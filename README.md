@@ -32,24 +32,16 @@ This example uses the following technologies:
 │   │   ├── /index.js                # react dom render
 │   │   ├── /...                     # etc.
 │   ├── /package.json                # react app dependencies
-├── /foundation/                     # Server Side Utils
-│   ├── /app-server/                 # Serverless with Apollo Integration
-│   │   ├── /handler.js              # AWS Lambda - Apollo Lambda Server
-│   │   ├── /package.json            # server side dependencies
-│   │   ├── /resolvers.js            # graphql resolvers
-│   │   ├── /schema.js               # graphql schema
-│   │   └── /server.js               # Express server - Apollo Express
-│   │   └── /serverless.yaml         # Serverless yaml for AWS deployment
-│   │   └── /webpack.config.js       # Webpack server side code with ES6
-│   ├── /environment/                # Configuration files
-│   │   └── /security.env.local      # local
-│   │   └── /security.env.prod       # production
-│   ├── /generateConfig/             # Authentication Configuration files
-│   │   └── /index.js                # configs
-│   ├── /jest/                       # Unit Testing
-│   │   ├── /cssMock.js              # tests
-│   │   ├── /fileMock.js             # tests
-└── README.MD                        # information
+├── /app-backend/                    # Server Backend with Apollo Integration
+│   ├── /handler.js                  # AWS Lambda - Apollo Lambda Server
+│   ├── /package.js                  # server side dependencies
+│   ├── /resolvers.js                # graphql resolvers
+│   ├── /schema.js                   # graphql schema
+│   ├── /serverless.yaml             # Serverless yaml for AWS deployment
+│   ├── /webpack.config.js           # Webpack server side code with ES6
+├── /config/                         # Configuration files
+│   ├── /security.env.local          # local config
+│   ├── /security.env.prod           # production config
 ```
 
 
@@ -64,16 +56,16 @@ npm install -g serverless
 
 Install Front and Backend
 ```
-cd foundation/app-server
+cd app-backend
 npm install
-cd ../../app-client
+cd app-client
 npm install
 ```
 
 Test Locally - Use Apollo Lambda Server
 ```
 # Start Server http://localhost:4000/graphql
-cd foundation/app-server
+cd app-backend
 npm run start-server-lambda:offline
 ```
 
@@ -95,7 +87,7 @@ OR
 
 ```
 # Start Client http://localhost:3000
-cd foundation/app-server
+cd app-backend
 npm run start-client-local
 ```
 
@@ -104,26 +96,12 @@ npm run start-client-local
 Use live data from the development environment. You need to make sure you have access to your deployed lambda functions. This works only after you deployed it to production.
 
 ```
-cd foundation/app-server
+cd app-backend
 npm run deploy-server-lambda-prod
 ```
 
 ![deploy feedback](https://cloud.githubusercontent.com/assets/223045/19171420/6e271150-8bd1-11e6-9b49-e9fa88cac379.png)
 
-
-## Testing
-
-We use Jest as a test runner. To run all tests use
-
-```
-npm run test
-```
-
-To update component snapshots after updating a component use
-
-```
-npm run test:update
-```
 
 ## Multiple package.json
 
@@ -134,6 +112,6 @@ In order to keep the total amount of code uploaded to AWS Lambda small the `foun
 - dependencies: dependencies used by the front-end
 - devDependencies: dependencies used to package the front-end application & running the local environment
 
-### `foundation/app-server/package.json`
+### `app-backend/package.json`
 
 - dependencies: dependencies used on AWS Lambda
