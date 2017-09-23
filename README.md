@@ -54,6 +54,16 @@ You need to have Node 6 or higher installed.
 npm install -g serverless
 ```
 
+Install AWS CLI on your command line (http://docs.aws.amazon.com/cli/latest/userguide/installing.html)
+
+```
+aws configure
+AWS Access Key ID: <access id>
+AWS Secret Access Key: <secret key>
+Default region name: <region>
+
+```
+
 Install Front and Backend
 ```
 cd app-backend
