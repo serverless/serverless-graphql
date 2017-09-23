@@ -7,9 +7,9 @@
     "url": "git@github.com:serverless/serverless-graphql-apollo.git"
   },
   "scripts": {
-    "start-client-local": "cd ../../app-client/ && npm start",
-    "start-server-lambda:offline": "env-cmd ../environment/security.env.prod serverless offline start",
-    "deploy-server-lambda-prod": "npm run generate:config:prod && serverless --stage=production deploy"
+    "start-client-local": "cd ../app-client/ && npm start",
+    "start-server-lambda:offline": "serverless offline start",
+    "deploy-server-lambda-prod": "serverless --stage=productionv4 deploy"
   },
   "dependencies": {
     "babel-runtime": "^6.25.0",
