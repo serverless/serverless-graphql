@@ -77,12 +77,6 @@ cd foundation/app-server
 npm run start-server-lambda:offline
 ```
 
-```
-# Start Client http://localhost:3000
-cd app-client
-npm start
-```
-
 ## Start Client
 
 ```
