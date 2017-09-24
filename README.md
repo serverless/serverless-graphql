@@ -10,6 +10,7 @@ This example uses the following technologies:
 
 - Backend
 	- Serverless
+	- AWS Lambda & AWS API Gateway
 	- Apollo Lambda Server
 	- Serverless Webpack
 	- Serverless Offline
@@ -44,9 +45,7 @@ This example uses the following technologies:
 │   ├── /security.env.prod           # production config
 ```
 
-
-
-## Start Server
+## Setup
 
 You need to have Node 6 or higher installed.
 
@@ -55,21 +54,17 @@ npm install -g serverless
 npm install -g yarn
 ```
 
-Install AWS CLI on your command line (http://docs.aws.amazon.com/cli/latest/userguide/installing.html)
+Configure your AWS keys. Here you can find a [2min walkthrough](https://www.youtube.com/watch?v=mRkUnA3mEt4) how to do retrieve the keys.
 
 ```
-aws configure
-AWS Access Key ID: <access id>
-AWS Secret Access Key: <secret key>
-Default region name: <region>
-
+sls config credentials --provider aws --key <your_aws_access_key> --secret <your_aws_secret_key>
 ```
 
 Install Dependencies (FrontEnd and BackEnd)
 ```
 cd app-backend
 yarn install
-cd app-client
+cd ../app-client
 yarn install
 ```
 
