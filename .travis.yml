@@ -3,7 +3,6 @@ cache: yarn
 node_js:
 - '8'
 script:
-- npm run lint
-- npm test
+- cd app-backend && yarn && npm run lint
 notifications:
   email: false
