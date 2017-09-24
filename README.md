@@ -52,6 +52,7 @@ You need to have Node 6 or higher installed.
 
 ```
 npm install -g serverless
+npm install -g yarn
 ```
 
 Install AWS CLI on your command line (http://docs.aws.amazon.com/cli/latest/userguide/installing.html)
@@ -64,12 +65,12 @@ Default region name: <region>
 
 ```
 
-Install Front and Backend
+Install Dependencies (FrontEnd and BackEnd)
 ```
 cd app-backend
-npm install
+yarn install
 cd app-client
-npm install
+yarn install
 ```
 
 Test Locally - Use Apollo Lambda Server
