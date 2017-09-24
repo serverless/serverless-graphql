@@ -17,6 +17,7 @@ const contributors = [
   },
 ];
 
+// eslint-disable-next-line import/prefer-default-export
 export const resolvers = {
   Query: {
     getContributorFeed: () => contributors,

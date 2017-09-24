@@ -6,6 +6,8 @@ npm-debug.log
 .serverless
 # webpack build files
 .webpack
+# eslint cache
+.eslintcache
 
 # vim
 *.swp
