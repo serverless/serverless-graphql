@@ -19,32 +19,6 @@ This example uses the following technologies:
 
 ![serverless application architecture v2](https://user-images.githubusercontent.com/1587005/30748634-c155b978-9f65-11e7-99d1-ebe7dafd0d6b.png)
 
-## Directory Layout
-
-```bash
-.
-├── /app-client/                     # React Client with Apollo Integration
-│   ├── /public/                     # front End Utils
-│   │   ├── /index.html              # main html file to render react app
-│   │   ├── /...                     # front end metadata
-│   ├── /src/                        # react app code logic
-│   │   ├── /componenets/            # react componenets
-│   │   ├── /App.js                  # react application logic
-│   │   ├── /index.js                # react dom render
-│   │   ├── /...                     # etc.
-│   ├── /package.json                # react app dependencies
-├── /app-backend/                    # Server Backend with Apollo Integration
-│   ├── /handler.js                  # AWS Lambda - Apollo Lambda Server
-│   ├── /package.js                  # server side dependencies
-│   ├── /resolvers.js                # graphql resolvers
-│   ├── /schema.js                   # graphql schema
-│   ├── /serverless.yaml             # Serverless yaml for AWS deployment
-│   ├── /webpack.config.js           # Webpack server side code with ES6
-├── /config/                         # Configuration files
-│   ├── /security.env.local          # local config
-│   ├── /security.env.prod           # production config
-```
-
 ## Setup
 
 You need to have Node 6 or higher installed.
@@ -102,6 +76,31 @@ npm run deploy-server-lambda-prod
 
 ![deploy feedback](https://cloud.githubusercontent.com/assets/223045/19171420/6e271150-8bd1-11e6-9b49-e9fa88cac379.png)
 
+## Directory Layout
+
+```bash
+.
+├── /app-client/                     # React Client with Apollo Integration
+│   ├── /public/                     # front End Utils
+│   │   ├── /index.html              # main html file to render react app
+│   │   ├── /...                     # front end metadata
+│   ├── /src/                        # react app code logic
+│   │   ├── /componenets/            # react componenets
+│   │   ├── /App.js                  # react application logic
+│   │   ├── /index.js                # react dom render
+│   │   ├── /...                     # etc.
+│   ├── /package.json                # react app dependencies
+├── /app-backend/                    # Server Backend with Apollo Integration
+│   ├── /handler.js                  # AWS Lambda - Apollo Lambda Server
+│   ├── /package.js                  # server side dependencies
+│   ├── /resolvers.js                # graphql resolvers
+│   ├── /schema.js                   # graphql schema
+│   ├── /serverless.yaml             # Serverless yaml for AWS deployment
+│   ├── /webpack.config.js           # Webpack server side code with ES6
+├── /config/                         # Configuration files
+│   ├── /security.env.local          # local config
+│   ├── /security.env.prod           # production config
+```
 
 ## Multiple package.json
 
