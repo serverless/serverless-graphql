@@ -1,0 +1,9 @@
+language: node_js
+cache: yarn
+node_js:
+- '8'
+script:
+- npm run lint
+- npm test
+notifications:
+  email: false
