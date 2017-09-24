@@ -60,14 +60,15 @@ You need to have Node 6 or higher installed.
 
 ```
 npm install -g serverless
+npm install -g yarn
 ```
 
-Install Front and Backend
+Install Dependencies (FrontEnd and BackEnd)
 ```
 cd foundation/app-server
-npm install
-cd ../../app-client
-npm install
+yarn install
+cd app-client
+yarn install
 ```
 
 Test Locally - Use Apollo Lambda Server
