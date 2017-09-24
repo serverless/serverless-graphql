@@ -46,7 +46,7 @@ Test Locally - Use Apollo Lambda Server
 ```
 # Start Server http://localhost:4000/graphql
 cd app-backend
-npm run start-server-lambda:offline
+yarn run start-server-lambda:offline
 ```
 
 ## Start Client
@@ -54,7 +54,7 @@ npm run start-server-lambda:offline
 ```
 # Start Client http://localhost:3000
 cd app-client
-npm start
+yarn start
 ```
 
 OR
@@ -62,7 +62,7 @@ OR
 ```
 # Start Client http://localhost:3000
 cd app-backend
-npm run start-client-local
+yarn run start-client-local
 ```
 
 ## Setup for Production
@@ -71,7 +71,7 @@ Use live data from the development environment. You need to make sure you have a
 
 ```
 cd app-backend
-npm run deploy-server-lambda-prod
+yarn run deploy-server-lambda-prod
 ```
 
 ![deploy feedback](https://cloud.githubusercontent.com/assets/223045/19171420/6e271150-8bd1-11e6-9b49-e9fa88cac379.png)
@@ -104,7 +104,7 @@ npm run deploy-server-lambda-prod
 
 ## Multiple package.json
 
-In order to keep the total amount of code uploaded to AWS Lambda small the `foundation/app-server` directory containing the Serverless service has it's own `package.json`. This speeds up uploading and also should reduce the cold start time of Lambda functions. You don't have to run `npm install` manually at any point. It will only happen during deploy, but you need make sure every library you are consuming in your GraphQL endpoint is added as a dependency there.
+In order to keep the total amount of code uploaded to AWS Lambda small the `foundation/app-server` directory containing the Serverless service has it's own `package.json`. This speeds up uploading and also should reduce the cold start time of Lambda functions. You don't have to run `yarn install` manually at any point. It will only happen during deploy, but you need make sure every library you are consuming in your GraphQL endpoint is added as a dependency there.
 
 ### `app-client/package.json`
 
