@@ -23,4 +23,5 @@ exports.graphqlHandler = function graphqlHandler(event, context, callback) {
   return handler(event, context, callbackFilter);
 };
 
-exports.graphiqlHandler = server.graphiqlLambda({ endpointURL: '/production/graphql' });
+//for local endpointURL is /graphql and for prod it is /stackname/graphql
+exports.graphiqlHandler = server.graphiqlLambda({ endpointURL: process.env.GRAPHQL_ENDPOINT ? process.env.GRAPHQL_ENDPOINT :'/production/graphql' });
