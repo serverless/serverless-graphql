@@ -61,7 +61,7 @@ OR
 
 ```
 # Start Client http://localhost:3000
-cd app-backend
+cd app-client
 yarn run start-client-local
 ```
 
