@@ -18,6 +18,9 @@ custom:
     babelOptions:
       presets: ["es2015", "stage-2"]
   webpackIncludeModules: true
+  region: ${opt:region, self:provider.region}
+  cognito_pool_id: <cognito_pool_id>
+  account_id: <aws_account_id>
 
 functions:
   graphql:
@@ -27,6 +30,8 @@ functions:
         path: graphql
         method: post
         cors: true
+        authorizer:
+          arn:aws:cognito-idp:${self:custom.region}:${self:custom.account_id}:userpool/${self:custom.cognito_pool_id}
   graphiql:
     handler: handler.graphiqlHandler
     events:
@@ -34,3 +39,5 @@ functions:
         path: graphiql
         method: get
         cors: true
+        authorizer:
+          arn:aws:cognito-idp:${self:custom.region}:${self:custom.account_id}:userpool/${self:custom.cognito_pool_id}

@@ -7,9 +7,10 @@
     "url": "git@github.com:serverless/serverless-graphql-apollo.git"
   },
   "scripts": {
-    "start-client-local": "cd ../app-client/ && npm start",
-    "start-server-lambda:offline": "env-cmd ../config/security.env.local serverless offline start",
+    "start-client-local": "cd ../app-client/ && yarn start",
+    "start-server-lambda:offline": "env-cmd ../config/security.env.local serverless offline start  --noAuth",
     "deploy-server-lambda-prod": "serverless --stage=production deploy",
+    "generate-token": "babel-node generate-token.js",
     "lint": "eslint . --cache"
   },
   "dependencies": {
@@ -21,6 +22,7 @@
     "graphql-tools": "^1.0.0"
   },
   "devDependencies": {
+    "amazon-cognito-identity-js": "^1.21.0",
     "aws-sdk": "^2.4.8",
     "babel-cli": "^6.16.0",
     "babel-core": "^6.17.0",
