@@ -4,7 +4,7 @@ node_js:
   - '8'
 script:
   - cd app-backend && yarn
-  - cd app-client && yarn
-  - yarn && yarn run test
+  - cd ../app-client && yarn
+  - cd ../ && yarn && yarn run test
 notifications:
   email: false
