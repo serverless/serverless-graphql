@@ -2,10 +2,16 @@
   "name": "serverless-graphql-apollo",
   "private": true,
   "scripts": {
+    "precommit": "lint-staged",
     "lint": "eslint app-backend/*.js app-client/src/**/*.js",
-    "prettier": "prettier --write \"{app-backend,app-client/src}/**/*.js\"",
-    "prettier-check": "prettier --list-different \"{app-backend,app-client/src}/**/*.js\"",
+    "prettier":
+      "prettier --write \"{app-backend,app-client/src}/**/*.{js,css,json}\"",
+    "prettier-check":
+      "prettier --list-different \"{app-backend,app-client/src}/**/*.{js,css,json}\"",
     "test": "yarn run lint && yarn run prettier-check"
+  },
+  "lint-staged": {
+    "*.{js,json,css}": ["prettier --write", "git add"]
   },
   "dependencies": {},
   "devDependencies": {
@@ -17,6 +23,8 @@
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-prettier": "^2.3.1",
     "eslint-plugin-react": "^7.4.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^4.2.3",
     "prettier": "^1.7.4"
   }
 }

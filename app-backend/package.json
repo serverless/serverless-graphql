@@ -8,7 +8,8 @@
   },
   "scripts": {
     "start-client-local": "cd ../app-client/ && npm start",
-    "start-server-lambda:offline": "env-cmd ../config/security.env.local serverless offline start",
+    "start-server-lambda:offline":
+      "env-cmd ../config/security.env.local serverless offline start",
     "deploy-server-lambda-prod": "serverless --stage=production deploy"
   },
   "dependencies": {
