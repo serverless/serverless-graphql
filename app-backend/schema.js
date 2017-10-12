@@ -1,4 +1,3 @@
-
 const schema = `
 type Contributor {   
   name: String!

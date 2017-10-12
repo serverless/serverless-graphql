@@ -1,13 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-class Contributor extends Component {
-    render() {
-        return (
-            <div>
-                <div>{this.props.user.name}</div>
-            </div>
-        );
-    }
+function Contributor({ user }) {
+  return (
+    <div>
+      <div>{user.name}</div>
+    </div>
+  );
 }
 
-export default Contributor
+Contributor.propTypes = {
+  user: PropTypes.any.isRequired, // eslint-disable-line
+};
+
+export default Contributor;

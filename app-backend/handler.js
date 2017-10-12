@@ -1,4 +1,4 @@
-'use strict'; // eslint-disable-line strict
+'use strict'; // eslint-disable-line strict,lines-around-directive
 
 import { makeExecutableSchema } from 'graphql-tools';
 import { schema } from './schema';
@@ -24,4 +24,8 @@ exports.graphqlHandler = function graphqlHandler(event, context, callback) {
 };
 
 // for local endpointURL is /graphql and for prod it is /stage/graphql
-exports.graphiqlHandler = server.graphiqlLambda({ endpointURL: process.env.GRAPHQL_ENDPOINT ? process.env.GRAPHQL_ENDPOINT : '/production/graphql' });
+exports.graphiqlHandler = server.graphiqlLambda({
+  endpointURL: process.env.GRAPHQL_ENDPOINT
+    ? process.env.GRAPHQL_ENDPOINT
+    : '/production/graphql',
+});
