@@ -1,27 +1,26 @@
-import React, { Component } from 'react'
-import Contributor from './Contributor'
-import {
-    gql,
-    graphql,
-} from 'react-apollo';
+import React from 'react';
+import { gql, graphql } from 'react-apollo';
+import Contributor from './Contributor';
 
+const ContributorList = ({ data: { loading, error, getContributorFeed } }) => {
+  if (loading) {
+    return <p>Loading ...</p>;
+  }
+  if (error) {
+    return <p>{error.message}</p>;
+  }
 
-const ContributorList = ({ data: {loading, error, getContributorFeed }}) => {
+  return (
+    <div>
+      {getContributorFeed.map(user => (
+        <Contributor key={user.name} user={user} />
+      ))}
+    </div>
+  );
+};
 
-    if (loading) {
-        return <p>Loading ...</p>;
-    }
-    if (error) {
-        return <p>{error.message}</p>;
-    }
-
-    return (
-        <div>
-            {getContributorFeed.map(user => (
-                <Contributor key={user.name} user={user}/>
-            ))}
-        </div>
-    );
+ContributorList.propTypes = {
+  data: PropTypes.any.isRequired, // eslint-disable-line
 };
 
 export const ContributorQuery = gql`
@@ -33,4 +32,4 @@ export const ContributorQuery = gql`
   }
 `;
 
-export default graphql(ContributorQuery,)(ContributorList);
+export default graphql(ContributorQuery)(ContributorList);

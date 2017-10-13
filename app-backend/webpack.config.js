@@ -9,18 +9,20 @@ module.exports = {
   target: 'node',
   externals: [nodeExternals()],
   module: {
-    rules: [{
-      test: /\.js$/,
-      use: [
-        'imports-loader?graphql',
-        {
-          loader: 'babel-loader',
-          options: {
-            presets: ['es2015'],
+    rules: [
+      {
+        test: /\.js$/,
+        use: [
+          'imports-loader?graphql',
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ['es2015'],
+            },
           },
-        },
-      ],
-    }],
+        ],
+      },
+    ],
   },
   output: {
     libraryTarget: 'commonjs',
