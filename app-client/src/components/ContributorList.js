@@ -1,6 +1,7 @@
 import React from 'react';
 import { gql, graphql } from 'react-apollo';
 import Contributor from './Contributor';
+import PropTypes from 'prop-types';
 
 const ContributorList = ({ data: { loading, error, getContributorFeed } }) => {
   if (loading) {
