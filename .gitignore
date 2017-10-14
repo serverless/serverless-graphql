@@ -11,3 +11,4 @@ npm-debug.log
 
 # vim
 *.swp
+.idea
