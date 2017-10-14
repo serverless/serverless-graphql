@@ -26,14 +26,22 @@ const userData = {
 const authenticationDetails = new AuthenticationDetails(authenticationData);
 const cognitoUser = new CognitoUser(userData);
 
-cognitoUser.authenticateUser(authenticationDetails, {
-  onSuccess(result) {
-    console.log(`access token = ${result.getAccessToken().getJwtToken()}`);
-    console.log(`id token = ${result.getIdToken().getJwtToken()}`);
-  },
 
-  onFailure(err) {
-    console.log(err);
-  },
+const promise = new Promise((res, rej)=> {
 
+    cognitoUser.authenticateUser(authenticationDetails, {
+        onSuccess(result) {
+            //console.log(`access token = ${result.getAccessToken().getJwtToken()}`);
+            //console.log(`id token = ${result.getIdToken().getJwtToken()}`);
+            res(result.getIdToken().getJwtToken());
+        },
+
+        onFailure(err) {
+            //console.log(err);
+            rej(null);
+        },
+
+    })
 });
+
+export { promise };
