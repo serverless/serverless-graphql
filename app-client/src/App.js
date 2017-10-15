@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { getToken } from '../generate-token';
 import ContributorList from './components/ContributorList';
 import logo from './logo.svg';
 import './App.css';
@@ -13,6 +14,27 @@ import {
 const networkInterface = createNetworkInterface({
   uri: 'http://localhost:4000/graphql',
 });
+
+networkInterface.use([
+  {
+    applyMiddleware(req, next) {
+      if (!req.options.headers) {
+        req.options.headers = {}; // Create the header object if needed.
+      }
+
+      getToken
+        .then(function(result) {
+          //console.log(result); // "yay!"
+          req.options.headers.authorization = result;
+          next();
+        })
+        .catch(function(err) {
+          req.options.headers.authorization = null;
+          next();
+        });
+    },
+  },
+]);
 
 const client = new ApolloClient({
   networkInterface,

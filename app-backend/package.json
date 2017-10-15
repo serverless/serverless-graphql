@@ -10,7 +10,7 @@
     "test": "jest",
     "start-client-local": "cd ../app-client/ && npm start",
     "start-server-lambda:offline":
-      "env-cmd ../config/security.env.local serverless offline start",
+      "env-cmd ../config/security.env.local serverless offline start --noAuth",
     "deploy-server-lambda-prod": "serverless --stage=production deploy"
   },
   "dependencies": {

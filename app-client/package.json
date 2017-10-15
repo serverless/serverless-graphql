@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "amazon-cognito-identity-js": "^1.21.0",
     "prop-types": "^15.6.0",
     "react": "^15.6.2",
     "react-apollo": "^0.13.2",
