@@ -16,7 +16,7 @@ const authenticationData = {
 };
 
 const poolData = {
-  UserPoolId: '...', // Your user pool id here
+  UserPoolId: 'us-east-1_xxxxxxxx', // Your user pool id here
   ClientId: '...', // Your client id here
 };
 

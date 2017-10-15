@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getToken } from './generate-token';
+import { getToken } from '../generate-token';
 import ContributorList from './components/ContributorList';
 import logo from './logo.svg';
 import './App.css';

@@ -67,12 +67,20 @@ yarn run start-client-local
 
 ## Setup for Production
 
-Use live data from the development environment. You need to make sure you have access to your deployed lambda functions. This works only after you deployed it to production.
+1. [Setup Cognito](https://medium.com/@kangzeroo/user-management-with-aws-cognito-1-3-initial-setup-a1a692a657b3)
 
+2. Insert credentials in app-client/generate-token.js
+3. Replace <cognito_pool_id> and <aws_account_id> with appropriate values in serverless.yml
+
+4. Use live data from the development environment. You need to make sure you have access to your deployed lambda functions. This works only after you deployed it to production.
 ```
 cd app-backend
 yarn run deploy-server-lambda-prod
 ```
+
+
+
+
 
 ![deploy feedback](https://cloud.githubusercontent.com/assets/223045/19171420/6e271150-8bd1-11e6-9b49-e9fa88cac379.png)
 
