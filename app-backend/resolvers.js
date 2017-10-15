@@ -1,5 +1,7 @@
 const OAuth2 = require('OAuth').OAuth2;
 
+require('babel-polyfill');
+
 const twitterEndpoint = {
   async getRawTweets(args) {
     const url =
