@@ -4,7 +4,11 @@
 
 'use strict'; // eslint-disable-line strict
 
-import { CognitoUserPool, CognitoUser, AuthenticationDetails } from 'amazon-cognito-identity-js';
+import {
+  CognitoUserPool,
+  CognitoUser,
+  AuthenticationDetails,
+} from 'amazon-cognito-identity-js';
 
 const authenticationData = {
   Username: '...', // username created in cognito pool
@@ -26,22 +30,17 @@ const userData = {
 const authenticationDetails = new AuthenticationDetails(authenticationData);
 const cognitoUser = new CognitoUser(userData);
 
+export const getToken = new Promise((resolve, reject) => {
+  cognitoUser.authenticateUser(authenticationDetails, {
+    onSuccess(result) {
+      //console.log(`access token = ${result.getAccessToken().getJwtToken()}`);
+      //console.log(`id token = ${result.getIdToken().getJwtToken()}`);
+      resolve(result.getIdToken().getJwtToken());
+    },
 
-const promise = new Promise((res, rej)=> {
-
-    cognitoUser.authenticateUser(authenticationDetails, {
-        onSuccess(result) {
-            //console.log(`access token = ${result.getAccessToken().getJwtToken()}`);
-            //console.log(`id token = ${result.getIdToken().getJwtToken()}`);
-            res(result.getIdToken().getJwtToken());
-        },
-
-        onFailure(err) {
-            //console.log(err);
-            rej(null);
-        },
-
-    })
+    onFailure(err) {
+      //console.log(err);
+      reject(null);
+    },
+  });
 });
-
-export { promise };
