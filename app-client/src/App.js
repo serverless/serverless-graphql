@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ContributorList from './components/ContributorList';
 import logo from './logo.svg';
 import './App.css';
+import User from './components/User';
 
 import {
   ApolloClient,
@@ -13,6 +14,23 @@ import {
 const networkInterface = createNetworkInterface({
   uri: 'http://localhost:4000/graphql',
 });
+
+networkInterface.use([
+  {
+    applyMiddleware(req, next) {
+      // Create the header object if needed.
+      if (!req.options.headers) {
+        req.options.headers = {};
+      }
+
+      const token = localStorage.getItem('token');
+      if (token) {
+        req.options.headers.authorization = token;
+      }
+      next();
+    },
+  },
+]);
 
 const client = new ApolloClient({
   networkInterface,
@@ -34,6 +52,7 @@ class App extends Component {
           <p className="App-Contributor">
             <ContributorList />
           </p>
+          <User />
         </div>
       </ApolloProvider>
     );
