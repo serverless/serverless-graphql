@@ -1,12 +1,13 @@
+const fetch = require('node-fetch');
 const OAuth2 = require('OAuth').OAuth2;
 
 require('babel-polyfill');
 
+/* eslint comma-dangle: ["error", "always"] */
+
 const twitterEndpoint = {
   async getRawTweets(args) {
-    const url =
-      'https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=' +
-      args.handle;
+    const url = `https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=${args.handle}`;
     const oauth2 = new OAuth2(
       args.consumer_key,
       args.consumer_secret,
@@ -22,21 +23,19 @@ const twitterEndpoint = {
         {
           grant_type: 'client_credentials',
         },
-        function(err, access_token) {
-          //console.log(access_token);
-          resolve(access_token);
+        (error, accessToken) => {
+          // console.log(access_token);
+          resolve(accessToken);
         }
       );
     })
-      .then(access_token => {
-        console.log(access_token);
+      .then(accessToken => {
         const options = {
           method: 'GET',
           headers: {
-            Authorization: 'Bearer ' + access_token,
+            Authorization: `Bearer ${accessToken}`,
           },
         };
-        console.log(options);
         return fetch(url, options)
           .then(res => res.json())
           .then(res => {
@@ -51,12 +50,12 @@ const twitterEndpoint = {
                 description: res[0].user.description,
                 followers_count: res[0].user.followers_count,
                 friends_count: res[0].user.friends_count,
-                favourites_count: res[9].user.favourites_count,
+                favourites_count: res[0].user.favourites_count,
                 posts: [],
               };
             }
 
-            for (let i = 0; i < res.length; i++) {
+            for (let i = 0; i < res.length; i += 1) {
               tweets.push({ tweet: res[i].text });
             }
 
@@ -64,13 +63,9 @@ const twitterEndpoint = {
 
             return listOfTweets;
           })
-          .catch(error => {
-            console.log(error);
-          });
+          .catch(error => error);
       })
-      .catch(function(err) {
-        return null;
-      });
+      .catch(error => error);
   },
 };
 

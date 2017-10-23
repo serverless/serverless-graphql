@@ -1,9 +1,9 @@
 import React from 'react';
 import { gql, graphql } from 'react-apollo';
 import PropTypes from 'prop-types';
-import Contributor from './Contributor';
+import User from './User';
 
-const ContributorList = ({ data: { loading, error, getTwitterFeed } }) => {
+const UserList = ({ data: { loading, error, getTwitterFeed } }) => {
   if (loading) {
     return <p>Loading ...</p>;
   }
@@ -11,21 +11,19 @@ const ContributorList = ({ data: { loading, error, getTwitterFeed } }) => {
     return <p>{error.message}</p>;
   }
 
-  console.log(getTwitterFeed);
-
   return (
     <div>
-      {getTwitterFeed.map(user => <Contributor key={user.name} user={user} />)}
+      <User key={getTwitterFeed.name} user={getTwitterFeed} />
     </div>
   );
 };
 
-ContributorList.propTypes = {
+UserList.propTypes = {
   data: PropTypes.any.isRequired, // eslint-disable-line
 };
 
-export const ContributorQuery = gql`
-  query ContributorQuery(
+export const UserQuery = gql`
+  query UserQuery(
     $handle: String!
     $consumer_key: String!
     $consumer_secret: String!
@@ -38,16 +36,23 @@ export const ContributorQuery = gql`
       name
       location
       screen_name
+      favourites_count
+      description
+      followers_count
+      friends_count
+      posts {
+        tweet
+      }
     }
   }
 `;
 
-export default graphql(ContributorQuery, {
+export default graphql(UserQuery, {
   options: () => ({
     variables: {
-      handle: 'nikgraf',
-      consumer_key: 'xxx',
-      consumer_secret: 'xxx',
+      handle: process.env.REACT_APP_HANDLE,
+      consumer_key: process.env.REACT_APP_CONSUMER_KEY,
+      consumer_secret: process.env.REACT_APP_SECRET_KEY,
     },
   }),
-})(ContributorList);
+})(UserList);
