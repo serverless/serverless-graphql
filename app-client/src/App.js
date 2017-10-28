@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ContributorList from './components/ContributorList';
+import UserList from './components/UserList';
 import logo from './logo.svg';
 import './App.css';
 
@@ -31,8 +31,8 @@ class App extends Component {
             Welcome to the world of <code>Serverless</code> and{' '}
             <code>GraphQL</code>.
           </p>
-          <p className="App-Contributor">
-            <ContributorList />
+          <p className="App-User">
+            <UserList />
           </p>
         </div>
       </ApolloProvider>
