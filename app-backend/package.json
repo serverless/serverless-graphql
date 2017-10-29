@@ -10,6 +10,8 @@
     "test": "jest",
     "start-client-local":
       "cd ../app-client/ && env-cmd ../config/security.env.local yarn start",
+    "start-client-prod":
+      "cd ../app-client/ && env-cmd ../config/security.env.prod yarn start",
     "start-server-lambda:offline":
       "env-cmd ../config/security.env.local serverless offline start",
     "deploy-server-lambda-prod": "serverless --stage=production deploy"

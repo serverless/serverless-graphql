@@ -78,7 +78,7 @@ yarn run deploy-server-lambda-prod
 ```
 
 2. Get your /graphql url after deployment and use it in config/security.env.prod 
-![deploy feedback](https://cloud.githubusercontent.com/assets/223045/19171420/6e271150-8bd1-11e6-9b49-e9fa88cac379.png)
+![deploy feedback](https://user-images.githubusercontent.com/1587005/32140859-eb61d1dc-bc2c-11e7-9ab4-23790ffa917a.png)
 
 
 ## Example Query

@@ -9,6 +9,7 @@ import {
   createNetworkInterface,
 } from 'react-apollo';
 
+console.log(process.env.REACT_APP_GRAPHQL_ENDPOINT);
 const networkInterface = createNetworkInterface({
   uri: process.env.REACT_APP_GRAPHQL_ENDPOINT,
 });
