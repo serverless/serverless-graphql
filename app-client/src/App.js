@@ -9,9 +9,8 @@ import {
   createNetworkInterface,
 } from 'react-apollo';
 
-//Todo: replace uri it with config variable. For local: use /graphql, For prod: use aws api gateway url
 const networkInterface = createNetworkInterface({
-  uri: 'http://localhost:4000/graphql',
+  uri: process.env.REACT_APP_GRAPHQL_ENDPOINT,
 });
 
 const client = new ApolloClient({
