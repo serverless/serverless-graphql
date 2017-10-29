@@ -69,13 +69,15 @@ sls config credentials --provider aws --key <your_aws_access_key> --secret <your
 ```
 
 
-Use live data from the development environment. You need to make sure you have access to your deployed lambda functions. This works only after you deployed it to production.
+You need to make sure you have access to your deployed lambda functions.
 
+1. Deploy Serverless Resources to your AWS Account
 ```
 cd app-backend
 yarn run deploy-server-lambda-prod
 ```
 
+2. Get your /graphql url after deployment and use it in config/security.env.prod 
 ![deploy feedback](https://cloud.githubusercontent.com/assets/223045/19171420/6e271150-8bd1-11e6-9b49-e9fa88cac379.png)
 
 
@@ -159,14 +161,11 @@ As the Serverless GraphQL Apollo community grows, we'd like to keep track of who
 
 Currently **officially** using Serverless GraphQL Apollo :
 
-1. Serverless (@nikgraf)
-2. Glassdoor (@sid88in)
+1. Serverless [@nikgraf](https://github.com/nikgraf)
+2. Glassdoor [@sid88in](https://github.com/sid88in)
 
-![happy]()
+## Feedback
 
+![](https://giphy.com/gifs/dog-confused-i-have-no-idea-what-im-doing-xDQ3Oql1BN54c)
 
-## Send us your feedback
-
-[Feeback](https://giphy.com/gifs/dog-confused-i-have-no-idea-what-im-doing-xDQ3Oql1BN54c)
-
-Send your feedback at: [@nikgraf](https://twitter.com/nikgraf), [@sidg_sid](https://twitter.com/sidg_sid)
+Send your questions or feedback at: [@nikgraf](https://twitter.com/nikgraf), [@sidg_sid](https://twitter.com/sidg_sid)
