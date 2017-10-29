@@ -8,7 +8,9 @@
       "prettier --write \"{app-backend,app-client/src}/**/*.{js,css,json}\"",
     "prettier-check":
       "prettier --list-different \"{app-backend,app-client/src}/**/*.{js,css,json}\"",
-    "test": "yarn run lint && yarn run prettier-check"
+    "test": "yarn run lint && yarn run prettier-check",
+    "install-dependencies":
+      "yarn install && cd app-backend && yarn install && cd ../app-client && yarn install"
   },
   "lint-staged": {
     "*.{js,json,css}": ["prettier --write", "git add"]
