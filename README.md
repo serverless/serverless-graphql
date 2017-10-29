@@ -19,7 +19,7 @@ This example uses the following technologies:
 
 ![serverless application architecture v2](https://user-images.githubusercontent.com/1587005/30748634-c155b978-9f65-11e7-99d1-ebe7dafd0d6b.png)
 
-## Setup
+## Quick Setup
 
 You need to have Node 6 or higher installed.
 
@@ -28,44 +28,46 @@ npm install -g serverless
 npm install -g yarn
 ```
 
+Install Dependencies.
+```
+yarn install-dependencies
+```
+
+## Quick Start (Serverless Offline)
+
+1. Start Backend
+```
+cd app-backend
+yarn run start-server-lambda:offline
+```
+
+2. Start FrontEnd
+
+```
+cd app-backend
+yarn run start-client-local
+```
+
+3. Start GraphiQL
+
+```
+http://localhost:4000/graphiql
+```
+
+4. Start Client
+
+```
+http://localhost:3000
+```
+
+## Setup for Production
+
 Configure your AWS keys. Here you can find a [2min walkthrough](https://www.youtube.com/watch?v=mRkUnA3mEt4) how to do retrieve the keys.
 
 ```
 sls config credentials --provider aws --key <your_aws_access_key> --secret <your_aws_secret_key>
 ```
 
-Install Dependencies (FrontEnd and BackEnd)
-```
-cd app-backend
-yarn install
-cd ../app-client
-yarn install
-```
-
-Test Locally - Use Apollo Lambda Server
-```
-# Start Server http://localhost:4000/graphql
-cd app-backend
-yarn run start-server-lambda:offline
-```
-
-## Start Client
-
-```
-# Start Client http://localhost:3000
-cd app-client
-yarn start
-```
-
-OR
-
-```
-# Start Client http://localhost:3000
-cd app-backend
-yarn run start-client-local
-```
-
-## Setup for Production
 
 Use live data from the development environment. You need to make sure you have access to your deployed lambda functions. This works only after you deployed it to production.
 
@@ -75,6 +77,51 @@ yarn run deploy-server-lambda-prod
 ```
 
 ![deploy feedback](https://cloud.githubusercontent.com/assets/223045/19171420/6e271150-8bd1-11e6-9b49-e9fa88cac379.png)
+
+
+## Example Query
+
+Introspection Query:
+
+```
+{
+  __type(name: "Tweets") {
+    name
+    kind
+    fields{
+      name
+      type{
+        name
+        kind
+        ofType{
+          name
+          kind
+        }
+      }
+    }
+  }
+}
+```
+
+Sample Query:
+
+note: consumer_key and consumer_secret are present in config/security.env.local
+```
+{
+  getTwitterFeed(handle:"sidg_sid", consumer_key:"xxx", consumer_secret:"xxx"){
+    name
+    screen_name
+    location
+    description
+    followers_count
+    friends_count
+    favourites_count
+    posts{
+      tweet
+    }
+  }
+}
+```
 
 ## Directory Layout
 
@@ -102,15 +149,24 @@ yarn run deploy-server-lambda-prod
 │   ├── /security.env.prod           # production config
 ```
 
-## Multiple package.json
+## Webpack and Babel
 
-In order to keep the total amount of code uploaded to AWS Lambda small the `foundation/app-server` directory containing the Serverless service has it's own `package.json`. This speeds up uploading and also should reduce the cold start time of Lambda functions. You don't have to run `yarn install` manually at any point. It will only happen during deploy, but you need make sure every library you are consuming in your GraphQL endpoint is added as a dependency there.
+Todo
 
-### `app-client/package.json`
+## Who uses Serverless GraphQL Apollo?
 
-- dependencies: dependencies used by the front-end
-- devDependencies: dependencies used to package the front-end application & running the local environment
+As the Serverless GraphQL Apollo community grows, we'd like to keep track of who is using the platform. Please send a PR with your company name and @githubhandle if you may.
 
-### `app-backend/package.json`
+Currently **officially** using Serverless GraphQL Apollo :
 
-- dependencies: dependencies used on AWS Lambda
+1. Serverless (@nikgraf)
+2. Glassdoor (@sid88in)
+
+![happy]()
+
+
+## Send us your feedback
+
+[Feeback](https://giphy.com/gifs/dog-confused-i-have-no-idea-what-im-doing-xDQ3Oql1BN54c)
+
+Send your feedback at: [@nikgraf](https://twitter.com/nikgraf), [@sidg_sid](https://twitter.com/sidg_sid)
