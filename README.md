@@ -17,7 +17,7 @@ This example uses the following technologies:
 
 ## System Architecture
 
-![serverless application architecture v2](https://user-images.githubusercontent.com/1587005/30748634-c155b978-9f65-11e7-99d1-ebe7dafd0d6b.png)
+![serverless application architecture v2](https://user-images.githubusercontent.com/1587005/32157652-fd0b315a-bd01-11e7-96fc-aa635b7a1448.png)
 
 ## Quick Setup
 
@@ -166,6 +166,6 @@ Currently **officially** using Serverless GraphQL Apollo :
 
 ## Feedback
 
-![](https://giphy.com/gifs/dog-confused-i-have-no-idea-what-im-doing-xDQ3Oql1BN54c)
+![](http://www.reactiongifs.com/wp-content/uploads/2013/11/I-have-no-idea-what-I-am-doing.gif)
 
 Send your questions or feedback at: [@nikgraf](https://twitter.com/nikgraf), [@sidg_sid](https://twitter.com/sidg_sid)
