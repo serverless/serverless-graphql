@@ -4,7 +4,8 @@ import { makeExecutableSchema } from 'graphql-tools';
 import { schema } from './schema';
 import { resolvers } from './resolvers';
 
-const server = require('apollo-server-lambda');
+const { graphqlLambda, graphiqlLambda } = require('apollo-server-lambda');
+const { lambdaPlayground } = require('graphql-playground-middleware');
 
 const myGraphQLSchema = makeExecutableSchema({
   typeDefs: schema,
@@ -19,13 +20,20 @@ exports.graphqlHandler = function graphqlHandler(event, context, callback) {
     callback(error, output);
   }
 
-  const handler = server.graphqlLambda({ schema: myGraphQLSchema });
+  const handler = graphqlLambda({ schema: myGraphQLSchema });
   return handler(event, context, callbackFilter);
 };
 
 // for local endpointURL is /graphql and for prod it is /stage/graphql
-exports.graphiqlHandler = server.graphiqlLambda({
+exports.graphiqlHandler = graphiqlLambda({
   endpointURL: process.env.REACT_APP_GRAPHQL_ENDPOINT
+    ? process.env.REACT_APP_GRAPHQL_ENDPOINT
+    : '/production/graphql',
+});
+
+// for local endpointURL is /graphql and for prod it is /stage/graphql
+exports.playgroundHandler = lambdaPlayground({
+  endpoint: process.env.REACT_APP_GRAPHQL_ENDPOINT
     ? process.env.REACT_APP_GRAPHQL_ENDPOINT
     : '/production/graphql',
 });

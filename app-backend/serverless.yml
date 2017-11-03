@@ -27,6 +27,13 @@ functions:
         path: graphql
         method: post
         cors: true
+  playground:
+    handler: handler.playgroundHandler
+    events:
+    - http:
+        path: playground
+        method: get
+        cors: true
   graphiql:
     handler: handler.graphiqlHandler
     events:
