@@ -151,6 +151,11 @@ note: consumer_key and consumer_secret are present in config/security.env.local
 │   ├── /security.env.prod           # production config
 ```
 
+## Usage of GraphQL Playground
+To use the GraphQL Playground, open `/playground` of your Serverless service. With serverless offline it is `http://localhost:4000/playground`.
+![playground](https://i.imgur.com/QPbIstr.png)
+
+
 ## Webpack and Babel
 
 Todo
