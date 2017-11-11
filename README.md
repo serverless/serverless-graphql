@@ -7,6 +7,8 @@ This example uses the following technologies:
 - Frontend
 	- Apollo Client
 	- React
+	- GraphiQL
+	- GraphQL Playground
 
 - Backend
 	- Serverless
@@ -38,14 +40,14 @@ yarn install-dependencies
 1. Start Backend
 ```
 cd app-backend
-yarn run start-server-lambda:offline
+yarn start-server-lambda:offline
 ```
 
 2. Start FrontEnd
 
 ```
 cd app-backend
-yarn run start-client-local
+yarn start-client-local
 ```
 
 3. Start GraphiQL
@@ -74,11 +76,11 @@ You need to make sure you have access to your deployed lambda functions.
 1. Deploy Serverless Resources to your AWS Account
 ```
 cd app-backend
-yarn run deploy-server-lambda-prod
+yarn deploy-server-lambda-prod
 ```
 
 2. Get your /graphql url after deployment and use it in config/security.env.prod 
-![deploy feedback](https://user-images.githubusercontent.com/1587005/32140859-eb61d1dc-bc2c-11e7-9ab4-23790ffa917a.png)
+![deploy feedback](https://user-images.githubusercontent.com/1587005/32410402-351ff868-c17c-11e7-9bfb-e39f7e8c14a3.png)
 
 
 ## Example Query
@@ -151,14 +153,21 @@ note: consumer_key and consumer_secret are present in config/security.env.local
 │   ├── /security.env.prod           # production config
 ```
 
+## Usage of GraphiQL
+To use the GraphiQL, open `/graphiql` of your Serverless service. With serverless offline it is `http://localhost:4000/graphiql`.
+![graphiql](https://i.imgur.com/QPbIstr.png)
+
 ## Usage of GraphQL Playground
 To use the GraphQL Playground, open `/playground` of your Serverless service. With serverless offline it is `http://localhost:4000/playground`.
 ![playground](https://i.imgur.com/QPbIstr.png)
 
 
-## Webpack and Babel
+## Plugins
 
-Todo
+![webpack](https://github.com/serverless-heaven/serverless-webpack)
+![offline](https://github.com/dherault/serverless-offline)
+![prettier](https://github.com/prettier/prettier)
+
 
 ## Who uses Serverless GraphQL Apollo?
 
