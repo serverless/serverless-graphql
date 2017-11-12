@@ -9,30 +9,23 @@
   "scripts": {
     "test": "jest",
     "start-client-local":
-      "cd ../app-client/ && env-cmd ../config/security.env.local yarn start",
+      "cd ../../app-client/ && env-cmd ../config/security.env.local yarn start",
     "start-client-prod":
-      "cd ../app-client/ && env-cmd ../config/security.env.prod yarn start",
-    "rest-api-start-server-lambda:offline":
-      "cd rest-api && env-cmd ../../config/security.env.local serverless offline start",
-    "dynamodb-start-server-lambda:offline":
-      "cd dynamodb && serverless dynamodb install && env-cmd ../../config/security.env.local serverless offline start",
-    "rest-api-deploy-server-lambda-prod":
-      "cd rest-api && serverless --stage=production deploy"
+      "cd ../../app-client/ && env-cmd ../config/security.env.prod yarn start",
+    "restapi-start-server-lambda:offline":
+      "env-cmd ../../config/security.env.local serverless offline start",
+    "restapi-deploy-server-lambda-prod": "serverless --stage=production deploy"
   },
   "dependencies": {
     "apollo-server-lambda": "1.2.0",
     "apollo-server-module-graphiql": "1.2.0",
     "babel-polyfill": "^6.16.0",
     "babel-runtime": "^6.25.0",
-    "faker": "^4.1.0",
     "graphql": "^0.10.5",
     "graphql-playground-middleware": "^1.1.0",
     "graphql-tools": "2.7.2",
-    "jsonfile": "^4.0.0",
     "node-fetch": "^1.7.3",
-    "oauth": "^0.9.15",
-    "serverless-dynamodb-client": "^0.0.2",
-    "serverless-dynamodb-local": "^0.2.26"
+    "oauth": "^0.9.15"
   },
   "devDependencies": {
     "aws-sdk": "^2.4.8",

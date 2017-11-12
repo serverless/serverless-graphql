@@ -1,8 +1,8 @@
 const faker = require('faker');
 const jsonfile = require('jsonfile');
 
-let numRecords = 100;
-let numPosts = 10;
+let numRecords = 50;
+let numPosts = 5;
 
 data = [];
 
@@ -30,7 +30,7 @@ for (let i = 0; i < numRecords; i++) {
   data.push(record);
 }
 
-const file = 'fake-test-users.json';
+const file = 'users.json';
 
 jsonfile.writeFile(file, data, function(err) {
   console.error(err);

@@ -1,0 +1,54 @@
+{
+  "name": "serverless-graphql-apollo",
+  "version": "0.0.0",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:serverless/serverless-graphql-apollo.git"
+  },
+  "scripts": {
+    "test": "jest",
+    "start-client-local":
+      "cd ../../app-client/ && env-cmd ../config/security.env.local yarn start",
+    "start-client-prod":
+      "cd ../../app-client/ && env-cmd ../config/security.env.prod yarn start",
+    "dynamodb-generate-seed-data": "cd seed-data && node create_seed_data.js",
+    "dynamodb-insert-seed-data-prod":
+      "cd seed-data && node insert_seed_data_prod.js",
+    "dynamodb-start-server-lambda:offline":
+      "yarn dynamodb-generate-seed-data && serverless dynamodb install && env-cmd ../../config/security.env.local serverless offline start",
+    "dynamodb-deploy-server-lambda-prod":
+      "yarn dynamodb-generate-seed-data && serverless --stage=production deploy && yarn dynamodb-insert-seed-data-prod"
+  },
+  "dependencies": {
+    "apollo-server-lambda": "1.2.0",
+    "apollo-server-module-graphiql": "1.2.0",
+    "babel-polyfill": "^6.16.0",
+    "babel-runtime": "^6.25.0",
+    "graphql": "^0.10.5",
+    "graphql-playground-middleware": "^1.1.0",
+    "graphql-tools": "2.7.2"
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.4.8",
+    "babel-cli": "^6.16.0",
+    "babel-core": "^6.17.0",
+    "babel-loader": "^6.4.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.16.0",
+    "babel-preset-stage-0": "^6.16.0",
+    "body-parser": "^1.15.2",
+    "cors": "2.8.4",
+    "env-cmd": "^5.0.0",
+    "imports-loader": "^0.7.1",
+    "jest": "^21.2.1",
+    "serverless-offline": "^3.15.3",
+    "serverless-webpack": "^2.2.0",
+    "webpack": "^2.2.0",
+    "webpack-node-externals": "^1.6.0",
+    "serverless-dynamodb-client": "^0.0.2",
+    "serverless-dynamodb-local": "^0.2.26",
+    "jsonfile": "^4.0.0",
+    "faker": "^4.1.0"
+  }
+}

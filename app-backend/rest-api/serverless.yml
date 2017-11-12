@@ -17,7 +17,7 @@ custom:
     port: 4000
     babelOptions:
       presets: ["es2015", "stage-2"]
-  webpack: ../webpack.config.js
+  webpack: webpack.config.js
   webpackIncludeModules: true
 
 functions:
