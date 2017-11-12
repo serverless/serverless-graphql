@@ -14,6 +14,8 @@
       "cd ../app-client/ && env-cmd ../config/security.env.prod yarn start",
     "rest-api-start-server-lambda:offline":
       "cd rest-api && env-cmd ../../config/security.env.local serverless offline start",
+    "dynamodb-start-server-lambda:offline":
+      "cd dynamodb && env-cmd ../../config/security.env.local serverless offline start",
     "rest-api-deploy-server-lambda-prod":
       "cd rest-api && serverless --stage=production deploy"
   },
@@ -27,6 +29,7 @@
     "graphql-tools": "2.7.2",
     "node-fetch": "^1.7.3",
     "oauth": "^0.9.15",
+    "serverless-dynamodb-client": "^0.0.2",
     "serverless-dynamodb-local": "^0.2.26"
   },
   "devDependencies": {

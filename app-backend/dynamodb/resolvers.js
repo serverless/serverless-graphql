@@ -6,8 +6,6 @@ require('babel-polyfill');
 
 /* eslint comma-dangle: ["error", "always"] */
 
-const rawClient = dynamodb.raw; // returns an instance of new AWS.DynamoDB()
-
 const docClient = dynamodb.doc; // return an instance of new AWS.DynamoDB.DocumentClient()
 
 // add to handler.js
@@ -24,20 +22,44 @@ const promisify = foo =>
 
 const twitterEndpoint = {
   getRawTweets(args) {
-    promisify(callback =>
-      rawClient.get(
+    return promisify(callback =>
+      docClient.query(
         {
           TableName: 'users',
-          Key: '@sidg_sid',
+          KeyConditionExpression: 'screen_name = :v1',
+          ExpressionAttributeValues: {
+            ':v1': args.handle,
+          },
         },
         callback
       )
     ).then(result => {
-      console.log(result);
+      const tweets = [];
+      let listOfTweets;
+
+      if (result.Items.length >= 1) {
+        listOfTweets = {
+          name: result.Items[0].name,
+          screen_name: result.Items[0].screen_name,
+          location: result.Items[0].location,
+          description: result.Items[0].description,
+          followers_count: result.Items[0].followers_count,
+          friends_count: result.Items[0].friends_count,
+          favourites_count: result.Items[0].favourites_count,
+          posts: [],
+        };
+      }
+
+      for (let i = 0; i < result.Items[0].posts.length; i += 1) {
+        tweets.push({ tweet: result.Items[0].posts[i].tweet });
+      }
+
+      listOfTweets.posts = tweets;
+
+      return listOfTweets;
     });
   },
 };
-
 // eslint-disable-next-line import/prefer-default-export
 export const resolvers = {
   Query: {
