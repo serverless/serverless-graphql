@@ -3,18 +3,14 @@ import UserList from './components/UserList';
 import logo from './logo.svg';
 import './App.css';
 
-import {
-  ApolloClient,
-  ApolloProvider,
-  createNetworkInterface,
-} from 'react-apollo';
-
-const networkInterface = createNetworkInterface({
-  uri: process.env.REACT_APP_GRAPHQL_ENDPOINT,
-});
+import { ApolloClient } from 'apollo-client';
+import { ApolloProvider } from 'react-apollo';
+import { HttpLink } from 'apollo-link-http';
+import { InMemoryCache } from 'apollo-cache-inmemory';
 
 const client = new ApolloClient({
-  networkInterface,
+  link: new HttpLink({ uri: process.env.REACT_APP_GRAPHQL_ENDPOINT }),
+  cache: new InMemoryCache(),
 });
 
 class App extends Component {
