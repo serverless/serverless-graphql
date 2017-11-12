@@ -1,6 +1,7 @@
 .DS_Store
 node_modules
 npm-debug.log
+users.json
 
 # serverless zip
 .serverless

@@ -9,12 +9,16 @@
   "scripts": {
     "test": "jest",
     "start-client-local":
-      "cd ../app-client/ && env-cmd ../config/security.env.local yarn start",
+      "cd ../../app-client/ && env-cmd ../config/security.env.local yarn start",
     "start-client-prod":
-      "cd ../app-client/ && env-cmd ../config/security.env.prod yarn start",
-    "start-server-lambda:offline":
-      "env-cmd ../config/security.env.local serverless offline start",
-    "deploy-server-lambda-prod": "serverless --stage=production deploy"
+      "cd ../../app-client/ && env-cmd ../config/security.env.prod yarn start",
+    "dynamodb-generate-seed-data": "cd seed-data && node create_seed_data.js",
+    "dynamodb-insert-seed-data-prod":
+      "cd seed-data && node insert_seed_data_prod.js",
+    "dynamodb-start-server-lambda:offline":
+      "yarn dynamodb-generate-seed-data && serverless dynamodb install && env-cmd ../../config/security.env.local serverless offline start",
+    "dynamodb-deploy-server-lambda-prod":
+      "yarn dynamodb-generate-seed-data && serverless --stage=production deploy && yarn dynamodb-insert-seed-data-prod"
   },
   "dependencies": {
     "apollo-server-lambda": "1.2.0",
@@ -24,11 +28,9 @@
     "graphql": "^0.10.5",
     "graphql-playground-middleware": "^1.1.0",
     "graphql-tools": "2.7.2",
-    "node-fetch": "^1.7.3",
-    "oauth": "^0.9.15"
+    "serverless-dynamodb-client": "^0.0.2"
   },
   "devDependencies": {
-    "aws-sdk": "^2.4.8",
     "babel-cli": "^6.16.0",
     "babel-core": "^6.17.0",
     "babel-loader": "^6.4.0",
@@ -43,6 +45,10 @@
     "serverless-offline": "^3.15.3",
     "serverless-webpack": "^2.2.0",
     "webpack": "^2.2.0",
-    "webpack-node-externals": "^1.6.0"
+    "webpack-node-externals": "^1.6.0",
+    "serverless-dynamodb-local": "^0.2.26",
+    "jsonfile": "^4.0.0",
+    "faker": "^4.1.0",
+    "aws-sdk": "^2.4.8"
   }
 }
