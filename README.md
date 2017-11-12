@@ -56,10 +56,10 @@ yarn start-client-local
 http://localhost:4000/graphiql
 ```
 
-4. Start Client
+4. Start GraphQL Playground
 
 ```
-http://localhost:3000
+http://localhost:4000/playground
 ```
 
 ## Setup for Production
@@ -155,18 +155,18 @@ note: consumer_key and consumer_secret are present in config/security.env.local
 
 ## Usage of GraphiQL
 To use the GraphiQL, open `/graphiql` of your Serverless service. With serverless offline it is `http://localhost:4000/graphiql`.
-![graphiql](https://i.imgur.com/QPbIstr.png)
+![graphiql](https://user-images.githubusercontent.com/1587005/32695300-943e355e-c70c-11e7-9fac-2c9324a242c4.gif)
 
 ## Usage of GraphQL Playground
 To use the GraphQL Playground, open `/playground` of your Serverless service. With serverless offline it is `http://localhost:4000/playground`.
-![playground](https://i.imgur.com/QPbIstr.png)
+![playground](https://user-images.githubusercontent.com/1587005/32695336-96dbbe16-c70d-11e7-96b9-c7ef4e9ba32c.gif)
 
 
 ## Plugins
 
-![webpack](https://github.com/serverless-heaven/serverless-webpack)
-![offline](https://github.com/dherault/serverless-offline)
-![prettier](https://github.com/prettier/prettier)
+- ![webpack](https://github.com/serverless-heaven/serverless-webpack)
+- ![offline](https://github.com/dherault/serverless-offline)
+- ![prettier](https://github.com/prettier/prettier)
 
 
 ## Who uses Serverless GraphQL Apollo?
