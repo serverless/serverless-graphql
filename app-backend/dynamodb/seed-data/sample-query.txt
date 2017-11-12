@@ -1,0 +1,11 @@
+var params = {
+    TableName: 'users',
+    KeyConditionExpression: 'screen_name = :v1',
+    ExpressionAttributeValues: {
+      ':v1': '@sidg_sid'
+    }
+};
+docClient.query(params, function(err, data) {
+    if (err) ppJson(err); // an error occurred
+    else ppJson(data); // successful response
+});

@@ -20,6 +20,17 @@ custom:
       presets: ["es2015", "stage-2"]
   webpack: ../webpack.config.js
   webpackIncludeModules: true
+  dynamodb:
+    start:
+      port: 8010
+      inMemory: true
+      migrate: true
+      seed: true
+    seed:
+      test:
+        sources:
+          - table: users
+            sources: [seed-data/fake-test-users.json]
 
 functions:
   graphql:
@@ -51,19 +62,13 @@ resources:
       Properties:
         KeySchema:
           -
-            AttributeName: user_id
+            AttributeName: screen_name
             KeyType: HASH
-          -
-            AttributeName: day
-            KeyType: RANGE
         AttributeDefinitions:
           -
-            AttributeName: user_id
-            AttributeType: N
-          -
-            AttributeName: day
+            AttributeName: screen_name
             AttributeType: S
         ProvisionedThroughput:
           ReadCapacityUnits: 10
           WriteCapacityUnits: 10
-        TableName: 'user-metadata'
+        TableName: 'users'
