@@ -1,7 +1,7 @@
 'use strict'; // eslint-disable-line strict,lines-around-directive
 
 import { makeExecutableSchema } from 'graphql-tools';
-import { schema } from '../rest-api/schema';
+import { schema } from './schema';
 import { resolvers } from './resolvers';
 
 const { graphqlLambda, graphiqlLambda } = require('apollo-server-lambda');
