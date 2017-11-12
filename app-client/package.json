@@ -5,7 +5,7 @@
   "dependencies": {
     "prop-types": "^15.6.0",
     "react": "^15.6.2",
-    "react-apollo": "^0.13.2",
+    "react-apollo": "2.0.1",
     "react-dom": "^15.6.2",
     "react-scripts": "1.0.13"
   },
