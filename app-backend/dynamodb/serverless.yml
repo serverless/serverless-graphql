@@ -1,0 +1,69 @@
+service: serverless-graphql-apollo
+
+frameworkVersion: ">=1.21.0 <2.0.0"
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  stage: dev
+  region: us-east-1
+
+plugins:
+  - serverless-webpack
+  - serverless-dynamodb-local
+  - serverless-offline
+
+custom:
+  serverless-offline:
+    port: 4000
+    babelOptions:
+      presets: ["es2015", "stage-2"]
+  webpack: ../webpack.config.js
+  webpackIncludeModules: true
+
+functions:
+  graphql:
+    handler: handler.graphqlHandler
+    events:
+    - http:
+        path: graphql
+        method: post
+        cors: true
+  playground:
+    handler: handler.playgroundHandler
+    events:
+    - http:
+        path: playground
+        method: get
+        cors: true
+  graphiql:
+    handler: handler.graphiqlHandler
+    events:
+    - http:
+        path: graphiql
+        method: get
+        cors: true
+
+resources:
+  Resources:
+    UserTable:
+      Type: 'AWS::DynamoDB::Table'
+      Properties:
+        KeySchema:
+          -
+            AttributeName: user_id
+            KeyType: HASH
+          -
+            AttributeName: day
+            KeyType: RANGE
+        AttributeDefinitions:
+          -
+            AttributeName: user_id
+            AttributeType: N
+          -
+            AttributeName: day
+            AttributeType: S
+        ProvisionedThroughput:
+          ReadCapacityUnits: 10
+          WriteCapacityUnits: 10
+        TableName: 'user-metadata'
