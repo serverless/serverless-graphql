@@ -15,7 +15,7 @@
     "rest-api-start-server-lambda:offline":
       "cd rest-api && env-cmd ../../config/security.env.local serverless offline start",
     "dynamodb-start-server-lambda:offline":
-      "cd dynamodb && env-cmd ../../config/security.env.local serverless offline start",
+      "cd dynamodb && serverless dynamodb install && env-cmd ../../config/security.env.local serverless offline start",
     "rest-api-deploy-server-lambda-prod":
       "cd rest-api && serverless --stage=production deploy"
   },
@@ -24,9 +24,11 @@
     "apollo-server-module-graphiql": "1.2.0",
     "babel-polyfill": "^6.16.0",
     "babel-runtime": "^6.25.0",
+    "faker": "^4.1.0",
     "graphql": "^0.10.5",
     "graphql-playground-middleware": "^1.1.0",
     "graphql-tools": "2.7.2",
+    "jsonfile": "^4.0.0",
     "node-fetch": "^1.7.3",
     "oauth": "^0.9.15",
     "serverless-dynamodb-client": "^0.0.2",

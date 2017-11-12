@@ -2,7 +2,7 @@ var params = {
     TableName: 'users',
     KeyConditionExpression: 'screen_name = :v1',
     ExpressionAttributeValues: {
-      ':v1': '@sidg_sid'
+      ':v1': 'screen_name'  //generated screename in fake-test-users.json
     }
 };
 docClient.query(params, function(err, data) {
