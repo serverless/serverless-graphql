@@ -22,7 +22,7 @@ custom:
   webpackIncludeModules: true
   dynamodb:
     start:
-      port: 8010
+      port: 8000
       inMemory: true
       migrate: true
       seed: true

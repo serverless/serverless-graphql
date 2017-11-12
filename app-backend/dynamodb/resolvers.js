@@ -1,10 +1,14 @@
 // add to handler.js
 const AWS = require('aws-sdk');
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
+const dynamodb = require('serverless-dynamodb-client');
 
 require('babel-polyfill');
 
 /* eslint comma-dangle: ["error", "always"] */
+
+const rawClient = dynamodb.raw; // returns an instance of new AWS.DynamoDB()
+
+const docClient = dynamodb.doc; // return an instance of new AWS.DynamoDB.DocumentClient()
 
 // add to handler.js
 const promisify = foo =>
@@ -21,21 +25,16 @@ const promisify = foo =>
 const twitterEndpoint = {
   getRawTweets(args) {
     promisify(callback =>
-      dynamoDb.get(
+      rawClient.get(
         {
-          TableName: process.env.DYNAMODB_TABLE,
-          Key: { firstName },
+          TableName: 'users',
+          Key: '@sidg_sid',
         },
         callback
       )
-    )
-      .then(result => {
-        if (!result.Item) {
-          return firstName;
-        }
-        return result.Item.nickname;
-      })
-      .then(name => `Hello, ${name}.`);
+    ).then(result => {
+      console.log(result);
+    });
   },
 };
 
