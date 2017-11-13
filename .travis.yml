@@ -4,8 +4,9 @@ node_js:
   - '8'
 script:
   - yarn run install-dependencies
-  - cd app-backend && yarn run test
-  - cd ../app-client && yarn run test
+  - cd app-backend/dynamodb && yarn run test
+  - cd ../rest-api && yarn run test
+  - cd ../../app-client && yarn run test
   - cd ../ && yarn run test
 notifications:
   email: false
