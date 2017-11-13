@@ -19,7 +19,5 @@ it('render user name', () => {
     ],
   };
   const wrapper = shallow(<User user={user} />);
-  expect(wrapper.text()).toBe(
-    'Name: sid Location: SF @Handle: sidg_sid About me: follow the universe Favourite Count: 200 Followers Count: 300 Friends Count: 100 Tweets :  this is my first tweet'
-  );
+  expect(wrapper.html()).toContain(user.description);
 });

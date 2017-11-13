@@ -1,5 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: 'Lato', sans-serif;
+  background: rgb(226, 229, 231);
+  color: #14171a;
 }
