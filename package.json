@@ -9,7 +9,7 @@
     "prettier-check":
       "prettier --list-different \"{app-backend,app-client/src}/**/*.{js,css,json}\"",
     "test": "yarn run lint && yarn run prettier-check",
-    "install-dependencies":
+    "postinstall":
       "yarn install && cd app-backend/dynamodb && yarn install && cd ../rest-api && yarn install && cd ../../app-client && yarn install"
   },
   "lint-staged": {

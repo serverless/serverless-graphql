@@ -40,7 +40,7 @@ npm install -g yarn
 
 Install Dependencies.
 ```
-yarn install-dependencies
+yarn install
 ```
 
 ## Quick Start (Serverless Offline)
