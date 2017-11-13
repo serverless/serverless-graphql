@@ -1,13 +1,13 @@
 const fetch = require('node-fetch');
-const OAuth2 = require('OAuth').OAuth2;
+const { OAuth2 } = require('oauth');
 
 require('babel-polyfill');
 
-/* eslint comma-dangle: ["error", "always"] */
-
 const twitterEndpoint = {
   async getRawTweets(args) {
-    const url = `https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=${args.handle}`;
+    const url = `https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=${
+      args.handle
+    }`;
     const oauth2 = new OAuth2(
       args.consumer_key,
       args.consumer_secret,
@@ -17,7 +17,7 @@ const twitterEndpoint = {
       null
     );
 
-    return await new Promise((resolve, reject) => {
+    return new Promise(resolve => {
       oauth2.getOAuthAccessToken(
         '',
         {

@@ -12,7 +12,9 @@ function User({ user }) {
       <div>Followers Count: {user.followers_count} </div>
       <div>Friends Count: {user.friends_count} </div>
       <div>Tweets : </div>
-      <ol>{user.posts.map(name => <li> {name.tweet}</li>)}</ol>
+      <ol>
+        {user.posts.map((name, index) => <li key={index}> {name.tweet}</li>)}
+      </ol>
     </div>
   );
 }

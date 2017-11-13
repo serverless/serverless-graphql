@@ -1,10 +1,7 @@
 // add to handler.js
-const AWS = require('aws-sdk');
 const dynamodb = require('serverless-dynamodb-client');
 
 require('babel-polyfill');
-
-/* eslint comma-dangle: ["error", "always"] */
 
 const docClient = dynamodb.doc; // return an instance of new AWS.DynamoDB.DocumentClient()
 
