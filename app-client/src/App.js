@@ -26,9 +26,9 @@ class App extends Component {
             Welcome to the world of <code>Serverless</code> and{' '}
             <code>GraphQL</code>.
           </p>
-          <p className="App-User">
+          <div className="App-User">
             <UserList />
-          </p>
+          </div>
         </div>
       </ApolloProvider>
     );
