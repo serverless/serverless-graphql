@@ -1,5 +1,5 @@
 const fetch = require('node-fetch');
-const OAuth2 = require('OAuth').OAuth2;
+const { OAuth2 } = require('oauth');
 
 require('babel-polyfill');
 
@@ -19,7 +19,7 @@ const twitterEndpoint = {
       null
     );
 
-    return await new Promise((resolve, reject) => {
+    return new Promise(resolve => {
       oauth2.getOAuthAccessToken(
         '',
         {

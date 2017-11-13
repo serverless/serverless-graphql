@@ -1,5 +1,4 @@
 // add to handler.js
-const AWS = require('aws-sdk');
 const dynamodb = require('serverless-dynamodb-client');
 
 require('babel-polyfill');

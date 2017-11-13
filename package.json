@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "precommit": "lint-staged",
-    "lint": "eslint app-backend/*.js app-client/src/**/*.js",
+    "lint": "eslint app-backend/**/*.js app-client/src/**/*.js",
     "prettier":
       "prettier --write \"{app-backend,app-client/src}/**/*.{js,css,json}\"",
     "prettier-check":

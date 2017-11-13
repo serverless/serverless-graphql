@@ -16,6 +16,7 @@
     "prettier/prettier": "error",
     "react/jsx-filename-extension": "off",
     "function-paren-newline": "off",
-    "comma-dangle": "off"
+    "comma-dangle": "off",
+    "arrow-parens": "off"
   }
 }
