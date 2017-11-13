@@ -15,6 +15,7 @@
   "rules": {
     "prettier/prettier": "error",
     "react/jsx-filename-extension": "off",
+    "react/no-array-index-key": "off",
     "function-paren-newline": "off",
     "comma-dangle": "off",
     "arrow-parens": "off"

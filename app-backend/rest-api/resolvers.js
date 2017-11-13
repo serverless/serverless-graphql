@@ -3,8 +3,6 @@ const { OAuth2 } = require('oauth');
 
 require('babel-polyfill');
 
-/* eslint comma-dangle: ["error", "always"] */
-
 const twitterEndpoint = {
   async getRawTweets(args) {
     const url = `https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=${
