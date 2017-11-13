@@ -32,6 +32,24 @@ for (let i = 0; i < numRecords; i++) {
 
 const file = 'users.json';
 
+//insert 1 static record for quick onboarding:
+record = {
+  name: 'Leonardo di Caprio',
+  screen_name: 'LeoDiCaprio',
+  location: 'LA',
+  description: 'Actor',
+  followers_count: 14050000,
+  friends_count: 1000,
+  favourites_count: 400,
+  posts: [
+    {
+      tweet: 'today will be a good day!',
+    },
+  ],
+};
+
+data.push(record);
+
 jsonfile.writeFile(file, data, function(err) {
   console.error(err);
 });

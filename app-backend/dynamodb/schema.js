@@ -16,7 +16,7 @@ type Tweet {
 
 #returns list of Tweets
 type Query {
-  getTwitterFeed(handle: String!) : Tweets
+  getTwitterFeed(handle: String!, consumer_key: String, consumer_secret: String) : Tweets
 }`;
 
 // eslint-disable-next-line import/prefer-default-export
