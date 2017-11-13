@@ -7,7 +7,9 @@ require('babel-polyfill');
 
 const twitterEndpoint = {
   async getRawTweets(args) {
-    const url = `https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=${args.handle}`;
+    const url = `https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=${
+      args.handle
+    }`;
     const oauth2 = new OAuth2(
       args.consumer_key,
       args.consumer_secret,

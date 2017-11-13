@@ -1,6 +1,7 @@
 {
   "extends": [
     "prettier",
+    "prettier/react",
     "airbnb",
     "plugin:jest/recommended"
   ],
@@ -13,6 +14,8 @@
   },
   "rules": {
     "prettier/prettier": "error",
-    "react/jsx-filename-extension": "off"
+    "react/jsx-filename-extension": "off",
+    "function-paren-newline": "off",
+    "comma-dangle": "off"
   }
 }
