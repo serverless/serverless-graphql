@@ -22,10 +22,6 @@ class App extends Component {
             <img src={logo} className="App-logo" alt="logo" />
             <h2>Serverless GraphQL Apollo </h2>
           </div>
-          <p className="App-intro">
-            Welcome to the world of <code>Serverless</code> and{' '}
-            <code>GraphQL</code>.
-          </p>
           <div className="App-User">
             <UserList />
           </div>

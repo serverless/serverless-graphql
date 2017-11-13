@@ -14,14 +14,6 @@
   color: white;
 }
 
-.App-intro {
-  font-size: large;
-}
-
-.tweet {
-  text-align: left;
-}
-
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
