@@ -44,6 +44,7 @@ yarn install
 ```
 
 ## Quick Start (Serverless Offline)
+Please note: AWS CLI is required to be installed on your system
 
 1. **Select Backend** (Twitter Rest API or DynamoDB)
 
