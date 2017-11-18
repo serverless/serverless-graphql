@@ -51,27 +51,20 @@ Please note: AWS CLI is required to be installed on your system
 - *Twitter Rest API*
     ```
     cd app-backend/rest-api
-    yarn restapi-start-server-lambda:offline
+    yarn start
     ```
 
 - *DynamoDB*
     ```
     cd app-backend/dynamodb
-    yarn dynamodb-start-server-lambda:offline
+    yarn start
     ```
 
 2. **Start FrontEnd**
 
 ```
-cd app-backend/rest-api
-yarn start-client-local
-```
-
-OR
-
-```
-cd app-backend/dynamodb
-yarn start-client-local
+cd app-client/rest-api
+yarn start
 ```
 
 3. **Start GraphiQL**
@@ -101,32 +94,33 @@ You need to make sure you have access to your deployed lambda functions.
 - *Twitter Rest API*
     ```
     cd app-backend/rest-api
-    yarn restapi-deploy-server-lambda-prod
+    yarn deploy-prod
     ```
 
 - *DynamoDB*
     ```
     cd app-backend/dynamodb
-    yarn dynamodb-deploy-server-lambda-prod
+    yarn deploy-prod
     ```
 
 2. **Config**: Get your /graphql url after deployment and use it in config/security.env.prod 
 ![deploy feedback](https://user-images.githubusercontent.com/1587005/32410402-351ff868-c17c-11e7-9bfb-e39f7e8c14a3.png)
 
 
-3. **Start FrontEnd**
+3. **Deploy FrontEnd**
 
-```
-cd app-backend/rest-api
-yarn start-client-prod
-```
+- *AWS s3*
+  ```
+  cd app-client
+  yarn deploy-s3
+  ```
 
-OR
+- *Netlify*
+  ```
+  cd app-backend/rest-api
+  yarn deploy-netlify
+  ```
 
-```
-cd app-backend/dynamodb
-yarn start-client-prod
-```
 ## Example Query
 
 Introspection Query:
@@ -239,6 +233,7 @@ Currently **officially** using Serverless GraphQL Apollo :
 
 1. Serverless [@nikgraf](https://github.com/nikgraf)
 2. Glassdoor [@sid88in](https://github.com/sid88in)
+3. [@pradel](https://github.com/pradel)
 
 ## Feedback
 
