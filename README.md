@@ -117,9 +117,11 @@ You need to make sure you have access to your deployed lambda functions.
 
 - *Netlify*
   ```
-  cd app-backend/rest-api
+  cd app-client
+  yarn install netlify-cli -g
   yarn deploy-netlify
   ```
+  You will be asked to login or create a new account. See https://www.netlify.com/docs/cli/ if you want to know more.
 
 ## Example Query
 
