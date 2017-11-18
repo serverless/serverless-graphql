@@ -21,8 +21,8 @@
     "build": "env-cmd ../config/security.env.prod react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "deploy-s3": "serverless client deploy",
-    "deploy-netlify": "netlify deploy build"
+    "deploy-s3": "yarn build && serverless client deploy",
+    "deploy-netlify": "yarn build && netlify deploy build"
   },
   "devDependencies": {
     "env-cmd": "^7.0.0",
