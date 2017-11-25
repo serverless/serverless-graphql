@@ -1,7 +1,5 @@
-const fetch = require('node-fetch');
-const { OAuth2 } = require('oauth');
-
-require('babel-polyfill');
+import fetch from 'node-fetch';
+import { OAuth2 } from 'oauth';
 
 const twitterEndpoint = {
   async getRawTweets(args) {

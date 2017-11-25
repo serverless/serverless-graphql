@@ -1,7 +1,5 @@
 // add to handler.js
-const dynamodb = require('serverless-dynamodb-client');
-
-require('babel-polyfill');
+import dynamodb from 'serverless-dynamodb-client';
 
 const docClient = dynamodb.doc; // return an instance of new AWS.DynamoDB.DocumentClient()
 
