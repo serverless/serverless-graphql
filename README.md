@@ -20,6 +20,7 @@ This example uses the following technologies:
 	    - ![Serverless Offline](https://github.com/dherault/serverless-offline)
 	    - ![Serverless DynamoDB Local](https://github.com/99xt/serverless-dynamodb-local)
 	    - ![Serverless DynamoDB Client](https://www.npmjs.com/package/serverless-dynamodb-client)
+      - ![Serverless Finch](https://www.npmjs.com/package/serverless-finch)
 	    
 - Utilities
     - ![Faker](https://www.npmjs.com/package/faker)
