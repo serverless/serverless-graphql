@@ -111,9 +111,17 @@ You need to make sure you have access to your deployed lambda functions.
 3. **Deploy FrontEnd**
 
 - *AWS s3*
+  First you will need to choose an s3 bucket name for your project.
+
+  Edit the `app-client/serverless.yml` `custom.client.bucketName` property and replace it with your bucket name.
+  ![deploy severless.yml](https://user-images.githubusercontent.com/5749437/33232723-2904eb7a-d20b-11e7-97d9-978e9d7ac785.png)
+  You will also have to change the client package.json `homepage` property with `https://s3.amazonaws.com/${yourBucketName}`.
+  ![deploy package.json](https://user-images.githubusercontent.com/5749437/33232734-62a83d0a-d20b-11e7-9c79-5b949760d211.png)
+
   ```
   cd app-client
   yarn deploy-s3
+  # Your deployment url will be printed on the console
   ```
 
 - *Netlify*
@@ -121,6 +129,7 @@ You need to make sure you have access to your deployed lambda functions.
   cd app-client
   yarn install netlify-cli -g
   yarn deploy-netlify
+  # Your deployment url will be printed on the console
   ```
   You will be asked to login or create a new account. See https://www.netlify.com/docs/cli/ if you want to know more.
 
@@ -182,6 +191,7 @@ note: consumer_key and consumer_secret are present in config/security.env.local
 │   │   ├── /index.js                       # react dom render
 │   │   ├── /...                            # etc.
 │   ├── /package.json                       # react app dependencies
+│   ├── /serverless.yml                     # Serverless yaml for AWS deployment
 ├── /app-backend/                           # Server Backend with Apollo Integration
 │   ├── /dynamodb
 │   │   ├── /seed-data/                     
@@ -192,14 +202,14 @@ note: consumer_key and consumer_secret are present in config/security.env.local
 │   │   ├── /package.js                     # server side dependencies
 │   │   ├── /resolvers.js                   # graphql resolvers
 │   │   ├── /schema.js                      # graphql schema
-│   │   ├── /serverless.yaml                # Serverless yaml for AWS deployment
+│   │   ├── /serverless.yml                 # Serverless yaml for AWS deployment
 │   │   ├── /webpack.config.js              # Webpack server side code with ES6
 │   ├── /rest-api
 │   │   ├── /handler.js                     # AWS Lambda - Apollo Lambda Server
 │   │   ├── /package.js                     # server side dependencies
 │   │   ├── /resolvers.js                   # graphql resolvers
 │   │   ├── /schema.js                      # graphql schema
-│   │   ├── /serverless.yaml                # Serverless yaml for AWS deployment
+│   │   ├── /serverless.yml                 # Serverless yaml for AWS deployment
 │   │   ├── /webpack.config.js              # Webpack server side code with ES6
 ├── /config/                                # Configuration files
 │   ├── /security.env.local                 # local config
