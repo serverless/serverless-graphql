@@ -6,6 +6,5 @@ script:
   - cd app-backend/dynamodb && yarn run test
   - cd ../rest-api && yarn run test
   - cd ../../app-client && yarn run test
-  - cd ../ && yarn run test
 notifications:
   email: false
