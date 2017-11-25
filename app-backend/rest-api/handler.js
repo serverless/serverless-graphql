@@ -1,11 +1,9 @@
-'use strict'; // eslint-disable-line strict,lines-around-directive
-
+import 'babel-polyfill';
+import { graphqlLambda, graphiqlLambda } from 'apollo-server-lambda';
+import { lambdaPlayground } from 'graphql-playground-middleware';
 import { makeExecutableSchema } from 'graphql-tools';
 import { schema } from './schema';
 import { resolvers } from './resolvers';
-
-const { graphqlLambda, graphiqlLambda } = require('apollo-server-lambda');
-const { lambdaPlayground } = require('graphql-playground-middleware');
 
 const myGraphQLSchema = makeExecutableSchema({
   typeDefs: schema,
