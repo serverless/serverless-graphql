@@ -111,6 +111,7 @@ You need to make sure you have access to your deployed lambda functions.
 3. **Deploy FrontEnd**
 
 - *AWS s3*
+
   First you will need to choose an s3 bucket name for your project.
 
   Edit the `app-client/serverless.yml` `custom.client.bucketName` property and replace it with your bucket name.
