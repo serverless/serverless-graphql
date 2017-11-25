@@ -37,6 +37,7 @@ You need to have Node 6 or higher installed.
 ```
 npm install -g serverless
 npm install -g yarn
+npm install -g netlify-cli
 ```
 
 Install Dependencies.
@@ -64,7 +65,7 @@ Please note: AWS CLI is required to be installed on your system
 2. **Start FrontEnd**
 
 ```
-cd app-client/rest-api
+cd app-client
 yarn start
 ```
 
@@ -104,35 +105,49 @@ You need to make sure you have access to your deployed lambda functions.
     yarn deploy-prod
     ```
 
-2. **Config**: Get your /graphql url after deployment and use it in config/security.env.prod 
+2. **Config**: Get your /graphql POST endpoint as shown below and use it in config/security.env.prod 
+
 ![deploy feedback](https://user-images.githubusercontent.com/1587005/32410402-351ff868-c17c-11e7-9bfb-e39f7e8c14a3.png)
 
 
-3. **Deploy FrontEnd**
+3. **Select Frontend** (AWS S3 or Netlify)
 
-- *AWS s3*
+Note: Please note that backend is deployed before deploying frontend.
 
-  First you will need to choose an s3 bucket name for your project.
+- *AWS S3*
 
-  Edit the `app-client/serverless.yml` `custom.client.bucketName` property and replace it with your bucket name.
-  ![deploy severless.yml](https://user-images.githubusercontent.com/5749437/33232723-2904eb7a-d20b-11e7-97d9-978e9d7ac785.png)
-  You will also have to change the client package.json `homepage` property with `https://s3.amazonaws.com/${yourBucketName}`.
-  ![deploy package.json](https://user-images.githubusercontent.com/5749437/33232734-62a83d0a-d20b-11e7-9c79-5b949760d211.png)
+  - First you will need to choose custom s3 bucket name for client. For ex: s3-firstname-serverless-graphql-apollo. Please note that bucket name must be unique across all aws buckets. 
 
-  ```
-  cd app-client
-  yarn deploy-s3
-  # Your deployment url will be printed on the console
-  ```
+  - Now, in `app-client/serverless.yml` edit the `custom.client.bucketName` property and replace it the bucket name above.
+  
+  - Now, in `app-client/package.json` edit the `homepage` property with `https://s3.amazonaws.com/${yourBucketName}`. For ex: https://s3.amazonaws.com/s3-firstname-serverless-graphql-apollo
+  
+  - Run the deployment command
+      ```
+      cd app-client
+      yarn deploy-s3
+      # Your deployment url will be printed on the console
+      ```
 
 - *Netlify*
-  ```
-  cd app-client
-  yarn install netlify-cli -g
-  yarn deploy-netlify
-  # Your deployment url will be printed on the console
-  ```
-  You will be asked to login or create a new account. See https://www.netlify.com/docs/cli/ if you want to know more.
+
+  - First you will need to create a new account. Please see https://www.netlify.com/docs/cli/ for details.
+  
+  - Remove homepage property in `app-client/package.json`. This property is not required while deploying to netlify but is required for aws s3 deployment.
+  
+  - The first time you use the cli tool, you’ll be asked to authenticate through the browser. After you authenticate netlify will store an access token in a global ~/.netlify/config
+ 
+  - Run deployment command
+ 
+      ```
+      cd app-client
+      yarn deploy-netlify
+      ```
+      
+      - ? No site id specified, create a new site (Y/n) Y
+      - ? Path to deploy? (current dir) build    
+  
+  - Your deployment url will be printed on the console
 
 ## Example Query
 
