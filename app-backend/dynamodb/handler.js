@@ -1,5 +1,4 @@
-'use strict'; // eslint-disable-line strict,lines-around-directive
-
+import 'babel-polyfill';
 import { makeExecutableSchema } from 'graphql-tools';
 import { schema } from './schema';
 import { resolvers } from './resolvers';
