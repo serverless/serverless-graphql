@@ -8,10 +8,8 @@
   },
   "scripts": {
     "test": "jest",
-    "start-client-local": "cd ../../app-client/ && env-cmd ../config/security.env.local yarn start",
-    "start-client-prod": "cd ../../app-client/ && env-cmd ../config/security.env.prod yarn start",
-    "restapi-start-server-lambda:offline": "env-cmd ../../config/security.env.local serverless offline start",
-    "restapi-deploy-server-lambda-prod": "serverless --stage=production deploy"
+    "start": "env-cmd ../../config/security.env.local serverless offline start",
+    "deploy-prod": "serverless --stage=production deploy"
   },
   "dependencies": {
     "apollo-server-lambda": "1.2.0",

@@ -20,6 +20,7 @@ This example uses the following technologies:
 	    - ![Serverless Offline](https://github.com/dherault/serverless-offline)
 	    - ![Serverless DynamoDB Local](https://github.com/99xt/serverless-dynamodb-local)
 	    - ![Serverless DynamoDB Client](https://www.npmjs.com/package/serverless-dynamodb-client)
+      - ![Serverless Finch](https://www.npmjs.com/package/serverless-finch)
 	    
 - Utilities
     - ![Faker](https://www.npmjs.com/package/faker)
@@ -51,27 +52,20 @@ Please note: AWS CLI is required to be installed on your system
 - *Twitter Rest API*
     ```
     cd app-backend/rest-api
-    yarn restapi-start-server-lambda:offline
+    yarn start
     ```
 
 - *DynamoDB*
     ```
     cd app-backend/dynamodb
-    yarn dynamodb-start-server-lambda:offline
+    yarn start
     ```
 
 2. **Start FrontEnd**
 
 ```
-cd app-backend/rest-api
-yarn start-client-local
-```
-
-OR
-
-```
-cd app-backend/dynamodb
-yarn start-client-local
+cd app-client/rest-api
+yarn start
 ```
 
 3. **Start GraphiQL**
@@ -101,32 +95,45 @@ You need to make sure you have access to your deployed lambda functions.
 - *Twitter Rest API*
     ```
     cd app-backend/rest-api
-    yarn restapi-deploy-server-lambda-prod
+    yarn deploy-prod
     ```
 
 - *DynamoDB*
     ```
     cd app-backend/dynamodb
-    yarn dynamodb-deploy-server-lambda-prod
+    yarn deploy-prod
     ```
 
 2. **Config**: Get your /graphql url after deployment and use it in config/security.env.prod 
 ![deploy feedback](https://user-images.githubusercontent.com/1587005/32410402-351ff868-c17c-11e7-9bfb-e39f7e8c14a3.png)
 
 
-3. **Start FrontEnd**
+3. **Deploy FrontEnd**
 
-```
-cd app-backend/rest-api
-yarn start-client-prod
-```
+- *AWS s3*
 
-OR
+  First you will need to choose an s3 bucket name for your project.
 
-```
-cd app-backend/dynamodb
-yarn start-client-prod
-```
+  Edit the `app-client/serverless.yml` `custom.client.bucketName` property and replace it with your bucket name.
+  ![deploy severless.yml](https://user-images.githubusercontent.com/5749437/33232723-2904eb7a-d20b-11e7-97d9-978e9d7ac785.png)
+  You will also have to change the client package.json `homepage` property with `https://s3.amazonaws.com/${yourBucketName}`.
+  ![deploy package.json](https://user-images.githubusercontent.com/5749437/33232734-62a83d0a-d20b-11e7-9c79-5b949760d211.png)
+
+  ```
+  cd app-client
+  yarn deploy-s3
+  # Your deployment url will be printed on the console
+  ```
+
+- *Netlify*
+  ```
+  cd app-client
+  yarn install netlify-cli -g
+  yarn deploy-netlify
+  # Your deployment url will be printed on the console
+  ```
+  You will be asked to login or create a new account. See https://www.netlify.com/docs/cli/ if you want to know more.
+
 ## Example Query
 
 Introspection Query:
@@ -185,6 +192,7 @@ note: consumer_key and consumer_secret are present in config/security.env.local
 │   │   ├── /index.js                       # react dom render
 │   │   ├── /...                            # etc.
 │   ├── /package.json                       # react app dependencies
+│   ├── /serverless.yml                     # Serverless yaml for AWS deployment
 ├── /app-backend/                           # Server Backend with Apollo Integration
 │   ├── /dynamodb
 │   │   ├── /seed-data/                     
@@ -195,14 +203,14 @@ note: consumer_key and consumer_secret are present in config/security.env.local
 │   │   ├── /package.js                     # server side dependencies
 │   │   ├── /resolvers.js                   # graphql resolvers
 │   │   ├── /schema.js                      # graphql schema
-│   │   ├── /serverless.yaml                # Serverless yaml for AWS deployment
+│   │   ├── /serverless.yml                 # Serverless yaml for AWS deployment
 │   │   ├── /webpack.config.js              # Webpack server side code with ES6
 │   ├── /rest-api
 │   │   ├── /handler.js                     # AWS Lambda - Apollo Lambda Server
 │   │   ├── /package.js                     # server side dependencies
 │   │   ├── /resolvers.js                   # graphql resolvers
 │   │   ├── /schema.js                      # graphql schema
-│   │   ├── /serverless.yaml                # Serverless yaml for AWS deployment
+│   │   ├── /serverless.yml                 # Serverless yaml for AWS deployment
 │   │   ├── /webpack.config.js              # Webpack server side code with ES6
 ├── /config/                                # Configuration files
 │   ├── /security.env.local                 # local config
@@ -239,6 +247,7 @@ Currently **officially** using Serverless GraphQL Apollo :
 
 1. Serverless [@nikgraf](https://github.com/nikgraf)
 2. Glassdoor [@sid88in](https://github.com/sid88in)
+3. [@pradel](https://github.com/pradel)
 
 ## Feedback
 
