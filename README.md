@@ -5,10 +5,10 @@ This starter kit is an opinionated set of tools combined to help you get started
 This example uses the following technologies:
 
 - Frontend
-	- ![Apollo Client 2.0](https://github.com/apollographql/apollo-client)
-	- ![React App](https://github.com/facebookincubator/create-react-app) 
-	- ![GraphiQL](https://github.com/graphql/graphiql)
-	- ![GraphQL Playground](https://github.com/graphcool/graphql-playground)
+	- [Apollo Client 2.0](https://github.com/apollographql/apollo-client)
+	- [React App](https://github.com/facebookincubator/create-react-app)
+	- [GraphiQL](https://github.com/graphql/graphiql)
+	- [GraphQL Playground](https://github.com/graphcool/graphql-playground)
 
 - Backend
 	- [Serverless](https://serverless.com/framework/docs/)
@@ -16,15 +16,15 @@ This example uses the following technologies:
 	- [Apollo Lambda GraphQL Server](https://www.npmjs.com/package/apollo-server-lambda)
 	- [DynamoDB](https://aws.amazon.com/dynamodb/)
 	- Plugins
-	    - ![Serverless Webpack](https://github.com/serverless-heaven/serverless-webpack)
-	    - ![Serverless Offline](https://github.com/dherault/serverless-offline)
-	    - ![Serverless DynamoDB Local](https://github.com/99xt/serverless-dynamodb-local)
-	    - ![Serverless DynamoDB Client](https://www.npmjs.com/package/serverless-dynamodb-client)
-	    
+	    - [Serverless Webpack](https://github.com/serverless-heaven/serverless-webpack)
+	    - [Serverless Offline](https://github.com/dherault/serverless-offline)
+	    - [Serverless DynamoDB Local](https://github.com/99xt/serverless-dynamodb-local)
+	    - [Serverless DynamoDB Client](https://www.npmjs.com/package/serverless-dynamodb-client)
+
 - Utilities
-    - ![Faker](https://www.npmjs.com/package/faker)
-    - ![Prettier](https://github.com/prettier/prettier)
-	
+    - [Faker](https://www.npmjs.com/package/faker)
+    - [Prettier](https://github.com/prettier/prettier)
+
 ## System Architecture
 
 ![serverless application architecture v2](https://user-images.githubusercontent.com/1587005/32188725-d9508436-bd65-11e7-81eb-e25c1c3f5192.png)
@@ -110,7 +110,7 @@ You need to make sure you have access to your deployed lambda functions.
     yarn dynamodb-deploy-server-lambda-prod
     ```
 
-2. **Config**: Get your /graphql url after deployment and use it in config/security.env.prod 
+2. **Config**: Get your /graphql url after deployment and use it in config/security.env.prod
 ![deploy feedback](https://user-images.githubusercontent.com/1587005/32410402-351ff868-c17c-11e7-9bfb-e39f7e8c14a3.png)
 
 
