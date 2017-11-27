@@ -5,21 +5,20 @@ This starter kit is an opinionated set of tools combined to help you get started
 This example uses the following technologies:
 
 - Frontend
-	- [Apollo Client 2.0](https://github.com/apollographql/apollo-client)
-	- [React App](https://github.com/facebookincubator/create-react-app)
-	- [GraphiQL](https://github.com/graphql/graphiql)
-	- [GraphQL Playground](https://github.com/graphcool/graphql-playground)
+  - [Apollo Client 2.0](https://github.com/apollographql/apollo-client)
+  - [React App](https://github.com/facebookincubator/create-react-app)
+  - [GraphQL Playground (GraphiQL replacement)](https://github.com/graphcool/graphql-playground)
 
 - Backend
-	- [Serverless](https://serverless.com/framework/docs/)
-	- [AWS Lambda](https://aws.amazon.com/lambda/) & [AWS API Gateway](https://aws.amazon.com/documentation/apigateway/)
-	- [Apollo Lambda GraphQL Server](https://www.npmjs.com/package/apollo-server-lambda)
-	- [DynamoDB](https://aws.amazon.com/dynamodb/)
-	- Plugins
-	    - [Serverless Webpack](https://github.com/serverless-heaven/serverless-webpack)
-	    - [Serverless Offline](https://github.com/dherault/serverless-offline)
-	    - [Serverless DynamoDB Local](https://github.com/99xt/serverless-dynamodb-local)
-	    - [Serverless DynamoDB Client](https://www.npmjs.com/package/serverless-dynamodb-client)
+  - [Serverless](https://serverless.com/framework/docs/)
+  - [AWS Lambda](https://aws.amazon.com/lambda/) & [AWS API Gateway](https://aws.amazon.com/documentation/apigateway/)
+  - [Apollo Lambda GraphQL Server](https://www.npmjs.com/package/apollo-server-lambda)
+  - [DynamoDB](https://aws.amazon.com/dynamodb/)
+  - Plugins
+      - [Serverless Webpack](https://github.com/serverless-heaven/serverless-webpack)
+      - [Serverless Offline](https://github.com/dherault/serverless-offline)
+      - [Serverless DynamoDB Local](https://github.com/99xt/serverless-dynamodb-local)
+      - [Serverless DynamoDB Client](https://www.npmjs.com/package/serverless-dynamodb-client)
       - [Serverless Finch](https://www.npmjs.com/package/serverless-finch)
 
 - Utilities
@@ -69,13 +68,7 @@ cd app-client
 yarn start
 ```
 
-3. **Start GraphiQL**
-
-```
-http://localhost:4000/graphiql
-```
-
-4. **Start GraphQL Playground**
+3. **Start GraphQL Playground (GraphiQL replacement)**
 
 ```
 http://localhost:4000/playground
