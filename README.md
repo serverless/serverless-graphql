@@ -5,27 +5,26 @@ This starter kit is an opinionated set of tools combined to help you get started
 This example uses the following technologies:
 
 - Frontend
-	- ![Apollo Client 2.0](https://github.com/apollographql/apollo-client)
-	- ![React App](https://github.com/facebookincubator/create-react-app) 
-	- ![GraphiQL](https://github.com/graphql/graphiql)
-	- ![GraphQL Playground](https://github.com/graphcool/graphql-playground)
+  - ![Apollo Client 2.0](https://github.com/apollographql/apollo-client)
+  - ![React App](https://github.com/facebookincubator/create-react-app)
+  - ![GraphQL Playground (GraphiQL Replacement)](https://github.com/graphcool/graphql-playground)
 
 - Backend
-	- [Serverless](https://serverless.com/framework/docs/)
-	- [AWS Lambda](https://aws.amazon.com/lambda/) & [AWS API Gateway](https://aws.amazon.com/documentation/apigateway/)
-	- [Apollo Lambda GraphQL Server](https://www.npmjs.com/package/apollo-server-lambda)
-	- [DynamoDB](https://aws.amazon.com/dynamodb/)
-	- Plugins
-	    - ![Serverless Webpack](https://github.com/serverless-heaven/serverless-webpack)
-	    - ![Serverless Offline](https://github.com/dherault/serverless-offline)
-	    - ![Serverless DynamoDB Local](https://github.com/99xt/serverless-dynamodb-local)
-	    - ![Serverless DynamoDB Client](https://www.npmjs.com/package/serverless-dynamodb-client)
+  - [Serverless](https://serverless.com/framework/docs/)
+  - [AWS Lambda](https://aws.amazon.com/lambda/) & [AWS API Gateway](https://aws.amazon.com/documentation/apigateway/)
+  - [Apollo Lambda GraphQL Server](https://www.npmjs.com/package/apollo-server-lambda)
+  - [DynamoDB](https://aws.amazon.com/dynamodb/)
+  - Plugins
+      - ![Serverless Webpack](https://github.com/serverless-heaven/serverless-webpack)
+      - ![Serverless Offline](https://github.com/dherault/serverless-offline)
+      - ![Serverless DynamoDB Local](https://github.com/99xt/serverless-dynamodb-local)
+      - ![Serverless DynamoDB Client](https://www.npmjs.com/package/serverless-dynamodb-client)
       - ![Serverless Finch](https://www.npmjs.com/package/serverless-finch)
-	    
+
 - Utilities
     - ![Faker](https://www.npmjs.com/package/faker)
     - ![Prettier](https://github.com/prettier/prettier)
-	
+
 ## System Architecture
 
 ![serverless application architecture v2](https://user-images.githubusercontent.com/1587005/32188725-d9508436-bd65-11e7-81eb-e25c1c3f5192.png)
@@ -69,13 +68,7 @@ cd app-client
 yarn start
 ```
 
-3. **Start GraphiQL**
-
-```
-http://localhost:4000/graphiql
-```
-
-4. **Start GraphQL Playground**
+3. **Start GraphQL Playground (GraphiQL replacement)**
 
 ```
 http://localhost:4000/playground
@@ -105,7 +98,7 @@ You need to make sure you have access to your deployed lambda functions.
     yarn deploy-prod
     ```
 
-2. **Config**: Get your /graphql POST endpoint as shown below and use it in config/security.env.prod 
+2. **Config**: Get your /graphql POST endpoint as shown below and use it in config/security.env.prod
 
 ![deploy feedback](https://user-images.githubusercontent.com/1587005/32410402-351ff868-c17c-11e7-9bfb-e39f7e8c14a3.png)
 
@@ -116,12 +109,12 @@ Note: Please note that backend is deployed before deploying frontend.
 
 - *AWS S3*
 
-  - First you will need to choose custom s3 bucket name for client. For ex: s3-firstname-serverless-graphql-apollo. Please note that bucket name must be unique across all aws buckets. 
+  - First you will need to choose custom s3 bucket name for client. For ex: s3-firstname-serverless-graphql-apollo. Please note that bucket name must be unique across all aws buckets.
 
   - Now, in `app-client/serverless.yml` edit the `custom.client.bucketName` property and replace it the bucket name above.
-  
+
   - Now, in `app-client/package.json` edit the `homepage` property with `https://s3.amazonaws.com/${yourBucketName}`. For ex: https://s3.amazonaws.com/s3-firstname-serverless-graphql-apollo
-  
+
   - Run the deployment command
       ```
       cd app-client
@@ -132,21 +125,21 @@ Note: Please note that backend is deployed before deploying frontend.
 - *Netlify*
 
   - First you will need to create a new account. Please see https://www.netlify.com/docs/cli/ for details.
-  
+
   - Remove homepage property in `app-client/package.json`. This property is not required while deploying to netlify but is required for aws s3 deployment.
-  
+
   - The first time you use the cli tool, you’ll be asked to authenticate through the browser. After you authenticate netlify will store an access token in a global ~/.netlify/config
- 
+
   - Run deployment command
- 
+
       ```
       cd app-client
       yarn deploy-netlify
       ```
-      
+
       - ? No site id specified, create a new site (Y/n) Y
       - ? Path to deploy? (current dir) build    
-  
+
   - Your deployment url will be printed on the console
 
 ## Example Query
