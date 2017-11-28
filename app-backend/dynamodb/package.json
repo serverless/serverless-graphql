@@ -18,7 +18,6 @@
   },
   "dependencies": {
     "apollo-server-lambda": "1.2.0",
-    "apollo-server-module-graphiql": "1.2.0",
     "babel-polyfill": "^6.26.0",
     "graphql": "^0.10.5",
     "graphql-playground-middleware": "^1.1.0",
