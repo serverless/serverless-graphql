@@ -252,6 +252,7 @@ Currently **officially** using Serverless GraphQL Apollo :
 1. Serverless [@nikgraf](https://github.com/nikgraf)
 2. Glassdoor [@sid88in](https://github.com/sid88in)
 3. [@pradel](https://github.com/pradel)
+4. EMC School [@JstnEdr] (https://github.com/JstnEdr)
 
 ## Feedback
 
