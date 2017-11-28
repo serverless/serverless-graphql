@@ -1,6 +1,6 @@
 import 'babel-polyfill';
-import { graphqlLambda, graphiqlLambda } from 'apollo-server-lambda';
-import { lambdaPlayground } from 'graphql-playground-middleware';
+import { graphqlLambda } from 'apollo-server-lambda';
+import { lambdaPlayground } from 'graphql-playground-middleware-lambda';
 import { makeExecutableSchema } from 'graphql-tools';
 import { schema } from './schema';
 import { resolvers } from './resolvers';

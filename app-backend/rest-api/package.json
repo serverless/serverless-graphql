@@ -17,6 +17,7 @@
     "babel-polyfill": "^6.26.0",
     "graphql": "^0.10.5",
     "graphql-playground-middleware": "^1.1.0",
+    "graphql-playground-middleware-lambda": "^1.2.0",
     "graphql-tools": "2.7.2",
     "node-fetch": "^1.7.3",
     "oauth": "^0.9.15"

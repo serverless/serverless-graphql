@@ -1834,9 +1834,9 @@ graphql-extensions@^0.0.x:
     core-js "^2.5.1"
     source-map-support "^0.5.0"
 
-graphql-playground-middleware@^1.1.0:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/graphql-playground-middleware/-/graphql-playground-middleware-1.1.2.tgz#f8503b1b89cf6dcf79f1873feb1e821b4d099bd7"
+graphql-playground-middleware-lambda@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/graphql-playground-middleware-lambda/-/graphql-playground-middleware-lambda-1.2.0.tgz#518106fb4e8759ca3cf20d0ca14e27c47fd0c644"
 
 graphql-tools@2.7.2:
   version "2.7.2"
