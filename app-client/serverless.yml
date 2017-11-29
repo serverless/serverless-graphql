@@ -13,5 +13,5 @@ plugins:
 
 custom:
   client:
-    bucketName: s3-bucketname-serverless-graphql-apollo
+    bucketName: emc-school-s3-serverless-graphql-apollo
     distributionFolder: build

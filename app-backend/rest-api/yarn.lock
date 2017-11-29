@@ -135,7 +135,7 @@ apollo-server-lambda@1.2.0:
     apollo-server-core "^1.2.0"
     apollo-server-module-graphiql "^1.2.0"
 
-apollo-server-module-graphiql@1.2.0, apollo-server-module-graphiql@^1.2.0:
+apollo-server-module-graphiql@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/apollo-server-module-graphiql/-/apollo-server-module-graphiql-1.2.0.tgz#899d84f3b747795dbbfc8354aa51622ef038151c"
 
