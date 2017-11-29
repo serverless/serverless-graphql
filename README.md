@@ -5,7 +5,7 @@ This starter kit is an opinionated set of tools combined to help you get started
 This example uses the following technologies:
 
 - Frontend
-  - [Apollo Client 2.0](https://github.com/apollographql/apollo-client)
+  - [AWSAppSyncClient (Apollo Client 2.0)](https://github.com/apollographql/apollo-client)
   - [React App](https://github.com/facebookincubator/create-react-app)
   - [GraphQL Playground (GraphiQL replacement)](https://github.com/graphcool/graphql-playground)
 

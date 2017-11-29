@@ -21,7 +21,7 @@ AWS.config.update({
 const client = new AWSAppSyncClient({
   url: process.env.REACT_APP_GRAPHQL_ENDPOINT,
   region: 'us-east-1',
-  auth: { type: AUTH_TYPE.AWS_IAM, credentials: null },
+  auth: { type: AUTH_TYPE.AWS_IAM, credentials: AWS.config.credentials },
 });
 
 class App extends Component {
