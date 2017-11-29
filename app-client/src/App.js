@@ -5,7 +5,7 @@ import './App.css';
 
 import AWSAppSyncClient from 'aws-appsync';
 import { Rehydrated } from 'aws-appsync-react';
-import { AUTH_TYPE } from 'aws-appsync/dist/link/auth-link';
+import { AUTH_TYPE } from 'aws-appsync/lib/link/auth-link';
 import { ApolloProvider } from 'react-apollo';
 import * as AWS from 'aws-sdk';
 import awsconfig from './aws-exports';
