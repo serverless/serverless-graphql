@@ -5,7 +5,7 @@ This starter kit is an opinionated set of tools combined to help you get started
 This example uses the following technologies:
 
 - Frontend
-  - [Apollo Client 2.0](https://github.com/apollographql/apollo-client)
+  - [AWSAppSyncClient (Apollo Client 2.0)](https://github.com/apollographql/apollo-client)
   - [React App](https://github.com/facebookincubator/create-react-app)
   - [GraphQL Playground (GraphiQL replacement)](https://github.com/graphcool/graphql-playground)
 
@@ -27,7 +27,7 @@ This example uses the following technologies:
 
 ## System Architecture
 
-![serverless application architecture v2](https://user-images.githubusercontent.com/1587005/32188725-d9508436-bd65-11e7-81eb-e25c1c3f5192.png)
+![serverless application architecture v2](https://user-images.githubusercontent.com/1587005/33366373-f1394d52-d49f-11e7-8afe-e2b6fe2da14a.png)
 
 ## Quick Setup
 
