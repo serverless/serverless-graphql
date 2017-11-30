@@ -27,7 +27,7 @@ This example uses the following technologies:
 
 ## System Architecture
 
-![serverless application architecture v2](https://user-images.githubusercontent.com/1587005/33366373-f1394d52-d49f-11e7-8afe-e2b6fe2da14a.png)
+![serverless application architecture v2](https://user-images.githubusercontent.com/1587005/33446390-bd5bbec8-d5b4-11e7-8ae5-f9aaf29c4d35.png)
 
 ## Quick Setup
 
@@ -121,7 +121,8 @@ Note: Please note that backend is deployed before deploying frontend.
       yarn deploy-s3
       # Your deployment url will be printed on the console
       ```
-
+  - Your deployment url will be : https://s3.amazonaws.com/<bucket-name>/index.html   
+      
 - *Netlify*
 
   - First you will need to create a new account. Please see https://www.netlify.com/docs/cli/ for details.
