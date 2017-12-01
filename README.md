@@ -5,7 +5,7 @@ This starter kit is an opinionated set of tools combined to help you get started
 This example uses the following technologies:
 
 - Frontend
-  - [Apollo Client 2.0](https://github.com/apollographql/apollo-client)
+  - [AWSAppSyncClient (Apollo Client 2.0)](https://github.com/apollographql/apollo-client)
   - [React App](https://github.com/facebookincubator/create-react-app)
   - [GraphQL Playground (GraphiQL replacement)](https://github.com/graphcool/graphql-playground)
 
@@ -27,7 +27,7 @@ This example uses the following technologies:
 
 ## System Architecture
 
-![serverless application architecture v2](https://user-images.githubusercontent.com/1587005/32188725-d9508436-bd65-11e7-81eb-e25c1c3f5192.png)
+![serverless application architecture v2](https://user-images.githubusercontent.com/1587005/33446390-bd5bbec8-d5b4-11e7-8ae5-f9aaf29c4d35.png)
 
 ## Quick Setup
 
@@ -121,7 +121,8 @@ Note: Please note that backend is deployed before deploying frontend.
       yarn deploy-s3
       # Your deployment url will be printed on the console
       ```
-
+  - Your deployment url will be : https://s3.amazonaws.com/<bucket-name>/index.html   
+      
 - *Netlify*
 
   - First you will need to create a new account. Please see https://www.netlify.com/docs/cli/ for details.
@@ -225,12 +226,8 @@ note: consumer_key and consumer_secret are present in config/security.env.local
 │   ├── /security.env.prod                  # production config
 ```
 
-## Usage of GraphiQL
-To use the GraphiQL, open `/graphiql` of your Serverless service. With serverless offline it is `http://localhost:4000/graphiql`.
-![graphiql](https://user-images.githubusercontent.com/1587005/32695300-943e355e-c70c-11e7-9fac-2c9324a242c4.gif)
-
 ## Usage of GraphQL Playground
-To use the GraphQL Playground, open `/playground` of your Serverless service. With serverless offline it is `http://localhost:4000/playground`.
+To use the GraphQL Playground, open `/playground` of your Serverless service. With serverless offline it is `http://localhost:4000/playground`. Why GraphQL Playground and not GraphiQL? [Refer FAQ](https://github.com/graphcool/graphql-playground)
 ![playground](https://user-images.githubusercontent.com/1587005/32695336-96dbbe16-c70d-11e7-96b9-c7ef4e9ba32c.gif)
 
 ## Coming Soon
@@ -256,6 +253,7 @@ Currently **officially** using Serverless GraphQL Apollo :
 1. Serverless [@nikgraf](https://github.com/nikgraf)
 2. Glassdoor [@sid88in](https://github.com/sid88in)
 3. [@pradel](https://github.com/pradel)
+4. EMC School [@JstnEdr] (https://github.com/JstnEdr)
 
 ## Feedback
 

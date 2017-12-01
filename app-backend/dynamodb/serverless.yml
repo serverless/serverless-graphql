@@ -7,7 +7,17 @@ provider:
   runtime: nodejs6.10
   stage: dev
   region: us-east-1
-  role: APIGWRole
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:BatchGetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:us-east-1:*:table/users"
 
 plugins:
   - serverless-webpack
@@ -48,33 +58,6 @@ functions:
 
 resources:
   Resources:
-    APIGWRole:
-      Type: "AWS::IAM::Role"
-      Properties:
-        RoleName: serverless-graphql-role
-        AssumeRolePolicyDocument:
-          Version: "2012-10-17"
-          Statement:
-            -
-              Effect: "Allow"
-              Principal:
-                Service:
-                  - "lambda.amazonaws.com"
-              Action:
-                - "sts:AssumeRole"
-        Policies:
-          -
-            PolicyName: "serverless-graphql-policy"
-            PolicyDocument:
-              Version: "2012-10-17"
-              Statement:
-                -
-                  Effect: "Allow"
-                  Action:
-                    - "dynamodb:*"
-                    - "logs:*"
-                  Resource:
-                    - "*"
     UserTable:
       Type: 'AWS::DynamoDB::Table'
       Properties:
