@@ -1,6 +1,6 @@
 import 'babel-polyfill';
 import { graphqlLambda } from 'apollo-server-lambda';
-import { lambdaPlayground } from 'graphql-playground-middleware';
+import lambdaPlayground from 'graphql-playground-middleware-lambda';
 import { makeExecutableSchema } from 'graphql-tools';
 import { schema } from './schema';
 import { resolvers } from './resolvers';
@@ -18,7 +18,7 @@ exports.graphqlHandler = function graphqlHandler(event, context, callback) {
     callback(error, output);
   }
 
-  const handler = graphqlLambda({ schema: myGraphQLSchema });
+  const handler = graphqlLambda({ schema: myGraphQLSchema, tracing: true });
   return handler(event, context, callbackFilter);
 };
 
