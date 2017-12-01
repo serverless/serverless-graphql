@@ -139,6 +139,12 @@ apollo-server-module-graphiql@1.2.0, apollo-server-module-graphiql@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/apollo-server-module-graphiql/-/apollo-server-module-graphiql-1.2.0.tgz#899d84f3b747795dbbfc8354aa51622ef038151c"
 
+apollo-tracing@^0.0.9:
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/apollo-tracing/-/apollo-tracing-0.0.9.tgz#37fd4a7f5340f6e2ac9437d284f10ae2b1c85ad1"
+  dependencies:
+    graphql-tools "^2.2.0"
+
 apollo-tracing@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/apollo-tracing/-/apollo-tracing-0.1.1.tgz#7a5707543fc102f81cda7ba45b98331a82a6750b"
@@ -1846,6 +1852,14 @@ graphql-playground-middleware@^1.2.1-beta.6:
 graphql-tools@2.7.2:
   version "2.7.2"
   resolved "https://registry.yarnpkg.com/graphql-tools/-/graphql-tools-2.7.2.tgz#03104a155b15f8441b0e5a7113b12b9512341a9e"
+  dependencies:
+    apollo-utilities "^1.0.1"
+    deprecated-decorator "^0.1.6"
+    uuid "^3.1.0"
+
+graphql-tools@^2.2.0:
+  version "2.11.0"
+  resolved "https://registry.yarnpkg.com/graphql-tools/-/graphql-tools-2.11.0.tgz#be86d14acfe4ca9411967c6b54bac2eedc0dbb72"
   dependencies:
     apollo-utilities "^1.0.1"
     deprecated-decorator "^0.1.6"

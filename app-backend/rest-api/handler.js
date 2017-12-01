@@ -18,7 +18,7 @@ exports.graphqlHandler = function graphqlHandler(event, context, callback) {
     callback(error, output);
   }
 
-  const handler = graphqlLambda({ schema: myGraphQLSchema });
+  const handler = graphqlLambda({ schema: myGraphQLSchema, tracing: true });
   return handler(event, context, callbackFilter);
 };
 
