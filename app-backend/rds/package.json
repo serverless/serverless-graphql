@@ -1,0 +1,45 @@
+{
+  "name": "serverless-graphql-apollo",
+  "version": "0.0.0",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:serverless/serverless-graphql-apollo.git"
+  },
+  "scripts": {
+    "test": "jest",
+    "migrate": "knex migrate:latest",
+    "seed": "cd seed-data && node create_seed_data.js",
+    "start":
+      "yarn migrate && yarn seed && env-cmd ../../config/security.env.local serverless offline start",
+    "deploy-prod":
+      "yarn migrate --env production && serverless --stage=production deploy"
+  },
+  "dependencies": {
+    "apollo-server-lambda": "1.2.0",
+    "apollo-tracing": "^0.0.9",
+    "babel-polyfill": "^6.26.0",
+    "graphql": "^0.10.5",
+    "graphql-playground-middleware-lambda": "^1.2.0",
+    "graphql-tools": "2.7.2",
+    "knex": "^0.14.2",
+    "sqlite3": "^3.1.13"
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.4.8",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "body-parser": "^1.15.2",
+    "cors": "2.8.4",
+    "env-cmd": "^5.0.0",
+    "faker": "^4.1.0",
+    "imports-loader": "^0.7.1",
+    "jest": "^21.2.1",
+    "jsonfile": "^4.0.0",
+    "serverless-offline": "^3.15.3",
+    "serverless-webpack": "^4.1.0",
+    "webpack": "^3.8.1",
+    "webpack-node-externals": "^1.6.0"
+  }
+}
