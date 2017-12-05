@@ -61,6 +61,12 @@ Please note: AWS CLI is required to be installed on your system
     yarn start
     ```
 
+- *RDS*
+    ```
+    cd app-backend/rds
+    yarn start
+    ```
+
 2. **Start FrontEnd**
 
 ```
@@ -97,6 +103,17 @@ You need to make sure you have access to your deployed lambda functions.
     cd app-backend/dynamodb
     yarn deploy-prod
     ```
+
+- *RDS*
+  - First you will need to setup a rds database. Please follow this tutorial in order to get a database url, user and password http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.PostgreSQL.html#CHAP_GettingStarted.Creating.PostgreSQL.
+
+  - Then edit the `config/security.env.prod` file and replace the `DATABASE_URL` variable with your amazon rds endpoint (eg: postgres://${username}:{password}@${endpoint):5432/${dbName}).
+
+  - Run the deployment command
+      ```
+      cd app-backend/rds
+      yarn deploy-prod
+      ```
 
 2. **Config**: Get your /graphql POST endpoint as shown below and use it in config/security.env.prod
 
