@@ -1,6 +1,10 @@
 const connection = require('./knexfile');
 
-const knex = require('knex')(connection.development);
+const knex = require('knex')(
+  process.env.NODE_ENV === 'production'
+    ? connection.production
+    : connection.development
+);
 
 // eslint-disable-next-line import/prefer-default-export
 export const resolvers = {

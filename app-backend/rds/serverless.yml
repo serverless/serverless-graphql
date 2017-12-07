@@ -7,6 +7,9 @@ provider:
   runtime: nodejs6.10
   stage: dev
   region: us-east-1
+  environment:
+    NODE_ENV: ${env:NODE_ENV}
+    DATABASE_URL: ${env:DATABASE_URL}
 
 plugins:
   - serverless-offline

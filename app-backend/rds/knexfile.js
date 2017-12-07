@@ -1,3 +1,6 @@
+// eslint-disable-next-line
+const pg = require('pg');
+
 module.exports = {
   development: {
     client: 'sqlite3',
@@ -6,11 +9,7 @@ module.exports = {
     },
   },
   production: {
-    client: 'postgresql',
-    connection: {
-      database: 'my_db',
-      user: 'username',
-      password: 'password',
-    },
+    client: 'pg',
+    connection: process.env.DATABASE_URL,
   },
 };
