@@ -1,3 +1,4 @@
+// This is needed in order to get the pg module bundled with webpack
 // eslint-disable-next-line
 const pg = require('pg');
 
