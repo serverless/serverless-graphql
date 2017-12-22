@@ -5,6 +5,7 @@ node_js:
 script:
   - cd app-backend/dynamodb && yarn run test
   - cd ../rest-api && yarn run test
+  - cd ../rds && yarn run test
   - cd ../../app-client && yarn run test
 notifications:
   email: false
