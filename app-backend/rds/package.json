@@ -9,7 +9,7 @@
   "scripts": {
     "test": "jest",
     "migrate": "knex migrate:latest",
-    "seed": "cd seed-data && node create_seed_data.js",
+    "seed": "cd seed-data && node create_seed_data.js && node seed.js",
     "start":
       "yarn migrate && yarn seed && env-cmd ../../config/security.env.local serverless offline start",
     "deploy-prod":
