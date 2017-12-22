@@ -9,11 +9,14 @@
   "scripts": {
     "test": "jest",
     "migrate": "knex migrate:latest",
-    "seed": "cd seed-data && node create_seed_data.js && node seed.js",
+    "seed-local":
+      "cd seed-data && node create_seed_data.js && node seed_local.js",
+    "seed-prod":
+      "cd seed-data && node create_seed_data.js && node seed_prod.js",
     "start":
-      "yarn migrate && yarn seed && env-cmd ../../config/security.env.local serverless offline start",
+      "yarn migrate && yarn seed-local && env-cmd ../../config/security.env.local serverless offline start",
     "deploy-prod":
-      "env-cmd ../../config/security.env.prod yarn migrate --env production && env-cmd ../../config/security.env.prod serverless --stage=production deploy"
+      "env-cmd ../../config/security.env.prod yarn migrate --env production && yarn seed-prod && env-cmd ../../config/security.env.prod serverless --stage=production deploy"
   },
   "dependencies": {
     "apollo-server-lambda": "1.2.0",
