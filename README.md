@@ -14,6 +14,7 @@ This example uses the following technologies:
   - [AWS Lambda](https://aws.amazon.com/lambda/) & [AWS API Gateway](https://aws.amazon.com/documentation/apigateway/)
   - [Apollo Lambda GraphQL Server](https://www.npmjs.com/package/apollo-server-lambda)
   - [DynamoDB](https://aws.amazon.com/dynamodb/)
+  - [RDS](https://aws.amazon.com/rds/)
   - Plugins
       - [Serverless Webpack](https://github.com/serverless-heaven/serverless-webpack)
       - [Serverless Offline](https://github.com/dherault/serverless-offline)
@@ -91,7 +92,7 @@ sls config credentials --provider aws --key <your_aws_access_key> --secret <your
 
 You need to make sure you have access to your deployed lambda functions.
 
-1. **Select Backend** (Twitter Rest API or DynamoDB). Deploy Serverless Resources to your AWS Account
+1. **Select Backend** (Twitter Rest API / DynamoDB / RDS). Deploy Serverless Resources to your AWS Account
 - *Twitter Rest API*
     ```
     cd app-backend/rest-api
@@ -105,9 +106,9 @@ You need to make sure you have access to your deployed lambda functions.
     ```
 
 - *RDS*
-  - First you will need to setup a rds database. Please follow this tutorial in order to get a database url, user and password http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.PostgreSQL.html#CHAP_GettingStarted.Creating.PostgreSQL.
+  - Create RDS Instance. For example - [PostGres Tutorial](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.PostgreSQL.html#CHAP_GettingStarted.Creating.PostgreSQL)
 
-  - Then edit the `config/security.env.prod` file and replace the `DATABASE_URL` variable with your amazon rds endpoint (eg: postgres://${username}:{password}@${endpoint):5432/${dbName}).
+  - Edit the `config/security.env.prod` file and replace the `DATABASE_URL` variable with your amazon rds endpoint (eg: postgres://${username}:{password}@${endpoint):5432/${dbName}).
 
   - Run the deployment command
       ```
