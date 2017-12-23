@@ -107,7 +107,9 @@ You need to make sure you have access to your deployed lambda functions.
 
 - *RDS*
   - Create RDS Instance. For example - [PostGres Tutorial](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.PostgreSQL.html#CHAP_GettingStarted.Creating.PostgreSQL)
-
+ 
+  - Please make sure connectivity to production RDS instance works (For example: test via razersql)
+  
   - Edit the `config/security.env.prod` file and replace the `DATABASE_URL` variable with your amazon rds endpoint (eg: postgres://${username}:{password}@${endpoint):5432/${dbName}).
 
   - Run the deployment command
