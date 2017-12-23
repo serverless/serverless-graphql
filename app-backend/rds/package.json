@@ -16,7 +16,7 @@
     "start":
       "yarn migrate && yarn seed-local && env-cmd ../../config/security.env.local serverless offline start",
     "deploy-prod":
-      "env-cmd ../../config/security.env.prod yarn migrate --env production && yarn seed-prod && env-cmd ../../config/security.env.prod serverless --stage=production deploy"
+      "env-cmd ../../config/security.env.prod yarn migrate --env production && env-cmd ../../config/security.env.prod yarn seed-prod && env-cmd ../../config/security.env.prod serverless --stage=production deploy"
   },
   "dependencies": {
     "apollo-server-lambda": "1.2.0",
