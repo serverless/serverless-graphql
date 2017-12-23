@@ -139,7 +139,7 @@ Note: Please note that backend is deployed before deploying frontend.
       yarn deploy-s3
       # Your deployment url will be printed on the console
       ```
-  - Your deployment url will be : https://s3.amazonaws.com/<bucket-name>/index.html   
+  - Your deployment url will be : https://s3.amazonaws.com/[bucket-name]/index.html   
       
 - *Netlify*
 
