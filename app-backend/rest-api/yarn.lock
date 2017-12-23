@@ -135,7 +135,7 @@ apollo-server-lambda@1.2.0:
     apollo-server-core "^1.2.0"
     apollo-server-module-graphiql "^1.2.0"
 
-apollo-server-module-graphiql@1.2.0, apollo-server-module-graphiql@^1.2.0:
+apollo-server-module-graphiql@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/apollo-server-module-graphiql/-/apollo-server-module-graphiql-1.2.0.tgz#899d84f3b747795dbbfc8354aa51622ef038151c"
 
@@ -273,8 +273,8 @@ asynckit@^0.4.0:
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
 
 aws-sdk@^2.4.8:
-  version "2.149.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.149.0.tgz#76f53722a7780bdb3191e83f27c10108c6fe9813"
+  version "2.175.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.175.0.tgz#33346247b3b9ca674f275eea746edfdfb6479e44"
   dependencies:
     buffer "4.9.1"
     crypto-browserify "1.0.9"
