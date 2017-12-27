@@ -9,6 +9,7 @@ This example uses the following technologies:
   - [React App](https://github.com/facebookincubator/create-react-app)
   - [GraphiQL](https://github.com/graphql/graphiql)
   - [GraphQL Playground (GraphiQL replacement)](https://github.com/graphcool/graphql-playground)
+  - [Netlify Integration](https://www.netlify.com/)
 
 - Backend
   - [Serverless](https://serverless.com/framework/docs/)
@@ -26,10 +27,11 @@ This example uses the following technologies:
 - Utilities
     - [Faker](https://www.npmjs.com/package/faker)
     - [Prettier](https://github.com/prettier/prettier)
+    - [Apollo Tracing](https://github.com/apollographql/apollo-tracing)
 
 ## System Architecture
 
-![serverless application architecture v2](https://user-images.githubusercontent.com/1587005/33446390-bd5bbec8-d5b4-11e7-8ae5-f9aaf29c4d35.png)
+![serverless application architecture v2](https://user-images.githubusercontent.com/1587005/34387054-fbeeb318-eb51-11e7-8cd5-15b263cd9d6c.png)
 
 ## Quick Setup
 
@@ -262,17 +264,18 @@ To use the GraphQL Playground, open `/playground` of your Serverless service. Wi
 
 ## Coming Soon
 
-1. Backend Integrations - MySQL, PostGres, ElasticSearch
-2. Aggregations at Scale - Druid
-3. GraphQL Subscriptions
-4. GraphQL Mutations
+1. AppSync Integrations - DynamoDB, ES and Lambda
+2. Backend Integrations - ElasticSearch, GraphCool
+3. AWS X-Ray Integration
+4. GraphQL Mutations and Subscriptions 
 5. Schema Stitching
-6. Authentication and Authorization
-7. Pagination
-8. Swagger Integration
-9. Data Loader
-10. Caching and Prefetching
-11. Integration with Azure, IBM and Google Coud
+6. Aggregations at Scale - Druid, InfuxDB
+7. Authentication and Authorization
+8. Pagination
+9. Swagger Integration
+10. Data Loader
+11. Caching and Prefetching
+12. Integration with Azure, IBM and Google Coud
 
 ## Who uses Serverless GraphQL Apollo?
 
