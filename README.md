@@ -7,6 +7,7 @@ This example uses the following technologies:
 - Frontend
   - [AWSAppSyncClient (Apollo Client 2.0)](https://github.com/apollographql/apollo-client)
   - [React App](https://github.com/facebookincubator/create-react-app)
+  - [GraphiQL](https://github.com/graphql/graphiql)
   - [GraphQL Playground (GraphiQL replacement)](https://github.com/graphcool/graphql-playground)
 
 - Backend
@@ -75,11 +76,16 @@ cd app-client
 yarn start
 ```
 
-3. **Start GraphQL Playground (GraphiQL replacement)**
+3. **Start GraphiQL**
+```
+http://localhost:4000/graphiql
+```
 
+4. **Start GraphQL Playground (GraphiQL replacement - coming soon)**
 ```
 http://localhost:4000/playground
 ```
+
 
 ## Setup for Production
 
@@ -250,6 +256,10 @@ note: consumer_key and consumer_secret are present in config/security.env.local
 To use the GraphQL Playground, open `/playground` of your Serverless service. With serverless offline it is `http://localhost:4000/playground`. Why GraphQL Playground and not GraphiQL? [Refer FAQ](https://github.com/graphcool/graphql-playground)
 ![playground](https://user-images.githubusercontent.com/1587005/32695336-96dbbe16-c70d-11e7-96b9-c7ef4e9ba32c.gif)
 
+## Usage of GraphiQL
+ To use the GraphiQL, open `/graphiql` of your Serverless service. With serverless offline it is `http://localhost:4000/graphiql`.
+ ![graphiql](https://user-images.githubusercontent.com/1587005/32695300-943e355e-c70c-11e7-9fac-2c9324a242c4.gif)
+
 ## Coming Soon
 
 1. Backend Integrations - MySQL, PostGres, ElasticSearch
@@ -273,7 +283,7 @@ Currently **officially** using Serverless GraphQL Apollo :
 1. Serverless [@nikgraf](https://github.com/nikgraf)
 2. Glassdoor [@sid88in](https://github.com/sid88in)
 3. [@pradel](https://github.com/pradel)
-4. EMC School [@JstnEdr] (https://github.com/JstnEdr)
+4. EMC School [@JstnEdr](https://github.com/JstnEdr)
 
 ## Feedback
 
