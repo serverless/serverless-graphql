@@ -5,7 +5,8 @@ This starter kit is an opinionated set of tools combined to help you get started
 This example uses the following technologies:
 
 - Frontend
-  - [AWSAppSyncClient (Apollo Client 2.0)](https://github.com/apollographql/apollo-client)
+  - [AWSAppSyncClient](http://docs.aws.amazon.com/appsync/latest/devguide/building-a-client-app-react.html)
+  - [Apollo Client 2.0](https://github.com/apollographql/apollo-client)
   - [React App](https://github.com/facebookincubator/create-react-app)
   - [GraphiQL](https://github.com/graphql/graphiql)
   - [GraphQL Playground (GraphiQL replacement)](https://github.com/graphcool/graphql-playground)
@@ -17,6 +18,7 @@ This example uses the following technologies:
   - [Apollo Lambda GraphQL Server](https://www.npmjs.com/package/apollo-server-lambda)
   - [DynamoDB](https://aws.amazon.com/dynamodb/)
   - [RDS](https://aws.amazon.com/rds/)
+  - [REST API](https://developer.twitter.com/en/docs)
   - Plugins
       - [Serverless Webpack](https://github.com/serverless-heaven/serverless-webpack)
       - [Serverless Offline](https://github.com/dherault/serverless-offline)
@@ -24,7 +26,7 @@ This example uses the following technologies:
       - [Serverless DynamoDB Client](https://www.npmjs.com/package/serverless-dynamodb-client)
       - [Serverless Finch](https://www.npmjs.com/package/serverless-finch)
 
-- Utilities
+- Other Utilities and Integrations
     - [Faker](https://www.npmjs.com/package/faker)
     - [Prettier](https://github.com/prettier/prettier)
     - [Apollo Tracing](https://github.com/apollographql/apollo-tracing)
@@ -51,7 +53,7 @@ yarn install
 ## Quick Start (Serverless Offline)
 Please note: AWS CLI is required to be installed on your system
 
-1. **Select Backend** (Twitter Rest API or DynamoDB)
+1. **Select Backend** (Twitter Rest API / DynamoDB / RDS (MySQL, PostGres or Aurora)
 
 - *Twitter Rest API*
     ```
@@ -71,10 +73,10 @@ Please note: AWS CLI is required to be installed on your system
     yarn start
     ```
 
-2. **Start FrontEnd**
+2. **Start FrontEnd** (Apollo Client or Appsync Client)
 
 ```
-cd app-client
+cd app-client/<client-name>/
 yarn start
 ```
 
@@ -131,21 +133,24 @@ You need to make sure you have access to your deployed lambda functions.
 ![deploy feedback](https://user-images.githubusercontent.com/1587005/32410402-351ff868-c17c-11e7-9bfb-e39f7e8c14a3.png)
 
 
-3. **Select Frontend** (AWS S3 or Netlify)
+3. **Select Frontend** (apollo-client or appsync-client)
 
-Note: Please note that backend is deployed before deploying frontend.
+
+- Note: 
+    - Please note that backend is deployed before deploying frontend.
+    - You can deploy the client on AWS S3 or Netlify.
 
 - *AWS S3*
 
   - First you will need to choose custom s3 bucket name for client. For ex: s3-firstname-serverless-graphql-apollo. Please note that bucket name must be unique across all aws buckets.
 
-  - Now, in `app-client/serverless.yml` edit the `custom.client.bucketName` property and replace it the bucket name above.
+  - Now, in `app-client/<client-name>/serverless.yml` edit the `custom.client.bucketName` property and replace it the bucket name above.
 
-  - Now, in `app-client/package.json` edit the `homepage` property with `https://s3.amazonaws.com/${yourBucketName}`. For ex: https://s3.amazonaws.com/s3-firstname-serverless-graphql-apollo
+  - Now, in `app-client/<client-name>/package.json` edit the `homepage` property with `https://s3.amazonaws.com/${yourBucketName}`. For ex: https://s3.amazonaws.com/s3-firstname-serverless-graphql-apollo
 
   - Run the deployment command
       ```
-      cd app-client
+      cd app-client/<client-name>/
       yarn deploy-s3
       # Your deployment url will be printed on the console
       ```
@@ -155,14 +160,14 @@ Note: Please note that backend is deployed before deploying frontend.
 
   - First you will need to create a new account. Please see https://www.netlify.com/docs/cli/ for details.
 
-  - Remove homepage property in `app-client/package.json`. This property is not required while deploying to netlify but is required for aws s3 deployment.
+  - Remove homepage property in `app-client/<client-name>/package.json`. This property is not required while deploying to netlify but is required for aws s3 deployment.
 
   - The first time you use the cli tool, you’ll be asked to authenticate through the browser. After you authenticate netlify will store an access token in a global ~/.netlify/config
 
   - Run deployment command
 
       ```
-      cd app-client
+      cd app-client/<client-name>/
       yarn deploy-netlify
       ```
 
@@ -219,39 +224,65 @@ note: consumer_key and consumer_secret are present in config/security.env.local
 
 ```bash
 .
-├── /app-client/                            # React Client with Apollo Integration
-│   ├── /public/                            # front End Utils
-│   │   ├── /index.html                     # main html file to render react app
-│   │   ├── /...                            # front end metadata
-│   ├── /src/                               # react app code logic
-│   │   ├── /componenets/                   # react componenets
-│   │   ├── /App.js                         # react application logic
-│   │   ├── /index.js                       # react dom render
-│   │   ├── /...                            # etc.
-│   ├── /package.json                       # react app dependencies
-│   ├── /serverless.yml                     # Serverless yaml for AWS deployment
-├── /app-backend/                           # Server Backend with Apollo Integration
-│   ├── /dynamodb
-│   │   ├── /seed-data/                     
-│   │   │   ├── /create_seed_data.js        # Create Seed data to be inserted in dynamodb local and remote
-│   │   │   ├── /insert_seed_Data_prod.js   # Insert seed data in aws dynamodb (serverless)
-│   │   │   ├── /sample-query.txt           # Test Query on DynamoDB Local Client http://localhost:8000
-│   │   ├── /handler.js                     # AWS Lambda - Apollo Lambda Server
-│   │   ├── /package.js                     # server side dependencies
-│   │   ├── /resolvers.js                   # graphql resolvers
-│   │   ├── /schema.js                      # graphql schema
-│   │   ├── /serverless.yml                 # Serverless yaml for AWS deployment
-│   │   ├── /webpack.config.js              # Webpack server side code with ES6
-│   ├── /rest-api
-│   │   ├── /handler.js                     # AWS Lambda - Apollo Lambda Server
-│   │   ├── /package.js                     # server side dependencies
-│   │   ├── /resolvers.js                   # graphql resolvers
-│   │   ├── /schema.js                      # graphql schema
-│   │   ├── /serverless.yml                 # Serverless yaml for AWS deployment
-│   │   ├── /webpack.config.js              # Webpack server side code with ES6
+├── /app-client/                             # React JS Client Integrations
+│   ├── /appsync-client                         # Appsync Client Itegrations
+│   │   ├── /public/                            # front End Utils
+│   │   │   ├── /index.html                     # main html file to render react app
+│   │   │   ├── /...                            # front end metadata
+│   │   ├── /src/                               # react app code logic
+│   │   │   ├── /componenets/                   # react componenets
+│   │   │   ├── /App.js                         # react application logic
+│   │   │   ├── /index.js                       # react dom render
+│   │   │   ├── /aws-exports.js                 # AWS Authentication
+│   │   │   ├── /...                            # etc.
+│   │   ├── /package.json                       # react app dependencies
+│   │   ├── /serverless.yml                     # Serverless yaml for AWS deployment
+│   ├── /apollo-client                       # Apollo Client Itegrations
+│   │   ├── /public/                            # front End Utils
+│   │   │   ├── /index.html                     # main html file to render react app
+│   │   │   ├── /...                            # front end metadata
+│   │   ├── /src/                               # react app code logic
+│   │   │   ├── /componenets/                   # react componenets
+│   │   │   ├── /App.js                         # react application logic
+│   │   │   ├── /index.js                       # react dom render
+│   │   │   ├── /...                            # etc.
+│   │   ├── /package.json                       # react app dependencies
+│   │   ├── /serverless.yml                     # Serverless yaml for AWS deployment
+├── /app-backend/                            # Server Backend Integrations
+│   ├── /dynamodb                            # Integration with DynamodDB Backend
+│   │   ├── /seed-data/                         # seed test data
+│   │   │   ├── /create_seed_data.js            # Create Seed data to be inserted in dynamodb local and remote
+│   │   │   ├── /insert_seed_data_prod.js       # Insert seed data in aws dynamodb (serverless)
+│   │   │   ├── /sample-query.txt               # Test Query on DynamoDB Local Client http://localhost:8000
+│   │   ├── /handler.js                         # AWS Lambda - Apollo Lambda Server
+│   │   ├── /package.js                         # server side dependencies
+│   │   ├── /resolvers.js                       # graphql resolvers
+│   │   ├── /schema.js                          # graphql schema
+│   │   ├── /serverless.yml                     # Serverless yaml for AWS deployment
+│   │   ├── /webpack.config.js                  # Webpack server side code with ES6
+│   ├── /rest-api                           # Integration with REST API Backend
+│   │   ├── /handler.js                         # AWS Lambda - Apollo Lambda Server
+│   │   ├── /package.js                         # server side dependencies
+│   │   ├── /resolvers.js                       # graphql resolvers
+│   │   ├── /schema.js                          # graphql schema
+│   │   ├── /serverless.yml                     # Serverless yaml for AWS deployment
+│   │   ├── /webpack.config.js                  # Webpack server side code with ES6
+│   ├── /RDS                                # Integrations for PostGres, MySQL and Aurora Backend
+│   │   ├── /seed-data/                         # seed test data
+│   │   │   ├── /create_seed_data.js            # Create Seed data to be inserted in dynamodb local and remote
+│   │   │   ├── /seed_local.js                  # Insert seed data in aws dynamodb (serverless)
+│   │   │   ├── /seed_prod.js                   # Test Query on DynamoDB Local Client http://localhost:8000
+│   │   ├── /migrations/                        # Create DDL statements
+│   │   ├── /kenxfile                           # Database Configurations 
+│   │   ├── /handler.js                         # AWS Lambda - Apollo Lambda Server
+│   │   ├── /package.js                         # server side dependencies
+│   │   ├── /resolvers.js                       # graphql resolvers
+│   │   ├── /schema.js                          # graphql schema
+│   │   ├── /serverless.yml                     # Serverless yaml for AWS deployment
+│   │   ├── /webpack.config.js                  # Webpack server side code with ES6
 ├── /config/                                # Configuration files
-│   ├── /security.env.local                 # local config
-│   ├── /security.env.prod                  # production config
+│   ├── /security.env.local                     # local config
+│   ├── /security.env.prod                      # production config
 ```
 
 ## Usage of GraphQL Playground
