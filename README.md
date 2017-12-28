@@ -53,7 +53,7 @@ yarn install
 ## Quick Start (Serverless Offline)
 Please note: AWS CLI is required to be installed on your system
 
-1. **Select Backend** (Twitter Rest API or DynamoDB)
+1. **Select Backend** (Twitter Rest API / DynamoDB / RDS (MySQL, PostGres or Aurora)
 
 - *Twitter Rest API*
     ```
@@ -73,10 +73,10 @@ Please note: AWS CLI is required to be installed on your system
     yarn start
     ```
 
-2. **Start FrontEnd**
+2. **Start FrontEnd** (Apollo Client or Appsync Client)
 
 ```
-cd app-client
+cd app-client/<client-name>/
 yarn start
 ```
 
