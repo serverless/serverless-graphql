@@ -32,3 +32,10 @@ functions:
         path: playground
         method: get
         cors: true
+  graphiql:
+    handler: handler.graphiqlHandler
+    events:
+    - http:
+        path: graphiql
+        method: get
+        cors: true
