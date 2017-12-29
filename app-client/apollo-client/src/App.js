@@ -13,6 +13,9 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+/* fetch data from graphQL server and print on console */
+//client.query({ query: gql`{ hello }` }).then(console.log);
+
 class App extends Component {
   render() {
     return (
