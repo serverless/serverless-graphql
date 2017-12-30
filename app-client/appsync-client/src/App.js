@@ -3,6 +3,8 @@ import UserList from './components/UserList';
 import logo from './logo.svg';
 import './App.css';
 
+import Amplify from 'aws-amplify';
+import { withAuthenticator } from 'aws-amplify-react';
 import AWSAppSyncClient from 'aws-appsync';
 import { Rehydrated } from 'aws-appsync-react';
 import { AUTH_TYPE } from 'aws-appsync/lib/link/auth-link';
@@ -11,7 +13,6 @@ import * as AWS from 'aws-sdk';
 import awsconfig from './aws-exports';
 
 AWS.config.update({
-  region: awsconfig.REGION,
   credentials: new AWS.Credentials({
     accessKeyId: awsconfig.AWS_ACCESS_KEY_ID,
     secretAccessKey: awsconfig.AWS_SECRET_ACCESS_KEY,
@@ -20,8 +21,11 @@ AWS.config.update({
 
 const client = new AWSAppSyncClient({
   url: process.env.REACT_APP_GRAPHQL_ENDPOINT,
-  region: 'us-east-1',
-  auth: { type: AUTH_TYPE.AWS_IAM, credentials: AWS.config.credentials },
+  region: awsconfig.region,
+  auth: {
+    type: AUTH_TYPE.AMAZON_COGNITO_USER_POOLS,
+    credentials: AWS.config.credentials,
+  },
 });
 
 class App extends Component {
