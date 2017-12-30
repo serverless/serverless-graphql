@@ -12,11 +12,12 @@ import { ApolloProvider } from 'react-apollo';
 import * as AWS from 'aws-sdk';
 import awsconfig from './aws-exports';
 
-AWS.config.update({
-  credentials: new AWS.Credentials({
-    accessKeyId: awsconfig.AWS_ACCESS_KEY_ID,
-    secretAccessKey: awsconfig.AWS_SECRET_ACCESS_KEY,
-  }),
+Amplify.configure({
+  Auth: {
+    identityPoolId: 'XX-XXXX-X:XXXXXXXX-XXXX-1234-abcd-1234567890ab', //REQUIRED - Amazon Cognito Identity Pool ID
+    region: 'XX-XXXX-X', // REQUIRED - Amazon Cognito Region
+    userPoolId: 'XX-XXXX-X_abcd1234', //OPTIONAL - Amazon Cognito User Pool ID
+  },
 });
 
 const client = new AWSAppSyncClient({
@@ -24,7 +25,6 @@ const client = new AWSAppSyncClient({
   region: awsconfig.region,
   auth: {
     type: AUTH_TYPE.AMAZON_COGNITO_USER_POOLS,
-    credentials: AWS.config.credentials,
   },
 });
 
@@ -52,4 +52,4 @@ const WithProvider = () => (
   </ApolloProvider>
 );
 
-export default WithProvider;
+export default withAuthenticator(WithProvider);
