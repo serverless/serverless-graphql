@@ -4,7 +4,7 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git@github.com:sid88in/serverless-appsync-plugin.git"
+    "url": "git@github.com:serverless/serverless-graphql-apollo.git"
   },
   "scripts": {
     "dynamodb-generate-seed-data": "cd seed-data && node create_seed_data.js",

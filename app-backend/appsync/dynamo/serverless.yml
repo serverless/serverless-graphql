@@ -27,40 +27,6 @@ custom:
 
 resources:
   Resources:
-    APIGWRole:
-      Type: "AWS::IAM::Role"
-      Properties:
-        RoleName: "appsyncrole"
-        AssumeRolePolicyDocument:
-          Version: "2012-10-17"
-          Statement:
-            -
-              Effect: "Allow"
-              Principal:
-                Service:
-                  - "dynamodb.amazonaws.com"
-              Action:
-                - "sts:AssumeRole"
-        Path: "/service-role/"
-        Policies:
-          -
-            PolicyName: "appsyncrole-policy"
-            PolicyDocument:
-              Version: "2012-10-17"
-              Statement:
-                -
-                  Effect: "Allow"
-                  Action:
-                    - "dynamodb:Query"
-                    - "dynamodb:BatchWriteItem"
-                    - "dynamodb:GetItem"
-                    - "dynamodb:DeleteItem"
-                    - "dynamodb:PutItem"
-                    - "dynamodb:Scan"
-                    - "dynamodb:UpdateItem"
-                  Resource:
-                    - "arn:aws:dynamodb:us-east-1:252626742933:table/users"
-                    - "arn:aws:dynamodb:us-east-1:252626742933:table/users/*"
     UserTable:
       Type: 'AWS::DynamoDB::Table'
       Properties:
