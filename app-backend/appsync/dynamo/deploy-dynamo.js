@@ -5,13 +5,14 @@ AWS.config.update({ region: 'us-east-1' });
 AWS.config.setPromisesDependency(require('bluebird'));
 
 const fs = require('fs');
+
 const appsync = new AWS.AppSync({ apiVersion: '2017-07-25' });
 
 // For creating User Pool: Reference https://serverless-stack.com/chapters/create-a-cognito-user-pool.html
 // API key is not recommended for security.
 // Can we automate the process of creating cognito user pool
 
-//Todo: how to create this service role via serverless.yml automatically
+// Todo: how to create this service role via serverless.yml automatically
 
 const graphQLAPIName = 'xxx';
 const awsRegion = 'us-east-1';
@@ -51,6 +52,8 @@ appsync
     appId = data['graphqlApi']['apiId'];
     graphqlEndpoint = data['graphqlApi']['uris']['GRAPHQL'];
 
+    console.log(`Your GraphQL endpoint is {graphqlEndpoint}`);
+
     const datasourceParams = [
       {
         apiId: appId /* required */,
@@ -65,7 +68,7 @@ appsync
       },
     ];
 
-    let dataSourceList = [];
+    const dataSourceList = [];
 
     for (let i = 0; i < datasourceParams.length; i++) {
       dataSourceList.push(
@@ -168,7 +171,7 @@ appsync
       },
     ];
 
-    let resolverList = [];
+    const resolverList = [];
 
     for (let i = 0; i < resolverParams.length; i++) {
       resolverList.push(appsync.createResolver(resolverParams[i]).promise());
