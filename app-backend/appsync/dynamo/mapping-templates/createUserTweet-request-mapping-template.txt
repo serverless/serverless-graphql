@@ -1,0 +1,18 @@
+{
+    "version" : "2017-02-28",
+    "operation" : "UpdateItem",
+    "key" : {
+        "screen_name" : { "S" : "${context.arguments.screen_name}" }
+    },
+    "update" : {
+        "expression" : "SET posts = list_append(if_not_exists(posts, :emptyList), :newTweet)",
+        "expressionValues" : {
+            ":emptyList": { "L" : [] },
+            ":newTweet" : { "L" : [
+                { "M": {
+                    "tweet": { "S" : "${context.arguments.post}" }
+                }}
+            ] }
+        }
+    }
+}
