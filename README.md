@@ -239,7 +239,7 @@ type Query {
 
 type Subscription {
   subscribeToTweeterUser(handle: String!): Tweets
-    @aws_subscribe(mutations: ["createUserRecord"])
+    @aws_subscribe(mutations: ["createUserTweet"])
 }
 
 type Tweet {
@@ -247,7 +247,7 @@ type Tweet {
 }
 
 type Mutation {
-  # Create a single tweet.
+  # Create a new user with his tweets.
   createUserRecord(
     name: String!,
     screen_name: String!,
@@ -257,6 +257,17 @@ type Mutation {
     friends_count: Int!,
     favourites_count: Int!,
     posts: [String]
+  ): Tweets
+
+  # Create a tweet for a user
+  createUserTweet(
+    screen_name: String!,
+    post: String!
+  ): Tweets
+
+  # Delete User Record
+  deleteUserRecord(
+    screen_name: String!
   ): Tweets
 }
 
@@ -276,6 +287,7 @@ schema {
   mutation: Mutation
   subscription: Subscription
 }
+
 
 ```
 
@@ -298,6 +310,24 @@ query{
 }
 ```
 
+## Resolver for Query : getTwitterFeed
+
+```
+##Request mapping template
+
+{
+    "version": "2017-02-28",
+    "operation": "GetItem",
+    "key": {
+        "screen_name": { "S": "$context.arguments.handle" }
+    }
+}
+
+##Response mapping template
+
+$util.toJson($context.result)
+```
+
 ## Mutation:
 
 ```
@@ -310,7 +340,7 @@ mutation add {
     favourites_count: 100,
     friends_count: 100,
     followers_count: 50,
-    posts: ["hello", "girl", "im good"]
+    posts: ["I", "love", "appsync"]
   ){
     name
     screen_name
@@ -364,22 +394,51 @@ $util.toJson($context.result)
 
 ```
 
-## Resolver for Query : getTwitterFeed
+## Resolver for Mutation - createUserTweet
 
 ```
-##Request mapping template
+## Request mapping template
 
 {
-    "version": "2017-02-28",
-    "operation": "GetItem",
-    "key": {
-        "screen_name": { "S": "$context.arguments.handle" }
+    "version" : "2017-02-28",
+    "operation" : "UpdateItem",
+    "key" : {
+        "screen_name" : { "S" : "${context.arguments.screen_name}" }
+    },
+    "update" : {
+        "expression" : "SET posts = list_append(if_not_exists(posts, :emptyList), :newTweet)",
+        "expressionValues" : {
+            ":emptyList": { "L" : [] },
+            ":newTweet" : { "L" : [
+                { "M": {
+                    "tweet": { "S" : "${context.arguments.post}" }
+                }}
+            ] }
+        }
     }
 }
 
-##Response mapping template
-
+## Response mapping template
 $util.toJson($context.result)
+
+```
+
+## Resolver for Mutation - deleteUserRecord
+
+```
+## Request mapping template
+
+{
+    "version" : "2017-02-28",
+    "operation" : "DeleteItem",
+    "key": {
+        "screen_name": { "S" : "${context.arguments.screen_name}"}
+    }
+}
+
+## Response mapping template
+$util.toJson($context.result)
+
 ```
 
 ## Appsync ElasticSearch Integration
