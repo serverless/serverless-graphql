@@ -81,7 +81,7 @@ appsync
     });
   })
   .then(() => {
-    const file = fs.readFileSync('schema.txt', 'utf8');
+    const file = fs.readFileSync('schema.graphql', 'utf8');
 
     const schemaCreationparams = {
       apiId: appId /* required */,
@@ -150,6 +150,34 @@ appsync
         typeName: 'Query' /* required */,
         responseMappingTemplate: fs.readFileSync(
           'mapping-templates/getTwitterFeed-response-mapping-template.txt',
+          'utf8'
+        ) /* required */,
+      },
+      {
+        apiId: appId /* required */,
+        dataSourceName: 'elastic' /* required */,
+        fieldName: 'createUserTweet' /* required */,
+        requestMappingTemplate: fs.readFileSync(
+          'mapping-templates/createUserTweet-request-mapping-template.txt',
+          'utf8'
+        ) /* required */,
+        typeName: 'Mutation' /* required */,
+        responseMappingTemplate: fs.readFileSync(
+          'mapping-templates/createUserTweet-response-mapping-template.txt',
+          'utf8'
+        ) /* required */,
+      },
+      {
+        apiId: appId /* required */,
+        dataSourceName: 'elastic' /* required */,
+        fieldName: 'deleteUserRecord' /* required */,
+        requestMappingTemplate: fs.readFileSync(
+          'mapping-templates/deleteUserRecord-request-mapping-template.txt',
+          'utf8'
+        ) /* required */,
+        typeName: 'Mutation' /* required */,
+        responseMappingTemplate: fs.readFileSync(
+          'mapping-templates/deleteUserRecord-response-mapping-template.txt',
           'utf8'
         ) /* required */,
       },
