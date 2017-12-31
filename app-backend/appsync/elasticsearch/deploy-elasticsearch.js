@@ -13,12 +13,14 @@ const appsync = new AWS.AppSync({ apiVersion: '2017-07-25' });
 
 //Todo: how to create this service role via serverless.yml automatically
 
-const graphQLAPIName = 'xxx';
+const graphQLAPIName = 'testmutations';
 const awsRegion = 'us-east-1';
-const userPoolId = 'xxx';
-const serviceRole = 'arn:aws:iam::xxx:role/service-role/xxx';
+const userPoolId = 'us-east-1_NrPGUsF22';
+const serviceRole =
+  'arn:aws:iam::252626742933:role/service-role/appsync-datasource-es-hklgc4-appsync';
 const MAX_RETRIES = 10;
-const esEndpoint = 'https://xxx.xxx.es.amazonaws.com';
+const esEndpoint =
+  'https://search-appsync-x7f52bmdmtw4wno2xxjhxc47eu.us-east-1.es.amazonaws.com';
 let appId;
 let graphqlEndpoint;
 
@@ -81,7 +83,7 @@ appsync
     });
   })
   .then(() => {
-    const file = fs.readFileSync('schema.txt', 'utf8');
+    const file = fs.readFileSync('schema.graphql', 'utf8');
 
     const schemaCreationparams = {
       apiId: appId /* required */,
@@ -150,6 +152,34 @@ appsync
         typeName: 'Query' /* required */,
         responseMappingTemplate: fs.readFileSync(
           'mapping-templates/getTwitterFeed-response-mapping-template.txt',
+          'utf8'
+        ) /* required */,
+      },
+      {
+        apiId: appId /* required */,
+        dataSourceName: 'elastic' /* required */,
+        fieldName: 'createUserTweet' /* required */,
+        requestMappingTemplate: fs.readFileSync(
+          'mapping-templates/createUserTweet-request-mapping-template.txt',
+          'utf8'
+        ) /* required */,
+        typeName: 'Mutation' /* required */,
+        responseMappingTemplate: fs.readFileSync(
+          'mapping-templates/createUserTweet-response-mapping-template.txt',
+          'utf8'
+        ) /* required */,
+      },
+      {
+        apiId: appId /* required */,
+        dataSourceName: 'elastic' /* required */,
+        fieldName: 'deleteUserRecord' /* required */,
+        requestMappingTemplate: fs.readFileSync(
+          'mapping-templates/deleteUserRecord-request-mapping-template.txt',
+          'utf8'
+        ) /* required */,
+        typeName: 'Mutation' /* required */,
+        responseMappingTemplate: fs.readFileSync(
+          'mapping-templates/deleteUserRecord-response-mapping-template.txt',
           'utf8'
         ) /* required */,
       },

@@ -447,27 +447,48 @@ $util.toJson($context.result)
 
 ```
 type Query {
-	getTwitterFeed(handle: String!): Tweets
+  getTwitterFeed(handle: String!): Tweets
+}
+
+type Subscription {
+  subscribeToTweeterUser(handle: String!): Tweets
+    @aws_subscribe(mutations: ["createUserTweet"])
 }
 
 type Tweet {
-	tweet: String
+  tweet: String
+}
+
+type Mutation {
+  # Create a tweet for a user
+  createUserTweet(
+    screen_name: String!,
+    post: String!
+  ): Tweets
+
+  # Delete User Record
+  deleteUserRecord(
+    screen_name: String!
+  ): Tweets
 }
 
 type Tweets {
-	name: String!
-	screen_name: String!
-	location: String!
-	description: String!
-	followers_count: Int!
-	friends_count: Int!
-	favourites_count: Int!
-	posts: [Tweet]
+  name: String!
+  screen_name: String!
+  location: String!
+  description: String!
+  followers_count: Int!
+  friends_count: Int!
+  favourites_count: Int!
+  posts: [Tweet]
 }
 
 schema {
-	query: Query
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
 }
+
 
 ```
 
@@ -525,6 +546,33 @@ schema {
       "favourites_count" : -1
    #end
 }
+```
+
+## Resolver for Mutation - createUserTweet 
+```
+## Request mapping template
+{
+    "version":"2017-02-28",
+    "operation":"PUT",
+    "path":"/user/twitter/$util.autoId()",
+    "params":{
+        "body":{
+            "name":"$context.arguments.name",
+            "screen_name":"$context.arguments.screen_name",
+            "location":"$context.arguments.location",
+            "description":"$context.arguments.description",
+            "followers_count":$context.arguments.followers_count,
+            "friends_count":$context.arguments.friends_count,
+            "favourites_count":$context.arguments.favourites_count,
+            "tweet": "$context.arguments.post"
+        }
+    }
+}
+
+
+## Response mapping template
+
+$utils.toJson($context.result.get("_source"))
 ```
 
 ## Appsync Lambda Integration
