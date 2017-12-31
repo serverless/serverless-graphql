@@ -13,14 +13,12 @@ const appsync = new AWS.AppSync({ apiVersion: '2017-07-25' });
 
 //Todo: how to create this service role via serverless.yml automatically
 
-const graphQLAPIName = 'testmutations';
+const graphQLAPIName = 'xxx';
 const awsRegion = 'us-east-1';
-const userPoolId = 'us-east-1_NrPGUsF22';
-const serviceRole =
-  'arn:aws:iam::252626742933:role/service-role/appsync-datasource-es-hklgc4-appsync';
+const userPoolId = 'xxx';
+const serviceRole = 'arn:aws:iam::xxx:role/service-role/xxx';
 const MAX_RETRIES = 10;
-const esEndpoint =
-  'https://search-appsync-x7f52bmdmtw4wno2xxjhxc47eu.us-east-1.es.amazonaws.com';
+const esEndpoint = 'https://xxx.xxx.es.amazonaws.com';
 let appId;
 let graphqlEndpoint;
 
