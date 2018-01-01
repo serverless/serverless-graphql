@@ -14,7 +14,8 @@ const graphQLAPIName = '...'; // your graphQL API Name
 const awsRegion = '...'; // AWS Region ex - us-east-1
 const userPoolId = '...'; // Your Cognito User Pool Id
 const roleName = '...';
-const serviceRole = `arn:aws:iam::${awsRegion}:role/service-role/${roleName}`; // Service IAM Role for appsync to access data sources
+const accountId = '...';
+const serviceRole = `arn:aws:iam::${accountId}:role/service-role/${roleName}`; // Service IAM Role for appsync to access data sources
 const MAX_RETRIES = 10;
 const esHostname = '...';
 const esEndpoint = `https://${esHostname}.${awsRegion}.es.amazonaws.com`;
@@ -59,7 +60,7 @@ appsync
         type: 'AMAZON_ELASTICSEARCH' /* required */,
         description: 'my first data source',
         elasticsearchConfig: {
-          awsRegion: 'us-east-1' /* required */,
+          awsRegion: awsRegion /* required */,
           endpoint: esEndpoint /* required */,
         },
         serviceRoleArn: serviceRole,
