@@ -9,14 +9,12 @@ const appsync = new AWS.AppSync({ apiVersion: '2017-07-25' });
 
 // For creating User Pool: Reference https://serverless-stack.com/chapters/create-a-cognito-user-pool.html
 // API key is not recommended for security.
-// Can we automate the process of creating cognito user pool
-
-//Todo: how to create this service role via serverless.yml automatically
 
 const graphQLAPIName = '...'; // your graphQL API Name
 const awsRegion = '...'; // AWS Region ex - us-east-1
 const userPoolId = '...'; // Your Cognito User Pool Id
-const serviceRole = 'arn:aws:iam::...:role/service-role/...'; // Service IAM Role for appsync to access data sources
+const roleName = '...';
+const serviceRole = `arn:aws:iam::${awsRegion}:role/service-role/${roleName}`; // Service IAM Role for appsync to access data sources
 const MAX_RETRIES = 10;
 let appId;
 let graphqlEndpoint;
