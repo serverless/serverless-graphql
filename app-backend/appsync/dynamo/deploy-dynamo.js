@@ -13,10 +13,10 @@ const appsync = new AWS.AppSync({ apiVersion: '2017-07-25' });
 
 //Todo: how to create this service role via serverless.yml automatically
 
-const graphQLAPIName = 'xxx';
-const awsRegion = 'us-east-1';
-const userPoolId = 'xxx';
-const serviceRole = 'arn:aws:iam::xxx:role/service-role/xxx';
+const graphQLAPIName = '...'; // your graphQL API Name
+const awsRegion = '...'; // AWS Region ex - us-east-1
+const userPoolId = '...'; // Your Cognito User Pool Id
+const serviceRole = 'arn:aws:iam::...:role/service-role/...'; // Service IAM Role for appsync to access data sources
 const MAX_RETRIES = 10;
 let appId;
 let graphqlEndpoint;
