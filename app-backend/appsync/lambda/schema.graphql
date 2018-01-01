@@ -14,8 +14,9 @@ type Tweet {
 type Mutation {
   # Create a tweet for a user
   createUserTweet(
-    screen_name: String!,
-    post: String!
+    post: String!,
+    consumer_key: String!,
+    consumer_secret: String!
   ): TweetConnection
 }
 

@@ -17,7 +17,9 @@ const roleName = '...';
 const accountId = '...';
 const serviceRole = `arn:aws:iam::${accountId}:role/service-role/${roleName}`; // Service IAM Role for appsync to access data sources
 const functionName = '...';
-const lambdaArn = `arn:aws:lambda:${awsRegion}:${accountId}:${functionName}`;
+const lambdaArn = `arn:aws:lambda:${awsRegion}:${accountId}:function:${
+  functionName
+}`;
 const MAX_RETRIES = 10;
 let appId;
 let graphqlEndpoint;
@@ -149,6 +151,20 @@ appsync
         typeName: 'Query' /* required */,
         responseMappingTemplate: fs.readFileSync(
           'mapping-templates/getTwitterFeed-response-mapping-template.txt',
+          'utf8'
+        ) /* required */,
+      },
+      {
+        apiId: appId /* required */,
+        dataSourceName: 'lambda' /* required */,
+        fieldName: 'createUserTweet' /* required */,
+        requestMappingTemplate: fs.readFileSync(
+          'mapping-templates/createUserTweet-request-mapping-template.txt',
+          'utf8'
+        ) /* required */,
+        typeName: 'Mutation' /* required */,
+        responseMappingTemplate: fs.readFileSync(
+          'mapping-templates/createUserTweet-response-mapping-template.txt',
           'utf8'
         ) /* required */,
       },
