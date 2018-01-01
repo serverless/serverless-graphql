@@ -14,7 +14,8 @@ const graphQLAPIName = '...'; // your graphQL API Name
 const awsRegion = '...'; // AWS Region ex - us-east-1
 const userPoolId = '...'; // Your Cognito User Pool Id
 const roleName = '...';
-const serviceRole = `arn:aws:iam::${awsRegion}:role/service-role/${roleName}`; // Service IAM Role for appsync to access data sources
+const accountId = '...';
+const serviceRole = `arn:aws:iam::${accountId}:role/service-role/${roleName}`; // Service IAM Role for appsync to access data sources
 const MAX_RETRIES = 10;
 let appId;
 let graphqlEndpoint;

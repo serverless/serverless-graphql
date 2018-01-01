@@ -14,9 +14,11 @@ const graphQLAPIName = '...'; // your graphQL API Name
 const awsRegion = '...'; // AWS Region ex - us-east-1
 const userPoolId = '...'; // Your Cognito User Pool Id
 const roleName = '...';
-const serviceRole = `arn:aws:iam::${awsRegion}:role/service-role/${roleName}`; // Service IAM Role for appsync to access data sources
+const accountId = '...';
+const serviceRole = `arn:aws:iam::${accountId}:role/service-role/${roleName}`; // Service IAM Role for appsync to access data sources
+const functionName = '...';
+const lambdaArn = `arn:aws:lambda:${awsRegion}:${accountId}:${functionName}`;
 const MAX_RETRIES = 10;
-const lambdaArn = 'xxx';
 let appId;
 let graphqlEndpoint;
 
@@ -54,11 +56,10 @@ appsync
       {
         apiId: appId /* required */,
         name: 'lambda' /* required */,
-        type: 'AMAZON_LAMBDA' /* required */,
+        type: 'AWS_LAMBDA' /* required */,
         description: 'my first data source',
-        elasticsearchConfig: {
-          awsRegion: 'us-east-1' /* required */,
-          endpoint: esEndpoint /* required */,
+        lambdaConfig: {
+          lambdaFunctionArn: lambdaArn /* required */,
         },
         serviceRoleArn: serviceRole,
       },
@@ -79,7 +80,7 @@ appsync
     });
   })
   .then(() => {
-    const file = fs.readFileSync('schema.txt', 'utf8');
+    const file = fs.readFileSync('schema.graphql', 'utf8');
 
     const schemaCreationparams = {
       apiId: appId /* required */,
