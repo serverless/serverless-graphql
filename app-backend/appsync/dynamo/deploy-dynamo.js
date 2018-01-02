@@ -44,11 +44,11 @@ appsync
   .promise()
   .then(async data => {
     console.log(data); // successful response
-    console.log(data['graphqlApi']['apiId']);
-    console.log(data['graphqlApi']['uris']['GRAPHQL']);
+    console.log(data.graphqlApi.apiId);
+    console.log(data.graphqlApi.uris.GRAPHQL);
 
-    appId = data['graphqlApi']['apiId'];
-    graphqlEndpoint = data['graphqlApi']['uris']['GRAPHQL'];
+    appId = data.graphqlApi.apiId;
+    graphqlEndpoint = data.graphqlApi.uris.GRAPHQL;
 
     const datasourceParams = [
       {
@@ -105,7 +105,7 @@ appsync
           .promise()
           .then(data => {
             console.log(data);
-            if (data['status'] === 'SUCCESS') {
+            if (data.status === 'SUCCESS') {
               success = true;
             }
           });
