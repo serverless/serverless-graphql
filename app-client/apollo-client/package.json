@@ -1,7 +1,7 @@
 {
   "name": "app-client",
   "homepage":
-    "https://s3-bucketname-serverless-graphql-apollo.s3-website-us-east-1.amazonaws.com",
+    "https://s3-bucketname-serverless-graphql.s3-website-us-east-1.amazonaws.com",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

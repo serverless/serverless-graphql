@@ -1,4 +1,4 @@
-service: serverless-graphql-apollo
+service: serverless-graphql
 
 frameworkVersion: ">=1.21.0 <2.0.0"
 

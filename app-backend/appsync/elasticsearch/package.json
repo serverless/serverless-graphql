@@ -1,10 +1,10 @@
 {
-  "name": "serverless-graphql-apollo",
+  "name": "serverless-graphql",
   "version": "0.0.0",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git@github.com:serverless/serverless-graphql-apollo.git"
+    "url": "git@github.com:serverless/serverless-graphql.git"
   },
   "scripts": {
     "deploy-prod": "cd seed-data && yarn create-seed-data"

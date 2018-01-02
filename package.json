@@ -1,5 +1,5 @@
 {
-  "name": "serverless-graphql-apollo",
+  "name": "serverless-graphql",
   "private": true,
   "scripts": {
     "precommit": "lint-staged",
