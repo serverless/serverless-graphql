@@ -2,13 +2,13 @@ import 'babel-polyfill';
 import fetch from 'node-fetch';
 import { OAuth2 } from 'oauth';
 
-async function getRawTweets(handle, consumer_key, consumer_secret) {
+async function getRawTweets(handle, consumerKey, consumerSecret) {
   const url = `https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=${
     handle
   }`;
   const oauth2 = new OAuth2(
-    consumer_key,
-    consumer_secret,
+    consumerKey,
+    consumerSecret,
     'https://api.twitter.com/',
     null,
     'oauth2/token',
@@ -65,12 +65,12 @@ async function getRawTweets(handle, consumer_key, consumer_secret) {
     .catch(error => error);
 }
 
-async function postTweet(post, consumer_key, consumer_secret) {
-  const url = `https://api.twitter.com/1.1/statuses/update.json`;
+async function postTweet(post, consumerKey, consumerSecret) {
+  const url = 'https://api.twitter.com/1.1/statuses/update.json';
 
   const oauth2 = new OAuth2(
-    consumer_key,
-    consumer_secret,
+    consumerKey,
+    consumerSecret,
     'https://api.twitter.com/',
     null,
     'oauth2/token',
@@ -119,31 +119,32 @@ async function postTweet(post, consumer_key, consumer_secret) {
 exports.graphqlHandler = (event, context, callback) => {
   console.log('Received event {}', JSON.stringify(event, 3));
 
-  const consumer_key = event.arguments.consumer_key;
-  const consumer_secret = event.arguments.consumer_secret;
+  const consumerKey = event.arguments.consumer_key;
+  const consumerSecret = event.arguments.consumer_secret;
 
   console.log('Got an Invoke Request.');
   switch (event.field) {
-    case 'getTwitterFeed':
-      const handle = event.arguments.handle;
+    case 'getTwitterFeed': {
+      const { handle } = event.arguments.handle;
 
-      getRawTweets(handle, consumer_key, consumer_secret).then(function(
-        result
-      ) {
+      getRawTweets(handle, consumerKey, consumerSecret).then(function(result) {
         callback(null, result);
       });
 
       break;
-    case 'createUserTweet':
-      const post = event.arguments.post;
+    }
+    case 'createUserTweet': {
+      const { post } = event.arguments.post;
 
-      postTweet(post, consumer_key, consumer_secret).then(function(result) {
+      postTweet(post, consumerKey, consumerSecret).then(function(result) {
         callback(null, result);
       });
 
       break;
-    default:
+    }
+    default: {
       callback('Unknown field, unable to resolve' + event.field, null);
       break;
+    }
   }
 };
