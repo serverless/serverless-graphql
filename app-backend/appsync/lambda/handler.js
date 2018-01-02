@@ -103,8 +103,7 @@ async function postTweet(post, consumerKey, consumerSecret) {
       return fetch(url, options)
         .then(res => res.json())
         .then(res => {
-          let tweet;
-          tweet = {
+          const tweet = {
             screen_name: res.user.name,
             post: res.text,
           };
@@ -127,7 +126,7 @@ exports.graphqlHandler = (event, context, callback) => {
     case 'getTwitterFeed': {
       const { handle } = event.arguments.handle;
 
-      getRawTweets(handle, consumerKey, consumerSecret).then(function(result) {
+      getRawTweets(handle, consumerKey, consumerSecret).then(result => {
         callback(null, result);
       });
 
@@ -136,14 +135,14 @@ exports.graphqlHandler = (event, context, callback) => {
     case 'createUserTweet': {
       const { post } = event.arguments.post;
 
-      postTweet(post, consumerKey, consumerSecret).then(function(result) {
+      postTweet(post, consumerKey, consumerSecret).then(result => {
         callback(null, result);
       });
 
       break;
     }
     default: {
-      callback('Unknown field, unable to resolve' + event.field, null);
+      callback(`Unknown field, unable to resolve ${event.field}`, null);
       break;
     }
   }
