@@ -18,6 +18,10 @@
     "react/no-array-index-key": "off",
     "function-paren-newline": "off",
     "comma-dangle": "off",
-    "arrow-parens": "off"
+    "arrow-parens": "off",
+    "object-shorthand": "off",
+    "no-plusplus": "off",
+    "no-buffer-constructor": "off",
+    "no-restricted-properties": "off"
   }
 }
