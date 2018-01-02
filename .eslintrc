@@ -22,6 +22,8 @@
     "object-shorthand": "off",
     "no-plusplus": "off",
     "no-buffer-constructor": "off",
-    "no-restricted-properties": "off"
+    "no-restricted-properties": "off",
+    "no-param-reassign": "off",
+    "no-await-in-loop": "off"
   }
 }
