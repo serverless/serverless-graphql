@@ -4,7 +4,7 @@ type Query {
 
 type Subscription {
   subscribeToTweeterUser(handle: String!): Tweets
-    @aws_subscribe(mutations: ["createUserRecord"])
+    @aws_subscribe(mutations: ["createUserTweet"])
 }
 
 type Tweet {
@@ -12,7 +12,7 @@ type Tweet {
 }
 
 type Mutation {
-  # Create a single tweet.
+  # Create a new user with his tweets.
   createUserRecord(
     name: String!,
     screen_name: String!,
@@ -22,6 +22,17 @@ type Mutation {
     friends_count: Int!,
     favourites_count: Int!,
     posts: [String]
+  ): Tweets
+
+  # Create a tweet for a user
+  createUserTweet(
+    screen_name: String!,
+    post: String!
+  ): Tweets
+
+  # Delete User Record
+  deleteUserRecord(
+    screen_name: String!
   ): Tweets
 }
 

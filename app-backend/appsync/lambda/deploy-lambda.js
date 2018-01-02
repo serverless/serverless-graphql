@@ -9,16 +9,16 @@ const appsync = new AWS.AppSync({ apiVersion: '2017-07-25' });
 
 // For creating User Pool: Reference https://serverless-stack.com/chapters/create-a-cognito-user-pool.html
 // API key is not recommended for security.
-// Can we automate the process of creating cognito user pool
 
-//Todo: how to create this service role via serverless.yml automatically
-
-const graphQLAPIName = 'xxx';
-const awsRegion = 'us-east-1';
-const userPoolId = 'xxx';
-const serviceRole = 'arn:aws:iam::xxx:role/service-role/xxx';
+const graphQLAPIName = '...'; // your graphQL API Name
+const awsRegion = '...'; // AWS Region ex - us-east-1
+const userPoolId = '...'; // Your Cognito User Pool Id
+const roleName = '...';
+const accountId = '...';
+const serviceRole = `arn:aws:iam::${accountId}:role/service-role/${roleName}`; // Service IAM Role for appsync to access data sources
+const functionName = '...';
+const lambdaArn = `arn:aws:lambda:${awsRegion}:${accountId}:${functionName}`;
 const MAX_RETRIES = 10;
-const lambdaArn = 'xxx';
 let appId;
 let graphqlEndpoint;
 
@@ -56,11 +56,10 @@ appsync
       {
         apiId: appId /* required */,
         name: 'lambda' /* required */,
-        type: 'AMAZON_LAMBDA' /* required */,
+        type: 'AWS_LAMBDA' /* required */,
         description: 'my first data source',
-        elasticsearchConfig: {
-          awsRegion: 'us-east-1' /* required */,
-          endpoint: esEndpoint /* required */,
+        lambdaConfig: {
+          lambdaFunctionArn: lambdaArn /* required */,
         },
         serviceRoleArn: serviceRole,
       },
@@ -81,7 +80,7 @@ appsync
     });
   })
   .then(() => {
-    const file = fs.readFileSync('schema.txt', 'utf8');
+    const file = fs.readFileSync('schema.graphql', 'utf8');
 
     const schemaCreationparams = {
       apiId: appId /* required */,

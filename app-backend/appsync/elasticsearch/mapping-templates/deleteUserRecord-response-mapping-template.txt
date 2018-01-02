@@ -1,0 +1,14 @@
+{
+  #set($hitcount = $context.result.hits.total)
+    #set($tweetList = [])
+  #if($hitcount == 0)
+      "location" : "",
+      "name" : "",
+      "screen_name" : "",
+      "description" : "",
+      "followers_count" : -1,
+      "friends_count" : -1,
+      "favourites_count" : -1
+      "posts": []
+   #end
+}

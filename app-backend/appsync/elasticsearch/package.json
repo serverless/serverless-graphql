@@ -1,5 +1,5 @@
 {
-  "name": "serverless-appsync-plugin",
+  "name": "serverless-graphql-apollo",
   "version": "0.0.0",
   "private": true,
   "repository": {
@@ -10,6 +10,7 @@
     "deploy-prod": "cd seed-data && yarn create-seed-data"
   },
   "dependencies": {
+    "amazon-cognito-identity-js": "^1.29.0",
     "babel-polyfill": "^6.26.0"
   },
   "devDependencies": {
