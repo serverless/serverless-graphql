@@ -10,10 +10,19 @@ provider:
   environment:
     NODE_ENV: ${env:NODE_ENV}
     DATABASE_URL: ${env:DATABASE_URL}
+  tracing: true # enable tracing
+  iamRoleStatements:
+    - Effect: "Allow" # xray permissions (required)
+      Action:
+        - "xray:PutTraceSegments"
+        - "xray:PutTelemetryRecords"
+      Resource:
+        - "*"
 
 plugins:
   - serverless-offline
   - serverless-webpack
+  - serverless-plugin-tracing
 
 custom:
   serverless-offline:

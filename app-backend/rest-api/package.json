@@ -20,7 +20,8 @@
     "graphql-playground-middleware-lambda": "^1.2.0",
     "graphql-tools": "2.7.2",
     "node-fetch": "^1.7.3",
-    "oauth": "^0.9.15"
+    "oauth": "^0.9.15",
+    "serverless-plugin-tracing": "^2.0.0"
   },
   "devDependencies": {
     "aws-sdk": "^2.4.8",

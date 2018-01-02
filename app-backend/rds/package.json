@@ -27,6 +27,7 @@
     "graphql-tools": "2.7.2",
     "knex": "^0.14.2",
     "pg": "^7.4.0",
+    "serverless-plugin-tracing": "^2.0.0",
     "sqlite3": "^3.1.13"
   },
   "devDependencies": {

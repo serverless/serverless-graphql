@@ -7,7 +7,14 @@ provider:
   runtime: nodejs6.10
   stage: dev
   region: us-east-1
+  tracing: true # enable tracing
   iamRoleStatements:
+    - Effect: "Allow" # xray permissions (required)
+      Action:
+        - "xray:PutTraceSegments"
+        - "xray:PutTelemetryRecords"
+      Resource:
+        - "*"
     - Effect: Allow
       Action:
         - dynamodb:Query
@@ -23,6 +30,7 @@ plugins:
   - serverless-webpack
   - serverless-dynamodb-local
   - serverless-offline
+  - serverless-plugin-tracing
 
 custom:
   serverless-offline:
