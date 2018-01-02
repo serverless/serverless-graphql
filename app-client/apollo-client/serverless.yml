@@ -1,4 +1,4 @@
-service: serverless-graphql-apollo-client
+service: serverless-graphql-client
 
 frameworkVersion: ">=1.21.0 <2.0.0"
 
@@ -13,5 +13,5 @@ plugins:
 
 custom:
   client:
-    bucketName: s3-bucketname-serverless-graphql-apollo
+    bucketName: s3-bucketname-serverless-graphql
     distributionFolder: build

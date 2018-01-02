@@ -143,11 +143,11 @@ You need to make sure you have access to your deployed lambda functions.
 
 - *AWS S3*
 
-  - First you will need to choose custom s3 bucket name for client. For ex: s3-firstname-serverless-graphql-apollo. Please note that bucket name must be unique across all aws buckets.
+  - First you will need to choose custom s3 bucket name for client. For ex: s3-firstname-serverless-graphql. Please note that bucket name must be unique across all aws buckets.
 
   - Now, in `app-client/<client-name>/serverless.yml` edit the `custom.client.bucketName` property and replace it the bucket name above.
 
-  - Now, in `app-client/<client-name>/package.json` edit the `homepage` property with `https://${yourBucketName}.s3-website-us-east-1.amazonaws.com`. For ex: https://s3-bucketname-serverless-graphql-apollo.s3-website-us-east-1.amazonaws.com
+  - Now, in `app-client/<client-name>/package.json` edit the `homepage` property with `https://${yourBucketName}.s3-website-us-east-1.amazonaws.com`. For ex: https://s3-bucketname-serverless-graphql.s3-website-us-east-1.amazonaws.com
 
   - Run the deployment command
       ```
