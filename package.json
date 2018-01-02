@@ -11,7 +11,7 @@
       "prettier --list-different \"{app-backend,app-client/**/src}/**/*.{js,css,json}\"",
     "test": "yarn run lint && yarn run prettier-check",
     "postinstall":
-      "cd app-backend/dynamodb && yarn install && cd ../rest-api && yarn install && cd ../rds && yarn install && cd ../../app-client/apollo-client && yarn install",
+      "cd app-backend/dynamodb && yarn install && cd ../rest-api && yarn install && cd ../rds && yarn install && cd ../../app-client/apollo-client && yarn install && cd ../../ && yarn install-appsync",
     "install-appsync":
       "cd app-client/appsync-client && yarn install && cd ../../app-backend/appsync/dynamo && yarn install && cd ../elasticsearch && yarn install && cd ../lambda && yarn install"
   },
