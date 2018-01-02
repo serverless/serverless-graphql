@@ -24,6 +24,9 @@
     "no-buffer-constructor": "off",
     "no-restricted-properties": "off",
     "no-param-reassign": "off",
-    "no-await-in-loop": "off"
+    "no-await-in-loop": "off",
+    "space-before-function-paren": "off",
+    "no-console": "off",
+    "func-names": "off"
   }
 }

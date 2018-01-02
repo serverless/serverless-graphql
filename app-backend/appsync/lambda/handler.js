@@ -74,11 +74,11 @@ exports.graphqlHandler = (event, context, callback) => {
   console.log('Got an Invoke Request.');
   switch (event.field) {
     case 'getTwitterFeed': {
-      const handle = event.arguments.handle;
-      const consumerKey = event.arguments.consumer_key;
-      const consumerSecret = event.arguments.consumer_secret;
+      const { handle } = event.arguments.handle;
+      const { consumerKey } = event.arguments.consumer_key;
+      const { consumerSecret } = event.arguments.consumer_secret;
 
-      const tweets = twitterEndpoint
+      twitterEndpoint
         .getRawTweets(handle, consumerKey, consumerSecret)
         .then(result => {
           callback(null, result);
