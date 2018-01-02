@@ -17,11 +17,12 @@
   },
   "dependencies": {
     "amazon-cognito-identity-js": "^1.29.0",
+    "aws-sdk": "^2.176.0",
     "babel-polyfill": "^6.26.0",
+    "bluebird": "^3.5.1",
     "serverless-dynamodb-client": "^0.0.2"
   },
   "devDependencies": {
-    "aws-sdk": "^2.4.8",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",

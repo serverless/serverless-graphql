@@ -6,13 +6,13 @@ exports.graphqlHandler = (event, context, callback) => {
   console.log('Received event {}', JSON.stringify(event, 3));
 
   const twitterEndpoint = {
-    async getRawTweets(handle, consumer_key, consumer_secret) {
+    async getRawTweets(handle, consumerKey, consumerSecret) {
       const url = `https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=${
         handle
       }`;
       const oauth2 = new OAuth2(
-        consumer_key,
-        consumer_secret,
+        consumerKey,
+        consumerSecret,
         'https://api.twitter.com/',
         null,
         'oauth2/token',
@@ -73,20 +73,22 @@ exports.graphqlHandler = (event, context, callback) => {
 
   console.log('Got an Invoke Request.');
   switch (event.field) {
-    case 'getTwitterFeed':
-      const handle = event.arguments.handle;
-      const consumer_key = event.arguments.consumer_key;
-      const consumer_secret = event.arguments.consumer_secret;
+    case 'getTwitterFeed': {
+      const { handle } = event.arguments.handle;
+      const { consumerKey } = event.arguments.consumer_key;
+      const { consumerSecret } = event.arguments.consumer_secret;
 
-      const tweets = twitterEndpoint
-        .getRawTweets(handle, consumer_key, consumer_secret)
-        .then(function(result) {
+      twitterEndpoint
+        .getRawTweets(handle, consumerKey, consumerSecret)
+        .then(result => {
           callback(null, result);
         });
 
       break;
-    default:
-      callback('Unknown field, unable to resolve' + event.field, null);
+    }
+    default: {
+      callback(`Unknown field, unable to resolve${event.field}`, null);
       break;
+    }
   }
 };
