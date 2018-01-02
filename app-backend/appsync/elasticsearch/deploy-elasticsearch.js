@@ -1,10 +1,11 @@
 // Load the SDK for JavaScript
 const AWS = require('aws-sdk');
+const fs = require('fs');
+
 // Set the region
 AWS.config.update({ region: 'us-east-1' });
 AWS.config.setPromisesDependency(require('bluebird'));
 
-const fs = require('fs');
 const appsync = new AWS.AppSync({ apiVersion: '2017-07-25' });
 
 // For creating User Pool: Reference https://serverless-stack.com/chapters/create-a-cognito-user-pool.html
@@ -21,7 +22,6 @@ const esHostname = '...';
 const esEndpoint = `https://${esHostname}.${awsRegion}.es.amazonaws.com`;
 
 let appId;
-let graphqlEndpoint;
 
 function wait(timeout) {
   return new Promise(resolve => {
@@ -47,11 +47,10 @@ appsync
   .promise()
   .then(async data => {
     console.log(data); // successful response
-    console.log(data.graphqlApi.apiId);
-    console.log(data.graphqlApi.uris.GRAPHQL);
+    console.log(`GraphQL API ID : ${data.graphqlApi.apiId}`);
+    console.log(`GraphQL EndPoint : ${data.graphqlApi.uris.GRAPHQL}`);
 
     appId = data.graphqlApi.apiId;
-    graphqlEndpoint = data.graphqlApi.uris.GRAPHQL;
 
     const datasourceParams = [
       {
@@ -67,7 +66,7 @@ appsync
       },
     ];
 
-    let dataSourceList = [];
+    const dataSourceList = [];
 
     for (let i = 0; i < datasourceParams.length; i++) {
       dataSourceList.push(
@@ -76,9 +75,9 @@ appsync
     }
 
     /* STEP 2 : Attach DataSources to GRAPHQL EndPoint */
-    await Promise.all(dataSourceList).then(function(data) {
+    await Promise.all(dataSourceList).then(result => {
       console.log('all the datasources are created');
-      console.log(data);
+      console.log(result);
     });
   })
   .then(() => {
@@ -106,9 +105,9 @@ appsync
         await appsync
           .getSchemaCreationStatus(schemaCreationparams)
           .promise()
-          .then(data => {
-            console.log(data);
-            if (data['status'] === 'SUCCESS') {
+          .then(result => {
+            console.log(result);
+            if (result.status === 'SUCCESS') {
               success = true;
             }
           });
@@ -116,7 +115,6 @@ appsync
         if (success) break;
       } catch (err) {
         const timeout = Math.pow(2, i) * 1000;
-        //const timeout = 5000;
         console.log('Waiting', timeout, 'ms');
         await wait(timeout);
         console.log('Retrying', err.message, i);
@@ -184,14 +182,14 @@ appsync
       },
     ];
 
-    let resolverList = [];
+    const resolverList = [];
 
     for (let i = 0; i < resolverParams.length; i++) {
       resolverList.push(appsync.createResolver(resolverParams[i]).promise());
     }
 
     /* STEP 5 : Create Resolvers */
-    await Promise.all(resolverList).then(function(data) {
+    await Promise.all(resolverList).then(data => {
       console.log('all the resolvers are created');
       console.log(data);
     });

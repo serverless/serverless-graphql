@@ -80,13 +80,13 @@ exports.graphqlHandler = (event, context, callback) => {
 
       const tweets = twitterEndpoint
         .getRawTweets(handle, consumer_key, consumer_secret)
-        .then(function(result) {
+        .then(result => {
           callback(null, result);
         });
 
       break;
     default:
-      callback('Unknown field, unable to resolve' + event.field, null);
+      callback(`Unknown field, unable to resolve${event.field}`, null);
       break;
   }
 };
