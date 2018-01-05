@@ -1,8 +1,9 @@
 import React from 'react';
-import { graphql } from 'react-apollo';
-import gql from 'graphql-tag';
+import { graphql, compose } from 'react-apollo';
 import PropTypes from 'prop-types';
 import User from './User';
+import GetTweetsByUserQuery from '../Queries/GetTweetsByUserQuery';
+import PostTweetByUserQuery from '../Queries/PostTweetByUserQuery';
 
 const UserList = ({ data: { loading, error, getTwitterFeed } }) => {
   if (loading) {
@@ -23,37 +24,28 @@ UserList.propTypes = {
   data: PropTypes.any.isRequired, // eslint-disable-line
 };
 
-export const UserQuery = gql`
-  query UserQuery(
-    $handle: String!
-    $consumer_key: String!
-    $consumer_secret: String!
-  ) {
-    getTwitterFeed(
-      handle: $handle
-      consumer_key: $consumer_key
-      consumer_secret: $consumer_secret
-    ) {
-      name
-      location
-      screen_name
-      favourites_count
-      description
-      followers_count
-      friends_count
-      posts {
-        tweet
-      }
-    }
-  }
-`;
-
-export default graphql(UserQuery, {
-  options: () => ({
-    variables: {
-      handle: process.env.REACT_APP_HANDLE,
-      consumer_key: process.env.REACT_APP_CONSUMER_KEY,
-      consumer_secret: process.env.REACT_APP_SECRET_KEY,
-    },
+export default compose(
+  graphql(GetTweetsByUserQuery, {
+    options: () => ({
+      variables: {
+        handle: process.env.REACT_APP_HANDLE,
+        consumer_key: process.env.REACT_APP_CONSUMER_KEY,
+        consumer_secret: process.env.REACT_APP_SECRET_KEY,
+      },
+      fetchPolicy: 'cache-and-network',
+    }),
   }),
-})(UserList);
+  graphql(PostTweetByUserQuery, {
+    options: {
+      refetchQueries: [{ query: GetTweetsByUserQuery }],
+      update: (dataProxy, { data: { createUserTweet } }) => {
+        const query = GetTweetsByUserQuery;
+        const data = dataProxy.readQuery({ query });
+
+        data.posts.push(createUserTweet);
+
+        dataProxy.writeQuery({ query, data });
+      },
+    },
+  })
+)(UserList);
