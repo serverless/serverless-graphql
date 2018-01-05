@@ -12,21 +12,23 @@ import { ApolloProvider } from 'react-apollo';
 
 Amplify.configure({
   Auth: {
-    region: 'xx-xxxx-x', // REQUIRED - Amazon Cognito Region
-    userPoolId: 'xx-xxxx-x_xxxxxxxxx', //OPTIONAL - Amazon Cognito User Pool ID
-    userPoolWebClientId: 'xxxxx', //User Pool App Client ID
+    region: process.env.REACT_APP_AWS_AUTH_REGION, // REQUIRED - Amazon Cognito Region
+    userPoolId: process.env.REACT_APP_USER_POOL_ID, //OPTIONAL - Amazon Cognito User Pool ID
+    userPoolWebClientId: process.env.REACT_APP_CLIENT_APP_ID, //User Pool App Client ID
   },
 });
 
 const getCreds = async () => {
   return await Auth.currentSession()
-    .then(data => console.log(data))
+    .then(data => {
+      return data.idToken.jwtToken;
+    })
     .catch(err => console.log(err));
 };
 
 const client = new AWSAppSyncClient({
   url: process.env.REACT_APP_GRAPHQL_ENDPOINT,
-  region: 'us-east-1',
+  region: process.env.REACT_APP_AWS_CLIENT_REGION,
   auth: {
     type: AUTH_TYPE.AMAZON_COGNITO_USER_POOLS,
     jwtToken: getCreds(),
