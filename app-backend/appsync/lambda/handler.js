@@ -100,7 +100,7 @@ async function postTweet(
 
       return response;
     })
-    .catch(function(error) {
+    .catch(error => {
       throw error;
     });
 }
