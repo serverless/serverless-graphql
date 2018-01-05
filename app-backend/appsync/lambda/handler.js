@@ -1,6 +1,6 @@
 import 'babel-polyfill';
-import fetch from 'node-fetch';
 import { OAuth2 } from 'oauth';
+
 const Twitter = require('twitter');
 
 async function getRawTweets(handle, consumerKey, consumerSecret) {
@@ -37,7 +37,7 @@ async function getRawTweets(handle, consumerKey, consumerSecret) {
 
       return client
         .get(url, params)
-        .then(function(tweets) {
+        .then(tweets => {
           console.log(tweets);
           const tweetArray = [];
           let listOfTweets;
@@ -64,7 +64,7 @@ async function getRawTweets(handle, consumerKey, consumerSecret) {
           console.log(listOfTweets);
           return listOfTweets;
         })
-        .catch(function(error) {
+        .catch(error => {
           throw error;
         });
     })
@@ -91,7 +91,7 @@ async function postTweet(
 
   return client
     .post(url, params)
-    .then(function(tweet) {
+    .then(tweet => {
       console.log(tweet);
       const response = {
         screen_name: tweet.user.name,
