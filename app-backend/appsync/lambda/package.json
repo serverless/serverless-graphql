@@ -7,23 +7,17 @@
     "url": "git@github.com:serverless/serverless-graphql.git"
   },
   "scripts": {
-    "test": "jest",
-    "start": "env-cmd ../../config/security.env.local serverless offline start",
     "deploy-prod": "serverless --stage=production deploy"
   },
   "dependencies": {
-    "apollo-server-lambda": "1.3.2",
-    "apollo-tracing": "^0.0.9",
+    "amazon-cognito-identity-js": "^1.29.0",
+    "aws-sdk": "^2.176.0",
     "babel-polyfill": "^6.26.0",
-    "graphql": "^0.10.5",
-    "graphql-playground-middleware": "^1.1.0",
-    "graphql-playground-middleware-lambda": "^1.2.0",
-    "graphql-tools": "2.7.2",
+    "bluebird": "^3.5.1",
     "node-fetch": "^1.7.3",
     "oauth": "^0.9.15"
   },
   "devDependencies": {
-    "aws-sdk": "^2.4.8",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",

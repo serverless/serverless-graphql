@@ -1,0 +1,29 @@
+{
+  #set($hitcount = $context.result.hits.total)
+    #set($tweetList = [])
+  #if($hitcount > 0)
+        #foreach($entry in $context.result.hits.hits)
+          #set( $element =
+          ${tweetList.add(
+          { "tweet" : $util.toJson("$entry.get('_source')['tweet']") }
+          )}
+          )
+      #end
+      "location" : $util.toJson("$context.result.hits.hits[0].get('_source')['location']"),
+      "name" : $util.toJson("$context.result.hits.hits[0].get('_source')['name']"),
+      "screen_name" : $util.toJson("$context.result.hits.hits[0].get('_source')['screen_name']"),
+      "description" : $util.toJson("$context.result.hits.hits[0].get('_source')['description']"),
+      "followers_count" : $util.toJson("$context.result.hits.hits[0].get('_source')['followers_count']"),
+      "friends_count" : $util.toJson("$context.result.hits.hits[0].get('_source')['friends_count']"),
+      "favourites_count" : $util.toJson("$context.result.hits.hits[0].get('_source')['favourites_count']"),
+      "posts" : $util.toJson($tweetList)
+    #else
+      "location" : "",
+      "name" : "",
+      "screen_name" : "",
+      "description" : "",
+      "followers_count" : -1,
+      "friends_count" : -1,
+      "favourites_count" : -1
+   #end
+}
