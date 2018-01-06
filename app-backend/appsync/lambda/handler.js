@@ -1,11 +1,11 @@
 import 'babel-polyfill';
-import fetch from 'node-fetch';
 import { OAuth2 } from 'oauth';
 
+const Twitter = require('twitter');
+
 async function getRawTweets(handle, consumerKey, consumerSecret) {
-  const url = `https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=${
-    handle
-  }`;
+  const url = 'statuses/user_timeline';
+
   const oauth2 = new OAuth2(
     consumerKey,
     consumerSecret,
@@ -27,92 +27,82 @@ async function getRawTweets(handle, consumerKey, consumerSecret) {
     );
   })
     .then(accessToken => {
-      const options = {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      };
-      return fetch(url, options)
-        .then(res => res.json())
-        .then(res => {
-          const tweets = [];
+      const client = new Twitter({
+        consumer_key: consumerKey,
+        consumer_secret: consumerSecret,
+        bearer_token: accessToken,
+      });
+
+      const params = { screen_name: handle };
+
+      return client
+        .get(url, params)
+        .then(tweets => {
+          console.log(tweets);
+          const tweetArray = [];
           let listOfTweets;
 
-          if (res.length >= 1) {
+          if (tweets.length >= 1) {
             listOfTweets = {
-              name: res[0].user.name,
-              screen_name: res[0].user.screen_name,
-              location: res[0].user.location,
-              description: res[0].user.description,
-              followers_count: res[0].user.followers_count,
-              friends_count: res[0].user.friends_count,
-              favourites_count: res[0].user.favourites_count,
+              name: tweets[0].user.name,
+              screen_name: tweets[0].user.screen_name,
+              location: tweets[0].user.location,
+              description: tweets[0].user.description,
+              followers_count: tweets[0].user.followers_count,
+              friends_count: tweets[0].user.friends_count,
+              favourites_count: tweets[0].user.favourites_count,
               posts: [],
             };
           }
 
-          for (let i = 0; i < res.length; i += 1) {
-            tweets.push({ tweet: res[i].text });
+          for (let i = 0; i < tweets.length; i += 1) {
+            tweetArray.push({ tweet: tweets[i].text });
           }
 
-          listOfTweets.posts = tweets;
+          listOfTweets.posts = tweetArray;
 
+          console.log(listOfTweets);
           return listOfTweets;
         })
-        .catch(error => error);
+        .catch(error => {
+          throw error;
+        });
     })
     .catch(error => error);
 }
 
-async function postTweet(post, consumerKey, consumerSecret) {
-  const url = 'https://api.twitter.com/1.1/statuses/update.json';
+async function postTweet(
+  post,
+  consumerKey,
+  consumerSecret,
+  accessTokenKey,
+  accessTokenSecret
+) {
+  const url = 'statuses/update';
 
-  const oauth2 = new OAuth2(
-    consumerKey,
-    consumerSecret,
-    'https://api.twitter.com/',
-    null,
-    'oauth2/token',
-    null
-  );
+  const client = new Twitter({
+    consumer_key: consumerKey,
+    consumer_secret: consumerSecret,
+    access_token_key: accessTokenKey,
+    access_token_secret: accessTokenSecret,
+  });
 
-  return new Promise(resolve => {
-    oauth2.getOAuthAccessToken(
-      '',
-      {
-        grant_type: 'client_credentials',
-      },
-      (error, accessToken) => {
-        resolve(accessToken);
-      }
-    );
-  })
-    .then(accessToken => {
-      const postBody = {
-        status: post,
+  const params = { status: post };
+
+  return client
+    .post(url, params)
+    .then(tweet => {
+      console.log(tweet);
+      const response = {
+        screen_name: tweet.user.name,
+        post: tweet.text,
       };
 
-      const options = {
-        method: 'POST',
-        body: postBody,
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      };
-      return fetch(url, options)
-        .then(res => res.json())
-        .then(res => {
-          const tweet = {
-            screen_name: res.user.name,
-            post: res.text,
-          };
-
-          return tweet;
-        })
-        .catch(error => error);
+      return response;
     })
-    .catch(error => error);
+    .catch(error => {
+      throw error;
+    });
 }
 
 exports.graphqlHandler = (event, context, callback) => {
@@ -124,18 +114,22 @@ exports.graphqlHandler = (event, context, callback) => {
   console.log('Got an Invoke Request.');
   switch (event.field) {
     case 'getTwitterFeed': {
-      const { handle } = event.arguments.handle;
-
-      getRawTweets(handle, consumerKey, consumerSecret).then(result => {
-        callback(null, result);
-      });
+      getRawTweets(event.arguments.handle, consumerKey, consumerSecret).then(
+        result => {
+          callback(null, result);
+        }
+      );
 
       break;
     }
     case 'createUserTweet': {
-      const { post } = event.arguments.post;
-
-      postTweet(post, consumerKey, consumerSecret).then(result => {
+      postTweet(
+        event.arguments.post,
+        consumerKey,
+        consumerSecret,
+        event.arguments.access_token_key,
+        event.arguments.access_token_secret
+      ).then(result => {
         callback(null, result);
       });
 
