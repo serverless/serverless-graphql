@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import UserList from './components/UserList';
+import Tweetbar from './components/Tweetbar';
 import logo from './logo.svg';
 import './App.css';
-
 import AWSAppSyncClient from 'aws-appsync';
 import { Rehydrated } from 'aws-appsync-react';
 import { AUTH_TYPE } from 'aws-appsync/lib/link/auth-link';
@@ -33,6 +33,7 @@ class App extends Component {
           <h2>Serverless GraphQL Apollo </h2>
         </div>
         <div className="App-User">
+          <Tweetbar />
           <UserList />
         </div>
       </div>
