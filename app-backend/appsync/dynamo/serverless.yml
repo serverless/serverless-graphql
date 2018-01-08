@@ -15,15 +15,17 @@ plugins:
 custom:
   dynamodb:
     start:
-      port: 8000
+      port: 8003
       inMemory: true
       migrate: true
       seed: true
     seed:
       test:
         sources:
-          - table: users
+          - table: Users
             sources: [seed-data/users.json]
+          - table: Tweets
+            sources: [seed-data/tweets.json]
 
 resources:
   Resources:
@@ -32,13 +34,28 @@ resources:
       Properties:
         KeySchema:
           -
-            AttributeName: screen_name
+            AttributeName: handle
             KeyType: HASH
         AttributeDefinitions:
           -
-            AttributeName: screen_name
+            AttributeName: handle
             AttributeType: S
         ProvisionedThroughput:
           ReadCapacityUnits: 10
           WriteCapacityUnits: 10
-        TableName: 'users'
+        TableName: 'Users'
+    TweetTable:
+      Type: 'AWS::DynamoDB::Table'
+      Properties:
+        KeySchema:
+          -
+            AttributeName: id
+            KeyType: HASH
+        AttributeDefinitions:
+          -
+            AttributeName: id
+            AttributeType: S
+        ProvisionedThroughput:
+          ReadCapacityUnits: 10
+          WriteCapacityUnits: 10
+        TableName: 'Tweets'

@@ -11,11 +11,11 @@ const appsync = new AWS.AppSync({ apiVersion: '2017-07-25' });
 // For creating User Pool: Reference https://serverless-stack.com/chapters/create-a-cognito-user-pool.html
 // API key is not recommended for security.
 
-const graphQLAPIName = '...'; // your graphQL API Name
-const awsRegion = '...'; // AWS Region ex - us-east-1
-const userPoolId = '...'; // Your Cognito User Pool Id
-const roleName = '...';
-const accountId = '...';
+const graphQLAPIName = 'dynamodbv2'; // your graphQL API Name
+const awsRegion = 'us-east-1'; // AWS Region ex - us-east-1
+const userPoolId = 'us-east-1_NrPGUsF22'; // Your Cognito User Pool Id
+const roleName = 'appsync-datasource-ddb-7vmsye-users';
+const accountId = '252626742933';
 const serviceRole = `arn:aws:iam::${accountId}:role/service-role/${roleName}`; // Service IAM Role for appsync to access data sources
 const MAX_RETRIES = 10;
 let appId;
@@ -52,12 +52,23 @@ appsync
     const datasourceParams = [
       {
         apiId: appId /* required */,
-        name: 'dynamo' /* required */,
+        name: 'Users' /* required */,
         type: 'AMAZON_DYNAMODB' /* required */,
-        description: 'my first data source',
+        description: 'Store user info',
         dynamodbConfig: {
           awsRegion: awsRegion /* required */,
-          tableName: 'users' /* required */,
+          tableName: 'Users' /* required */,
+        },
+        serviceRoleArn: serviceRole,
+      },
+      {
+        apiId: appId /* required */,
+        name: 'Tweets' /* required */,
+        type: 'AMAZON_DYNAMODB' /* required */,
+        description: 'Store tweets info',
+        dynamodbConfig: {
+          awsRegion: awsRegion /* required */,
+          tableName: 'Tweets' /* required */,
         },
         serviceRoleArn: serviceRole,
       },
@@ -137,49 +148,35 @@ appsync
     const resolverParams = [
       {
         apiId: appId /* required */,
-        dataSourceName: 'dynamo' /* required */,
-        fieldName: 'getTwitterFeed' /* required */,
+        dataSourceName: 'Users' /* required */,
+        fieldName: 'getUserTwitterFeed' /* required */,
         requestMappingTemplate: fs.readFileSync(
-          'mapping-templates/getTwitterFeed-request-mapping-template.txt',
+          'mapping-templates/getUserTwitterFeed-request-mapping-template.txt',
           'utf8'
         ) /* required */,
         typeName: 'Query' /* required */,
         responseMappingTemplate: fs.readFileSync(
-          'mapping-templates/getTwitterFeed-response-mapping-template.txt',
+          'mapping-templates/getUserTwitterFeed-response-mapping-template.txt',
           'utf8'
         ) /* required */,
       },
       {
         apiId: appId /* required */,
-        dataSourceName: 'dynamo' /* required */,
-        fieldName: 'createUserRecord' /* required */,
+        dataSourceName: 'Users' /* required */,
+        fieldName: 'deleteUserTweet' /* required */,
         requestMappingTemplate: fs.readFileSync(
-          'mapping-templates/createUserRecord-request-mapping-template.txt',
+          'mapping-templates/deleteUserTweet-request-mapping-template.txt',
           'utf8'
         ) /* required */,
         typeName: 'Mutation' /* required */,
         responseMappingTemplate: fs.readFileSync(
-          'mapping-templates/createUserRecord-response-mapping-template.txt',
+          'mapping-templates/deleteUserTweet-response-mapping-template.txt',
           'utf8'
         ) /* required */,
       },
       {
         apiId: appId /* required */,
-        dataSourceName: 'dynamo' /* required */,
-        fieldName: 'deleteUserRecord' /* required */,
-        requestMappingTemplate: fs.readFileSync(
-          'mapping-templates/deleteUserRecord-request-mapping-template.txt',
-          'utf8'
-        ) /* required */,
-        typeName: 'Mutation' /* required */,
-        responseMappingTemplate: fs.readFileSync(
-          'mapping-templates/deleteUserRecord-response-mapping-template.txt',
-          'utf8'
-        ) /* required */,
-      },
-      {
-        apiId: appId /* required */,
-        dataSourceName: 'dynamo' /* required */,
+        dataSourceName: 'Users' /* required */,
         fieldName: 'createUserTweet' /* required */,
         requestMappingTemplate: fs.readFileSync(
           'mapping-templates/createUserTweet-request-mapping-template.txt',

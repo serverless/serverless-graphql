@@ -1,55 +1,75 @@
 const faker = require('faker');
 const jsonfile = require('jsonfile');
 
-let numRecords = 100;
-let numPosts = 25;
+const numUsers = 100;
+const tweetsPerUser = 25;
 
-data = [];
+const udata = [];
 
-for (let i = 0; i < numRecords; i++) {
-  let posts = [];
+faker.seed(1000);
+const tweets = [];
 
-  for (let j = 0; j < numPosts; j++) {
-    let item = {
+for (let i = 0; i < numUsers; i++) {
+  const tweetId = [];
+  const handle = faker.internet.userName();
+
+  for (let j = 0; j < tweetsPerUser; j++) {
+    const id = faker.random.uuid();
+    tweetId.push(id);
+
+    const item = {
+      id: id,
       tweet: faker.lorem.sentence(),
+      retweeted: faker.random.boolean(),
+      retweet_count: faker.random.number({
+        min: 1,
+        max: 50,
+      }),
+      favorited: faker.random.boolean(),
+      handle: handle,
     };
-    posts.push(item);
+    tweets.push(item);
   }
 
-  record = {
+  const urecord = {
     name: faker.name.findName(),
-    screen_name: faker.internet.userName(),
+    handle: handle,
     location: faker.address.city(),
     description: faker.name.jobTitle(),
-    followers_count: faker.random.number(),
-    friends_count: faker.random.number(),
-    favourites_count: faker.random.number(),
-    posts: posts,
+    followers_count: faker.random.number({
+      min: 1,
+      max: 500,
+    }),
+    friends_count: faker.random.number({
+      min: 1,
+      max: 500,
+    }),
+    favourites_count: faker.random.number({
+      min: 1,
+      max: 5000,
+    }),
+    id: tweetId,
   };
 
-  data.push(record);
+  udata.push(urecord);
 }
 
-const file = 'users.json';
+const ufile = 'users.json';
 
-//insert 1 static record for quick onboarding:
-record = {
-  name: 'Leonardo di Caprio',
-  screen_name: 'LeoDiCaprio',
-  location: 'LA',
-  description: 'Actor',
-  followers_count: 14050000,
-  friends_count: 1000,
-  favourites_count: 400,
-  posts: [
-    {
-      tweet: 'today will be a good day!',
-    },
-  ],
-};
+jsonfile.writeFileSync(ufile, udata, function(err) {
+  if (err) {
+    console.error(err);
+  } else {
+    console.log('data created successfully');
+  }
+});
 
-data.push(record);
+const tfile = 'tweets.json';
 
-jsonfile.writeFile(file, data, function(err) {
-  console.error(err);
+jsonfile.writeFileSync(tfile, tweets, function(err) {
+  if (err) {
+    console.error(err);
+  } else {
+    console.log('data created successfully');
+  }
 });

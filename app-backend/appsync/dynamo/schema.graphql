@@ -1,50 +1,49 @@
 type Query {
-  getTwitterFeed(handle: String!): Tweets
+  getUserTwitterFeed(handle: String!): User
 }
 
 type Subscription {
-  subscribeToTweeterUser(handle: String!): Tweets
-    @aws_subscribe(mutations: ["createUserTweet"])
+  subscribeToTweeterUser(handle: String!): User
+    @aws_subscribe(mutations: ["createUserTweet", "deleteUserTweet"])
 }
 
 type Tweet {
-  tweet: String
+  id : String!
+  tweet: String!
+  retweeted: Boolean!
+  retweet_count: Int
+  favorited: Boolean!
 }
 
 type Mutation {
-  # Create a new user with his tweets.
-  createUserRecord(
-    name: String!,
-    screen_name: String!,
-    location: String!,
-    description: String!,
-    followers_count: Int!,
-    friends_count: Int!,
-    favourites_count: Int!,
-    posts: [String]
-  ): Tweets
 
   # Create a tweet for a user
   createUserTweet(
-    screen_name: String!,
-    post: String!
-  ): Tweets
+    handle: String!,
+    tweet: String!
+  ): User
 
-  # Delete User Record
-  deleteUserRecord(
-    screen_name: String!
-  ): Tweets
+  # Delete User Tweet
+  deleteUserTweet(
+    id: String!
+  ): User
 }
 
-type Tweets {
+type User {
   name: String!
-  screen_name: String!
+  handle: String!
   location: String!
   description: String!
   followers_count: Int!
   friends_count: Int!
   favourites_count: Int!
-  posts: [Tweet]
+  followers: [User]
+  tweets(limit: Int=10, nextToken: String) : TweetConnection
+}
+
+type TweetConnection {
+  items: [Tweet]
+  nextToken:String
 }
 
 schema {

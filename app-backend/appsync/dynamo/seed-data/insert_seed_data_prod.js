@@ -11,21 +11,21 @@ console.log('Importing movies into DynamoDB. Please wait.');
 const allUsers = JSON.parse(fs.readFileSync('users.json', 'utf8'));
 
 allUsers.forEach(function(user) {
-  const params = {
-    TableName: 'users',
+  const Userparams = {
+    TableName: 'Users',
     Item: {
       name: user.name,
-      screen_name: user.screen_name,
+      handle: user.handle,
       location: user.location,
       description: user.description,
       followers_count: user.followers_count,
       friends_count: user.friends_count,
       favourites_count: user.favourites_count,
-      posts: user.posts,
+      list_tweets: user.tweetId,
     },
   };
 
-  docClient.put(params, function(err, data) {
+  docClient.put(Userparams, function(err, data) {
     if (err) {
       console.error(
         'Unable to add user',
@@ -36,5 +36,31 @@ allUsers.forEach(function(user) {
     } else {
       console.log('PutItem succeeded:', user.name);
     }
+  });
+
+  user.tweets.forEach(function(tweet) {
+    const Tweetparams = {
+      TableName: 'Tweets',
+      Item: {
+        id: tweet.id,
+        tweet: tweet.tweet,
+        retweeted: tweet.retweeted,
+        retweet_count: tweet.retweet_count,
+        favorited: tweet.favorited,
+      },
+    };
+
+    docClient.put(Tweetparams, function(err, data) {
+      if (err) {
+        console.error(
+          'Unable to add user',
+          user.name,
+          '. Error JSON:',
+          JSON.stringify(err, null, 2)
+        );
+      } else {
+        console.log('PutItem succeeded:', tweet.id);
+      }
+    });
   });
 });
