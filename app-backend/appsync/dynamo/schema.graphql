@@ -25,7 +25,8 @@ type Mutation {
 
   # Delete User Tweet
   deleteUserTweet(
-    id: String!
+    id: String!,
+    handle: String
   ): User
 }
 

@@ -3618,8 +3618,8 @@ serverless-dynamodb-client@^0.0.2:
     aws-sdk "^2.3.19"
 
 serverless-dynamodb-local@^0.2.26:
-  version "0.2.26"
-  resolved "https://registry.yarnpkg.com/serverless-dynamodb-local/-/serverless-dynamodb-local-0.2.26.tgz#f8192ac077135f93bf55540fd5376db77d39ba19"
+  version "0.2.27"
+  resolved "https://registry.yarnpkg.com/serverless-dynamodb-local/-/serverless-dynamodb-local-0.2.27.tgz#218328363c8e5e9ebb61133e183dacfffee98727"
   dependencies:
     aws-sdk "^2.7.0"
     bluebird "^3.4.6"

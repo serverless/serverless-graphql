@@ -1,17 +1,28 @@
 const faker = require('faker');
 const jsonfile = require('jsonfile');
 
-const numUsers = 100;
-const tweetsPerUser = 25;
+const numUsers = 10;
+const tweetsPerUser = 5;
+const followersPerUser = 2;
 
 const udata = [];
+const handleNames = [];
 
 faker.seed(1000);
 const tweets = [];
 
 for (let i = 0; i < numUsers; i++) {
-  const tweetId = [];
   const handle = faker.internet.userName();
+  handleNames.push(handle);
+}
+
+for (let i = 0; i < handleNames.length; i++) {
+  const tweetId = [];
+  const followers = [];
+
+  for (let k = 0; k < followersPerUser; k++) {
+    followers.push(handleNames[Math.floor(Math.random() * handleNames.length)]);
+  }
 
   for (let j = 0; j < tweetsPerUser; j++) {
     const id = faker.random.uuid();
@@ -26,14 +37,14 @@ for (let i = 0; i < numUsers; i++) {
         max: 50,
       }),
       favorited: faker.random.boolean(),
-      handle: handle,
+      handle: handleNames[i],
     };
     tweets.push(item);
   }
 
   const urecord = {
     name: faker.name.findName(),
-    handle: handle,
+    handle: handleNames[i],
     location: faker.address.city(),
     description: faker.name.jobTitle(),
     followers_count: faker.random.number({
@@ -49,6 +60,7 @@ for (let i = 0; i < numUsers; i++) {
       max: 5000,
     }),
     id: tweetId,
+    followers: followers,
   };
 
   udata.push(urecord);

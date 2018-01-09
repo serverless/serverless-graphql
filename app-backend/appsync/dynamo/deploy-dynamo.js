@@ -11,11 +11,11 @@ const appsync = new AWS.AppSync({ apiVersion: '2017-07-25' });
 // For creating User Pool: Reference https://serverless-stack.com/chapters/create-a-cognito-user-pool.html
 // API key is not recommended for security.
 
-const graphQLAPIName = 'dynamodbv2'; // your graphQL API Name
-const awsRegion = 'us-east-1'; // AWS Region ex - us-east-1
-const userPoolId = 'us-east-1_NrPGUsF22'; // Your Cognito User Pool Id
-const roleName = 'appsync-datasource-ddb-7vmsye-users';
-const accountId = '252626742933';
+const graphQLAPIName = '...'; // your graphQL API Name
+const awsRegion = '...'; // AWS Region ex - us-east-1
+const userPoolId = '...'; // Your Cognito User Pool Id
+const roleName = '...';
+const accountId = '...';
 const serviceRole = `arn:aws:iam::${accountId}:role/service-role/${roleName}`; // Service IAM Role for appsync to access data sources
 const MAX_RETRIES = 10;
 let appId;
@@ -59,7 +59,9 @@ appsync
           awsRegion: awsRegion /* required */,
           tableName: 'Users' /* required */,
         },
-        serviceRoleArn: serviceRole,
+        serviceRoleArn: `arn:aws:iam::${accountId}:role/service-role/${
+          userTableroleName
+        }`,
       },
       {
         apiId: appId /* required */,
@@ -70,7 +72,9 @@ appsync
           awsRegion: awsRegion /* required */,
           tableName: 'Tweets' /* required */,
         },
-        serviceRoleArn: serviceRole,
+        serviceRoleArn: `arn:aws:iam::${accountId}:role/service-role/${
+          tweetTableroleName
+        }`,
       },
     ];
 
@@ -162,7 +166,7 @@ appsync
       },
       {
         apiId: appId /* required */,
-        dataSourceName: 'Users' /* required */,
+        dataSourceName: 'Tweets' /* required */,
         fieldName: 'deleteUserTweet' /* required */,
         requestMappingTemplate: fs.readFileSync(
           'mapping-templates/deleteUserTweet-request-mapping-template.txt',
@@ -176,13 +180,27 @@ appsync
       },
       {
         apiId: appId /* required */,
-        dataSourceName: 'Users' /* required */,
+        dataSourceName: 'Tweets' /* required */,
         fieldName: 'createUserTweet' /* required */,
         requestMappingTemplate: fs.readFileSync(
           'mapping-templates/createUserTweet-request-mapping-template.txt',
           'utf8'
         ) /* required */,
         typeName: 'Mutation' /* required */,
+        responseMappingTemplate: fs.readFileSync(
+          'mapping-templates/createUserTweet-response-mapping-template.txt',
+          'utf8'
+        ) /* required */,
+      },
+      {
+        apiId: appId /* required */,
+        dataSourceName: 'Tweets' /* required */,
+        fieldName: 'tweets' /* required */,
+        requestMappingTemplate: fs.readFileSync(
+          'mapping-templates/createUserTweet-request-mapping-template.txt',
+          'utf8'
+        ) /* required */,
+        typeName: 'User' /* required */,
         responseMappingTemplate: fs.readFileSync(
           'mapping-templates/createUserTweet-response-mapping-template.txt',
           'utf8'
