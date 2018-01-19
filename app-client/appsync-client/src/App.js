@@ -18,6 +18,16 @@ Amplify.configure({
   },
 });
 
+const client = new AWSAppSyncClient({
+  url: process.env.REACT_APP_GRAPHQL_ENDPOINT,
+  region: process.env.REACT_APP_AWS_CLIENT_REGION,
+  auth: {
+    type: AUTH_TYPE.AMAZON_COGNITO_USER_POOLS,
+    jwtToken: async () =>
+      (await Auth.currentSession()).getIdToken().getJwtToken(),
+  },
+});
+
 class App extends Component {
   render() {
     return (
@@ -34,28 +44,12 @@ class App extends Component {
   }
 }
 
-class WithProvider extends React.Component {
-  render() {
-    if (this.props.authState !== 'signedIn') {
-      return null;
-    } else {
-      this.client = new AWSAppSyncClient({
-        url: process.env.REACT_APP_GRAPHQL_ENDPOINT,
-        region: process.env.REACT_APP_AWS_CLIENT_REGION,
-        auth: {
-          type: AUTH_TYPE.AMAZON_COGNITO_USER_POOLS,
-          jwtToken: this.props.authData.signInUserSession.idToken.jwtToken,
-        },
-      });
+const WithProvider = () => (
+  <ApolloProvider client={client}>
+    <Rehydrated>
+      <App />
+    </Rehydrated>
+  </ApolloProvider>
+);
 
-      return (
-        <ApolloProvider client={this.client}>
-          <Rehydrated>
-            <App authData={this.props.authData} />
-          </Rehydrated>
-        </ApolloProvider>
-      );
-    }
-  }
-}
 export default withAuthenticator(WithProvider, { includeGreetings: true });
