@@ -155,6 +155,20 @@ appsync
       {
         apiId: appId /* required */,
         dataSourceName: 'elastic' /* required */,
+        fieldName: 'searchTwitterFeed' /* required */,
+        requestMappingTemplate: fs.readFileSync(
+          'mapping-templates/searchTwitterFeed-request-mapping-template.txt',
+          'utf8'
+        ) /* required */,
+        typeName: 'Query' /* required */,
+        responseMappingTemplate: fs.readFileSync(
+          'mapping-templates/getTwitterFeed-response-mapping-template.txt',
+          'utf8'
+        ) /* required */,
+      },
+      {
+        apiId: appId /* required */,
+        dataSourceName: 'elastic' /* required */,
         fieldName: 'createUserTweet' /* required */,
         requestMappingTemplate: fs.readFileSync(
           'mapping-templates/createUserTweet-request-mapping-template.txt',
