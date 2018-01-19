@@ -420,27 +420,26 @@ autoprefixer@^6.3.1:
     postcss-value-parser "^3.2.3"
 
 aws-amplify-react@^0.1.30:
-  version "0.1.30"
-  resolved "https://registry.yarnpkg.com/aws-amplify-react/-/aws-amplify-react-0.1.30.tgz#03f75b614e1cd16549bbef17ad39f39c14b6e3a0"
+  version "0.1.31"
+  resolved "https://registry.yarnpkg.com/aws-amplify-react/-/aws-amplify-react-0.1.31.tgz#e8d8034807b532b83fa1c27e50f32fc907d00d9c"
 
 aws-amplify@^0.1.30:
-  version "0.1.30"
-  resolved "https://registry.yarnpkg.com/aws-amplify/-/aws-amplify-0.1.30.tgz#ee2c934cc58eb487c38ffe66853c2ad5b3eb3f02"
+  version "0.1.36"
+  resolved "https://registry.yarnpkg.com/aws-amplify/-/aws-amplify-0.1.36.tgz#44ab88ef704158ca51b10644c075315d6cecd0df"
   dependencies:
     amazon-cognito-identity-js "^1.19.0"
-    aws-sdk "^2.101.0"
-    aws-sdk-mobile-analytics "^0.9.2"
+    aws-sdk "2.177.0"
     axios "^0.17.0"
     querystring-browser "^1.0.4"
 
 aws-appsync-react@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/aws-appsync-react/-/aws-appsync-react-1.0.1.tgz#51ad70daf8fd9b477845d10c46a67f4ea189e122"
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/aws-appsync-react/-/aws-appsync-react-1.0.4.tgz#a20fd8024481f94a36df9fd9c857f8b16425162c"
   dependencies:
     aws-appsync "^1.0.0"
     prop-types "^15.6.0"
 
-aws-appsync@^1.0.0, aws-appsync@^1.0.1:
+aws-appsync@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/aws-appsync/-/aws-appsync-1.0.1.tgz#4778de4c3a70861b1b464ee1867a1cbbc169a377"
   dependencies:
@@ -457,15 +456,26 @@ aws-appsync@^1.0.0, aws-appsync@^1.0.1:
     redux-thunk "^2.2.0"
     url "^0.11.0"
 
-aws-sdk-mobile-analytics@^0.9.2:
-  version "0.9.2"
-  resolved "https://registry.yarnpkg.com/aws-sdk-mobile-analytics/-/aws-sdk-mobile-analytics-0.9.2.tgz#b56a6e5206fc8c3975a19170b41536c53f6d5d91"
+aws-appsync@^1.0.1:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/aws-appsync/-/aws-appsync-1.0.6.tgz#f4558895fd56c8a1dda52c754933cb3adb1f147e"
   dependencies:
-    aws-sdk ">=2.2.37"
+    "@redux-offline/redux-offline" "^2.2.1"
+    apollo-cache-inmemory "^1.0.0"
+    apollo-client "^2.0.3"
+    apollo-link "^1.0.0"
+    apollo-link-context "^1.0.0"
+    apollo-link-http "^1.0.0"
+    aws-sdk "^2.139.0"
+    graphql "^0.11.7"
+    paho-client "^1.0.1"
+    redux "^3.7.2"
+    redux-thunk "^2.2.0"
+    url "^0.11.0"
 
-aws-sdk@>=2.2.37, aws-sdk@^2.101.0, aws-sdk@^2.6.0:
-  version "2.176.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.176.0.tgz#2723c14e1c623ac45c5b890a3fc736eee8085f67"
+aws-sdk@2.177.0:
+  version "2.177.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.177.0.tgz#d5fbf1f82bab250e55153699b030b44f687f600b"
   dependencies:
     buffer "4.9.1"
     crypto-browserify "1.0.9"
@@ -496,6 +506,21 @@ aws-sdk@^2.139.0:
 aws-sdk@^2.158.0:
   version "2.175.0"
   resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.175.0.tgz#33346247b3b9ca674f275eea746edfdfb6479e44"
+  dependencies:
+    buffer "4.9.1"
+    crypto-browserify "1.0.9"
+    events "^1.1.1"
+    jmespath "0.15.0"
+    querystring "0.2.0"
+    sax "1.2.1"
+    url "0.10.3"
+    uuid "3.1.0"
+    xml2js "0.4.17"
+    xmlbuilder "4.2.1"
+
+aws-sdk@^2.6.0:
+  version "2.176.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.176.0.tgz#2723c14e1c623ac45c5b890a3fc736eee8085f67"
   dependencies:
     buffer "4.9.1"
     crypto-browserify "1.0.9"
