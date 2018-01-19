@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import UserList from './components/UserList';
-import logo from './logo.svg';
-import './App.css';
-
 import Amplify, { Auth } from 'aws-amplify';
 import { withAuthenticator } from 'aws-amplify-react/dist/Auth';
 import AWSAppSyncClient from 'aws-appsync';
 import { Rehydrated } from 'aws-appsync-react';
 import { AUTH_TYPE } from 'aws-appsync/lib/link/auth-link';
 import { ApolloProvider } from 'react-apollo';
+
+import UserList from './components/UserList';
+import Tweetbar from './components/Tweetbar';
+import logo from './logo.svg';
+import './App.css';
 
 Amplify.configure({
   Auth: {
