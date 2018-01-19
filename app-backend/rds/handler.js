@@ -12,7 +12,12 @@ const myGraphQLSchema = makeExecutableSchema({
 });
 
 exports.graphqlHandler = function graphqlHandler(event, context, callback) {
+  context.callbackWaitsForEmptyEventLoop = false;
+
   function callbackFilter(error, output) {
+    if (!output.headers) {
+      output.headers = {};
+    }
     // eslint-disable-next-line no-param-reassign
     output.headers['Access-Control-Allow-Origin'] = '*';
     callback(error, output);

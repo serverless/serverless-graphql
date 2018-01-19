@@ -1,11 +1,7 @@
 const data = require('./users.json');
-const pg = require('pg');
+const connection = require('../knexfile');
 
-const knex = require('knex')({
-  client: 'pg',
-  connection: process.env.DATABASE_URL,
-  debug: true,
-});
+const knex = require('knex')(connection.production);
 
 const posts = [];
 
