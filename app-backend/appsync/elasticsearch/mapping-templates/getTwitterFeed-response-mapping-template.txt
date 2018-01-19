@@ -5,7 +5,7 @@
         #foreach($entry in $context.result.hits.hits)
           #set( $element =
           ${tweetList.add(
-          { "tweet" : $util.toJson("$entry.get('_source')['tweet']") }
+          { "tweet" : "$entry.get('_source')['tweet']" }
           )}
           )
       #end
