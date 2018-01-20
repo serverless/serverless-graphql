@@ -1,47 +1,50 @@
-type Mutation {
-	# Create a tweet for a user
-	createUserTweet(
-		name: String!,
-		screen_name: String!,
-		location: String!,
-		description: String!,
-		followers_count: Int!,
-		friends_count: Int!,
-		favourites_count: Int!,
-		post: String!
-	): Tweets
-	# Delete User Record
-	deleteUserRecord(screen_name: String!): Tweets
-}
-
 type Query {
-	getTwitterFeed(handle: String!, consumer_key: String, consumer_secret: String): Tweets
-	searchTwitterFeed(handle: String!, keyword: String!): Tweets
-	searchAllTweets(keyword: String!): [Tweets]
+  getTwitterFeed(handle: String!, consumer_key: String, consumer_secret: String): Tweets
+  searchTwitterFeed(handle: String!, keyword: String!): Tweets
+  searchAllTweets(keyword: String!): [Tweets]
 }
 
 type Subscription {
-	subscribeToTweeterUser(handle: String!): Tweets
-		@aws_subscribe(mutations: ["createUserTweet"])
+  subscribeToTweeterUser(handle: String!): Tweets
+    @aws_subscribe(mutations: ["createUserTweet"])
 }
 
 type Tweet {
-	tweet: String
+  tweet: String
+}
+
+type Mutation {
+  # Create a tweet for a user
+  createUserTweet(
+    name: String!,
+    screen_name: String!,
+    location: String!,
+    description: String!,
+    followers_count: Int!,
+    friends_count: Int!,
+    favourites_count: Int!,
+    post: String!
+  ): Tweets
+
+  # Delete User Record
+  deleteUserRecord(
+    screen_name: String!
+  ): Tweets
 }
 
 type Tweets {
-	name: String!
-	screen_name: String!
-	location: String!
-	description: String!
-	followers_count: Int!
-	friends_count: Int!
-	favourites_count: Int!
-	posts: [Tweet]
+  name: String!
+  screen_name: String!
+  location: String!
+  description: String!
+  followers_count: Int!
+  friends_count: Int!
+  favourites_count: Int!
+  posts: [Tweet]
 }
 
 schema {
-	query: Query
-	mutation: Mutation
-	subscription: Subscription
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
 }
