@@ -167,6 +167,20 @@ appsync
         ) /* required */,
       },
       {
+          apiId: appId /* required */,
+          dataSourceName: 'elastic' /* required */,
+          fieldName: 'searchAllTweets' /* required */,
+          requestMappingTemplate: fs.readFileSync(
+              'mapping-templates/searchAllTweets-request-mapping-template.txt',
+              'utf8'
+          ) /* required */,
+          typeName: 'Query' /* required */,
+          responseMappingTemplate: fs.readFileSync(
+              'mapping-templates/searchAllTweets-response-mapping-template.txt',
+              'utf8'
+          ) /* required */,
+      },
+      {
         apiId: appId /* required */,
         dataSourceName: 'elastic' /* required */,
         fieldName: 'createUserTweet' /* required */,

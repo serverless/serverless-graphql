@@ -1,0 +1,29 @@
+[
+  #set($hitcount = $context.result.hits.total)
+    #set($tweetMap = {})
+    #set($result = [])
+  #if($hitcount > 0)
+      #foreach($entry in $context.result.hits.hits)
+      	#if($tweetMap.get("$entry.get('_source')['screen_name']"))
+        	#set($tweetList = $tweetMap.get("$entry.get('_source')['screen_name']"))
+        	#set($element = ${tweetList.add({ "tweet" : "$entry.get('_source')['tweet']" })})
+            #set($tweetMap["$entry.get('_source')['screen_name']"] = {
+            	"screen_name" : "$entry.get('_source')['screen_name']",
+                "posts" : $tweetList
+            }
+            )
+        #else
+        	#set($tweetList = [])
+            #set($element = ${tweetList.add({ "tweet" : "$entry.get('_source')['tweet']" })})
+            #set($tweetMap["$entry.get('_source')['screen_name']"] = {
+            	"screen_name" : "$entry.get('_source')['screen_name']",
+                "posts" : $tweetList
+            }
+            )
+        #end    
+      #end
+	  #foreach( $key in $tweetMap.keySet() )
+    	$tweetMap.get($key)
+	  #end
+  #end
+]
