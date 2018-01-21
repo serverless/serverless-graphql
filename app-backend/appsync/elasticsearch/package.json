@@ -7,7 +7,7 @@
     "url": "git@github.com:serverless/serverless-graphql.git"
   },
   "scripts": {
-    "deploy-prod": "cd seed-data && yarn create-seed-data"
+    "deploy-prod": "cd seed-data && yarn create-seed-data && serverless --stage=production deploy"
   },
   "dependencies": {
     "amazon-cognito-identity-js": "^1.29.0",
