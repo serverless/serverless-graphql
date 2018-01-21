@@ -1,4 +1,4 @@
-service: serverless-graphql
+service: serverless-graphql-appsync-dynamo
 
 frameworkVersion: ">=1.21.0 <2.0.0"
 
@@ -24,8 +24,6 @@ custom:
         sources:
           - table: Users
             sources: [seed-data/users.json]
-          - table: Tweets
-            sources: [seed-data/tweets.json]
 
 resources:
   Resources:
@@ -36,26 +34,70 @@ resources:
           -
             AttributeName: handle
             KeyType: HASH
+          -
+            AttributeName: tweet_id
+            KeyType: RANGE
         AttributeDefinitions:
           -
             AttributeName: handle
             AttributeType: S
-        ProvisionedThroughput:
-          ReadCapacityUnits: 10
-          WriteCapacityUnits: 10
-        TableName: 'Users'
-    TweetTable:
-      Type: 'AWS::DynamoDB::Table'
-      Properties:
-        KeySchema:
           -
-            AttributeName: id
-            KeyType: HASH
-        AttributeDefinitions:
-          -
-            AttributeName: id
+            AttributeName: tweet_id
             AttributeType: S
         ProvisionedThroughput:
           ReadCapacityUnits: 10
           WriteCapacityUnits: 10
-        TableName: 'Tweets'
+        TableName: 'users'
+        GlobalSecondaryIndexes:
+          -
+            IndexName: user-index
+            KeySchema:
+              -
+                AttributeName: handle
+                KeyType: HASH
+            Projection:
+              NonKeyAttributes:
+                - name
+                - location
+                - description
+                - followers_count
+                - friends_count
+                - favourites_count
+                - followers
+              ProjectionType: INCLUDE
+            ProvisionedThroughput:
+              ReadCapacityUnits: 50
+              WriteCapacityUnits: 50
+    AppSyncServiceRole:
+      Type: "AWS::IAM::Role"
+      Properties:
+        RoleName: "Dynamo-AppSyncServiceRole"
+        AssumeRolePolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            -
+              Effect: "Allow"
+              Principal:
+                Service:
+                  - "appsync.amazonaws.com"
+              Action:
+                - "sts:AssumeRole"
+        Policies:
+          -
+            PolicyName: "Dynamo-AppSyncServiceRole-Policy"
+            PolicyDocument:
+              Version: "2012-10-17"
+              Statement:
+                -
+                  Effect: "Allow"
+                  Action:
+                    - "dynamodb:Query"
+                    - "dynamodb:BatchWriteItem"
+                    - "dynamodb:GetItem"
+                    - "dynamodb:DeleteItem"
+                    - "dynamodb:PutItem"
+                    - "dynamodb:Scan"
+                    - "dynamodb:UpdateItem"
+                  Resource:
+                    - "arn:aws:dynamodb:us-east-1:xxx:table/users"
+                    - "arn:aws:dynamodb:us-east-1:xxx:table/users/*"
