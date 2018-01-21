@@ -1,6 +1,7 @@
 type Query {
   getTwitterFeed(handle: String!, consumer_key: String, consumer_secret: String): Tweets
   searchTwitterFeed(handle: String!, keyword: String!): Tweets
+  searchAllTweets(keyword: String!): [Tweets]
 }
 
 type Subscription {
