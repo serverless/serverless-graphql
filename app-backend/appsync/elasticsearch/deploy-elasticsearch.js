@@ -14,9 +14,9 @@ const appsync = new AWS.AppSync({ apiVersion: '2017-07-25' });
 const graphQLAPIName = '...'; // your graphQL API Name
 const awsRegion = '...'; // AWS Region ex - us-east-1
 const userPoolId = '...'; // Your Cognito User Pool Id
-const roleName = '...';
+const roleName = 'ES-AppSyncServiceRole';
 const accountId = '...';
-const serviceRole = `arn:aws:iam::${accountId}:role/service-role/${roleName}`; // Service IAM Role for appsync to access data sources
+const serviceRole = `arn:aws:iam::${accountId}:role/${roleName}`; // Service IAM Role for appsync to access data sources
 const MAX_RETRIES = 10;
 const esHostname = '...';
 const esEndpoint = `https://${esHostname}.${awsRegion}.es.amazonaws.com`;
@@ -151,6 +151,34 @@ appsync
           'mapping-templates/getTwitterFeed-response-mapping-template.txt',
           'utf8'
         ) /* required */,
+      },
+      {
+        apiId: appId /* required */,
+        dataSourceName: 'elastic' /* required */,
+        fieldName: 'searchTwitterFeed' /* required */,
+        requestMappingTemplate: fs.readFileSync(
+          'mapping-templates/searchTwitterFeed-request-mapping-template.txt',
+          'utf8'
+        ) /* required */,
+        typeName: 'Query' /* required */,
+        responseMappingTemplate: fs.readFileSync(
+          'mapping-templates/getTwitterFeed-response-mapping-template.txt',
+          'utf8'
+        ) /* required */,
+      },
+      {
+          apiId: appId /* required */,
+          dataSourceName: 'elastic' /* required */,
+          fieldName: 'searchAllTweets' /* required */,
+          requestMappingTemplate: fs.readFileSync(
+              'mapping-templates/searchAllTweets-request-mapping-template.txt',
+              'utf8'
+          ) /* required */,
+          typeName: 'Query' /* required */,
+          responseMappingTemplate: fs.readFileSync(
+              'mapping-templates/searchAllTweets-response-mapping-template.txt',
+              'utf8'
+          ) /* required */,
       },
       {
         apiId: appId /* required */,

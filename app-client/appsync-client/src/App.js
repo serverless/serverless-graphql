@@ -3,25 +3,29 @@ import UserList from './components/UserList';
 import logo from './logo.svg';
 import './App.css';
 
+import Amplify, { Auth } from 'aws-amplify';
+import { withAuthenticator } from 'aws-amplify-react/dist/Auth';
 import AWSAppSyncClient from 'aws-appsync';
 import { Rehydrated } from 'aws-appsync-react';
 import { AUTH_TYPE } from 'aws-appsync/lib/link/auth-link';
 import { ApolloProvider } from 'react-apollo';
-import * as AWS from 'aws-sdk';
-import awsconfig from './aws-exports';
 
-AWS.config.update({
-  region: awsconfig.REGION,
-  credentials: new AWS.Credentials({
-    accessKeyId: awsconfig.AWS_ACCESS_KEY_ID,
-    secretAccessKey: awsconfig.AWS_SECRET_ACCESS_KEY,
-  }),
+Amplify.configure({
+  Auth: {
+    region: process.env.REACT_APP_AWS_AUTH_REGION, // REQUIRED - Amazon Cognito Region
+    userPoolId: process.env.REACT_APP_USER_POOL_ID, //OPTIONAL - Amazon Cognito User Pool ID
+    userPoolWebClientId: process.env.REACT_APP_CLIENT_APP_ID, //User Pool App Client ID
+  },
 });
 
 const client = new AWSAppSyncClient({
   url: process.env.REACT_APP_GRAPHQL_ENDPOINT,
-  region: 'us-east-1',
-  auth: { type: AUTH_TYPE.AWS_IAM, credentials: AWS.config.credentials },
+  region: process.env.REACT_APP_AWS_CLIENT_REGION,
+  auth: {
+    type: AUTH_TYPE.AMAZON_COGNITO_USER_POOLS,
+    jwtToken: async () =>
+      (await Auth.currentSession()).getIdToken().getJwtToken(),
+  },
 });
 
 class App extends Component {
@@ -48,4 +52,4 @@ const WithProvider = () => (
   </ApolloProvider>
 );
 
-export default WithProvider;
+export default withAuthenticator(WithProvider, { includeGreetings: true });
