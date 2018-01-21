@@ -1,29 +1,36 @@
 [
+
   #set($hitcount = $context.result.hits.total)
     #set($tweetMap = {})
-    #set($result = [])
   #if($hitcount > 0)
       #foreach($entry in $context.result.hits.hits)
       	#if($tweetMap.get("$entry.get('_source')['screen_name']"))
         	#set($tweetList = $tweetMap.get("$entry.get('_source')['screen_name']"))
         	#set($element = ${tweetList.add({ "tweet" : "$entry.get('_source')['tweet']" })})
-            #set($tweetMap["$entry.get('_source')['screen_name']"] = {
-            	"screen_name" : "$entry.get('_source')['screen_name']",
-                "posts" : $tweetList
-            }
-            )
+            #set($tweetMap["$entry.get('_source')['screen_name']"] = $tweetList)
         #else
         	#set($tweetList = [])
             #set($element = ${tweetList.add({ "tweet" : "$entry.get('_source')['tweet']" })})
-            #set($tweetMap["$entry.get('_source')['screen_name']"] = {
-            	"screen_name" : "$entry.get('_source')['screen_name']",
-                "posts" : $tweetList
-            }
-            )
+            #set($tweetMap["$entry.get('_source')['screen_name']"] = $tweetList)
         #end    
       #end
-	  #foreach( $key in $tweetMap.keySet() )
-    	$tweetMap.get($key)
-	  #end
+  
+  
+    #foreach($entry in $context.result.hits.hits) 
+        ## $velocityCount starts at 1 and increments with the #foreach loop **
+        #if( $velocityCount > 1 ) , #end
+        $util.toJson(
+        {
+        	'screen_name' : $entry.get("_source")['screen_name'], 
+            'name' : $entry.get("_source")['name'],
+            'location': $entry.get("_source")['location'],
+            'description': $entry.get("_source")['description'],
+            'followers_count': $entry.get("_source")['followers_count'],
+            'friends_count': $entry.get("_source")['friends_count'],
+            'favourites_count': $entry.get("_source")['favourites_count'],
+            "posts" : $tweetMap[$entry.get("_source")['screen_name']]
+        }
+        )
+    #end
   #end
 ]
