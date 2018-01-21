@@ -1,4 +1,4 @@
-service: serverless-graphql
+service: serverless-graphql-appsync-dynamo
 
 frameworkVersion: ">=1.21.0 <2.0.0"
 
