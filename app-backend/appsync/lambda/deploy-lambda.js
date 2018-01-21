@@ -14,10 +14,10 @@ const appsync = new AWS.AppSync({ apiVersion: '2017-07-25' });
 const graphQLAPIName = '...'; // your graphQL API Name
 const awsRegion = '...'; // AWS Region ex - us-east-1
 const userPoolId = '...'; // Your Cognito User Pool Id
-const roleName = '...';
+const roleName = 'Lambda-AppSyncServiceRole';
 const accountId = '...';
-const serviceRole = `arn:aws:iam::${accountId}:role/service-role/${roleName}`; // Service IAM Role for appsync to access data sources
-const functionName = '...';
+const serviceRole = `arn:aws:iam::${accountId}:role/${roleName}`; // Service IAM Role for appsync to access data sources
+const functionName = 'serverless-graphql-appsync-lda-production-graphql';
 const lambdaArn = `arn:aws:lambda:${awsRegion}:${accountId}:function:${
   functionName
 }`;

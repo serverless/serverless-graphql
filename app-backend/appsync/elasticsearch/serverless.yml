@@ -1,4 +1,4 @@
-service: serverless-graphql-appsync-lda
+service: serverless-graphql-appsync-es
 
 frameworkVersion: ">=1.21.0 <2.0.0"
 
@@ -8,25 +8,12 @@ provider:
   stage: dev
   region: us-east-1
 
-plugins:
-  - serverless-offline
-  - serverless-webpack
-
-custom:
-  serverless-offline:
-    port: 4000
-  webpackIncludeModules: true
-
-functions:
-  graphql:
-    handler: handler.graphqlHandler
-
 resources:
   Resources:
     AppSyncServiceRole:
       Type: "AWS::IAM::Role"
       Properties:
-        RoleName: "Lambda-AppSyncServiceRole"
+        RoleName: "ES-AppSyncServiceRole"
         AssumeRolePolicyDocument:
           Version: "2012-10-17"
           Statement:
@@ -39,14 +26,13 @@ resources:
                 - "sts:AssumeRole"
         Policies:
           -
-            PolicyName: "Lambda-AppSyncServiceRole-Policy"
+            PolicyName: "ES-AppSyncServiceRole-Policy"
             PolicyDocument:
               Version: "2012-10-17"
               Statement:
                 -
                   Effect: "Allow"
                   Action:
-                    - "lambda:invokeFunction"
+                    - "es:*"
                   Resource:
-                    - "arn:aws:lambda:us-east-1:xxx:function:serverless-graphql-appsync-lda-production-graphql"
-                    - "arn:aws:lambda:us-east-1:xxx:function:serverless-graphql-appsync-lda-production-graphql:*"
+                    - "arn:aws:es:us-east-1:xxx:domain/appsync/*"
