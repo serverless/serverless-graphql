@@ -1,0 +1,14 @@
+{
+    "version" : "2017-02-28",
+    "operation" : "UpdateItem",
+    "key" : {
+        "handle" : { "S" : "${context.arguments.handle}" },
+        "tweet_id" : { "S" : "${context.arguments.tweet_id}" }
+    },
+    "update" : {
+        "expression" : "SET tweet = :tweet",
+        "expressionValues": {
+        	":tweet" : { "S" : "${context.arguments.tweet}" }
+        }
+    }
+}
