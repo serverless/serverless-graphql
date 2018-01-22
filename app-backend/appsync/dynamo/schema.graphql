@@ -1,8 +1,22 @@
 type Mutation {
 	# Create a tweet for a user
-	createUserTweet(handle: String!, tweet: String!): User
+	createTweet(
+		handle: String!,
+		tweet: String!,
+		name: String!,
+		location: String!,
+		description: String!,
+		followers: [String],
+		followers_count: Int!,
+		friends_count: Int!,
+		favourites_count: Int!
+	): Tweet
+
 	# Delete User Tweet
-	deleteUserTweet(id: String!, handle: String): User
+	deleteTweet(tweet_id: String!, handle: String): Tweet
+
+	# Retweet existing Tweet
+	reTweet(tweet_id: String!, handle: String): Tweet
 }
 
 type Query {
@@ -10,7 +24,7 @@ type Query {
 }
 
 type Subscription {
-	subscribeToTweeterUser(handle: String!): User
+	subscribeToTweeterUser(handle: String!): Tweet
 		@aws_subscribe(mutations: ["createUserTweet","deleteUserTweet"])
 }
 

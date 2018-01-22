@@ -177,6 +177,62 @@ appsync
               'utf8'
           ) /* required */,
       },
+        {
+            apiId: appId /* required */,
+            dataSourceName: 'users' /* required */,
+            fieldName: 'tweets' /* required */,
+            requestMappingTemplate: fs.readFileSync(
+                'mapping-templates/tweets-request-mapping-template.txt',
+                'utf8'
+            ) /* required */,
+            typeName: 'User' /* required */,
+            responseMappingTemplate: fs.readFileSync(
+                'mapping-templates/tweets-response-mapping-template.txt',
+                'utf8'
+            ) /* required */,
+        },
+        {
+            apiId: appId /* required */,
+            dataSourceName: 'users' /* required */,
+            fieldName: 'createTweet' /* required */,
+            requestMappingTemplate: fs.readFileSync(
+                'mapping-templates/createTweet-request-mapping-template.txt',
+                'utf8'
+            ) /* required */,
+            typeName: 'Mutation' /* required */,
+            responseMappingTemplate: fs.readFileSync(
+                'mapping-templates/createTweet-response-mapping-template.txt',
+                'utf8'
+            ) /* required */,
+        },
+        {
+            apiId: appId /* required */,
+            dataSourceName: 'users' /* required */,
+            fieldName: 'createTweet' /* required */,
+            requestMappingTemplate: fs.readFileSync(
+                'mapping-templates/deleteTweet-request-mapping-template.txt',
+                'utf8'
+            ) /* required */,
+            typeName: 'Mutation' /* required */,
+            responseMappingTemplate: fs.readFileSync(
+                'mapping-templates/deleteTweet-response-mapping-template.txt',
+                'utf8'
+            ) /* required */,
+        },
+        {
+            apiId: appId /* required */,
+            dataSourceName: 'users' /* required */,
+            fieldName: 'reTweet' /* required */,
+            requestMappingTemplate: fs.readFileSync(
+                'mapping-templates/reTweet-request-mapping-template.txt',
+                'utf8'
+            ) /* required */,
+            typeName: 'Mutation' /* required */,
+            responseMappingTemplate: fs.readFileSync(
+                'mapping-templates/reTweet-response-mapping-template.txt',
+                'utf8'
+            ) /* required */,
+        },
     ];
 
     const resolverList = [];
