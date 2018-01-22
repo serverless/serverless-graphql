@@ -7,7 +7,6 @@ type Mutation {
 
 type Query {
 	getUserTwitterFeed(handle: String!): User
-	getUserTweetByKeyword(keyword: String!): User
 }
 
 type Subscription {
@@ -21,6 +20,7 @@ type Tweet {
 	retweeted: Boolean!
 	retweet_count: Int
 	favorited: Boolean!
+	created_at: String!
 }
 
 type TweetConnection {

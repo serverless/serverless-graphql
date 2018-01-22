@@ -50,25 +50,6 @@ resources:
         TableName: 'users'
         GlobalSecondaryIndexes:
           -
-            IndexName: user-index
-            KeySchema:
-              -
-                AttributeName: handle
-                KeyType: HASH
-            Projection:
-              NonKeyAttributes:
-                - name
-                - location
-                - description
-                - followers_count
-                - friends_count
-                - favourites_count
-                - followers
-              ProjectionType: INCLUDE
-            ProvisionedThroughput:
-              ReadCapacityUnits: 50
-              WriteCapacityUnits: 50
-          -
             IndexName: top-index
             KeySchema:
               -

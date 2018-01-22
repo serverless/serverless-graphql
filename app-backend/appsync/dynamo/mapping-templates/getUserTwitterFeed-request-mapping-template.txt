@@ -9,6 +9,5 @@
                 "S" : "${context.arguments.handle}"
             }
         }
-    },
-    "index": "user-index"
+    }
 }
