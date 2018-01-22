@@ -52,30 +52,15 @@ appsync
     const datasourceParams = [
       {
         apiId: appId /* required */,
-        name: 'Users' /* required */,
+        name: 'users' /* required */,
         type: 'AMAZON_DYNAMODB' /* required */,
         description: 'Store user info',
         dynamodbConfig: {
           awsRegion: awsRegion /* required */,
-          tableName: 'Users' /* required */,
+          tableName: 'users' /* required */,
         },
-        serviceRoleArn: `arn:aws:iam::${accountId}:role/service-role/${
-          userTableroleName
-        }`,
-      },
-      {
-        apiId: appId /* required */,
-        name: 'Tweets' /* required */,
-        type: 'AMAZON_DYNAMODB' /* required */,
-        description: 'Store tweets info',
-        dynamodbConfig: {
-          awsRegion: awsRegion /* required */,
-          tableName: 'Tweets' /* required */,
-        },
-        serviceRoleArn: `arn:aws:iam::${accountId}:role/service-role/${
-          tweetTableroleName
-        }`,
-      },
+        serviceRoleArn: serviceRole
+      }
     ];
 
     const dataSourceList = [];
@@ -152,7 +137,7 @@ appsync
     const resolverParams = [
       {
         apiId: appId /* required */,
-        dataSourceName: 'Users' /* required */,
+        dataSourceName: 'users' /* required */,
         fieldName: 'getUserTwitterFeed' /* required */,
         requestMappingTemplate: fs.readFileSync(
           'mapping-templates/getUserTwitterFeed-request-mapping-template.txt',
@@ -165,46 +150,32 @@ appsync
         ) /* required */,
       },
       {
-        apiId: appId /* required */,
-        dataSourceName: 'Tweets' /* required */,
-        fieldName: 'deleteUserTweet' /* required */,
-        requestMappingTemplate: fs.readFileSync(
-          'mapping-templates/deleteUserTweet-request-mapping-template.txt',
-          'utf8'
-        ) /* required */,
-        typeName: 'Mutation' /* required */,
-        responseMappingTemplate: fs.readFileSync(
-          'mapping-templates/deleteUserTweet-response-mapping-template.txt',
-          'utf8'
-        ) /* required */,
+          apiId: appId /* required */,
+          dataSourceName: 'users' /* required */,
+          fieldName: 'tweets' /* required */,
+          requestMappingTemplate: fs.readFileSync(
+              'mapping-templates/getUserTwitterFeed-request-mapping-template.txt',
+              'utf8'
+          ) /* required */,
+          typeName: 'User' /* required */,
+          responseMappingTemplate: fs.readFileSync(
+              'mapping-templates/getUserTwitterFeed-response-mapping-template.txt',
+              'utf8'
+          ) /* required */,
       },
       {
-        apiId: appId /* required */,
-        dataSourceName: 'Tweets' /* required */,
-        fieldName: 'createUserTweet' /* required */,
-        requestMappingTemplate: fs.readFileSync(
-          'mapping-templates/createUserTweet-request-mapping-template.txt',
-          'utf8'
-        ) /* required */,
-        typeName: 'Mutation' /* required */,
-        responseMappingTemplate: fs.readFileSync(
-          'mapping-templates/createUserTweet-response-mapping-template.txt',
-          'utf8'
-        ) /* required */,
-      },
-      {
-        apiId: appId /* required */,
-        dataSourceName: 'Tweets' /* required */,
-        fieldName: 'tweets' /* required */,
-        requestMappingTemplate: fs.readFileSync(
-          'mapping-templates/createUserTweet-request-mapping-template.txt',
-          'utf8'
-        ) /* required */,
-        typeName: 'User' /* required */,
-        responseMappingTemplate: fs.readFileSync(
-          'mapping-templates/createUserTweet-response-mapping-template.txt',
-          'utf8'
-        ) /* required */,
+          apiId: appId /* required */,
+          dataSourceName: 'users' /* required */,
+          fieldName: 'topTweet' /* required */,
+          requestMappingTemplate: fs.readFileSync(
+              'mapping-templates/topTweet-request-mapping-template.txt',
+              'utf8'
+          ) /* required */,
+          typeName: 'User' /* required */,
+          responseMappingTemplate: fs.readFileSync(
+              'mapping-templates/topTweet-response-mapping-template.txt',
+              'utf8'
+          ) /* required */,
       },
     ];
 

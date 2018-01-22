@@ -68,6 +68,20 @@ resources:
             ProvisionedThroughput:
               ReadCapacityUnits: 50
               WriteCapacityUnits: 50
+          -
+            IndexName: top-index
+            KeySchema:
+              -
+                AttributeName: handle
+                KeyType: HASH
+            Projection:
+              NonKeyAttributes:
+                - tweet
+                - retweet_count
+              ProjectionType: INCLUDE
+            ProvisionedThroughput:
+              ReadCapacityUnits: 50
+              WriteCapacityUnits: 50
     AppSyncServiceRole:
       Type: "AWS::IAM::Role"
       Properties:
