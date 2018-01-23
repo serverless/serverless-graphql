@@ -11,6 +11,9 @@
             "followers_count":$context.arguments.followers_count,
             "friends_count":$context.arguments.friends_count,
             "favourites_count":$context.arguments.favourites_count,
+            "retweet_count":0,
+            "retweeted":false,
+            "favorited":false,
             #set($followersList = [])
             #foreach ( $follower in $context.arguments.followers )
               #set( $element =

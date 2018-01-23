@@ -6,7 +6,10 @@
           #set( $element =
           ${tweetList.add(
           { "tweet" : "$entry.get('_source')['tweet']",
-          	"retweet_count" : "$entry.get('_source')['retweet_count']"
+          	"retweet_count" : "$entry.get('_source')['retweet_count']",
+            "retweeted": $entry.get('_source')['retweeted'],
+            "favorited": $entry.get('_source')['favorited'],
+            "tweet_id": "$entry.get('_id')"
           }
           )}
           )

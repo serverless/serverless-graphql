@@ -34,10 +34,9 @@ type Subscription {
 type Tweet {
 	tweet_id: String!
 	tweet: String!
-	retweeted: Boolean!
+	retweeted: Boolean
 	retweet_count: Int
-	favorited: Boolean!
-	created_at: String!
+	favorited: Boolean
 }
 
 type TweetConnection {
