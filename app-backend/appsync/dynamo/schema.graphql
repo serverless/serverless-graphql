@@ -13,13 +13,13 @@ type Mutation {
 	): Tweet!
 
 	# Delete User Tweet
-	deleteTweet(tweet_id: String!, handle: String): Tweet!
+	deleteTweet(tweet_id: String!, handle: String!): Tweet!
 
 	# Retweet existing Tweet
-	reTweet(tweet_id: String!, handle: String): Tweet!
+	reTweet(tweet_id: String!, handle: String!): Tweet!
 
 	# Update existing Tweet
-	updateTweet(tweet_id: String!, handle: String, tweet: String!): Tweet!
+	updateTweet(tweet_id: String!, handle: String!, tweet: String!): Tweet!
 }
 
 type Query {
@@ -34,10 +34,9 @@ type Subscription {
 type Tweet {
 	tweet_id: String!
 	tweet: String!
-	retweeted: Boolean!
+	retweeted: Boolean
 	retweet_count: Int
-	favorited: Boolean!
-	created_at: String!
+	favorited: Boolean
 }
 
 type TweetConnection {
