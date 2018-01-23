@@ -17,13 +17,5 @@
       "friends_count" : $util.toJson("$context.result.hits.hits[0].get('_source')['friends_count']"),
       "favourites_count" : $util.toJson("$context.result.hits.hits[0].get('_source')['favourites_count']"),
       "posts" : $util.toJson($tweetList)
-    #else
-      "location" : "",
-      "name" : "",
-      "screen_name" : "",
-      "description" : "",
-      "followers_count" : -1,
-      "friends_count" : -1,
-      "favourites_count" : -1
    #end
 }
