@@ -23,7 +23,7 @@ type Query {
 	getUserTwitterFeed(handle: String!): User!
 	searchTwitterFeedByKeyword(handle: String!, keyword: String!): User!
 	searchTwitterFeedByLocation(handle: String!, location: String!): User!
-	searchAllTweets(keyword: String!): [User!]!
+	searchAllTweetsByKeyword(keyword: String!): [User!]!
 }
 
 type Subscription {

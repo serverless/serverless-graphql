@@ -5,13 +5,20 @@
     "params":{
         "body":{
             "name":"$context.arguments.name",
-            "screen_name":"$context.arguments.screen_name",
+            "handle":"$context.arguments.handle",
             "location":"$context.arguments.location",
             "description":"$context.arguments.description",
             "followers_count":$context.arguments.followers_count,
             "friends_count":$context.arguments.friends_count,
             "favourites_count":$context.arguments.favourites_count,
-            "tweet": "$context.arguments.post"
+            #set($followersList = [])
+            #foreach ( $follower in $context.arguments.followers )
+              #set( $element =
+              ${followersList.add($follower)}
+              )
+            #end
+            "followers": $utils.toJson($followersList),
+            "tweet": "$context.arguments.tweet"
         }
     }
 }

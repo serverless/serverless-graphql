@@ -152,20 +152,6 @@ appsync
       {
           apiId: appId /* required */,
           dataSourceName: 'users' /* required */,
-          fieldName: 'tweets' /* required */,
-          requestMappingTemplate: fs.readFileSync(
-              'mapping-templates/getUserTwitterFeed-request-mapping-template.txt',
-              'utf8'
-          ) /* required */,
-          typeName: 'User' /* required */,
-          responseMappingTemplate: fs.readFileSync(
-              'mapping-templates/getUserTwitterFeed-response-mapping-template.txt',
-              'utf8'
-          ) /* required */,
-      },
-      {
-          apiId: appId /* required */,
-          dataSourceName: 'users' /* required */,
           fieldName: 'topTweet' /* required */,
           requestMappingTemplate: fs.readFileSync(
               'mapping-templates/topTweet-request-mapping-template.txt',
@@ -208,7 +194,7 @@ appsync
         {
             apiId: appId /* required */,
             dataSourceName: 'users' /* required */,
-            fieldName: 'createTweet' /* required */,
+            fieldName: 'deleteTweet' /* required */,
             requestMappingTemplate: fs.readFileSync(
                 'mapping-templates/deleteTweet-request-mapping-template.txt',
                 'utf8'
