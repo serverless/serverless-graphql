@@ -13,6 +13,7 @@ plugins:
   - serverless-webpack
 
 custom:
+  account_id: ${opt:account_id}
   serverless-offline:
     port: 4000
   webpackIncludeModules: true
@@ -48,5 +49,5 @@ resources:
                   Action:
                     - "lambda:invokeFunction"
                   Resource:
-                    - "arn:aws:lambda:us-east-1:xxx:function:serverless-graphql-appsync-lda-production-graphql"
-                    - "arn:aws:lambda:us-east-1:xxx:function:serverless-graphql-appsync-lda-production-graphql:*"
+                    - "arn:aws:lambda:us-east-1:${self:custom.account_id}:function:serverless-graphql-appsync-lda-production-graphql"
+                    - "arn:aws:lambda:us-east-1:${self:custom.account_id}:function:serverless-graphql-appsync-lda-production-graphql:*"

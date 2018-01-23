@@ -12,7 +12,7 @@ const appsync = new AWS.AppSync({ apiVersion: '2017-07-25' });
 // API key is not recommended for security.
 
 const graphQLAPIName = '...'; // your graphQL API Name
-const awsRegion = '...'; // AWS Region ex - us-east-1
+const awsRegion = 'us-east-1'; // AWS Region ex - us-east-1
 const userPoolId = '...'; // Your Cognito User Pool Id
 const roleName = 'Lambda-AppSyncServiceRole';
 const accountId = '...';
@@ -141,28 +141,28 @@ appsync
       {
         apiId: appId /* required */,
         dataSourceName: 'lambda' /* required */,
-        fieldName: 'getTwitterFeed' /* required */,
+        fieldName: 'getUserTwitterFeed' /* required */,
         requestMappingTemplate: fs.readFileSync(
-          'mapping-templates/getTwitterFeed-request-mapping-template.txt',
+          'mapping-templates/getUserTwitterFeed-request-mapping-template.txt',
           'utf8'
         ) /* required */,
         typeName: 'Query' /* required */,
         responseMappingTemplate: fs.readFileSync(
-          'mapping-templates/getTwitterFeed-response-mapping-template.txt',
+          'mapping-templates/getUserTwitterFeed-response-mapping-template.txt',
           'utf8'
         ) /* required */,
       },
       {
         apiId: appId /* required */,
         dataSourceName: 'lambda' /* required */,
-        fieldName: 'createUserTweet' /* required */,
+        fieldName: 'createTweet' /* required */,
         requestMappingTemplate: fs.readFileSync(
-          'mapping-templates/createUserTweet-request-mapping-template.txt',
+          'mapping-templates/createTweet-request-mapping-template.txt',
           'utf8'
         ) /* required */,
         typeName: 'Mutation' /* required */,
         responseMappingTemplate: fs.readFileSync(
-          'mapping-templates/createUserTweet-response-mapping-template.txt',
+          'mapping-templates/createTweet-response-mapping-template.txt',
           'utf8'
         ) /* required */,
       },

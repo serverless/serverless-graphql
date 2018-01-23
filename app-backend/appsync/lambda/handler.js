@@ -45,7 +45,7 @@ async function getRawTweets(handle, consumerKey, consumerSecret) {
           if (tweets.length >= 1) {
             listOfTweets = {
               name: tweets[0].user.name,
-              screen_name: tweets[0].user.screen_name,
+              handle: tweets[0].user.screen_name,
               location: tweets[0].user.location,
               description: tweets[0].user.description,
               followers_count: tweets[0].user.followers_count,
@@ -113,7 +113,7 @@ exports.graphqlHandler = (event, context, callback) => {
 
   console.log('Got an Invoke Request.');
   switch (event.field) {
-    case 'getTwitterFeed': {
+    case 'getUserTwitterFeed': {
       getRawTweets(event.arguments.handle, consumerKey, consumerSecret).then(
         result => {
           callback(null, result);
@@ -122,7 +122,7 @@ exports.graphqlHandler = (event, context, callback) => {
 
       break;
     }
-    case 'createUserTweet': {
+    case 'createTweet': {
       postTweet(
         event.arguments.post,
         consumerKey,
