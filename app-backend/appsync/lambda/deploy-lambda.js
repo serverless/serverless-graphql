@@ -12,7 +12,7 @@ const appsync = new AWS.AppSync({ apiVersion: '2017-07-25' });
 // API key is not recommended for security.
 
 const graphQLAPIName = '...'; // your graphQL API Name
-const awsRegion = '...'; // AWS Region ex - us-east-1
+const awsRegion = 'us-east-1'; // AWS Region ex - us-east-1
 const userPoolId = '...'; // Your Cognito User Pool Id
 const roleName = 'Lambda-AppSyncServiceRole';
 const accountId = '...';

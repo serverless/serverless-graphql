@@ -1,23 +1,16 @@
 type Mutation {
 	# Create a tweet for a user
 	createTweet(
-		handle: String!,
 		tweet: String!,
-		name: String!,
-		location: String!,
-		description: String!,
-		followers: [String!]!,
-		followers_count: Int!,
-		friends_count: Int!,
-		favourites_count: Int!
+		consumer_key: String,
+		secret_key: String,
+		access_token_key: String,
+		access_token_secret: String
 	): Tweet!
-
 	# Delete User Tweet
 	deleteTweet(tweet_id: String!, handle: String!): Tweet!
-
 	# Retweet existing Tweet
 	reTweet(tweet_id: String!, handle: String!): Tweet!
-
 	# Update existing Tweet
 	updateTweet(tweet_id: String!, handle: String!, tweet: String!): Tweet!
 }
@@ -28,7 +21,7 @@ type Query {
 
 type Subscription {
 	subscribeToTweeterUser(handle: String!): Tweet
-		@aws_subscribe(mutations: ["createTweet","deleteTweet", "reTweet", "updateTweet"])
+		@aws_subscribe(mutations: ["createTweet","deleteTweet","reTweet","updateTweet"])
 }
 
 type Tweet {
@@ -37,11 +30,6 @@ type Tweet {
 	retweeted: Boolean
 	retweet_count: Int
 	favorited: Boolean
-}
-
-type TweetConnection {
-	items: [Tweet!]!
-	nextToken: String
 }
 
 type User {
@@ -54,7 +42,7 @@ type User {
 	favourites_count: Int!
 	followers: [String!]!
 	topTweet: Tweet
-	tweets(limit: Int, nextToken: String, keyword: String): TweetConnection
+	tweets: [Tweet!]!
 }
 
 schema {

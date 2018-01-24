@@ -106,7 +106,8 @@ async function getRawTweets(handle, consumerKey, consumerSecret) {
                       followers_count: tweets[0].user.followers_count,
                       friends_count: tweets[0].user.friends_count,
                       favourites_count: tweets[0].user.favourites_count,
-                      followers: data
+                      followers: data,
+                      tweets: [],
                   };
               }
 
@@ -123,9 +124,12 @@ async function getRawTweets(handle, consumerKey, consumerSecret) {
                   tweetArray.push(t);
               }
 
-              console.log(tweetArray);
+              tweetArray.sort(function(a, b) {
+                  return b.retweet_count - a.retweet_count;
+              });
+
               listOfTweets.topTweet = tweetArray[0]; //needs to sort
-              console.log(listOfTweets);
+              listOfTweets.tweets = tweetArray;
               return listOfTweets;
           });
         })
@@ -137,7 +141,7 @@ async function getRawTweets(handle, consumerKey, consumerSecret) {
 }
 
 async function postTweet(
-  post,
+  tweet,
   consumerKey,
   consumerSecret,
   accessTokenKey,
@@ -152,18 +156,21 @@ async function postTweet(
     access_token_secret: accessTokenSecret,
   });
 
-  const params = { status: post };
+  const params = { status: tweet };
 
   return client
     .post(url, params)
     .then(tweet => {
       console.log(tweet);
-      const response = {
-        screen_name: tweet.user.name,
-        post: tweet.text,
+
+      return {
+        tweet: tweet.text,
+        tweet_id: tweet.id_str,
+        retweeted: false,
+        retweet_count: 0,
+        favorited: false
       };
 
-      return response;
     })
     .catch(error => {
       throw error;
@@ -189,7 +196,7 @@ exports.graphqlHandler = (event, context, callback) => {
     }
     case 'createTweet': {
       postTweet(
-        event.arguments.post,
+        event.arguments.tweet,
         consumerKey,
         consumerSecret,
         event.arguments.access_token_key,
