@@ -13,6 +13,7 @@ plugins:
   - serverless-offline
 
 custom:
+  account_id: ${opt:account_id}
   dynamodb:
     start:
       port: 8000
@@ -22,7 +23,7 @@ custom:
     seed:
       test:
         sources:
-          - table: users
+          - table: Users
             sources: [seed-data/users.json]
 
 resources:
@@ -32,16 +33,39 @@ resources:
       Properties:
         KeySchema:
           -
-            AttributeName: screen_name
+            AttributeName: handle
             KeyType: HASH
+          -
+            AttributeName: tweet_id
+            KeyType: RANGE
         AttributeDefinitions:
           -
-            AttributeName: screen_name
+            AttributeName: handle
+            AttributeType: S
+          -
+            AttributeName: tweet_id
             AttributeType: S
         ProvisionedThroughput:
           ReadCapacityUnits: 10
           WriteCapacityUnits: 10
         TableName: 'users'
+        GlobalSecondaryIndexes:
+          -
+            IndexName: top-index
+            KeySchema:
+              -
+                AttributeName: handle
+                KeyType: HASH
+            Projection:
+              NonKeyAttributes:
+                - tweet
+                - retweet_count
+                - retweeted
+                - favorited
+              ProjectionType: INCLUDE
+            ProvisionedThroughput:
+              ReadCapacityUnits: 50
+              WriteCapacityUnits: 50
     AppSyncServiceRole:
       Type: "AWS::IAM::Role"
       Properties:
@@ -73,5 +97,5 @@ resources:
                     - "dynamodb:Scan"
                     - "dynamodb:UpdateItem"
                   Resource:
-                    - "arn:aws:dynamodb:us-east-1:xxx:table/users"
-                    - "arn:aws:dynamodb:us-east-1:xxx:table/users/*"
+                    - "arn:aws:dynamodb:us-east-1:${self:custom.account_id}:table/users"
+                    - "arn:aws:dynamodb:us-east-1:${self:custom.account_id}:table/users/*"

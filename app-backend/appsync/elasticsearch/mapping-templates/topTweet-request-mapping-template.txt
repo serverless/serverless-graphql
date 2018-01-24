@@ -1,0 +1,21 @@
+{
+    "version":"2017-02-28",
+    "operation":"GET",
+    "path":"/user/twitter/_search",
+    "params":{
+        "body":{
+            "from":0,
+            "size":1,
+            "query" : {
+                "bool" : {
+                    "must" : [
+                        {"match" : { "handle" : "$context.source.handle" }}
+                    ]
+                }
+            },
+		   "sort" : [
+		      {"retweet_count" : {"order" : "desc"}}
+		   ]
+        }
+    }
+}

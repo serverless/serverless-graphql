@@ -1,55 +1,79 @@
 const faker = require('faker');
 const jsonfile = require('jsonfile');
 
-let numRecords = 100;
-let numPosts = 25;
+const numUsers = 10;
+const tweetsPerUser = 5;
+const followersPerUser = 2;
 
-data = [];
+const udata = [];
+const handleNames = [];
 
-for (let i = 0; i < numRecords; i++) {
-  let posts = [];
+faker.seed(1000);
 
-  for (let j = 0; j < numPosts; j++) {
-    let item = {
-      tweet: faker.lorem.sentence(),
-    };
-    posts.push(item);
-  }
-
-  record = {
-    name: faker.name.findName(),
-    screen_name: faker.internet.userName(),
-    location: faker.address.city(),
-    description: faker.name.jobTitle(),
-    followers_count: faker.random.number(),
-    friends_count: faker.random.number(),
-    favourites_count: faker.random.number(),
-    posts: posts,
-  };
-
-  data.push(record);
+for (let i = 0; i < numUsers; i++) {
+  const handle = faker.internet.userName();
+  handleNames.push(handle);
 }
 
-const file = 'users.json';
+for (let i = 0; i < handleNames.length; i++) {
+    const followers = [];
 
-//insert 1 static record for quick onboarding:
-record = {
-  name: 'Leonardo di Caprio',
-  screen_name: 'LeoDiCaprio',
-  location: 'LA',
-  description: 'Actor',
-  followers_count: 14050000,
-  friends_count: 1000,
-  favourites_count: 400,
-  posts: [
-    {
-      tweet: 'today will be a good day!',
-    },
-  ],
-};
+    for (let k = 0; k < followersPerUser; k++) {
+        followers.push(handleNames[Math.floor(Math.random() * handleNames.length)]);
+    }
 
-data.push(record);
+    const followers_count = faker.random.number({
+        min: 1,
+        max: 500,
+    });
 
-jsonfile.writeFile(file, data, function(err) {
-  console.error(err);
+    const friends_count = faker.random.number({
+        min: 1,
+        max: 500,
+    });
+
+    const favourites_count = faker.random.number({
+        min: 1,
+        max: 5000,
+    });
+
+    const name = faker.name.findName();
+    const location = faker.address.city();
+    const description = faker.name.jobTitle();
+
+    for (let j = 0; j < tweetsPerUser; j++) {
+        const id = faker.random.uuid();
+
+        const record = {
+            name: name,
+            handle: handleNames[i],
+            tweet_id: id,
+            location: location,
+            description: description,
+            followers_count: followers_count,
+            friends_count: friends_count,
+            favourites_count: favourites_count,
+            followers: followers,
+            tweet: faker.lorem.sentence(),
+            retweeted: faker.random.boolean(),
+            retweet_count: faker.random.number({
+                min: 1,
+                max: 50,
+            }),
+            favorited: faker.random.boolean()
+        };
+
+        udata.push(record);
+    }
+}
+
+const ufile = 'users.json';
+
+jsonfile.writeFileSync(ufile, udata, function(err) {
+  if (err) {
+    console.error(err);
+  } else {
+    console.log('data created successfully');
+  }
 });
+

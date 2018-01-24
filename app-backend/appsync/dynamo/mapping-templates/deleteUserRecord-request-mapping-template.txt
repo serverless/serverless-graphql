@@ -1,7 +1,0 @@
-{
-    "version" : "2017-02-28",
-    "operation" : "DeleteItem",
-    "key": {
-        "screen_name": { "S" : "${context.arguments.screen_name}"}
-    }
-}

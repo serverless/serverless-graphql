@@ -1,7 +1,0 @@
-{
-    "version": "2017-02-28",
-    "operation": "GetItem",
-    "key": {
-        "screen_name": { "S": "$context.arguments.handle" }
-    }
-}

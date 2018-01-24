@@ -9,7 +9,8 @@
             "query" : {
                 "bool" : {
                     "must" : [
-                        {"match" : { "screen_name" : "$context.arguments.handle" }}
+                        {"match" : { "handle" : "$context.arguments.handle" }},
+                        {"match" : { "tweet" : "$context.arguments.keyword" }}
                     ]
                 }
             }

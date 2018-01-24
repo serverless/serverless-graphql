@@ -1,0 +1,7 @@
+{
+   "tweet" : '',
+   "retweet_count" : '',
+   "retweeted" : '',
+   "favorited" : '',
+   "tweet_id" : ''
+}

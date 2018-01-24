@@ -1,0 +1,30 @@
+{
+    "version" : "2017-02-28",
+    "operation" : "PutItem",
+    "key" : {
+        "handle" : { "S" : "${context.arguments.handle}" },
+        "tweet_id" : { "S" : "$util.autoId()" }
+    },
+    "attributeValues" : {
+        "tweet" : { "S" : "${context.arguments.tweet}" },
+        "location" : { "S" : "${context.arguments.location}" },
+        "description" : { "S" : "${context.arguments.description}" },
+        "name" : { "S" : "${context.arguments.name}" },
+        "followers_count" : { "N" : ${context.arguments.followers_count} },
+        "friends_count" : { "N" : ${context.arguments.friends_count} },
+        "favourites_count" : { "N" : ${context.arguments.favourites_count} },
+        "retweeted": { "BOOL" : false },
+        "favorited": { "BOOL" : false },
+        "retweet_count": { "N" : 0},
+        #set($followersList = [])
+        #foreach ( $follower in $context.arguments.followers )
+          #set( $element =
+          ${followersList.add(
+          {
+          	"S" : $follower
+          })}
+          )
+        #end
+        "followers": { "L" : $utils.toJson($followersList) }
+    }
+}

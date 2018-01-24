@@ -12,15 +12,16 @@ const appsync = new AWS.AppSync({ apiVersion: '2017-07-25' });
 // API key is not recommended for security.
 
 const graphQLAPIName = '...'; // your graphQL API Name
-const awsRegion = '...'; // AWS Region ex - us-east-1
+const awsRegion = 'us-east-1'; // AWS Region ex - us-east-1
 const userPoolId = '...'; // Your Cognito User Pool Id
 const roleName = 'Lambda-AppSyncServiceRole';
 const accountId = '...';
 const serviceRole = `arn:aws:iam::${accountId}:role/${roleName}`; // Service IAM Role for appsync to access data sources
 const functionName = 'serverless-graphql-appsync-lda-production-graphql';
 const lambdaArn = `arn:aws:lambda:${awsRegion}:${accountId}:function:${
-  functionName
-}`;
+    functionName
+    }`;
+
 const MAX_RETRIES = 10;
 let appId;
 
@@ -141,31 +142,59 @@ appsync
       {
         apiId: appId /* required */,
         dataSourceName: 'lambda' /* required */,
-        fieldName: 'getTwitterFeed' /* required */,
+        fieldName: 'getUserTwitterFeed' /* required */,
         requestMappingTemplate: fs.readFileSync(
-          'mapping-templates/getTwitterFeed-request-mapping-template.txt',
+          'mapping-templates/getUserTwitterFeed-request-mapping-template.txt',
           'utf8'
         ) /* required */,
         typeName: 'Query' /* required */,
         responseMappingTemplate: fs.readFileSync(
-          'mapping-templates/getTwitterFeed-response-mapping-template.txt',
+          'mapping-templates/getUserTwitterFeed-response-mapping-template.txt',
           'utf8'
         ) /* required */,
       },
       {
         apiId: appId /* required */,
         dataSourceName: 'lambda' /* required */,
-        fieldName: 'createUserTweet' /* required */,
+        fieldName: 'createTweet' /* required */,
         requestMappingTemplate: fs.readFileSync(
-          'mapping-templates/createUserTweet-request-mapping-template.txt',
+          'mapping-templates/createTweet-request-mapping-template.txt',
           'utf8'
         ) /* required */,
         typeName: 'Mutation' /* required */,
         responseMappingTemplate: fs.readFileSync(
-          'mapping-templates/createUserTweet-response-mapping-template.txt',
+          'mapping-templates/createTweet-response-mapping-template.txt',
           'utf8'
         ) /* required */,
       },
+        {
+            apiId: appId /* required */,
+            dataSourceName: 'lambda' /* required */,
+            fieldName: 'deleteTweet' /* required */,
+            requestMappingTemplate: fs.readFileSync(
+                'mapping-templates/deleteTweet-request-mapping-template.txt',
+                'utf8'
+            ) /* required */,
+            typeName: 'Mutation' /* required */,
+            responseMappingTemplate: fs.readFileSync(
+                'mapping-templates/deleteTweet-response-mapping-template.txt',
+                'utf8'
+            ) /* required */,
+        },
+        {
+            apiId: appId /* required */,
+            dataSourceName: 'lambda' /* required */,
+            fieldName: 'reTweet' /* required */,
+            requestMappingTemplate: fs.readFileSync(
+                'mapping-templates/reTweet-request-mapping-template.txt',
+                'utf8'
+            ) /* required */,
+            typeName: 'Mutation' /* required */,
+            responseMappingTemplate: fs.readFileSync(
+                'mapping-templates/reTweet-response-mapping-template.txt',
+                'utf8'
+            ) /* required */,
+        },
     ];
 
     const resolverList = [];

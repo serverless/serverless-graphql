@@ -1,0 +1,7 @@
+[
+    #foreach($entry in $context.result.hits.hits)
+        ## $velocityCount starts at 1 and increments with the #foreach loop **
+        #if( $velocityCount > 1 ) , #end
+        $util.toJson($entry.get("_source"))
+    #end
+]

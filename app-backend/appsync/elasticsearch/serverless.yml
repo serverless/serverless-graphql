@@ -8,6 +8,9 @@ provider:
   stage: dev
   region: us-east-1
 
+custom:
+  account_id: ${opt:account_id}
+
 resources:
   Resources:
     AppSyncServiceRole:
@@ -35,4 +38,4 @@ resources:
                   Action:
                     - "es:*"
                   Resource:
-                    - "arn:aws:es:us-east-1:xxx:domain/appsync/*"
+                    - "arn:aws:es:us-east-1:${self:custom.account_id}:domain/appsync/*"

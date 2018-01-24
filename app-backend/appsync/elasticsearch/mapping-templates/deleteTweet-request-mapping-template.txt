@@ -7,7 +7,7 @@
             "query" : {
                 "bool" : {
                     "should" : [
-                        {"match" : { "screen_name" : "$context.arguments.screen_name" }}
+                        {"match" : { "_id" : "$context.arguments.tweet_id" }}
                     ]
                 }
             }

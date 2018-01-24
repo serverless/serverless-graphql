@@ -1,54 +1,64 @@
+type Mutation {
+	# Create a tweet for a user
+	createTweet(
+		handle: String!,
+		tweet: String!,
+		name: String!,
+		location: String!,
+		description: String!,
+		followers: [String!]!,
+		followers_count: Int!,
+		friends_count: Int!,
+		favourites_count: Int!
+	): Tweet!
+
+	# Delete User Tweet
+	deleteTweet(tweet_id: String!, handle: String!): Tweet!
+
+	# Retweet existing Tweet
+	reTweet(tweet_id: String!, handle: String!): Tweet!
+
+	# Update existing Tweet
+	updateTweet(tweet_id: String!, handle: String!, tweet: String!): Tweet!
+}
+
 type Query {
-  getTwitterFeed(handle: String!, consumer_key: String, consumer_secret: String): Tweets
+	getUserTwitterFeed(handle: String!): User!
 }
 
 type Subscription {
-  subscribeToTweeterUser(handle: String!): Tweets
-    @aws_subscribe(mutations: ["createUserTweet"])
+	subscribeToTweeterUser(handle: String!): Tweet
+		@aws_subscribe(mutations: ["createTweet","deleteTweet", "reTweet", "updateTweet"])
 }
 
 type Tweet {
-  tweet: String
+	tweet_id: String!
+	tweet: String!
+	retweeted: Boolean
+	retweet_count: Int
+	favorited: Boolean
 }
 
-type Mutation {
-  # Create a new user with his tweets.
-  createUserRecord(
-    name: String!,
-    screen_name: String!,
-    location: String!,
-    description: String!,
-    followers_count: Int!,
-    friends_count: Int!,
-    favourites_count: Int!,
-    posts: [String]
-  ): Tweets
-
-  # Create a tweet for a user
-  createUserTweet(
-    screen_name: String!,
-    post: String!
-  ): Tweets
-
-  # Delete User Record
-  deleteUserRecord(
-    screen_name: String!
-  ): Tweets
+type TweetConnection {
+	items: [Tweet!]!
+	nextToken: String
 }
 
-type Tweets {
-  name: String!
-  screen_name: String!
-  location: String!
-  description: String!
-  followers_count: Int!
-  friends_count: Int!
-  favourites_count: Int!
-  posts: [Tweet]
+type User {
+	name: String!
+	handle: String!
+	location: String!
+	description: String!
+	followers_count: Int!
+	friends_count: Int!
+	favourites_count: Int!
+	followers: [String!]!
+	topTweet: Tweet
+	tweets(limit: Int, nextToken: String, keyword: String): TweetConnection
 }
 
 schema {
-  query: Query
-  mutation: Mutation
-  subscription: Subscription
+	query: Query
+	mutation: Mutation
+	subscription: Subscription
 }

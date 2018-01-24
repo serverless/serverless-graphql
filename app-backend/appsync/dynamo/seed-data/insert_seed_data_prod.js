@@ -6,26 +6,32 @@ AWS.config.update({ region: 'us-east-1' });
 
 const docClient = new AWS.DynamoDB.DocumentClient();
 
-console.log('Importing movies into DynamoDB. Please wait.');
+console.log('Importing data into DynamoDB. Please wait.');
 
 const allUsers = JSON.parse(fs.readFileSync('users.json', 'utf8'));
 
 allUsers.forEach(function(user) {
-  const params = {
+  const Userparams = {
     TableName: 'users',
     Item: {
       name: user.name,
-      screen_name: user.screen_name,
+      handle: user.handle,
       location: user.location,
       description: user.description,
       followers_count: user.followers_count,
       friends_count: user.friends_count,
       favourites_count: user.favourites_count,
-      posts: user.posts,
+      list_tweets: user.id,
+      followers: user.followers,
+      tweet_id: user.tweet_id,
+      tweet: user.tweet,
+      retweeted: user.retweeted,
+      retweet_count: user.retweet_count,
+      favorited: user.favorited
     },
   };
 
-  docClient.put(params, function(err, data) {
+  docClient.put(Userparams, function(err, data) {
     if (err) {
       console.error(
         'Unable to add user',
