@@ -1,18 +1,32 @@
 type Mutation {
+
 	# Create a tweet for a user
 	createTweet(
 		tweet: String!,
 		consumer_key: String,
-		secret_key: String,
+		consumer_secret: String,
 		access_token_key: String,
 		access_token_secret: String
 	): Tweet!
+
 	# Delete User Tweet
-	deleteTweet(tweet_id: String!, handle: String!): Tweet!
+	deleteTweet(
+	    tweet_id: String!,
+	    consumer_key: String,
+        consumer_secret: String,
+        access_token_key: String,
+        access_token_secret: String
+    ): Tweet!
+
 	# Retweet existing Tweet
-	reTweet(tweet_id: String!, handle: String!): Tweet!
-	# Update existing Tweet
-	updateTweet(tweet_id: String!, handle: String!, tweet: String!): Tweet!
+	reTweet(
+	    tweet_id: String!,
+	    consumer_key: String,
+        consumer_secret: String,
+        access_token_key: String,
+        access_token_secret: String
+    ): Tweet!
+
 }
 
 type Query {

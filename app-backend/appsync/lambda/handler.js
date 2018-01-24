@@ -177,6 +177,81 @@ async function postTweet(
     });
 }
 
+async function deleteTweet(
+    tweet_id,
+    consumerKey,
+    consumerSecret,
+    accessTokenKey,
+    accessTokenSecret
+) {
+    const url = 'statuses/destroy';
+
+    const client = new Twitter({
+        consumer_key: consumerKey,
+        consumer_secret: consumerSecret,
+        access_token_key: accessTokenKey,
+        access_token_secret: accessTokenSecret,
+    });
+
+    const params = { id: tweet_id };
+
+    return client
+        .post(url, params)
+        .then(tweet => {
+            console.log(tweet);
+
+            return {
+                tweet: tweet.text,
+                tweet_id: tweet.id_str,
+                retweeted: tweet.retweeted,
+                retweet_count: tweet.retweet_count,
+                favorited: tweet.favorited
+            };
+
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
+async function reTweet(
+    tweet_id,
+    consumerKey,
+    consumerSecret,
+    accessTokenKey,
+    accessTokenSecret
+) {
+    const url = 'statuses/retweet';
+
+    const client = new Twitter({
+        consumer_key: consumerKey,
+        consumer_secret: consumerSecret,
+        access_token_key: accessTokenKey,
+        access_token_secret: accessTokenSecret,
+    });
+
+    const params = { id: tweet_id };
+
+    return client
+        .post(url, params)
+        .then(tweet => {
+            console.log(tweet);
+
+            return {
+                tweet: tweet.text,
+                tweet_id: tweet.id_str,
+                retweeted: tweet.retweeted,
+                retweet_count: tweet.retweet_count,
+                favorited: tweet.favorited
+            };
+
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
+
 exports.graphqlHandler = (event, context, callback) => {
   console.log('Received event {}', JSON.stringify(event, 3));
 
@@ -207,6 +282,32 @@ exports.graphqlHandler = (event, context, callback) => {
 
       break;
     }
+      case 'deleteTweet': {
+          deleteTweet(
+              event.arguments.tweet_id,
+              consumerKey,
+              consumerSecret,
+              event.arguments.access_token_key,
+              event.arguments.access_token_secret
+          ).then(result => {
+              callback(null, result);
+          });
+
+          break;
+      }
+      case 'reTweet': {
+          reTweet(
+              event.arguments.tweet_id,
+              consumerKey,
+              consumerSecret,
+              event.arguments.access_token_key,
+              event.arguments.access_token_secret
+          ).then(result => {
+              callback(null, result);
+          });
+
+          break;
+      }
     default: {
       callback(`Unknown field, unable to resolve ${event.field}`, null);
       break;

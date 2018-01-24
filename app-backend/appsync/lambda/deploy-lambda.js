@@ -167,6 +167,34 @@ appsync
           'utf8'
         ) /* required */,
       },
+        {
+            apiId: appId /* required */,
+            dataSourceName: 'lambda' /* required */,
+            fieldName: 'deleteTweet' /* required */,
+            requestMappingTemplate: fs.readFileSync(
+                'mapping-templates/deleteTweet-request-mapping-template.txt',
+                'utf8'
+            ) /* required */,
+            typeName: 'Mutation' /* required */,
+            responseMappingTemplate: fs.readFileSync(
+                'mapping-templates/deleteTweet-response-mapping-template.txt',
+                'utf8'
+            ) /* required */,
+        },
+        {
+            apiId: appId /* required */,
+            dataSourceName: 'lambda' /* required */,
+            fieldName: 'reTweet' /* required */,
+            requestMappingTemplate: fs.readFileSync(
+                'mapping-templates/reTweet-request-mapping-template.txt',
+                'utf8'
+            ) /* required */,
+            typeName: 'Mutation' /* required */,
+            responseMappingTemplate: fs.readFileSync(
+                'mapping-templates/reTweet-response-mapping-template.txt',
+                'utf8'
+            ) /* required */,
+        },
     ];
 
     const resolverList = [];
