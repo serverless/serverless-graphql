@@ -137,148 +137,148 @@ appsync
     console.log(schema.toString());
   })
   .then(async () => {
-      const resolverParams = [
-          {
-              apiId: appId /* required */,
-              dataSourceName: 'elastic' /* required */,
-              fieldName: 'getUserTwitterFeed' /* required */,
-              requestMappingTemplate: fs.readFileSync(
-                  'mapping-templates/getUserTwitterFeed-request-mapping-template.txt',
-                  'utf8'
-              ) /* required */,
-              typeName: 'Query' /* required */,
-              responseMappingTemplate: fs.readFileSync(
-                  'mapping-templates/getUserTwitterFeed-response-mapping-template.txt',
-                  'utf8'
-              ) /* required */,
-          },
-          {
-              apiId: appId /* required */,
-              dataSourceName: 'elastic' /* required */,
-              fieldName: 'topTweet' /* required */,
-              requestMappingTemplate: fs.readFileSync(
-                  'mapping-templates/topTweet-request-mapping-template.txt',
-                  'utf8'
-              ) /* required */,
-              typeName: 'User' /* required */,
-              responseMappingTemplate: fs.readFileSync(
-                  'mapping-templates/topTweet-response-mapping-template.txt',
-                  'utf8'
-              ) /* required */,
-          },
-          {
-              apiId: appId /* required */,
-              dataSourceName: 'elastic' /* required */,
-              fieldName: 'tweets' /* required */,
-              requestMappingTemplate: fs.readFileSync(
-                  'mapping-templates/tweets-request-mapping-template.txt',
-                  'utf8'
-              ) /* required */,
-              typeName: 'User' /* required */,
-              responseMappingTemplate: fs.readFileSync(
-                  'mapping-templates/tweets-response-mapping-template.txt',
-                  'utf8'
-              ) /* required */,
-          },
-          {
-              apiId: appId /* required */,
-              dataSourceName: 'elastic' /* required */,
-              fieldName: 'createTweet' /* required */,
-              requestMappingTemplate: fs.readFileSync(
-                  'mapping-templates/createTweet-request-mapping-template.txt',
-                  'utf8'
-              ) /* required */,
-              typeName: 'Mutation' /* required */,
-              responseMappingTemplate: fs.readFileSync(
-                  'mapping-templates/createTweet-response-mapping-template.txt',
-                  'utf8'
-              ) /* required */,
-          },
-          {
-              apiId: appId /* required */,
-              dataSourceName: 'elastic' /* required */,
-              fieldName: 'deleteTweet' /* required */,
-              requestMappingTemplate: fs.readFileSync(
-                  'mapping-templates/deleteTweet-request-mapping-template.txt',
-                  'utf8'
-              ) /* required */,
-              typeName: 'Mutation' /* required */,
-              responseMappingTemplate: fs.readFileSync(
-                  'mapping-templates/deleteTweet-response-mapping-template.txt',
-                  'utf8'
-              ) /* required */,
-          },
-          {
-              apiId: appId /* required */,
-              dataSourceName: 'elastic' /* required */,
-              fieldName: 'reTweet' /* required */,
-              requestMappingTemplate: fs.readFileSync(
-                  'mapping-templates/reTweet-request-mapping-template.txt',
-                  'utf8'
-              ) /* required */,
-              typeName: 'Mutation' /* required */,
-              responseMappingTemplate: fs.readFileSync(
-                  'mapping-templates/reTweet-response-mapping-template.txt',
-                  'utf8'
-              ) /* required */,
-          },
-          {
-              apiId: appId /* required */,
-              dataSourceName: 'elastic' /* required */,
-              fieldName: 'updateTweet' /* required */,
-              requestMappingTemplate: fs.readFileSync(
-                  'mapping-templates/updateTweet-request-mapping-template.txt',
-                  'utf8'
-              ) /* required */,
-              typeName: 'Mutation' /* required */,
-              responseMappingTemplate: fs.readFileSync(
-                  'mapping-templates/updateTweet-response-mapping-template.txt',
-                  'utf8'
-              ) /* required */,
-          },
-          {
-              apiId: appId /* required */,
-              dataSourceName: 'elastic' /* required */,
-              fieldName: 'searchTwitterFeedByKeyword' /* required */,
-              requestMappingTemplate: fs.readFileSync(
-                  'mapping-templates/searchTwitterFeedByKeyword-request-mapping-template.txt',
-                  'utf8'
-              ) /* required */,
-              typeName: 'Query' /* required */,
-              responseMappingTemplate: fs.readFileSync(
-                  'mapping-templates/searchTwitterFeedByKeyword-response-mapping-template.txt',
-                  'utf8'
-              ) /* required */,
-          },
-          {
-              apiId: appId /* required */,
-              dataSourceName: 'elastic' /* required */,
-              fieldName: 'searchTwitterFeedByLocation' /* required */,
-              requestMappingTemplate: fs.readFileSync(
-                  'mapping-templates/searchTwitterFeedByLocation-request-mapping-template.txt',
-                  'utf8'
-              ) /* required */,
-              typeName: 'Query' /* required */,
-              responseMappingTemplate: fs.readFileSync(
-                  'mapping-templates/searchTwitterFeedByLocation-response-mapping-template.txt',
-                  'utf8'
-              ) /* required */,
-          },
-          {
-              apiId: appId /* required */,
-              dataSourceName: 'elastic' /* required */,
-              fieldName: 'searchAllTweetsByKeyword' /* required */,
-              requestMappingTemplate: fs.readFileSync(
-                  'mapping-templates/searchAllTweetsByKeyword-request-mapping-template.txt',
-                  'utf8'
-              ) /* required */,
-              typeName: 'Query' /* required */,
-              responseMappingTemplate: fs.readFileSync(
-                  'mapping-templates/searchAllTweetsByKeyword-response-mapping-template.txt',
-                  'utf8'
-              ) /* required */,
-          }
-      ];
+    const resolverParams = [
+      {
+        apiId: appId /* required */,
+        dataSourceName: 'elastic' /* required */,
+        fieldName: 'getUserTwitterFeed' /* required */,
+        requestMappingTemplate: fs.readFileSync(
+          'mapping-templates/getUserTwitterFeed-request-mapping-template.txt',
+          'utf8'
+        ) /* required */,
+        typeName: 'Query' /* required */,
+        responseMappingTemplate: fs.readFileSync(
+          'mapping-templates/getUserTwitterFeed-response-mapping-template.txt',
+          'utf8'
+        ) /* required */,
+      },
+      {
+        apiId: appId /* required */,
+        dataSourceName: 'elastic' /* required */,
+        fieldName: 'topTweet' /* required */,
+        requestMappingTemplate: fs.readFileSync(
+          'mapping-templates/topTweet-request-mapping-template.txt',
+          'utf8'
+        ) /* required */,
+        typeName: 'User' /* required */,
+        responseMappingTemplate: fs.readFileSync(
+          'mapping-templates/topTweet-response-mapping-template.txt',
+          'utf8'
+        ) /* required */,
+      },
+      {
+        apiId: appId /* required */,
+        dataSourceName: 'elastic' /* required */,
+        fieldName: 'tweets' /* required */,
+        requestMappingTemplate: fs.readFileSync(
+          'mapping-templates/tweets-request-mapping-template.txt',
+          'utf8'
+        ) /* required */,
+        typeName: 'User' /* required */,
+        responseMappingTemplate: fs.readFileSync(
+          'mapping-templates/tweets-response-mapping-template.txt',
+          'utf8'
+        ) /* required */,
+      },
+      {
+        apiId: appId /* required */,
+        dataSourceName: 'elastic' /* required */,
+        fieldName: 'createTweet' /* required */,
+        requestMappingTemplate: fs.readFileSync(
+          'mapping-templates/createTweet-request-mapping-template.txt',
+          'utf8'
+        ) /* required */,
+        typeName: 'Mutation' /* required */,
+        responseMappingTemplate: fs.readFileSync(
+          'mapping-templates/createTweet-response-mapping-template.txt',
+          'utf8'
+        ) /* required */,
+      },
+      {
+        apiId: appId /* required */,
+        dataSourceName: 'elastic' /* required */,
+        fieldName: 'deleteTweet' /* required */,
+        requestMappingTemplate: fs.readFileSync(
+          'mapping-templates/deleteTweet-request-mapping-template.txt',
+          'utf8'
+        ) /* required */,
+        typeName: 'Mutation' /* required */,
+        responseMappingTemplate: fs.readFileSync(
+          'mapping-templates/deleteTweet-response-mapping-template.txt',
+          'utf8'
+        ) /* required */,
+      },
+      {
+        apiId: appId /* required */,
+        dataSourceName: 'elastic' /* required */,
+        fieldName: 'reTweet' /* required */,
+        requestMappingTemplate: fs.readFileSync(
+          'mapping-templates/reTweet-request-mapping-template.txt',
+          'utf8'
+        ) /* required */,
+        typeName: 'Mutation' /* required */,
+        responseMappingTemplate: fs.readFileSync(
+          'mapping-templates/reTweet-response-mapping-template.txt',
+          'utf8'
+        ) /* required */,
+      },
+      {
+        apiId: appId /* required */,
+        dataSourceName: 'elastic' /* required */,
+        fieldName: 'updateTweet' /* required */,
+        requestMappingTemplate: fs.readFileSync(
+          'mapping-templates/updateTweet-request-mapping-template.txt',
+          'utf8'
+        ) /* required */,
+        typeName: 'Mutation' /* required */,
+        responseMappingTemplate: fs.readFileSync(
+          'mapping-templates/updateTweet-response-mapping-template.txt',
+          'utf8'
+        ) /* required */,
+      },
+      {
+        apiId: appId /* required */,
+        dataSourceName: 'elastic' /* required */,
+        fieldName: 'searchTwitterFeedByKeyword' /* required */,
+        requestMappingTemplate: fs.readFileSync(
+          'mapping-templates/searchTwitterFeedByKeyword-request-mapping-template.txt',
+          'utf8'
+        ) /* required */,
+        typeName: 'Query' /* required */,
+        responseMappingTemplate: fs.readFileSync(
+          'mapping-templates/searchTwitterFeedByKeyword-response-mapping-template.txt',
+          'utf8'
+        ) /* required */,
+      },
+      {
+        apiId: appId /* required */,
+        dataSourceName: 'elastic' /* required */,
+        fieldName: 'searchTwitterFeedByLocation' /* required */,
+        requestMappingTemplate: fs.readFileSync(
+          'mapping-templates/searchTwitterFeedByLocation-request-mapping-template.txt',
+          'utf8'
+        ) /* required */,
+        typeName: 'Query' /* required */,
+        responseMappingTemplate: fs.readFileSync(
+          'mapping-templates/searchTwitterFeedByLocation-response-mapping-template.txt',
+          'utf8'
+        ) /* required */,
+      },
+      {
+        apiId: appId /* required */,
+        dataSourceName: 'elastic' /* required */,
+        fieldName: 'searchAllTweetsByKeyword' /* required */,
+        requestMappingTemplate: fs.readFileSync(
+          'mapping-templates/searchAllTweetsByKeyword-request-mapping-template.txt',
+          'utf8'
+        ) /* required */,
+        typeName: 'Query' /* required */,
+        responseMappingTemplate: fs.readFileSync(
+          'mapping-templates/searchAllTweetsByKeyword-response-mapping-template.txt',
+          'utf8'
+        ) /* required */,
+      },
+    ];
 
     const resolverList = [];
 

@@ -15,15 +15,15 @@ data = [];
 const file = 'users.json';
 
 for (let i = 0; i < numRecords; i++) {
-    const handle = faker.internet.userName();
-    handleNames.push(handle);
+  const handle = faker.internet.userName();
+  handleNames.push(handle);
 }
 
 for (let i = 0; i < numRecords; i++) {
   const followers = [];
 
   for (let k = 0; k < followersPerUser; k++) {
-      followers.push(handleNames[Math.floor(Math.random() * handleNames.length)]);
+    followers.push(handleNames[Math.floor(Math.random() * handleNames.length)]);
   }
 
   record = {
@@ -34,7 +34,7 @@ for (let i = 0; i < numRecords; i++) {
     followers_count: faker.random.number(),
     friends_count: faker.random.number(),
     favourites_count: faker.random.number(),
-    followers: followers
+    followers: followers,
   };
 
   for (let j = 0; j < numPosts; j++) {

@@ -19,8 +19,8 @@ const accountId = '...';
 const serviceRole = `arn:aws:iam::${accountId}:role/${roleName}`; // Service IAM Role for appsync to access data sources
 const functionName = 'serverless-graphql-appsync-lda-production-graphql';
 const lambdaArn = `arn:aws:lambda:${awsRegion}:${accountId}:function:${
-    functionName
-    }`;
+  functionName
+}`;
 
 const MAX_RETRIES = 10;
 let appId;
@@ -167,34 +167,34 @@ appsync
           'utf8'
         ) /* required */,
       },
-        {
-            apiId: appId /* required */,
-            dataSourceName: 'lambda' /* required */,
-            fieldName: 'deleteTweet' /* required */,
-            requestMappingTemplate: fs.readFileSync(
-                'mapping-templates/deleteTweet-request-mapping-template.txt',
-                'utf8'
-            ) /* required */,
-            typeName: 'Mutation' /* required */,
-            responseMappingTemplate: fs.readFileSync(
-                'mapping-templates/deleteTweet-response-mapping-template.txt',
-                'utf8'
-            ) /* required */,
-        },
-        {
-            apiId: appId /* required */,
-            dataSourceName: 'lambda' /* required */,
-            fieldName: 'reTweet' /* required */,
-            requestMappingTemplate: fs.readFileSync(
-                'mapping-templates/reTweet-request-mapping-template.txt',
-                'utf8'
-            ) /* required */,
-            typeName: 'Mutation' /* required */,
-            responseMappingTemplate: fs.readFileSync(
-                'mapping-templates/reTweet-response-mapping-template.txt',
-                'utf8'
-            ) /* required */,
-        },
+      {
+        apiId: appId /* required */,
+        dataSourceName: 'lambda' /* required */,
+        fieldName: 'deleteTweet' /* required */,
+        requestMappingTemplate: fs.readFileSync(
+          'mapping-templates/deleteTweet-request-mapping-template.txt',
+          'utf8'
+        ) /* required */,
+        typeName: 'Mutation' /* required */,
+        responseMappingTemplate: fs.readFileSync(
+          'mapping-templates/deleteTweet-response-mapping-template.txt',
+          'utf8'
+        ) /* required */,
+      },
+      {
+        apiId: appId /* required */,
+        dataSourceName: 'lambda' /* required */,
+        fieldName: 'reTweet' /* required */,
+        requestMappingTemplate: fs.readFileSync(
+          'mapping-templates/reTweet-request-mapping-template.txt',
+          'utf8'
+        ) /* required */,
+        typeName: 'Mutation' /* required */,
+        responseMappingTemplate: fs.readFileSync(
+          'mapping-templates/reTweet-response-mapping-template.txt',
+          'utf8'
+        ) /* required */,
+      },
     ];
 
     const resolverList = [];
