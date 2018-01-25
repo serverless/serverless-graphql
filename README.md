@@ -18,7 +18,7 @@ This example uses the following technologies:
   - [AWS Lambda](https://aws.amazon.com/lambda/) & [AWS API Gateway](https://aws.amazon.com/documentation/apigateway/)
   - [Apollo Lambda GraphQL Server](https://www.npmjs.com/package/apollo-server-lambda)
   - [DynamoDB](https://aws.amazon.com/dynamodb/)
-  - [RDS](https://aws.amazon.com/rds/)
+  - [RDS (MySQL, PostGres and Aurora)](https://aws.amazon.com/rds/)
   - [REST API](https://developer.twitter.com/en/docs)
   - Plugins
       - [Serverless Webpack](https://github.com/serverless-heaven/serverless-webpack)
