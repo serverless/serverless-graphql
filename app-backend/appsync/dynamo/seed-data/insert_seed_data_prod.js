@@ -27,7 +27,7 @@ allUsers.forEach(function(user) {
       tweet: user.tweet,
       retweeted: user.retweeted,
       retweet_count: user.retweet_count,
-      favorited: user.favorited
+      favorited: user.favorited,
     },
   };
 
