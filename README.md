@@ -34,7 +34,7 @@ This example uses the following technologies:
 
 ## System Architecture
 
-![serverless application architecture v2](https://user-images.githubusercontent.com/1587005/34456668-8402b764-edc2-11e7-95b8-bf5c75581af7.png)
+![serverless application architecture v2](https://user-images.githubusercontent.com/1587005/35407827-f10c2314-01c1-11e8-8451-74cc12e6b2b5.png)
 
 ## Quick Setup
 
@@ -51,35 +51,58 @@ Install Dependencies.
 yarn install
 ```
 
+## Feature Support in this repository
+
+![feature_support](https://user-images.githubusercontent.com/1587005/35408060-a258d5cc-01c2-11e8-81e6-7e977f1bb15d.png)
+
 ## Quick Start (Serverless Offline)
 Please note: [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/installing.html) is required to be installed on your system
 
-1. **Select Backend** (Twitter Rest API / DynamoDB / RDS (MySQL, PostGres or Aurora)
+1. **Select Backend** 
 
-- *Twitter Rest API*
-    ```
-    cd app-backend/rest-api
-    yarn start
-    ```
+- *AWS Appsync* (Serverless Offline does not support Appsync at this point)
 
-- *DynamoDB*
-    ```
-    cd app-backend/dynamodb
-    yarn start
-    ```
+    - AWS DynamoDB
+    - AWS ElasticSearch
+    - AWS Lambda
 
-- *RDS*
-    ```
-    cd app-backend/rds
-    yarn start
-    ```
+- *Lambda Backend* (Serverless Offline Supported)
+    
+    - *Twitter Rest API*
+        ```
+        cd app-backend/rest-api
+        yarn start
+        ```
+
+    - *DynamoDB*
+        ```
+        cd app-backend/dynamodb
+        yarn start
+        ```
+
+    - *RDS*
+        ```
+        cd app-backend/rds
+        yarn start
+        ```
 
 2. **Start FrontEnd** (Apollo Client or Appsync Client)
 
-```
-cd app-client/<client-name>/
-yarn start
-```
+- For Appsync Backend please select Appsync Client Integration:
+
+    ```
+    cd app-client/appsync-client/
+    yarn start
+    ```
+
+- For Lambda Backend please select Apollo Client Integration:
+
+    ```
+    cd app-client/apollo-client/
+    yarn start
+    ```
+
+Also, please make sure GraphQL endpoint is configured correctly in config/security.env.local to run client on local.
 
 3. **Start GraphiQL**
 ```
@@ -92,7 +115,7 @@ http://localhost:4000/playground
 ```
 
 
-## Setup for Production
+## Setup for Production (Deploy resources to AWS)
 
 Configure your AWS keys. Here you can find a [2min walkthrough](https://www.youtube.com/watch?v=mRkUnA3mEt4) how to do retrieve the keys.
 
@@ -103,31 +126,80 @@ sls config credentials --provider aws --key <your_aws_access_key> --secret <your
 
 You need to make sure you have access to your deployed lambda functions.
 
-1. **Select Backend** (Twitter Rest API / DynamoDB / RDS). Deploy Serverless Resources to your AWS Account
-- *Twitter Rest API*
-    ```
-    cd app-backend/rest-api
-    yarn deploy-prod
-    ```
+1. **Select Backend** 
 
-- *DynamoDB*
-    ```
-    cd app-backend/dynamodb
-    yarn deploy-prod
-    ```
+- *AWS Appsync* (Serverless Offline does not support Appsync at this point)
 
-- *RDS*
-  - Create RDS Instance. For example - [PostGres Tutorial](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.PostgreSQL.html#CHAP_GettingStarted.Creating.PostgreSQL)
- 
-  - Please make sure connectivity to production RDS instance works (For example: test via razersql)
-  
-  - Edit the `config/security.env.prod` file and replace the `DATABASE_URL` variable with your amazon rds endpoint (eg: postgres://${username}:{password}@${endpoint):5432/${dbName}).
+To use aws appsync you will need to create cognito user pool to authenticate the API [Reference](https://serverless-stack.com/chapters/create-a-cognito-user-pool.html)
 
-  - Run the deployment command
-      ```
-      cd app-backend/rds
-      yarn deploy-prod
-      ```
+    - *AWS DynamoDB*
+        ```
+        cd app-backend/appsync/dynamodb
+        yarn deploy-prod
+        ```
+    
+    Please make sure:
+     1. account_id is configured in package.json
+     2. graphQLAPIName, userPoolId and accountId are configured in deploy-dynamo.js
+    
+        ```
+        node deploy-dynamo.js
+        ```    
+    
+    - AWS ElasticSearch
+        ```
+        cd app-backend/appsync/elasticsearch
+        yarn deploy-prod
+        ```
+    
+    Please make sure:
+     1. account_id is configured in package.json
+     2. graphQLAPIName, userPoolId, accountId and esHostname are configured in deploy-elasticsearch.js
+    
+        ```
+        node deploy-elasticsearch.js
+        ```    
+        
+    - AWS Lambda
+        ```
+        cd app-backend/appsync/lambda
+        yarn deploy-prod
+        ```
+    
+    Please make sure:
+     1. account_id is configured in package.json
+     2. graphQLAPIName, userPoolId and accountId are configured in deploy-lambda.js
+    
+        ```
+        node deploy-lambda.js
+        ```    
+
+- *Lambda Backend* (Serverless Offline Supported)
+
+    - *Twitter Rest API*
+        ```
+        cd app-backend/rest-api
+        yarn deploy-prod
+        ```
+    
+    - *DynamoDB*
+        ```
+        cd app-backend/dynamodb
+        yarn deploy-prod
+        ```
+    
+    - *RDS*
+      - Create RDS Instance. For example - [PostGres Tutorial](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.PostgreSQL.html#CHAP_GettingStarted.Creating.PostgreSQL)
+     
+      - Please make sure connectivity to production RDS instance works (For example: test via razersql)
+      
+      - Edit the `config/security.env.prod` file and replace the `DATABASE_URL` variable with your amazon rds endpoint (eg: postgres://${username}:{password}@${endpoint):5432/${dbName}).
+    
+      - Run the deployment command
+          ```
+          cd app-backend/rds
+          yarn deploy-prod
+          ```
 
 2. **Config**: Get your /graphql POST endpoint as shown below and use it in config/security.env.prod
 
@@ -136,10 +208,11 @@ You need to make sure you have access to your deployed lambda functions.
 
 3. **Select Frontend** (apollo-client or appsync-client)
 
-
 - Note: 
+    - For lambda please use apollo-client
+    - For appsync backend please use appsync-client
     - Please note that backend is deployed before deploying frontend.
-    - You can deploy the client on AWS S3 or Netlify.
+    - You can deploy the client on AWS S3 or Netlify.    
 
 - *AWS S3*
 
@@ -177,448 +250,80 @@ You need to make sure you have access to your deployed lambda functions.
 
   - Your deployment url will be printed on the console
 
-## Example Query
+## Example: Appsync Backend Integration
 
-Introspection Query:
+- GraphQL Schema:
 
 ```
-{
-  __type(name: "Tweets") {
-    name
-    kind
-    fields{
-      name
-      type{
-        name
-        kind
-        ofType{
-          name
-          kind
-        }
-      }
-    }
-  }
+type Mutation {
+	# Create a tweet for a user
+	createTweet(
+		handle: String!,
+		tweet: String!,
+		name: String!,
+		location: String!,
+		description: String!,
+		followers: [String!]!,
+		followers_count: Int!,
+		friends_count: Int!,
+		favourites_count: Int!
+	): Tweet!
+
+	# Delete User Tweet
+	deleteTweet(tweet_id: String!, handle: String!): Tweet!
+
+	# Retweet existing Tweet
+	reTweet(tweet_id: String!, handle: String!): Tweet!
+
+	# Update existing Tweet
+	updateTweet(tweet_id: String!, handle: String!, tweet: String!): Tweet!
 }
-```
 
-Sample Query:
-
-note: consumer_key and consumer_secret are present in config/security.env.local
-```
-{
-  getTwitterFeed(handle:"sidg_sid", consumer_key:"xxx", consumer_secret:"xxx"){
-    name
-    screen_name
-    location
-    description
-    followers_count
-    friends_count
-    favourites_count
-    posts{
-      tweet
-    }
-  }
-}
-```
-
-# AppSync Integrations (NEW)
-
-Install Dependencies.
-```
-yarn install-appsync
-```
-
-## Appsync DynamoDB Integration
-
-## Schema:
-
-```
 type Query {
-  getTwitterFeed(handle: String!): Tweets
+	getUserTwitterFeed(handle: String!): User!
 }
 
 type Subscription {
-  subscribeToTweeterUser(handle: String!): Tweets
-    @aws_subscribe(mutations: ["createUserTweet"])
+	subscribeToTweeterUser(handle: String!): Tweet
+		@aws_subscribe(mutations: ["createTweet","deleteTweet", "reTweet", "updateTweet"])
 }
 
 type Tweet {
-  tweet: String
+	tweet_id: String!
+	tweet: String!
+	retweeted: Boolean
+	retweet_count: Int
+	favorited: Boolean
 }
 
-type Mutation {
-  # Create a new user with his tweets.
-  createUserRecord(
-    name: String!,
-    screen_name: String!,
-    location: String!,
-    description: String!,
-    followers_count: Int!,
-    friends_count: Int!,
-    favourites_count: Int!,
-    posts: [String]
-  ): Tweets
-
-  # Create a tweet for a user
-  createUserTweet(
-    screen_name: String!,
-    post: String!
-  ): Tweets
-
-  # Delete User Record
-  deleteUserRecord(
-    screen_name: String!
-  ): Tweets
+type TweetConnection {
+	items: [Tweet!]!
+	nextToken: String
 }
 
-type Tweets {
-  name: String!
-  screen_name: String!
-  location: String!
-  description: String!
-  followers_count: Int!
-  friends_count: Int!
-  favourites_count: Int!
-  posts: [Tweet]
-}
-
-schema {
-  query: Query
-  mutation: Mutation
-  subscription: Subscription
-}
-
-
-```
-
-## Query:
-
-```
-query{
-    getTwitterFeed(handle: "Charles.Hills"){
-        name
-        location
-        description
-        screen_name
-        followers_count
-        friends_count
-        favourites_count
-        posts {
-            tweet
-        }
-    }
-}
-```
-
-## Resolver for Query : getTwitterFeed
-
-```
-##Request mapping template
-
-{
-    "version": "2017-02-28",
-    "operation": "GetItem",
-    "key": {
-        "screen_name": { "S": "$context.arguments.handle" }
-    }
-}
-
-##Response mapping template
-
-$util.toJson($context.result)
-```
-
-## Mutation:
-
-```
-mutation add {
-  createUserRecord(
-    name:"Siddharth",
-    screen_name:"sidg_sid",
-    description:"cool guy",
-    location: "new delhi",
-    favourites_count: 100,
-    friends_count: 100,
-    followers_count: 50,
-    posts: ["I", "love", "appsync"]
-  ){
-    name
-    screen_name
-    description
-    location
-    favourites_count
-    friends_count
-    followers_count
-    posts{
-      tweet
-    }
-  }
-}
-```
-
-## Resolver for Mutation - createUserRecord
-
-```
-## Request mapping template
-
-{
-    "version": "2017-02-28",
-    "operation": "PutItem",
-    "key": {
-        "screen_name": { "S": "$context.arguments.screen_name"}
-    },
-    "attributeValues": {
-        "name": { "S": "$context.arguments.name" },
-        "location": { "S": "$context.arguments.location" },
-        "description": { "S": "$context.arguments.description" },
-        "followers_count": { "N": $context.arguments.followers_count },
-        "friends_count": { "N": $context.arguments.friends_count },
-        "favourites_count": { "N": $context.arguments.favourites_count },
-        #set($tweetList = [])
-        #set($temp = [])
-        #foreach ( $post in $context.arguments.posts )
-          #set( $element =
-          ${tweetList.add(
-          { "M" : {
-                "tweet" : { "S"  : $post }
-             }
-          })}
-          )
-        #end
-        "posts": { "L" : $utils.toJson($tweetList) }
-    }
-}
-
-## Response mapping template
-$util.toJson($context.result)
-
-```
-
-## Resolver for Mutation - createUserTweet
-
-```
-## Request mapping template
-
-{
-    "version" : "2017-02-28",
-    "operation" : "UpdateItem",
-    "key" : {
-        "screen_name" : { "S" : "${context.arguments.screen_name}" }
-    },
-    "update" : {
-        "expression" : "SET posts = list_append(if_not_exists(posts, :emptyList), :newTweet)",
-        "expressionValues" : {
-            ":emptyList": { "L" : [] },
-            ":newTweet" : { "L" : [
-                { "M": {
-                    "tweet": { "S" : "${context.arguments.post}" }
-                }}
-            ] }
-        }
-    }
-}
-
-## Response mapping template
-$util.toJson($context.result)
-
-```
-
-## Resolver for Mutation - deleteUserRecord
-
-```
-## Request mapping template
-
-{
-    "version" : "2017-02-28",
-    "operation" : "DeleteItem",
-    "key": {
-        "screen_name": { "S" : "${context.arguments.screen_name}"}
-    }
-}
-
-## Response mapping template
-$util.toJson($context.result)
-
-```
-
-## Appsync ElasticSearch Integration
-
-## Schema
-
-```
-type Query {
-  getTwitterFeed(handle: String!): Tweets
-}
-
-type Subscription {
-  subscribeToTweeterUser(handle: String!): Tweets
-    @aws_subscribe(mutations: ["createUserTweet"])
-}
-
-type Tweet {
-  tweet: String
-}
-
-type Mutation {
-  # Create a tweet for a user
-  createUserTweet(
-    screen_name: String!,
-    post: String!
-  ): Tweets
-
-  # Delete User Record
-  deleteUserRecord(
-    screen_name: String!
-  ): Tweets
-}
-
-type Tweets {
-  name: String!
-  screen_name: String!
-  location: String!
-  description: String!
-  followers_count: Int!
-  friends_count: Int!
-  favourites_count: Int!
-  posts: [Tweet]
-}
-
-schema {
-  query: Query
-  mutation: Mutation
-  subscription: Subscription
-}
-
-
-```
-
-## Resolver for Query - getTwitterFeed 
-```
-## Request mapping template
-{
-    "version":"2017-02-28",
-    "operation":"GET",
-    "path":"/user/twitter/_search",
-    "params":{
-        "body":{
-            "from":0,
-            "size":50,
-            "query" : {
-                "bool" : {
-                    "should" : [
-                        {"match" : { "screen_name" : "$context.arguments.handle" }}
-                    ]
-                }
-            }
-        }
-    }
-}
-
-
-## Response mapping template
-
-{
-  #set($hitcount = $context.result.hits.total)
-    #set($tweetList = [])
-  #if($hitcount > 0)
-        #foreach($entry in $context.result.hits.hits)
-          #set( $element =
-          ${tweetList.add(
-          { "tweet" : $util.toJson("$entry.get('_source')['tweet']") }
-          )}
-          )
-      #end
-      "location" : $util.toJson("$context.result.hits.hits[0].get('_source')['location']"),
-      "name" : $util.toJson("$context.result.hits.hits[0].get('_source')['name']"),
-      "screen_name" : $util.toJson("$context.result.hits.hits[0].get('_source')['screen_name']"),
-      "description" : $util.toJson("$context.result.hits.hits[0].get('_source')['description']"),
-      "followers_count" : $util.toJson("$context.result.hits.hits[0].get('_source')['followers_count']"),
-      "friends_count" : $util.toJson("$context.result.hits.hits[0].get('_source')['friends_count']"),
-      "favourites_count" : $util.toJson("$context.result.hits.hits[0].get('_source')['favourites_count']"),
-      "posts" : $util.toJson($tweetList)
-    #else
-      "location" : "",
-      "name" : "",
-      "screen_name" : "",
-      "description" : "",
-      "followers_count" : -1,
-      "friends_count" : -1,
-      "favourites_count" : -1
-   #end
-}
-```
-
-## Resolver for Mutation - createUserTweet 
-```
-## Request mapping template
-{
-    "version":"2017-02-28",
-    "operation":"PUT",
-    "path":"/user/twitter/$util.autoId()",
-    "params":{
-        "body":{
-            "name":"$context.arguments.name",
-            "screen_name":"$context.arguments.screen_name",
-            "location":"$context.arguments.location",
-            "description":"$context.arguments.description",
-            "followers_count":$context.arguments.followers_count,
-            "friends_count":$context.arguments.friends_count,
-            "favourites_count":$context.arguments.favourites_count,
-            "tweet": "$context.arguments.post"
-        }
-    }
-}
-
-
-## Response mapping template
-
-$utils.toJson($context.result.get("_source"))
-```
-
-## Appsync Lambda Integration
-
-## Schema
-```
-type Query {
-	getTwitterFeed(handle: String!, consumer_key: String, consumer_secret: String): Tweets
-}
-
-type Tweet {
-	tweet: String
-}
-
-type Tweets {
+type User {
 	name: String!
-	screen_name: String!
+	handle: String!
 	location: String!
 	description: String!
 	followers_count: Int!
 	friends_count: Int!
 	favourites_count: Int!
-	posts: [Tweet]
+	followers: [String!]!
+	topTweet: Tweet
+	tweets(limit: Int, nextToken: String, keyword: String): TweetConnection
 }
 
 schema {
 	query: Query
+	mutation: Mutation
+	subscription: Subscription
 }
 ```
 
-## Resolver for Mutation - getTwitterFeed
+- GraphQL Query:
 
-```
-## Request Mapping Template
-{
-    "version": "2017-02-28",
-    "operation": "Invoke",
-    "payload": {
-        "field": "getTwitterFeed",
-        "arguments":  $utils.toJson($context.arguments)
-    }
-}
-
-## Response Mapping Template
-$utils.toJson($context.result)
-```
+![query](https://user-images.githubusercontent.com/1587005/35409243-786b52d6-01c6-11e8-85c1-5f9572e3db04.gif)
 
 
 ## Directory Layout
@@ -700,18 +405,14 @@ To use the GraphQL Playground, open `/playground` of your Serverless service. Wi
 
 ## Coming Soon
 
-1. AppSync Integrations - DynamoDB, ES and Lambda
-2. Backend Integrations - ElasticSearch, GraphCool
-3. AWS X-Ray Integration
-4. GraphQL Mutations and Subscriptions 
-5. Schema Stitching
-6. Aggregations at Scale - Druid, InfuxDB
-7. Authentication and Authorization
-8. Pagination
-9. Swagger Integration
-10. Data Loader
-11. Caching and Prefetching
-12. Integration with Azure, IBM and Google Coud
+1. Schema Stitching
+2. Lambda Backend: GraphCool, Druid
+3. Lambda Backend: GraphQL Mutations and Subscriptions 
+4. Aggregations at Scale - Druid
+5. Lambda Backend: Authentication and Authorization
+6. Lambda Backend: Pagination
+7. Swagger Integration
+8. Integration with Azure, IBM and Google Coud
 
 ## Who uses Serverless GraphQL Apollo?
 
