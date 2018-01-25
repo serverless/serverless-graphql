@@ -53,7 +53,7 @@ yarn install
 
 ## Feature Support in this repository
 
-![feature_support](https://user-images.githubusercontent.com/1587005/35408060-a258d5cc-01c2-11e8-81e6-7e977f1bb15d.png)
+![feature_support](https://user-images.githubusercontent.com/1587005/35409562-6fd6dd1a-01c7-11e8-9467-321deb9a56b1.png)
 
 ## Quick Start (Serverless Offline)
 Please note: [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/installing.html) is required to be installed on your system
@@ -133,47 +133,37 @@ You need to make sure you have access to your deployed lambda functions.
 To use aws appsync you will need to create cognito user pool to authenticate the API [Reference](https://serverless-stack.com/chapters/create-a-cognito-user-pool.html)
 
     - *AWS DynamoDB*
-        ```
         cd app-backend/appsync/dynamodb
         yarn deploy-prod
-        ```
-    
+        
     Please make sure:
      1. account_id is configured in package.json
      2. graphQLAPIName, userPoolId and accountId are configured in deploy-dynamo.js
     
-        ```
         node deploy-dynamo.js
-        ```    
-    
+        
     - AWS ElasticSearch
-        ```
+        
         cd app-backend/appsync/elasticsearch
         yarn deploy-prod
-        ```
-    
+        
     Please make sure:
      1. account_id is configured in package.json
      2. graphQLAPIName, userPoolId, accountId and esHostname are configured in deploy-elasticsearch.js
     
-        ```
         node deploy-elasticsearch.js
-        ```    
         
     - AWS Lambda
-        ```
+        
         cd app-backend/appsync/lambda
         yarn deploy-prod
-        ```
-    
+        
     Please make sure:
      1. account_id is configured in package.json
      2. graphQLAPIName, userPoolId and accountId are configured in deploy-lambda.js
     
-        ```
         node deploy-lambda.js
-        ```    
-
+        
 - *Lambda Backend* (Serverless Offline Supported)
 
     - *Twitter Rest API*
