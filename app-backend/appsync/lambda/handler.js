@@ -106,7 +106,6 @@ async function getRawTweets(handle, consumerKey, consumerSecret) {
                   friends_count: tweets[0].user.friends_count,
                   favourites_count: tweets[0].user.favourites_count,
                   followers: data,
-                  tweets: [],
                 };
               }
 
@@ -126,7 +125,8 @@ async function getRawTweets(handle, consumerKey, consumerSecret) {
 
               const [topTweet] = tweetArray;
               listOfTweets.topTweet = topTweet;
-              listOfTweets.tweets = tweetArray;
+              listOfTweets.tweets = { items: tweetArray };
+
               return listOfTweets;
             }
           );
