@@ -1,0 +1,24 @@
+{
+    "version":"2017-02-28",
+    "operation":"POST",
+    "path":"/user/twitter/$context.arguments.tweet_id/_update",
+    "params":{
+        "body":{
+        "doc": {
+            "name":"$context.arguments.name",
+            "location":"$context.arguments.location",
+            "description":"$context.arguments.description",
+            "followers_count":$context.arguments.followers_count,
+            "friends_count":$context.arguments.friends_count,
+            "favourites_count":$context.arguments.favourites_count,
+            #set($followersList = [])
+            #foreach ( $follower in $context.arguments.followers )
+              #set( $element =
+              ${followersList.add($follower)}
+              )
+            #end
+            "followers": $utils.toJson($followersList)
+          }
+        }
+    }
+}

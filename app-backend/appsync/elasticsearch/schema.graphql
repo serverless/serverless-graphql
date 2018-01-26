@@ -4,10 +4,10 @@ type Mutation {
 	createTweet(
 		handle: String!,
 		tweet: String!,
-		consumer_key: String!,
-		consumer_secret: String!,
-		access_token_key: String!,
-		access_token_secret: String!
+		consumer_key: String,
+		consumer_secret: String,
+		access_token_key: String,
+		access_token_secret: String
 	): Tweet!
 
 	# Delete User Tweet
@@ -18,6 +18,19 @@ type Mutation {
 
 	# Update existing Tweet
 	updateTweet(tweet_id: String!, handle: String, tweet: String!): Tweet!
+
+    # Create user info is available in elasticsearch integration
+	createUserInfo(
+		handle: String!,
+		tweet_id: String!,
+		location: String,
+		description: String,
+		name: String,
+		followers_count: Int!,
+		friends_count: Int!,
+		favourites_count: Int!,
+		followers: [String]
+	): User!
 }
 
 type Query {
