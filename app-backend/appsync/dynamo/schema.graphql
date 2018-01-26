@@ -18,6 +18,19 @@ type Mutation {
 
 	# Update existing Tweet
 	updateTweet(tweet_id: String!, handle: String!, tweet: String!): Tweet!
+
+    # Create user info is available in dynamo integration
+	createUserInfo(
+		handle: String!,
+		tweet_id: String!,
+		location: String,
+		description: String,
+		name: String,
+		followers_count: Int!,
+		friends_count: Int!,
+		favourites_count: Int!,
+		followers: [String]
+	): User!
 }
 
 type Query {
