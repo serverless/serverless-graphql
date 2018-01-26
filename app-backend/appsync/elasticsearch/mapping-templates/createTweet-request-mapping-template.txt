@@ -5,7 +5,10 @@
     "params":{
         "body":{
             "handle":"$context.arguments.handle",
-            "tweet": "$context.arguments.tweet"
+            "tweet": "$context.arguments.tweet",
+            "retweeted": false,
+            "favorited": false,
+            "retweet_count": 0
         }
     }
 }

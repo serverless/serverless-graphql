@@ -68,6 +68,11 @@ type Tweet {
 	favorited: Boolean
 }
 
+type TweetConnection {
+	items: [Tweet!]!
+	nextToken: String
+}
+
 type User {
 	name: String!
 	handle: String!
@@ -78,7 +83,7 @@ type User {
 	favourites_count: Int!
 	followers: [String!]!
 	topTweet: Tweet
-	tweets: [Tweet!]!
+	tweets(limit: Int, nextToken: String): TweetConnection
 }
 
 schema {
