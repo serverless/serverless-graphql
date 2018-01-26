@@ -22,7 +22,7 @@ const lambdaArn = `arn:aws:lambda:${awsRegion}:${accountId}:function:${
   functionName
 }`;
 
-const MAX_RETRIES = 10;
+const MAX_RETRIES = 20;
 let appId;
 
 function wait(timeout) {
