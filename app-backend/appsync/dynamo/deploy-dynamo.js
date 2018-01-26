@@ -17,7 +17,7 @@ const userPoolId = '...'; // Your Cognito User Pool Id
 const roleName = 'Dynamo-AppSyncServiceRole';
 const accountId = '...';
 const serviceRole = `arn:aws:iam::${accountId}:role/${roleName}`; // Service IAM Role for appsync to access data sources
-const MAX_RETRIES = 10;
+const MAX_RETRIES = 20;
 let appId;
 
 function wait(timeout) {

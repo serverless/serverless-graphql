@@ -17,7 +17,7 @@ const userPoolId = '...'; // Your Cognito User Pool Id
 const roleName = 'ES-AppSyncServiceRole';
 const accountId = '...';
 const serviceRole = `arn:aws:iam::${accountId}:role/${roleName}`; // Service IAM Role for appsync to access data sources
-const MAX_RETRIES = 10;
+const MAX_RETRIES = 20;
 const esHostname = '...';
 const esEndpoint = `https://${esHostname}.${awsRegion}.es.amazonaws.com`;
 
@@ -286,7 +286,7 @@ appsync
           'mapping-templates/createUserInfo-request-mapping-template.txt',
           'utf8'
         ) /* required */,
-        typeName: 'Query' /* required */,
+        typeName: 'Mutation' /* required */,
         responseMappingTemplate: fs.readFileSync(
           'mapping-templates/createUserInfo-response-mapping-template.txt',
           'utf8'
