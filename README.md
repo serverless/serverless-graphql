@@ -247,16 +247,14 @@ To use aws appsync you will need to create cognito user pool to authenticate the
 ```
 type Mutation {
 	# Create a tweet for a user
+	# consumer keys and tokens are not required for dynamo integration
 	createTweet(
 		handle: String!,
 		tweet: String!,
-		name: String!,
-		location: String!,
-		description: String!,
-		followers: [String!]!,
-		followers_count: Int!,
-		friends_count: Int!,
-		favourites_count: Int!
+		consumer_key: String,
+		consumer_secret: String,
+		access_token_key: String,
+		access_token_secret: String
 	): Tweet!
 
 	# Delete User Tweet
@@ -267,15 +265,33 @@ type Mutation {
 
 	# Update existing Tweet
 	updateTweet(tweet_id: String!, handle: String!, tweet: String!): Tweet!
+
+    # Create user info is available in dynamo integration
+	createUserInfo(
+		handle: String!,
+		tweet_id: String!,
+		location: String,
+		description: String,
+		name: String,
+		followers_count: Int!,
+		friends_count: Int!,
+		favourites_count: Int!,
+		followers: [String]
+	): User!
 }
 
 type Query {
-	getUserTwitterFeed(handle: String!): User!
+	getUserTwitterFeed(handle: String!, consumer_key: String, consumer_secret: String): User!
+
+	# search functionality is available in elasticsearch integration
+	searchTwitterFeedByKeyword(handle: String!, keyword: String!): User!
+	searchTwitterFeedByLocation(handle: String!, location: String!): User!
+	searchAllTweetsByKeyword(keyword: String!): [User!]!
 }
 
 type Subscription {
 	subscribeToTweeterUser(handle: String!): Tweet
-		@aws_subscribe(mutations: ["createTweet","deleteTweet", "reTweet", "updateTweet"])
+		@aws_subscribe(mutations: ["createTweet", "deleteTweet", "reTweet", "updateTweet"])
 }
 
 type Tweet {
@@ -301,7 +317,7 @@ type User {
 	favourites_count: Int!
 	followers: [String!]!
 	topTweet: Tweet
-	tweets(limit: Int, nextToken: String, keyword: String): TweetConnection
+	tweets(limit: Int!, nextToken: String): TweetConnection
 }
 
 schema {
