@@ -57,7 +57,7 @@ type User {
 	favourites_count: Int!
 	followers: [String!]!
 	topTweet: Tweet
-	tweets(limit: Int!, nextToken: String!): TweetConnection
+	tweets(limit: Int!, nextToken: String): TweetConnection
 }
 
 schema {
