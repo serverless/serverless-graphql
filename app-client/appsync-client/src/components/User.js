@@ -93,7 +93,7 @@ function User({ user }) {
         <Numbers>
           <div className="column">
             <div className="title">Tweets</div>
-            <div className="number">{user.posts.length}</div>
+            <div className="number">{user.tweets.items.length}</div>
           </div>
           <div className="column">
             <div className="title">Followers</div>
@@ -111,7 +111,7 @@ function User({ user }) {
       </Container>
 
       <Container>
-        {user.posts.map((name, index) => (
+        {user.tweets.items.map((name, index) => (
           <Tweet key={index}>{name.tweet}</Tweet>
         ))}
       </Container>

@@ -4,7 +4,7 @@ import gql from 'graphql-tag';
 import PropTypes from 'prop-types';
 import User from './User';
 
-const UserList = ({ data: { loading, error, getTwitterFeed } }) => {
+const UserList = ({ data: { loading, error, getUserTwitterFeed } }) => {
   if (loading) {
     return <p>Loading ...</p>;
   }
@@ -14,7 +14,7 @@ const UserList = ({ data: { loading, error, getTwitterFeed } }) => {
 
   return (
     <div>
-      <User key={getTwitterFeed.name} user={getTwitterFeed} />
+      <User key={getUserTwitterFeed.name} user={getUserTwitterFeed} />
     </div>
   );
 };
@@ -29,20 +29,35 @@ export const UserQuery = gql`
     $consumer_key: String!
     $consumer_secret: String!
   ) {
-    getTwitterFeed(
+    getUserTwitterFeed(
       handle: $handle
       consumer_key: $consumer_key
       consumer_secret: $consumer_secret
     ) {
       name
       location
-      screen_name
+      handle
       favourites_count
       description
       followers_count
       friends_count
-      posts {
+      followers
+      topTweet {
+        tweet_id
         tweet
+        retweeted
+        retweet_count
+        favorited
+      }
+      tweets(limit: 5) {
+        items {
+          tweet
+          tweet_id
+          retweet_count
+          retweeted
+          favorited
+        }
+        nextToken
       }
     }
   }
