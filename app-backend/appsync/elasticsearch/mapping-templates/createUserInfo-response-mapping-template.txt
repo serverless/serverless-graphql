@@ -1,0 +1,15 @@
+{
+   "name" : $util.toJson("$context.result.get('_source')['name']"),
+   "location" : $util.toJson("$context.result.get('_source')['location']"),
+   "description" : $util.toJson("$context.result.get('_source')['description']"),
+   "followers_count" : $util.toJson("$context.result.get('_source')['followers_count']"),
+   "favourites_count" : $util.toJson("$context.result.get('_source')['favourites_count']"),
+  	  #set($followerList = [])
+      #foreach($entry in $context.result.hits.hits[0].get('_source')['followers'])
+      	  #set( $element =
+          ${followerList.add($entry)}
+          )
+      #end
+   "followers": $util.toJson($followerList),
+   "friends_count" : $util.toJson("$context.result.get('_source')['friends_count']")
+}

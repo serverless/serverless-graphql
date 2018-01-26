@@ -11,15 +11,4 @@
     },
     "limit": #if($context.arguments.limit) $context.arguments.limit #else 10 #end,
     "nextToken": #if($context.arguments.nextToken) "$context.arguments.nextToken" #else null #end
-    #if(${context.arguments.keyword})
-    ,"filter": {
-        "expression": "begins_with (#tweet, :keyword)",
-        "expressionNames" : {
-          	"#tweet" : "tweet"
-        },
-        "expressionValues": {
-            ":keyword": { "S": "${context.arguments.keyword}" }
-        }
-      }
-    #end
 }

@@ -233,6 +233,20 @@ appsync
           'utf8'
         ) /* required */,
       },
+      {
+        apiId: appId /* required */,
+        dataSourceName: 'users' /* required */,
+        fieldName: 'createUserInfo' /* required */,
+        requestMappingTemplate: fs.readFileSync(
+          'mapping-templates/createUserInfo-request-mapping-template.txt',
+          'utf8'
+        ) /* required */,
+        typeName: 'Mutation' /* required */,
+        responseMappingTemplate: fs.readFileSync(
+          'mapping-templates/createUserInfo-response-mapping-template.txt',
+          'utf8'
+        ) /* required */,
+      },
     ];
 
     const resolverList = [];
