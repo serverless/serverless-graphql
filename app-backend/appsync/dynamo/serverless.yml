@@ -41,27 +41,6 @@ resources:
           -
             AttributeName: handle
             AttributeType: S
-          -
-            AttributeName: location
-            AttributeType: S
-          -
-            AttributeName: description
-            AttributeType: S
-          -
-            AttributeName: followers
-            AttributeType: L
-          -
-            AttributeName: name
-            AttributeType: S
-          -
-            AttributeName: followers_count
-            AttributeType: N
-          -
-            AttributeName: friends_count
-            AttributeType: N
-          -
-            AttributeName: favourites_count
-            AttributeType: N
         ProvisionedThroughput:
           ReadCapacityUnits: 10
           WriteCapacityUnits: 10
@@ -78,28 +57,33 @@ resources:
             AttributeName: tweet_id
             AttributeType: S
           -
-            AttributeName: tweet
+            AttributeName: handle
             AttributeType: S
           -
             AttributeName: retweet_count
             AttributeType: N
           -
-            AttributeName: handle
-            AttributeType: S
-          -
             AttributeName: created_at
             AttributeType: S
-          -
-            AttributeName: retweeted
-            AttributeType: BOOL
-          -
-            AttributeName: favorited
-            AttributeType: BOOL
         ProvisionedThroughput:
           ReadCapacityUnits: 10
           WriteCapacityUnits: 10
         TableName: 'Tweets'
         GlobalSecondaryIndexes:
+          -
+            IndexName: top-index
+            KeySchema:
+              -
+                AttributeName: handle
+                KeyType: HASH
+              -
+                AttributeName: retweet_count
+                KeyType: RANGE
+            Projection:
+              ProjectionType: ALL
+            ProvisionedThroughput:
+              ReadCapacityUnits: 50
+              WriteCapacityUnits: 50
           -
             IndexName: tweet-index
             KeySchema:
@@ -107,7 +91,7 @@ resources:
                 AttributeName: handle
                 KeyType: HASH
               -
-                AttributeName: retweet_count
+                AttributeName: created_at
                 KeyType: RANGE
             Projection:
               ProjectionType: ALL
