@@ -10,10 +10,11 @@
     "jest"
   ],
   "env": {
-    "jest": true
+    "jest": true,
+    "browser": true
   },
   "rules": {
-    "prettier/prettier": "error",
+    "prettier/prettier": "off",
     "react/jsx-filename-extension": "off",
     "react/no-array-index-key": "off",
     "function-paren-newline": "off",

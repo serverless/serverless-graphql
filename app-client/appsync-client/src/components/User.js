@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import UserInfo from './UserInfo';
 import UserTweets from './UserTweets';
 import TweetForm from './TweetForm';
+import { Div } from './helpers';
 
 const Main = styled.div`
   width: 800px;
@@ -27,8 +28,10 @@ const User = () => (
       <UserInfo />
     </SideBar>
     <Content>
-      <TweetForm />
-      <UserTweets />
+      <Div>
+        <TweetForm />
+        <UserTweets />
+      </Div>
     </Content>
   </Main>
 );

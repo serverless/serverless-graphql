@@ -2,14 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
 import styled from 'styled-components';
+import { v4 as uuid } from 'uuid';
 
 import { AddTweetMutation } from '../mutations';
-import { Div, Container } from './helpers';
+import { Container } from './helpers';
 
 const Form = styled.form`
   padding: 10px;
   display: flex;
   flex-direction: row;
+  margin-bottom: 15px;
 
   input {
     flex: auto;
@@ -59,14 +61,7 @@ export class TweetFormComponent extends React.Component {
     });
 
     this.props
-      .mutate({
-        variables: {
-          handle: process.env.REACT_APP_HANDLE,
-          consumer_key: process.env.REACT_APP_CONSUMER_KEY,
-          consumer_secret: process.env.REACT_APP_SECRET_KEY,
-          tweet: value,
-        },
-      })
+      .addTweet(value)
       .then(() => {
         this.setState({
           value: '',
@@ -90,27 +85,45 @@ export class TweetFormComponent extends React.Component {
   render() {
     const { value, error } = this.state;
     return (
-      <Div>
-        <Container>
-          {error && <p>{error}</p>}
-          <Form onSubmit={this.handleSubmit}>
-            <input
-              type="text"
-              size="50"
-              value={value}
-              onChange={this.updateValue}
-              placeholder="Submit a tweet!"
-            />
-            <button type="submit">Send</button>
-          </Form>
-        </Container>
-      </Div>
+      <Container>
+        {error && <p>{error}</p>}
+        <Form onSubmit={this.handleSubmit}>
+          <input
+            type="text"
+            size="50"
+            value={value}
+            onChange={this.updateValue}
+            placeholder="Submit a tweet!"
+            maxLength="160"
+          />
+          <button type="submit">Send</button>
+        </Form>
+      </Container>
     );
   }
 }
 
 TweetFormComponent.propTypes = {
-  mutate: PropTypes.func.isRequired,
+  addTweet: PropTypes.func.isRequired,
 };
 
-export default graphql(AddTweetMutation)(TweetFormComponent);
+export default graphql(AddTweetMutation, {
+  props: ({ mutate }) => ({
+    addTweet: tweet =>
+      mutate({
+        variables: {
+          handle: process.env.REACT_APP_HANDLE,
+          consumer_key: process.env.REACT_APP_CONSUMER_KEY,
+          consumer_secret: process.env.REACT_APP_SECRET_KEY,
+          tweet,
+        },
+        optimisticResponse: () => ({
+          createTweet: {
+            tweet,
+            tweet_id: uuid(),
+            __typename: 'Tweet',
+          },
+        }),
+      }),
+  }),
+})(TweetFormComponent);

@@ -7,7 +7,7 @@ import { Div, Container } from './helpers';
 import { UserQuery } from '../queries';
 
 const UserProfile = styled.div`
-  margin-bottom: 30px;
+  margin-bottom: 15px;
   padding: 15px 15px;
   text-align: center;
   & .username {
@@ -36,8 +36,8 @@ const UserProfile = styled.div`
 
 const Numbers = styled.div`
   display: flex;
-  margin-top: 30px;
-  margin-bottom: 30px;
+  margin-top: 15px;
+  margin-bottom: 15px;
   & .column {
     color: #657786;
     flex: 1;
