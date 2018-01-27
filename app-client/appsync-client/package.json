@@ -28,8 +28,6 @@
   "scripts": {
     "start": "env-cmd ../../config/security.env.local react-scripts start",
     "build": "env-cmd ../../config/security.env.prod react-scripts build",
-    "lint": "eslint src/**/*.js",
-    "lint:fix": "eslint src/**/*.js --fix",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "deploy-s3": "yarn build && serverless client deploy",
