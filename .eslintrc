@@ -10,7 +10,8 @@
     "jest"
   ],
   "env": {
-    "jest": true
+    "jest": true,
+    "browser": true
   },
   "rules": {
     "prettier/prettier": "error",
@@ -27,6 +28,7 @@
     "no-await-in-loop": "off",
     "space-before-function-paren": "off",
     "no-console": "off",
-    "func-names": "off"
+    "func-names": "off",
+    "object-curly-newline": "off"
   }
 }
