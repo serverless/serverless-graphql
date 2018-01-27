@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { UserInfo } from './UserInfo';
+import { UserInfoComponent } from './UserInfo';
 
 it('render user name', () => {
   const data = {
@@ -12,18 +12,18 @@ it('render user name', () => {
       favourites_count: 200,
       followers_count: 300,
       friends_count: 100,
-      tweets: {
-        items: [
-          {
-            tweet: 'this is my first tweet',
-            tweet_id: '123',
-          },
-        ],
+      followers: [],
+      topTweet: {
+        tweet_id: '123',
+        tweet: 'this is my first tweet',
+        retweeted: true,
+        retweet_count: 501,
+        favorited: false,
       },
     },
     loading: false,
     error: null,
   };
-  const wrapper = shallow(<UserInfo data={data} />);
+  const wrapper = shallow(<UserInfoComponent data={data} />);
   expect(wrapper.html()).toContain(data.getUserTwitterFeed.description);
 });

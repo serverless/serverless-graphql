@@ -98,7 +98,9 @@ export const UserInfoComponent = ({
         <Numbers>
           <div className="column">
             <div className="title">Tweets</div>
-            <div className="number">{user.tweets.items.length}</div>
+            <div className="number">
+              <span title="NEED 'TWEET_COUNT' FOR USER">XX</span>
+            </div>
           </div>
           <div className="column">
             <div className="title">Followers</div>
