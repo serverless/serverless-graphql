@@ -4,8 +4,9 @@ import { graphql } from 'react-apollo';
 import styled from 'styled-components';
 import { v4 as uuid } from 'uuid';
 
-import { AddTweetMutation } from '../mutations';
 import { Container } from './helpers';
+import { AddTweetMutation } from '../mutations';
+import { UserTweetsQuery } from '../queries';
 
 const Form = styled.form`
   padding: 10px;
@@ -94,7 +95,7 @@ export class TweetFormComponent extends React.Component {
             value={value}
             onChange={this.updateValue}
             placeholder="Submit a tweet!"
-            maxLength="160"
+            maxLength="140"
           />
           <button type="submit">Send</button>
         </Form>
@@ -124,6 +125,16 @@ export default graphql(AddTweetMutation, {
             __typename: 'Tweet',
           },
         }),
+        refetchQueries: [
+          {
+            query: UserTweetsQuery,
+            variables: {
+              handle: process.env.REACT_APP_HANDLE,
+              consumer_key: process.env.REACT_APP_CONSUMER_KEY,
+              consumer_secret: process.env.REACT_APP_SECRET_KEY,
+            },
+          },
+        ],
       }),
   }),
 })(TweetFormComponent);

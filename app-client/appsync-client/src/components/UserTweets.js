@@ -96,6 +96,7 @@ const deleteMutation = graphql(DeleteTweetMutation, {
         },
         optimisticResponse: () => ({
           deleteTweet: {
+            handle: process.env.REACT_APP_HANDLE,
             tweet_id: tweetId,
             __typename: 'Tweet',
           },

@@ -50,4 +50,7 @@ export const ReTweetMutation = gql`
 
 export default {
   AddTweetMutation,
+  UpdateTweetMutation,
+  DeleteTweetMutation,
+  ReTweetMutation,
 };
