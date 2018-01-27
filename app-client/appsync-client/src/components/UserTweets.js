@@ -40,9 +40,10 @@ export class UserTweetsComponent extends React.Component {
 
   render() {
     const { data } = this.props;
-    const { loading, error, getUserTwitterFeed, refetch } = data;
+    const { loading, error, getUserTwitterFeed, networkStatus } = data;
+    const isRefetching = networkStatus === 4;
 
-    if (loading && !refetch) {
+    if (loading && !isRefetching) {
       return (
         <Container>
           <p>Loading ...</p>
