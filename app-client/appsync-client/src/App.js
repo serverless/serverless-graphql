@@ -13,8 +13,8 @@ import './App.css';
 Amplify.configure({
   Auth: {
     region: process.env.REACT_APP_AWS_AUTH_REGION, // REQUIRED - Amazon Cognito Region
-    userPoolId: process.env.REACT_APP_USER_POOL_ID, //OPTIONAL - Amazon Cognito User Pool ID
-    userPoolWebClientId: process.env.REACT_APP_CLIENT_APP_ID, //User Pool App Client ID
+    userPoolId: process.env.REACT_APP_USER_POOL_ID, // OPTIONAL - Amazon Cognito User Pool ID
+    userPoolWebClientId: process.env.REACT_APP_CLIENT_APP_ID, // User Pool App Client ID
   },
 });
 
