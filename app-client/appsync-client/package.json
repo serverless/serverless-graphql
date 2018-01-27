@@ -14,6 +14,7 @@
     "aws-appsync-react": "^1.0.4",
     "aws-sdk": "^2.184.0",
     "graphql": "^0.12.3",
+    "graphql-anywhere": "^4.1.1",
     "graphql-tag": "^2.6.1",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
@@ -26,6 +27,8 @@
   "scripts": {
     "start": "env-cmd ../../config/security.env.local react-scripts start",
     "build": "env-cmd ../../config/security.env.prod react-scripts build",
+    "lint": "eslint src/**/*.js",
+    "lint:fix": "eslint src/**/*.js --fix",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "deploy-s3": "yarn build && serverless client deploy",

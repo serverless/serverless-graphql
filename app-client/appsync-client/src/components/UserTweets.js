@@ -1,6 +1,7 @@
 import React from 'react';
-import { graphql, compose } from 'react-apollo';
 import PropTypes from 'prop-types';
+import { graphql, compose } from 'react-apollo';
+import { propType } from 'graphql-anywhere';
 import styled from 'styled-components';
 
 import { Div, Container } from './helpers';
@@ -18,7 +19,7 @@ const Tweet = styled.div`
   }
 `;
 
-class UserTweets extends React.Component {
+export class UserTweetsComponent extends React.Component {
   constructor(props) {
     super(props);
 
@@ -26,6 +27,7 @@ class UserTweets extends React.Component {
   }
 
   deleteTweet(tweet) {
+    // eslint-disable-next-line no-alert
     if (window.confirm('Are you sure you want to delete this tweet?')) {
       this.props
         .mutate({
@@ -73,8 +75,9 @@ class UserTweets extends React.Component {
   }
 }
 
-UserTweets.propTypes = {
-  data: PropTypes.any.isRequired, // eslint-disable-line
+UserTweetsComponent.propTypes = {
+  data: propType(UserTweetsQuery).isRequired,
+  mutate: PropTypes.func.isRequired,
 };
 
 const tweetsQuery = graphql(UserTweetsQuery, {
@@ -89,4 +92,4 @@ const tweetsQuery = graphql(UserTweetsQuery, {
 
 const deleteMutation = graphql(DeleteTweetMutation);
 
-export default compose(tweetsQuery, deleteMutation)(UserTweets);
+export default compose(tweetsQuery, deleteMutation)(UserTweetsComponent);

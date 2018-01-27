@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
 import styled from 'styled-components';
 
@@ -31,7 +32,7 @@ const Form = styled.form`
   }
 `;
 
-export class TweetForm extends React.Component {
+export class TweetFormComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -52,8 +53,6 @@ export class TweetForm extends React.Component {
       return;
     }
 
-    console.log(`Sending: ${value}`);
-
     this.setState({
       sending: true,
       error: null,
@@ -68,8 +67,7 @@ export class TweetForm extends React.Component {
           tweet: value,
         },
       })
-      .then(({ data }) => {
-        console.log(data);
+      .then(() => {
         this.setState({
           value: '',
           sending: false,
@@ -90,14 +88,16 @@ export class TweetForm extends React.Component {
   }
 
   render() {
+    const { value, error } = this.state;
     return (
       <Div>
         <Container>
+          {error && <p>{error}</p>}
           <Form onSubmit={this.handleSubmit}>
             <input
               type="text"
               size="50"
-              value={this.state.value}
+              value={value}
               onChange={this.updateValue}
               placeholder="Submit a tweet!"
             />
@@ -109,4 +109,8 @@ export class TweetForm extends React.Component {
   }
 }
 
-export default graphql(AddTweetMutation)(TweetForm);
+TweetFormComponent.propTypes = {
+  mutate: PropTypes.func.isRequired,
+};
+
+export default graphql(AddTweetMutation)(TweetFormComponent);

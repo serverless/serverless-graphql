@@ -21,18 +21,16 @@ const Content = styled.div`
   flex: 2;
 `;
 
-const User = () => {
-  return (
-    <Main>
-      <SideBar>
-        <UserInfo />
-      </SideBar>
-      <Content>
-        <TweetForm />
-        <UserTweets />
-      </Content>
-    </Main>
-  );
-};
+const User = () => (
+  <Main>
+    <SideBar>
+      <UserInfo />
+    </SideBar>
+    <Content>
+      <TweetForm />
+      <UserTweets />
+    </Content>
+  </Main>
+);
 
 export default User;

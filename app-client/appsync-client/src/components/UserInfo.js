@@ -1,6 +1,6 @@
 import React from 'react';
 import { graphql } from 'react-apollo';
-import PropTypes from 'prop-types';
+import { propType } from 'graphql-anywhere';
 import styled from 'styled-components';
 
 import { Div, Container } from './helpers';
@@ -55,7 +55,9 @@ const Numbers = styled.div`
   }
 `;
 
-const UserList = ({ data: { loading, error, getUserTwitterFeed } }) => {
+export const UserInfoComponent = ({
+  data: { loading, error, getUserTwitterFeed },
+}) => {
   if (loading) {
     return (
       <Div>
@@ -75,7 +77,7 @@ const UserList = ({ data: { loading, error, getUserTwitterFeed } }) => {
     );
   }
 
-  const user = this.props.getUserTwitterFeed;
+  const user = getUserTwitterFeed;
 
   return (
     <Div>
@@ -116,8 +118,8 @@ const UserList = ({ data: { loading, error, getUserTwitterFeed } }) => {
   );
 };
 
-UserList.propTypes = {
-  data: PropTypes.any.isRequired, // eslint-disable-line
+UserInfoComponent.propTypes = {
+  data: propType(UserQuery).isRequired,
 };
 
 export default graphql(UserQuery, {
@@ -128,4 +130,4 @@ export default graphql(UserQuery, {
       consumer_secret: process.env.REACT_APP_SECRET_KEY,
     },
   }),
-})(UserList);
+})(UserInfoComponent);
