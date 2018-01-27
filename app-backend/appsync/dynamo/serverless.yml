@@ -24,7 +24,9 @@ custom:
       test:
         sources:
           - table: Users
-            sources: [seed-data/users.json]
+            sources: [seed-data/Users.json]
+          - table: Tweets
+            sources: [seed-data/Tweets.json]
 
 resources:
   Resources:
@@ -35,34 +37,80 @@ resources:
           -
             AttributeName: handle
             KeyType: HASH
-          -
-            AttributeName: tweet_id
-            KeyType: RANGE
         AttributeDefinitions:
           -
             AttributeName: handle
             AttributeType: S
           -
-            AttributeName: tweet_id
+            AttributeName: location
             AttributeType: S
+          -
+            AttributeName: description
+            AttributeType: S
+          -
+            AttributeName: followers
+            AttributeType: L
+          -
+            AttributeName: name
+            AttributeType: S
+          -
+            AttributeName: followers_count
+            AttributeType: N
+          -
+            AttributeName: friends_count
+            AttributeType: N
+          -
+            AttributeName: favourites_count
+            AttributeType: N
         ProvisionedThroughput:
           ReadCapacityUnits: 10
           WriteCapacityUnits: 10
-        TableName: 'users'
+        TableName: 'Users'
+    TweetsTable:
+      Type: 'AWS::DynamoDB::Table'
+      Properties:
+        KeySchema:
+          -
+            AttributeName: tweet_id
+            KeyType: HASH
+        AttributeDefinitions:
+          -
+            AttributeName: tweet_id
+            AttributeType: S
+          -
+            AttributeName: tweet
+            AttributeType: S
+          -
+            AttributeName: retweet_count
+            AttributeType: N
+          -
+            AttributeName: handle
+            AttributeType: S
+          -
+            AttributeName: created_at
+            AttributeType: S
+          -
+            AttributeName: retweeted
+            AttributeType: BOOL
+          -
+            AttributeName: favorited
+            AttributeType: BOOL
+        ProvisionedThroughput:
+          ReadCapacityUnits: 10
+          WriteCapacityUnits: 10
+        TableName: 'Tweets'
         GlobalSecondaryIndexes:
           -
-            IndexName: top-index
+            IndexName: tweet-index
             KeySchema:
               -
                 AttributeName: handle
                 KeyType: HASH
+              -
+                AttributeName: retweet_count
+                KeyType: RANGE
             Projection:
-              NonKeyAttributes:
-                - tweet
-                - retweet_count
-                - retweeted
-                - favorited
-              ProjectionType: INCLUDE
+              ProjectionType: ALL
             ProvisionedThroughput:
               ReadCapacityUnits: 50
               WriteCapacityUnits: 50
@@ -97,5 +145,7 @@ resources:
                     - "dynamodb:Scan"
                     - "dynamodb:UpdateItem"
                   Resource:
-                    - "arn:aws:dynamodb:us-east-1:${self:custom.account_id}:table/users"
-                    - "arn:aws:dynamodb:us-east-1:${self:custom.account_id}:table/users/*"
+                    - "arn:aws:dynamodb:us-east-1:${self:custom.account_id}:table/Users"
+                    - "arn:aws:dynamodb:us-east-1:${self:custom.account_id}:table/Users/*"
+                    - "arn:aws:dynamodb:us-east-1:${self:custom.account_id}:table/Tweets"
+                    - "arn:aws:dynamodb:us-east-1:${self:custom.account_id}:table/Tweets/*"
