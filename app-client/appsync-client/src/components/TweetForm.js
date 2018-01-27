@@ -1,9 +1,37 @@
 import React from 'react';
 import { graphql } from 'react-apollo';
+import styled from 'styled-components';
 
-import PostTweetByUserQuery from '../Queries/PostTweetByUserQuery';
+import { AddTweetMutation } from '../mutations';
+import { Div, Container } from './helpers';
 
-export class Tweetbar extends React.Component {
+const Form = styled.form`
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+
+  input {
+    flex: auto;
+    padding: 5px;
+    font-size: 16px;
+  }
+
+  button {
+    border: 1px solid darkgrey;
+    background-color: skyblue;
+    font-size: 16px;
+    padding: 6px 16px;
+    margin-left: 5px;
+
+    &:hover {
+      color: white;
+      background-color: lightblue;
+      cursor: pointer;
+    }
+  }
+`;
+
+export class TweetForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -31,12 +59,13 @@ export class Tweetbar extends React.Component {
       error: null,
     });
 
-    debugger;
     this.props
       .mutate({
         variables: {
-          screen_name: process.env.REACT_APP_HANDLE,
-          post: value,
+          handle: process.env.REACT_APP_HANDLE,
+          consumer_key: process.env.REACT_APP_CONSUMER_KEY,
+          consumer_secret: process.env.REACT_APP_SECRET_KEY,
+          tweet: value,
         },
       })
       .then(({ data }) => {
@@ -62,9 +91,9 @@ export class Tweetbar extends React.Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <div>
+      <Div>
+        <Container>
+          <Form onSubmit={this.handleSubmit}>
             <input
               type="text"
               size="50"
@@ -72,14 +101,12 @@ export class Tweetbar extends React.Component {
               onChange={this.updateValue}
               placeholder="Submit a tweet!"
             />
-          </div>
-          <div>
-            <input type="submit" value="Send Tweet" />
-          </div>
-        </form>
-      </div>
+            <button type="submit">Send</button>
+          </Form>
+        </Container>
+      </Div>
     );
   }
 }
 
-export default graphql(PostTweetByUserQuery)(Tweetbar);
+export default graphql(AddTweetMutation)(TweetForm);

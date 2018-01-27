@@ -6,8 +6,7 @@ import { Rehydrated } from 'aws-appsync-react';
 import { AUTH_TYPE } from 'aws-appsync/lib/link/auth-link';
 import { ApolloProvider } from 'react-apollo';
 
-import UserList from './components/UserList';
-import Tweetbar from './components/Tweetbar';
+import User from './components/User';
 import logo from './logo.svg';
 import './App.css';
 
@@ -38,7 +37,7 @@ class App extends Component {
           <h2>Serverless GraphQL Apollo </h2>
         </div>
         <div className="App-User">
-          <UserList />
+          <User />
         </div>
       </div>
     );
