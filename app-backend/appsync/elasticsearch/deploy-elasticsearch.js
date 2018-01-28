@@ -14,9 +14,11 @@ const appsync = new AWS.AppSync({ apiVersion: '2017-07-25' });
 const graphQLAPIName = '...'; // your graphQL API Name
 const awsRegion = 'us-east-1'; // AWS Region ex - us-east-1
 const userPoolId = '...'; // Your Cognito User Pool Id
-const roleName = 'ES-AppSyncServiceRole';
+const roleNameElastic = 'ES-AppSyncServiceRole';
+const roleNameDynamo = 'Dynamo-AppSyncServiceRole';
 const accountId = '...';
-const serviceRole = `arn:aws:iam::${accountId}:role/${roleName}`; // Service IAM Role for appsync to access data sources
+const serviceRoleElastic = `arn:aws:iam::${accountId}:role/${roleNameElastic}`; // Service IAM Role for appsync to access data sources
+const serviceRoleDynamo = `arn:aws:iam::${accountId}:role/${roleNameDynamo}`; // Service IAM Role for appsync to access data sources
 const MAX_RETRIES = 20;
 const esHostname = '...';
 const esEndpoint = `https://${esHostname}.${awsRegion}.es.amazonaws.com`;
@@ -62,7 +64,7 @@ appsync
           awsRegion: awsRegion /* required */,
           endpoint: esEndpoint /* required */,
         },
-        serviceRoleArn: serviceRole,
+        serviceRoleArn: serviceRoleElastic,
       },
       {
         apiId: appId /* required */,
@@ -73,7 +75,7 @@ appsync
           awsRegion: awsRegion /* required */,
           tableName: 'Users' /* required */,
         },
-        serviceRoleArn: serviceRole,
+        serviceRoleArn: serviceRoleDynamo,
       },
     ];
 

@@ -28,7 +28,33 @@ resources:
           ReadCapacityUnits: 10
           WriteCapacityUnits: 10
         TableName: 'Users'
-    LambdaAppSyncServiceRole:
+    ESAppSyncServiceRole:
+      Type: "AWS::IAM::Role"
+      Properties:
+        RoleName: "ES-AppSyncServiceRole"
+        AssumeRolePolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            -
+              Effect: "Allow"
+              Principal:
+                Service:
+                  - "appsync.amazonaws.com"
+              Action:
+                - "sts:AssumeRole"
+        Policies:
+          -
+            PolicyName: "ES-AppSyncServiceRole-Policy"
+            PolicyDocument:
+              Version: "2012-10-17"
+              Statement:
+                -
+                  Effect: "Allow"
+                  Action:
+                    - "es:*"
+                  Resource:
+                    - "arn:aws:es:us-east-1:${self:custom.account_id}:domain/appsync/*"
+    DDBAppSyncServiceRole:
       Type: "AWS::IAM::Role"
       Properties:
         RoleName: "Dynamo-AppSyncServiceRole"
@@ -63,69 +89,3 @@ resources:
                     - "arn:aws:dynamodb:us-east-1:${self:custom.account_id}:table/Users/*"
                     - "arn:aws:dynamodb:us-east-1:${self:custom.account_id}:table/Tweets"
                     - "arn:aws:dynamodb:us-east-1:${self:custom.account_id}:table/Tweets/*"
-    DynamoDbStreamServiceRole:
-      Type: "AWS::IAM::Role"
-      Properties:
-        RoleName: "DynamoDbStream-AppSyncServiceRole"
-        AssumeRolePolicyDocument:
-          Version: "2012-10-17"
-          Statement:
-            -
-              Effect: "Allow"
-              Principal:
-                Service:
-                  - "lambda.amazonaws.com"
-              Action:
-                - "sts:AssumeRole"
-        Policies:
-          -
-            PolicyName: "DynamoDbStreamWrite-AppSyncServiceRole-Policy"
-            PolicyDocument:
-              Version: "2012-10-17"
-              Statement:
-                -
-                  Effect: "Allow"
-                  Action:
-                    - "es:ESHttpPost"
-                  Resource:
-                    - "arn:aws:es:us-east-1:${self:custom.account_id}:domain/appsync/*"
-          -
-            PolicyName: "DynamoDbStreamRead-AppSyncServiceRole-Policy"
-            PolicyDocument:
-              Version: "2012-10-17"
-              Statement:
-                -
-                  Effect: "Allow"
-                  Action:
-                    - "dynamodb:DescribeStream"
-                    - "dynamodb:GetRecords"
-                    - "dynamodb:GetShardIterator"
-                    - "dynamodb:ListStreams"
-                  Resource:
-                    - "arn:aws:dynamodb:us-east-1:${self:custom.account_id}:table/Tweets/stream/2018-01-28T09:35:44.488"
-    AppSyncServiceRole:
-      Type: "AWS::IAM::Role"
-      Properties:
-        RoleName: "ES-AppSyncServiceRole"
-        AssumeRolePolicyDocument:
-          Version: "2012-10-17"
-          Statement:
-            -
-              Effect: "Allow"
-              Principal:
-                Service:
-                  - "appsync.amazonaws.com"
-              Action:
-                - "sts:AssumeRole"
-        Policies:
-          -
-            PolicyName: "ES-AppSyncServiceRole-Policy"
-            PolicyDocument:
-              Version: "2012-10-17"
-              Statement:
-                -
-                  Effect: "Allow"
-                  Action:
-                    - "es:*"
-                  Resource:
-                    - "arn:aws:es:us-east-1:${self:custom.account_id}:domain/appsync/*"
