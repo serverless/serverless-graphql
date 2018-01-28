@@ -255,7 +255,7 @@ appsync
           'mapping-templates/searchTweetsByKeyword-request-mapping-template.txt',
           'utf8'
         ) /* required */,
-        typeName: 'Query' /* required */,
+        typeName: 'User' /* required */,
         responseMappingTemplate: fs.readFileSync(
           'mapping-templates/searchTweetsByKeyword-response-mapping-template.txt',
           'utf8'
@@ -269,7 +269,7 @@ appsync
           'mapping-templates/searchTweetsByLocation-request-mapping-template.txt',
           'utf8'
         ) /* required */,
-        typeName: 'Query' /* required */,
+        typeName: 'User' /* required */,
         responseMappingTemplate: fs.readFileSync(
           'mapping-templates/searchTweetsByLocation-response-mapping-template.txt',
           'utf8'
