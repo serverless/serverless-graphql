@@ -1,0 +1,6 @@
+projects:
+  app:
+    schemaPath: "schema.js"
+    extensions:
+      endpoints:
+        default: "http://localhost:4000"
