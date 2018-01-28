@@ -15,7 +15,7 @@ const allUsers = JSON.parse(fs.readFileSync('ESUsers.json', 'utf8'));
 
 allUsers.forEach(function(user) {
   const Userparams = {
-    TableName: 'Users',
+    TableName: 'ESUsers',
     Item: {
       name: user.name,
       handle: user.handle,
