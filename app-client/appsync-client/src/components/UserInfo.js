@@ -4,7 +4,7 @@ import { propType } from 'graphql-anywhere';
 import styled from 'styled-components';
 
 import { Div, Container } from './helpers';
-import { UserQuery } from '../queries';
+import { MeQuery } from '../queries';
 
 const UserProfile = styled.div`
   margin-bottom: 15px;
@@ -55,9 +55,7 @@ const Numbers = styled.div`
   }
 `;
 
-export const UserInfoComponent = ({
-  data: { loading, error, getUserInfo },
-}) => {
+export const UserInfoComponent = ({ data: { loading, error, meInfo } }) => {
   if (loading) {
     return (
       <Div>
@@ -77,14 +75,14 @@ export const UserInfoComponent = ({
     );
   }
 
-  const user = getUserInfo;
+  const user = meInfo;
 
   return (
     <Div>
       <Container>
         <UserProfile>
           <h4 className="username">
-            {user.name} <span>@{user.screen_name}</span>
+            {user.name} <span>@{user.handle}</span>
           </h4>
           <p className="location">
             <i className="material-icons">location_on</i>
@@ -121,10 +119,10 @@ export const UserInfoComponent = ({
 };
 
 UserInfoComponent.propTypes = {
-  data: propType(UserQuery).isRequired,
+  data: propType(MeQuery).isRequired,
 };
 
-export default graphql(UserQuery, {
+export default graphql(MeQuery, {
   options: () => ({
     variables: {
       consumer_key: process.env.REACT_APP_CONSUMER_KEY,

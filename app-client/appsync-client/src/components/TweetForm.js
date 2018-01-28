@@ -6,7 +6,7 @@ import { v4 as uuid } from 'uuid';
 
 import { Container } from './helpers';
 import { AddTweetMutation } from '../mutations';
-import { UserTweetsQuery } from '../queries';
+import { MeTweetsQuery } from '../queries';
 
 const Form = styled.form`
   padding: 10px;
@@ -132,7 +132,7 @@ export default graphql(AddTweetMutation, {
         }),
         refetchQueries: [
           {
-            query: UserTweetsQuery,
+            query: MeTweetsQuery,
             variables: {
               consumer_key: process.env.REACT_APP_CONSUMER_KEY,
               consumer_secret: process.env.REACT_APP_SECRET_KEY,
