@@ -142,14 +142,14 @@ appsync
       {
         apiId: appId /* required */,
         dataSourceName: 'lambda' /* required */,
-        fieldName: 'getUserTwitterFeed' /* required */,
+        fieldName: 'getUserInfo' /* required */,
         requestMappingTemplate: fs.readFileSync(
-          'mapping-templates/getUserTwitterFeed-request-mapping-template.txt',
+          'mapping-templates/getUserInfo-request-mapping-template.txt',
           'utf8'
         ) /* required */,
         typeName: 'Query' /* required */,
         responseMappingTemplate: fs.readFileSync(
-          'mapping-templates/getUserTwitterFeed-response-mapping-template.txt',
+          'mapping-templates/getUserInfo-response-mapping-template.txt',
           'utf8'
         ) /* required */,
       },
