@@ -6,6 +6,7 @@ const tweetsPerUser = 5;
 const followersPerUser = 2;
 
 const udata = [];
+const tdata = [];
 const handleNames = [];
 
 faker.seed(1000);
@@ -18,6 +19,7 @@ for (let i = 0; i < numUsers; i++) {
 for (let i = 0; i < handleNames.length; i++) {
   const followers = [];
 
+  //create user info
   for (let k = 0; k < followersPerUser; k++) {
     followers.push(handleNames[Math.floor(Math.random() * handleNames.length)]);
   }
@@ -41,19 +43,26 @@ for (let i = 0; i < handleNames.length; i++) {
   const location = faker.address.city();
   const description = faker.name.jobTitle();
 
+  const userInfo = {
+    handle: handleNames[i],
+    name: name,
+    location: location,
+    description: description,
+    followers_count: followers_count,
+    friends_count: friends_count,
+    favourites_count: favourites_count,
+    followers: followers,
+  };
+
+  udata.push(userInfo);
+
+  //create tweet info
   for (let j = 0; j < tweetsPerUser; j++) {
     const id = faker.random.uuid();
 
-    const record = {
-      name: name,
+    const tweetInfo = {
       handle: handleNames[i],
       tweet_id: id,
-      location: location,
-      description: description,
-      followers_count: followers_count,
-      friends_count: friends_count,
-      favourites_count: favourites_count,
-      followers: followers,
       tweet: faker.lorem.sentence(),
       retweeted: faker.random.boolean(),
       retweet_count: faker.random.number({
@@ -61,15 +70,25 @@ for (let i = 0; i < handleNames.length; i++) {
         max: 50,
       }),
       favorited: faker.random.boolean(),
+      created_at: faker.date.between('2016-01-01', '2017-01-27'),
     };
 
-    udata.push(record);
+    tdata.push(tweetInfo);
   }
 }
 
-const ufile = 'users.json';
+const ufile = 'Users.json';
+const tfile = 'Tweets.json';
 
 jsonfile.writeFileSync(ufile, udata, function(err) {
+  if (err) {
+    console.error(err);
+  } else {
+    console.log('data created successfully');
+  }
+});
+
+jsonfile.writeFileSync(tfile, tdata, function(err) {
   if (err) {
     console.error(err);
   } else {
