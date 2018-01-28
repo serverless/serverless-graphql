@@ -13,7 +13,7 @@
     "postinstall":
       "cd app-backend/dynamodb && yarn install && cd ../rest-api && yarn install && cd ../rds && yarn install && cd ../../app-client/apollo-client && yarn install && cd ../../ && yarn install-appsync",
     "install-appsync":
-      "cd app-client/appsync-client && yarn install && cd ../../app-backend/appsync/dynamo && yarn install && cd ../elasticsearch && yarn install && cd ../lambda && yarn install"
+      "cd app-client/appsync-client && yarn install && cd ../../app-backend/appsync/dynamo && yarn install && cd ../dynamo-elasticsearch && yarn install && cd ../lambda && yarn install"
   },
   "lint-staged": {
     "*.{js,json,css}": ["prettier --write", "git add"]
