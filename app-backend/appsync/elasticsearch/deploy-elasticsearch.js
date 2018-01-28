@@ -64,6 +64,17 @@ appsync
         },
         serviceRoleArn: serviceRole,
       },
+      {
+        apiId: appId /* required */,
+        name: 'Users' /* required */,
+        type: 'AMAZON_DYNAMODB' /* required */,
+        description: 'Store user info',
+        dynamodbConfig: {
+          awsRegion: awsRegion /* required */,
+          tableName: 'Users' /* required */,
+        },
+        serviceRoleArn: serviceRole,
+      },
     ];
 
     const dataSourceList = [];
@@ -140,15 +151,15 @@ appsync
     const resolverParams = [
       {
         apiId: appId /* required */,
-        dataSourceName: 'elastic' /* required */,
-        fieldName: 'getUserTwitterFeed' /* required */,
+        dataSourceName: 'Users' /* required */,
+        fieldName: 'getUserInfo' /* required */,
         requestMappingTemplate: fs.readFileSync(
-          'mapping-templates/getUserTwitterFeed-request-mapping-template.txt',
+          'mapping-templates/getUserInfo-request-mapping-template.txt',
           'utf8'
         ) /* required */,
         typeName: 'Query' /* required */,
         responseMappingTemplate: fs.readFileSync(
-          'mapping-templates/getUserTwitterFeed-response-mapping-template.txt',
+          'mapping-templates/getUserInfo-response-mapping-template.txt',
           'utf8'
         ) /* required */,
       },
@@ -239,28 +250,28 @@ appsync
       {
         apiId: appId /* required */,
         dataSourceName: 'elastic' /* required */,
-        fieldName: 'searchTwitterFeedByKeyword' /* required */,
+        fieldName: 'searchTweetsByKeyword' /* required */,
         requestMappingTemplate: fs.readFileSync(
-          'mapping-templates/searchTwitterFeedByKeyword-request-mapping-template.txt',
+          'mapping-templates/searchTweetsByKeyword-request-mapping-template.txt',
           'utf8'
         ) /* required */,
         typeName: 'Query' /* required */,
         responseMappingTemplate: fs.readFileSync(
-          'mapping-templates/searchTwitterFeedByKeyword-response-mapping-template.txt',
+          'mapping-templates/searchTweetsByKeyword-response-mapping-template.txt',
           'utf8'
         ) /* required */,
       },
       {
         apiId: appId /* required */,
         dataSourceName: 'elastic' /* required */,
-        fieldName: 'searchTwitterFeedByLocation' /* required */,
+        fieldName: 'searchTweetsByLocation' /* required */,
         requestMappingTemplate: fs.readFileSync(
-          'mapping-templates/searchTwitterFeedByLocation-request-mapping-template.txt',
+          'mapping-templates/searchTweetsByLocation-request-mapping-template.txt',
           'utf8'
         ) /* required */,
         typeName: 'Query' /* required */,
         responseMappingTemplate: fs.readFileSync(
-          'mapping-templates/searchTwitterFeedByLocation-response-mapping-template.txt',
+          'mapping-templates/searchTweetsByLocation-response-mapping-template.txt',
           'utf8'
         ) /* required */,
       },
@@ -280,15 +291,15 @@ appsync
       },
       {
         apiId: appId /* required */,
-        dataSourceName: 'elastic' /* required */,
-        fieldName: 'createUserInfo' /* required */,
+        dataSourceName: 'Users' /* required */,
+        fieldName: 'updateUserInfo' /* required */,
         requestMappingTemplate: fs.readFileSync(
-          'mapping-templates/createUserInfo-request-mapping-template.txt',
+          'mapping-templates/updateUserInfo-request-mapping-template.txt',
           'utf8'
         ) /* required */,
         typeName: 'Mutation' /* required */,
         responseMappingTemplate: fs.readFileSync(
-          'mapping-templates/createUserInfo-response-mapping-template.txt',
+          'mapping-templates/updateUserInfo-response-mapping-template.txt',
           'utf8'
         ) /* required */,
       },

@@ -36,8 +36,6 @@ type Query {
 
 	# search functionality is available in elasticsearch integration
 	searchTwitterFeedByKeyword(keyword: String!): User!
-	searchTwitterFeedByLocation(location: String!): User!
-	searchAllTweetsByKeyword(keyword: String!): [User!]!
 }
 
 type Subscription {
@@ -70,6 +68,10 @@ type User {
 	followers: [String!]!
 	topTweet: Tweet
 	tweets(limit: Int!, nextToken: String): TweetConnection
+
+	# search functionality is available in elasticsearch integration
+    searchTweetsByKeyword(keyword: String!): TweetConnection
+	searchTweetsByLocation(location: String!): TweetConnection
 }
 
 schema {

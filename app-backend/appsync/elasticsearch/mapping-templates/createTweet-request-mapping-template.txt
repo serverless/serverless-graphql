@@ -4,7 +4,7 @@
     "path":"/user/twitter/$util.autoId()",
     "params":{
         "body":{
-            "handle":"$context.arguments.handle",
+            "handle":"$context.identity.username",
             "tweet": "$context.arguments.tweet",
             "retweeted": false,
             "favorited": false,

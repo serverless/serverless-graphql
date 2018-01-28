@@ -9,8 +9,8 @@
             "query" : {
                 "bool" : {
                     "must" : [
-                        {"match" : { "handle" : "$context.arguments.handle" }},
-                        {"match" : { "location" : "$context.arguments.location" }}
+                        {"match" : { "handle" : "$context.identity.username" }},
+                        {"match" : { "tweet" : "$context.arguments.keyword" }}
                     ]
                 }
             }
