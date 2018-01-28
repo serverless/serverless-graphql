@@ -14,6 +14,8 @@ const handleNames = [];
 
 udata = [];
 
+faker.seed(1000);
+
 for (let i = 0; i < numUsers; i++) {
   const handle = faker.internet.userName();
   handleNames.push(handle);
