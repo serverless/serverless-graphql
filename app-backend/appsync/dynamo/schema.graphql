@@ -2,7 +2,7 @@ type Mutation {
   # Create a tweet for a user
   # consumer keys and tokens are not required for dynamo integration
   createTweet(
-    tweet: String!,
+    text: String!,
     createdAt: String!
   ): Tweet!
 
@@ -17,7 +17,7 @@ type Mutation {
   ): Tweet!
 
   # Update existing Tweet
-  updateTweet(tweetId: String!, tweet: String!): Tweet!
+  updateTweet(tweetId: String!, text: String!): Tweet!
 
   # Create user info is available in dynamo integration
   updateUserInfo(
