@@ -40,7 +40,10 @@ export const UserTweetsQuery = gql`
       consumer_key: $consumer_key
       consumer_secret: $consumer_secret
     ) {
-      tweets(limit: 10) {
+      tweets(
+        limit: 10
+        nextToken: "0" # only necessary for ElasticSearch implementation
+      ) {
         items {
           tweet
           tweet_id
