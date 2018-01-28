@@ -35,7 +35,7 @@ type Query {
 	getUserInfo(consumer_key: String, consumer_secret: String): User!
 
 	# search functionality is available in elasticsearch integration
-	searchTwitterFeedByKeyword(keyword: String!): User!
+	searchAllTweetsByKeyword(keyword: String!): TweetConnection
 }
 
 type Subscription {
@@ -71,7 +71,6 @@ type User {
 
 	# search functionality is available in elasticsearch integration
     searchTweetsByKeyword(keyword: String!): TweetConnection
-	searchTweetsByLocation(location: String!): TweetConnection
 }
 
 schema {

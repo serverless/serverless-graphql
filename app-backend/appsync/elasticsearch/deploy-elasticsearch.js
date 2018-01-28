@@ -266,20 +266,6 @@ appsync
       {
         apiId: appId /* required */,
         dataSourceName: 'elastic' /* required */,
-        fieldName: 'searchTweetsByLocation' /* required */,
-        requestMappingTemplate: fs.readFileSync(
-          'mapping-templates/searchTweetsByLocation-request-mapping-template.txt',
-          'utf8'
-        ) /* required */,
-        typeName: 'User' /* required */,
-        responseMappingTemplate: fs.readFileSync(
-          'mapping-templates/searchTweetsByLocation-response-mapping-template.txt',
-          'utf8'
-        ) /* required */,
-      },
-      {
-        apiId: appId /* required */,
-        dataSourceName: 'elastic' /* required */,
         fieldName: 'searchAllTweetsByKeyword' /* required */,
         requestMappingTemplate: fs.readFileSync(
           'mapping-templates/searchAllTweetsByKeyword-request-mapping-template.txt',
