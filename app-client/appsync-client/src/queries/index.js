@@ -6,7 +6,7 @@ export const UserQuery = gql`
     $consumer_key: String!
     $consumer_secret: String!
   ) {
-    getUserTwitterFeed(
+    getUserInfo(
       handle: $handle
       consumer_key: $consumer_key
       consumer_secret: $consumer_secret
@@ -36,7 +36,7 @@ export const UserTweetsQuery = gql`
     $consumer_key: String!
     $consumer_secret: String!
   ) {
-    getUserTwitterFeed(
+    getUserInfo(
       handle: $handle
       consumer_key: $consumer_key
       consumer_secret: $consumer_secret

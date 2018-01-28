@@ -15,6 +15,9 @@ export const AddTweetMutation = gql`
     ) {
       tweet_id
       tweet
+      retweeted
+      retweet_count
+      favorited
     }
   }
 `;

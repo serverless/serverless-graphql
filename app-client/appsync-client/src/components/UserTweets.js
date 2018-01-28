@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { Container } from './helpers';
 import { DeleteTweetMutation } from '../mutations';
 import { UserTweetsQuery } from '../queries';
+import { AddTweetSubscription } from '../subscriptions';
 
 const Tweet = styled.div`
   border-bottom: 1px solid #e6ecf0;
@@ -20,11 +21,25 @@ const Tweet = styled.div`
   }
 `;
 
+const variables = {
+  handle: process.env.REACT_APP_HANDLE,
+  consumer_key: process.env.REACT_APP_CONSUMER_KEY,
+  consumer_secret: process.env.REACT_APP_SECRET_KEY,
+};
+
 export class UserTweetsComponent extends React.Component {
   constructor(props) {
     super(props);
 
     this.deleteTweet = this.deleteTweet.bind(this);
+  }
+
+  componentDidMount() {
+    this.subscription = this.props.subscribeToNewTweets(variables);
+  }
+
+  componentWillUnmount() {
+    this.subscription(); // NOTE removes the subscription
   }
 
   deleteTweet(tweet) {
@@ -40,7 +55,7 @@ export class UserTweetsComponent extends React.Component {
 
   render() {
     const { data } = this.props;
-    const { loading, error, getUserTwitterFeed, networkStatus } = data;
+    const { loading, error, getUserInfo, networkStatus } = data;
     const isRefetching = networkStatus === 4;
 
     if (loading && !isRefetching) {
@@ -60,7 +75,7 @@ export class UserTweetsComponent extends React.Component {
 
     return (
       <Container>
-        {getUserTwitterFeed.tweets.items.map((item, index) => (
+        {getUserInfo.tweets.items.map((item, index) => (
           <Tweet key={index}>
             <button onClick={() => this.deleteTweet(item)}>Delete</button>
             {item.tweet}
@@ -74,16 +89,39 @@ export class UserTweetsComponent extends React.Component {
 UserTweetsComponent.propTypes = {
   data: propType(UserTweetsQuery).isRequired,
   deleteTweet: PropTypes.func.isRequired,
+  subscribeToNewTweets: PropTypes.func.isRequired,
 };
 
 const tweetsQuery = graphql(UserTweetsQuery, {
   options: () => ({
-    variables: {
-      handle: process.env.REACT_APP_HANDLE,
-      consumer_key: process.env.REACT_APP_CONSUMER_KEY,
-      consumer_secret: process.env.REACT_APP_SECRET_KEY,
-    },
+    variables,
     fetchPolicy: 'cache-and-network',
+  }),
+  props: props => ({
+    ...props,
+    subscribeToNewTweets: params => {
+      props.data.subscribeToMore({
+        document: AddTweetSubscription,
+        variables: params,
+        updateQuery: (prev, { subscriptionData: { data: { addTweet } } }) => ({
+          ...prev,
+          getUserInfo: {
+            ...prev.getUserInfo,
+            tweets: {
+              items: [
+                {
+                  ...addTweet,
+                  favourited: false,
+                  retweeted: false,
+                  retweet_count: 0,
+                },
+                ...prev.getUserInfo.tweets.items,
+              ],
+            },
+          },
+        }),
+      });
+    },
   }),
 });
 
