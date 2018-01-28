@@ -149,7 +149,7 @@ appsync
       {
         apiId: appId /* required */,
         dataSourceName: 'Users' /* required */,
-        fieldName: 'getUserTwitterFeed' /* required */,
+        fieldName: 'getUserInfo' /* required */,
         requestMappingTemplate: fs.readFileSync(
           'mapping-templates/getUserInfo-request-mapping-template.txt',
           'utf8'
