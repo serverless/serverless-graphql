@@ -156,6 +156,20 @@ appsync
       {
         apiId: appId /* required */,
         dataSourceName: 'lambda' /* required */,
+        fieldName: 'meInfo' /* required */,
+        requestMappingTemplate: fs.readFileSync(
+          'mapping-templates/meInfo-request-mapping-template.txt',
+          'utf8'
+        ) /* required */,
+        typeName: 'Query' /* required */,
+        responseMappingTemplate: fs.readFileSync(
+          'mapping-templates/meInfo-response-mapping-template.txt',
+          'utf8'
+        ) /* required */,
+      },
+      {
+        apiId: appId /* required */,
+        dataSourceName: 'lambda' /* required */,
         fieldName: 'createTweet' /* required */,
         requestMappingTemplate: fs.readFileSync(
           'mapping-templates/createTweet-request-mapping-template.txt',
