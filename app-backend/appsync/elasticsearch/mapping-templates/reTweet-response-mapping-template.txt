@@ -1,7 +1,0 @@
-{
-   "tweet" : $util.toJson("$context.result.get('_source')['tweet']"),
-   "retweet_count" : $util.toJson("$context.result.get('_source')['retweet_count']"),
-   "retweeted" : $util.toJson("$context.result.get('_source')['retweeted']"),
-   "favorited" : $util.toJson("$context.resul.get('_source')['favorited']"),
-   "tweet_id" : $util.toJson("$context.result.get('_id')")
-}
