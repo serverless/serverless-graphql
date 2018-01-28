@@ -20,14 +20,14 @@ type Mutation {
 	updateTweet(tweet_id: String!, tweet: String!): Tweet!
 
     # Create user info is available in dynamo integration
-	createUserInfo(
-		location: String,
-		description: String,
-		name: String,
+	updateUserInfo(
+		location: String!,
+		description: String!,
+		name: String!,
 		followers_count: Int!,
 		friends_count: Int!,
 		favourites_count: Int!,
-		followers: [String]
+		followers: [String!]!
 	): User!
 }
 

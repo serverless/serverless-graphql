@@ -247,14 +247,14 @@ appsync
       {
         apiId: appId /* required */,
         dataSourceName: 'Users' /* required */,
-        fieldName: 'createUserInfo' /* required */,
+        fieldName: 'updateUserInfo' /* required */,
         requestMappingTemplate: fs.readFileSync(
-          'mapping-templates/createUserInfo-request-mapping-template.txt',
+          'mapping-templates/updateUserInfo-request-mapping-template.txt',
           'utf8'
         ) /* required */,
         typeName: 'Mutation' /* required */,
         responseMappingTemplate: fs.readFileSync(
-          'mapping-templates/createUserInfo-response-mapping-template.txt',
+          'mapping-templates/updateUserInfo-response-mapping-template.txt',
           'utf8'
         ) /* required */,
       },
