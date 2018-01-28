@@ -6,7 +6,7 @@
         "expression": "handle = :handle",
         "expressionValues" : {
             ":handle" : {
-                "S" : "${context.source.handle}"
+                "S" : "${context.identity.username}"
             }
         }
     },
