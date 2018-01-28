@@ -254,8 +254,8 @@ exports.graphqlHandler = (event, context, callback) => {
 
   console.log('Got an Invoke Request.');
   switch (event.field) {
-    case 'getUserTwitterFeed': {
-      getRawTweets(event.arguments.handle, consumerKey, consumerSecret).then(
+    case 'getUserInfo': {
+      getRawTweets(context.identity.username, consumerKey, consumerSecret).then(
         result => {
           callback(null, result);
         }
