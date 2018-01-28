@@ -1,14 +1,13 @@
 type Mutation {
-
 	# Create a tweet for a user
 	# consumer keys and tokens are required for lambda integration
 	createTweet(
-	    handle: String,
-		tweet: String!,
+	    tweet: String!,
 		consumer_key: String!,
 		consumer_secret: String!,
 		access_token_key: String!,
-		access_token_secret: String!
+		access_token_secret: String!,
+		created_at: String
 	): Tweet!
 
 	# Delete User Tweet
@@ -30,11 +29,10 @@ type Mutation {
     ): Tweet!
 
 	# update functionality is not available in lambda integration
-	updateTweet(tweet_id: String!, handle: String, tweet: String!): Tweet!
+	updateTweet(tweet_id: String!, tweet: String!): Tweet!
 
     # Create user info is not available in lambda integration
-	createUserInfo(
-		handle: String!,
+	updateUserInfo(
 		tweet_id: String!,
 		location: String,
 		description: String,
@@ -47,17 +45,15 @@ type Mutation {
 }
 
 type Query {
-	getUserTwitterFeed(handle: String!, consumer_key: String, consumer_secret: String): User!
+	getUserInfo(consumer_key: String!, consumer_secret: String!): User!
 
 	# search functionality is available in elasticsearch integration
-	searchTwitterFeedByKeyword(handle: String!, keyword: String!): User!
-	searchTwitterFeedByLocation(handle: String!, location: String!): User!
-	searchAllTweetsByKeyword(keyword: String!): [User!]!
+	searchAllTweetsByKeyword(keyword: String!): TweetConnection
 }
 
 type Subscription {
-	subscribeToTweeterUser(handle: String!): Tweet
-		@aws_subscribe(mutations: ["createTweet","deleteTweet","reTweet","updateTweet"])
+	addTweet: Tweet
+		@aws_subscribe(mutations: ["createTweet"])
 }
 
 type Tweet {
@@ -66,6 +62,7 @@ type Tweet {
 	retweeted: Boolean
 	retweet_count: Int
 	favorited: Boolean
+	created_at: String
 }
 
 type TweetConnection {
@@ -84,6 +81,9 @@ type User {
 	followers: [String!]!
 	topTweet: Tweet
 	tweets(limit: Int, nextToken: String): TweetConnection
+
+	# search functionality is available in elasticsearch integration
+    searchTweetsByKeyword(keyword: String!): TweetConnection
 }
 
 schema {

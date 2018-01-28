@@ -11,10 +11,22 @@ type Mutation {
 	): Tweet!
 
 	# Delete User Tweet
-	deleteTweet(tweet_id: String!): Tweet!
+	deleteTweet(
+	    tweet_id: String!,
+	    consumer_key: String,
+        consumer_secret: String,
+        access_token_key: String,
+        access_token_secret: String
+    ): Tweet!
 
 	# Retweet existing Tweet
-	reTweet(tweet_id: String!): Tweet!
+	reTweet(
+	    tweet_id: String!,
+	    consumer_key: String,
+        consumer_secret: String,
+        access_token_key: String,
+        access_token_secret: String
+    ): Tweet!
 
 	# Update existing Tweet
 	updateTweet(tweet_id: String!, tweet: String!): Tweet!
