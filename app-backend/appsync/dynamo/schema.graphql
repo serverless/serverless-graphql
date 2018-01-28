@@ -7,7 +7,8 @@ type Mutation {
 		consumer_key: String,
 		consumer_secret: String,
 		access_token_key: String,
-		access_token_secret: String
+		access_token_secret: String,
+		created_at: String!
 	): Tweet!
 
 	# Delete User Tweet
