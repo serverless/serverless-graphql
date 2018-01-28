@@ -53,6 +53,7 @@ type Tweet {
 	retweeted: Boolean
 	retweet_count: Int
 	favorited: Boolean
+	created_at: String!
 }
 
 type TweetConnection {

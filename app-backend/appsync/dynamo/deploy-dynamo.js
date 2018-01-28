@@ -52,12 +52,23 @@ appsync
     const datasourceParams = [
       {
         apiId: appId /* required */,
-        name: 'users' /* required */,
+        name: 'Users' /* required */,
         type: 'AMAZON_DYNAMODB' /* required */,
         description: 'Store user info',
         dynamodbConfig: {
           awsRegion: awsRegion /* required */,
-          tableName: 'users' /* required */,
+          tableName: 'Users' /* required */,
+        },
+        serviceRoleArn: serviceRole,
+      },
+      {
+        apiId: appId /* required */,
+        name: 'Tweets' /* required */,
+        type: 'AMAZON_DYNAMODB' /* required */,
+        description: 'Store user info',
+        dynamodbConfig: {
+          awsRegion: awsRegion /* required */,
+          tableName: 'Tweets' /* required */,
         },
         serviceRoleArn: serviceRole,
       },
@@ -137,7 +148,7 @@ appsync
     const resolverParams = [
       {
         apiId: appId /* required */,
-        dataSourceName: 'users' /* required */,
+        dataSourceName: 'Users' /* required */,
         fieldName: 'getUserTwitterFeed' /* required */,
         requestMappingTemplate: fs.readFileSync(
           'mapping-templates/getUserTwitterFeed-request-mapping-template.txt',
@@ -151,7 +162,7 @@ appsync
       },
       {
         apiId: appId /* required */,
-        dataSourceName: 'users' /* required */,
+        dataSourceName: 'Tweets' /* required */,
         fieldName: 'topTweet' /* required */,
         requestMappingTemplate: fs.readFileSync(
           'mapping-templates/topTweet-request-mapping-template.txt',
@@ -165,7 +176,7 @@ appsync
       },
       {
         apiId: appId /* required */,
-        dataSourceName: 'users' /* required */,
+        dataSourceName: 'Tweets' /* required */,
         fieldName: 'tweets' /* required */,
         requestMappingTemplate: fs.readFileSync(
           'mapping-templates/tweets-request-mapping-template.txt',
@@ -179,7 +190,7 @@ appsync
       },
       {
         apiId: appId /* required */,
-        dataSourceName: 'users' /* required */,
+        dataSourceName: 'Tweets' /* required */,
         fieldName: 'createTweet' /* required */,
         requestMappingTemplate: fs.readFileSync(
           'mapping-templates/createTweet-request-mapping-template.txt',
@@ -193,7 +204,7 @@ appsync
       },
       {
         apiId: appId /* required */,
-        dataSourceName: 'users' /* required */,
+        dataSourceName: 'Tweets' /* required */,
         fieldName: 'deleteTweet' /* required */,
         requestMappingTemplate: fs.readFileSync(
           'mapping-templates/deleteTweet-request-mapping-template.txt',
@@ -207,7 +218,7 @@ appsync
       },
       {
         apiId: appId /* required */,
-        dataSourceName: 'users' /* required */,
+        dataSourceName: 'Tweets' /* required */,
         fieldName: 'reTweet' /* required */,
         requestMappingTemplate: fs.readFileSync(
           'mapping-templates/reTweet-request-mapping-template.txt',
@@ -221,7 +232,7 @@ appsync
       },
       {
         apiId: appId /* required */,
-        dataSourceName: 'users' /* required */,
+        dataSourceName: 'Tweets' /* required */,
         fieldName: 'updateTweet' /* required */,
         requestMappingTemplate: fs.readFileSync(
           'mapping-templates/updateTweet-request-mapping-template.txt',
@@ -235,7 +246,7 @@ appsync
       },
       {
         apiId: appId /* required */,
-        dataSourceName: 'users' /* required */,
+        dataSourceName: 'Users' /* required */,
         fieldName: 'createUserInfo' /* required */,
         requestMappingTemplate: fs.readFileSync(
           'mapping-templates/createUserInfo-request-mapping-template.txt',

@@ -9,6 +9,9 @@
             }
         }
     },
+    ## Provide a secondary index name or remove the next line to query the table directly. **
+    "index": "tweet-index",
     "limit": #if($context.arguments.limit) $context.arguments.limit #else 10 #end,
-    "nextToken": #if($context.arguments.nextToken) "$context.arguments.nextToken" #else null #end
+    "nextToken": #if($context.arguments.nextToken) "$context.arguments.nextToken" #else null #end,
+    "scanIndexForward": false
 }
