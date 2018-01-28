@@ -127,7 +127,6 @@ UserInfoComponent.propTypes = {
 export default graphql(UserQuery, {
   options: () => ({
     variables: {
-      handle: process.env.REACT_APP_HANDLE,
       consumer_key: process.env.REACT_APP_CONSUMER_KEY,
       consumer_secret: process.env.REACT_APP_SECRET_KEY,
     },

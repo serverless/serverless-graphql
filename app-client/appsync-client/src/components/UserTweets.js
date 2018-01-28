@@ -22,7 +22,6 @@ const Tweet = styled.div`
 `;
 
 const variables = {
-  handle: process.env.REACT_APP_HANDLE,
   consumer_key: process.env.REACT_APP_CONSUMER_KEY,
   consumer_secret: process.env.REACT_APP_SECRET_KEY,
 };
@@ -99,29 +98,29 @@ const tweetsQuery = graphql(UserTweetsQuery, {
   }),
   props: props => ({
     ...props,
-    subscribeToNewTweets: params => {
+    subscribeToNewTweets: params =>
       props.data.subscribeToMore({
         document: AddTweetSubscription,
         variables: params,
-        updateQuery: (prev, { subscriptionData: { data: { addTweet } } }) => ({
-          ...prev,
-          getUserInfo: {
-            ...prev.getUserInfo,
-            tweets: {
-              items: [
-                {
-                  ...addTweet,
-                  favourited: false,
-                  retweeted: false,
-                  retweet_count: 0,
-                },
-                ...prev.getUserInfo.tweets.items,
-              ],
+        updateQuery: (prev, { subscriptionData: { data: { addTweet } } }) => {
+          // NOTE happens when the user created the tweet and it was rendered optimistically
+          const tweetAlreadyExists = prev.getUserInfo.tweets.items.find(
+            item => item.tweet_id === addTweet.tweet_id
+          );
+          if (tweetAlreadyExists) {
+            return { ...prev };
+          }
+          return {
+            ...prev,
+            getUserInfo: {
+              ...prev.getUserInfo,
+              tweets: {
+                items: [addTweet, ...prev.getUserInfo.tweets.items],
+              },
             },
-          },
-        }),
-      });
-    },
+          };
+        },
+      }),
   }),
 });
 
@@ -130,12 +129,10 @@ const deleteMutation = graphql(DeleteTweetMutation, {
     deleteTweet: tweetId =>
       mutate({
         variables: {
-          handle: process.env.REACT_APP_HANDLE,
           tweet_id: tweetId,
         },
         optimisticResponse: () => ({
           deleteTweet: {
-            handle: process.env.REACT_APP_HANDLE,
             tweet_id: tweetId,
             __typename: 'Tweet',
           },

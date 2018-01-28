@@ -2,14 +2,14 @@ import gql from 'graphql-tag';
 
 export const AddTweetMutation = gql`
   mutation AddTweetMutation(
-    $handle: String!
     $tweet: String!
+    $created_at: String!
     $consumer_key: String!
     $consumer_secret: String!
   ) {
     createTweet(
-      handle: $handle
       tweet: $tweet
+      created_at: $created_at
       consumer_key: $consumer_key
       consumer_secret: $consumer_secret
     ) {
@@ -23,12 +23,8 @@ export const AddTweetMutation = gql`
 `;
 
 export const UpdateTweetMutation = gql`
-  mutation UpdateTweetMutation(
-    $handle: String!
-    $tweet_id: String!
-    $tweet: String!
-  ) {
-    updateTweet(handle: $handle, tweet_id: $tweet_id, tweet: $tweet) {
+  mutation UpdateTweetMutation($tweet_id: String!, $tweet: String!) {
+    updateTweet(tweet_id: $tweet_id, tweet: $tweet) {
       tweet_id
       tweet
     }
@@ -36,16 +32,16 @@ export const UpdateTweetMutation = gql`
 `;
 
 export const DeleteTweetMutation = gql`
-  mutation DeleteTweetMutation($handle: String!, $tweet_id: String!) {
-    deleteTweet(handle: $handle, tweet_id: $tweet_id) {
+  mutation DeleteTweetMutation($tweet_id: String!) {
+    deleteTweet(tweet_id: $tweet_id) {
       tweet_id
     }
   }
 `;
 
 export const ReTweetMutation = gql`
-  mutation ReTweetMutation($handle: String!, $tweet_id: String!) {
-    reTweet(handle: $handle, tweet_id: $tweet_id) {
+  mutation ReTweetMutation($tweet_id: String!) {
+    reTweet(tweet_id: $tweet_id) {
       tweet_id
     }
   }
