@@ -9,6 +9,7 @@
         "tweet" : { "S" : "${context.arguments.tweet}" },
         "retweeted": { "BOOL" : false },
         "favorited": { "BOOL" : false },
-        "retweet_count": { "N" : 0}
+        "retweet_count": { "N" : 0},
+        "created_at": {"S" : "${context.arguments.created_at}" }
     }
 }
