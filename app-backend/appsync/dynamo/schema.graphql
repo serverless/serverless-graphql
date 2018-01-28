@@ -43,8 +43,8 @@ type Query {
 }
 
 type Subscription {
-	subscribeToTweeterUser(handle: String!): Tweet
-		@aws_subscribe(mutations: ["createTweet", "deleteTweet", "reTweet", "updateTweet"])
+	addTweet: Tweet
+		@aws_subscribe(mutations: ["createTweet"])
 }
 
 type Tweet {
