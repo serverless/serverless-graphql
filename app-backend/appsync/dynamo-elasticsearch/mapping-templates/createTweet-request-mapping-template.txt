@@ -1,0 +1,15 @@
+{
+    "version":"2017-02-28",
+    "operation":"PUT",
+    "path":"/user/twitter/$util.autoId()",
+    "params":{
+        "body":{
+            "handle":"$context.identity.username",
+            "tweet": "$context.arguments.tweet",
+            "retweeted": false,
+            "favorited": false,
+            "retweet_count": 0,
+            "created_at": "$context.arguments.created_at"
+        }
+    }
+}

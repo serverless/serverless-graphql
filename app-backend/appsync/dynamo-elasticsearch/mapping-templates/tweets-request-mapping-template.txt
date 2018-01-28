@@ -1,0 +1,18 @@
+{
+    "version":"2017-02-28",
+    "operation":"GET",
+    "path":"/user/twitter/_search",
+    "params":{
+        "body":{
+            "from":$context.arguments.nextToken,
+            "size":$context.arguments.limit,
+            "query" : {
+                "bool" : {
+                    "must" : [
+                        {"match" : { "handle" : "$context.identity.username" }}
+                    ]
+                }
+            }
+        }
+    }
+}

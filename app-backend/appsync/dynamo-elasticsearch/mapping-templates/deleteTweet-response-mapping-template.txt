@@ -1,0 +1,8 @@
+$util.toJson({
+   "tweet" : '',
+   "retweet_count" : '',
+   "retweeted" : '',
+   "favorited" : '',
+   "tweet_id" : '',
+   "created_at" : ''
+})

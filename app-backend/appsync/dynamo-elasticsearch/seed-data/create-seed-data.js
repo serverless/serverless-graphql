@@ -101,7 +101,7 @@ for (let i = 0; i < numUsers; i++) {
   }
 }
 
-jsonfile.writeFileSync('Users.json', udata, function(err) {
+jsonfile.writeFileSync('ESUsers.json', udata, function(err) {
   if (err) {
     console.error(err);
   } else {

@@ -1,0 +1,16 @@
+{
+    "version":"2017-02-28",
+    "operation":"POST",
+    "path":"/user/twitter/_delete_by_query",
+    "params":{
+        "body":{
+            "query" : {
+                "bool" : {
+                    "should" : [
+                        {"match" : { "_id" : "$context.arguments.tweet_id" }}
+                    ]
+                }
+            }
+        }
+    }
+}
