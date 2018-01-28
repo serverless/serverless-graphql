@@ -2,7 +2,8 @@
     "version": "2017-02-28",
     "operation": "Invoke",
     "payload": {
-        "field": "getUserTwitterFeed",
-        "arguments":  $utils.toJson($context.arguments)
+        "field": "getUserInfo",
+        "arguments":  $utils.toJson($context.arguments),
+        "handle" : $utils.toJson($context.identity.username)
     }
 }
