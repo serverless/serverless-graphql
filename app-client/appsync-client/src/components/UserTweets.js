@@ -22,7 +22,6 @@ const Tweet = styled.div`
 `;
 
 const variables = {
-  handle: process.env.REACT_APP_HANDLE,
   consumer_key: process.env.REACT_APP_CONSUMER_KEY,
   consumer_secret: process.env.REACT_APP_SECRET_KEY,
 };
@@ -38,9 +37,9 @@ export class UserTweetsComponent extends React.Component {
     this.subscription = this.props.subscribeToNewTweets(variables);
   }
 
-  componentWillUnmount() {
-    this.subscription(); // NOTE removes the subscription
-  }
+  // componentWillUnmount() {
+  //   this.subscription(); // NOTE removes the subscription
+  // }
 
   deleteTweet(tweet) {
     // eslint-disable-next-line no-alert
@@ -130,12 +129,10 @@ const deleteMutation = graphql(DeleteTweetMutation, {
     deleteTweet: tweetId =>
       mutate({
         variables: {
-          handle: process.env.REACT_APP_HANDLE,
           tweet_id: tweetId,
         },
         optimisticResponse: () => ({
           deleteTweet: {
-            handle: process.env.REACT_APP_HANDLE,
             tweet_id: tweetId,
             __typename: 'Tweet',
           },

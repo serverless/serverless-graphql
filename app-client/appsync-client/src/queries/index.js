@@ -1,19 +1,13 @@
 import gql from 'graphql-tag';
 
 export const UserQuery = gql`
-  query UserQuery(
-    $handle: String!
-    $consumer_key: String!
-    $consumer_secret: String!
-  ) {
+  query UserQuery($consumer_key: String!, $consumer_secret: String!) {
     getUserInfo(
-      handle: $handle
       consumer_key: $consumer_key
       consumer_secret: $consumer_secret
     ) {
       name
       location
-      handle
       favourites_count
       description
       followers_count
@@ -31,13 +25,8 @@ export const UserQuery = gql`
 `;
 
 export const UserTweetsQuery = gql`
-  query UserQuery(
-    $handle: String!
-    $consumer_key: String!
-    $consumer_secret: String!
-  ) {
+  query UserQuery($consumer_key: String!, $consumer_secret: String!) {
     getUserInfo(
-      handle: $handle
       consumer_key: $consumer_key
       consumer_secret: $consumer_secret
     ) {
