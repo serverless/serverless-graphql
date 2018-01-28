@@ -28,60 +28,7 @@ resources:
           ReadCapacityUnits: 10
           WriteCapacityUnits: 10
         TableName: 'Users'
-    TweetsTable:
-      Type: 'AWS::DynamoDB::Table'
-      Properties:
-        KeySchema:
-          -
-            AttributeName: tweet_id
-            KeyType: HASH
-        AttributeDefinitions:
-          -
-            AttributeName: tweet_id
-            AttributeType: S
-          -
-            AttributeName: handle
-            AttributeType: S
-          -
-            AttributeName: retweet_count
-            AttributeType: N
-          -
-            AttributeName: created_at
-            AttributeType: S
-        ProvisionedThroughput:
-          ReadCapacityUnits: 10
-          WriteCapacityUnits: 10
-        TableName: 'Tweets'
-        GlobalSecondaryIndexes:
-          -
-            IndexName: top-index
-            KeySchema:
-              -
-                AttributeName: handle
-                KeyType: HASH
-              -
-                AttributeName: retweet_count
-                KeyType: RANGE
-            Projection:
-              ProjectionType: ALL
-            ProvisionedThroughput:
-              ReadCapacityUnits: 50
-              WriteCapacityUnits: 50
-          -
-            IndexName: tweet-index
-            KeySchema:
-              -
-                AttributeName: handle
-                KeyType: HASH
-              -
-                AttributeName: created_at
-                KeyType: RANGE
-            Projection:
-              ProjectionType: ALL
-            ProvisionedThroughput:
-              ReadCapacityUnits: 50
-              WriteCapacityUnits: 50
-    AppSyncServiceRole:
+    LambdaAppSyncServiceRole:
       Type: "AWS::IAM::Role"
       Properties:
         RoleName: "Dynamo-AppSyncServiceRole"
