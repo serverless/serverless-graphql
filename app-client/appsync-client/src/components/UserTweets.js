@@ -37,9 +37,9 @@ export class UserTweetsComponent extends React.Component {
     this.subscription = this.props.subscribeToNewTweets(variables);
   }
 
-  // componentWillUnmount() {
-  //   this.subscription(); // NOTE removes the subscription
-  // }
+  componentWillUnmount() {
+    this.subscription(); // NOTE removes the subscription
+  }
 
   deleteTweet(tweet) {
     // eslint-disable-next-line no-alert
@@ -98,7 +98,7 @@ const tweetsQuery = graphql(UserTweetsQuery, {
   }),
   props: props => ({
     ...props,
-    subscribeToNewTweets: params => {
+    subscribeToNewTweets: params =>
       props.data.subscribeToMore({
         document: AddTweetSubscription,
         variables: params,
@@ -120,8 +120,7 @@ const tweetsQuery = graphql(UserTweetsQuery, {
             },
           };
         },
-      });
-    },
+      }),
   }),
 });
 
