@@ -22,7 +22,6 @@ type Mutation {
     # Create user info is available in dynamo integration
 	createUserInfo(
 		handle: String!,
-		tweet_id: String!,
 		location: String,
 		description: String,
 		name: String,
@@ -34,7 +33,7 @@ type Mutation {
 }
 
 type Query {
-	getUserTwitterFeed(handle: String!, consumer_key: String, consumer_secret: String): User!
+	getUserInfo(handle: String!, consumer_key: String, consumer_secret: String): User!
 
 	# search functionality is available in elasticsearch integration
 	searchTwitterFeedByKeyword(handle: String!, keyword: String!): User!

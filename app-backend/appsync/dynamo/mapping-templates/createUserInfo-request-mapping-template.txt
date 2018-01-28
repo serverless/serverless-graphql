@@ -1,17 +1,10 @@
 {
     "version" : "2017-02-28",
-    "operation" : "UpdateItem",
+    "operation" : "PutItem",
     "key" : {
-        "handle" : { "S" : "${context.arguments.handle}" },
-        "tweet_id" : { "S" : "${context.arguments.tweet_id}" }
+        "handle" : { "S" : "${context.arguments.handle}" }
     },
-    "update" : {
-        "expression" : "SET followers = :followers, #name = :name, #location = :location, description = :description, followers_count = :followers_count, friends_count = :friends_count, favourites_count = :favourites_count",
-        "expressionNames": {
-            "#name" : "name",
-            "#location" : "location"
-        },
-        "expressionValues": {
+    "attributeValues" : {
             #set($followersList = [])
             #foreach ( $follower in $context.arguments.followers )
               #set( $element =
@@ -21,13 +14,12 @@
               })}
               )
             #end
-        	":name" : { "S" : "${context.arguments.name}" },
-            ":location" : { "S" : "${context.arguments.location}" },
-        	":description" : { "S" : "${context.arguments.description}" },
-            ":followers_count" : { "N" : ${context.arguments.followers_count} },
-            ":friends_count" : { "N" : ${context.arguments.friends_count} },
-            ":favourites_count" : { "N" : ${context.arguments.favourites_count} },
-            ":followers" : { "L" : $utils.toJson($followersList) }
-        }
+        	"name" : { "S" : "${context.arguments.name}" },
+            "location" : { "S" : "${context.arguments.location}" },
+        	"description" : { "S" : "${context.arguments.description}" },
+            "followers_count" : { "N" : ${context.arguments.followers_count} },
+            "friends_count" : { "N" : ${context.arguments.friends_count} },
+            "favourites_count" : { "N" : ${context.arguments.favourites_count} },
+            "followers" : { "L" : $utils.toJson($followersList) }
     }
 }
