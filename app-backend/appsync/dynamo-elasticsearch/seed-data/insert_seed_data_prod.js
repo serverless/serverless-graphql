@@ -11,7 +11,7 @@ const docClient = new AWS.DynamoDB.DocumentClient();
 
 console.log('Importing data into DynamoDB. Please wait.');
 
-const allUsers = JSON.parse(fs.readFileSync('Users.json', 'utf8'));
+const allUsers = JSON.parse(fs.readFileSync('ESUsers.json', 'utf8'));
 
 allUsers.forEach(function(user) {
   const Userparams = {

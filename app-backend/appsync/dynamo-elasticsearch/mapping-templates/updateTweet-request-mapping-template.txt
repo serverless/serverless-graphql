@@ -1,0 +1,12 @@
+{
+    "version":"2017-02-28",
+    "operation":"POST",
+    "path":"/user/twitter/$context.arguments.tweet_id/_update",
+    "params":{
+        "body":{
+        "doc": {
+            "tweet": "$context.arguments.tweet"
+          }
+        }
+    }
+}
