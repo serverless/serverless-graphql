@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
-export const NewTweetsSubscription = gql`
-  subscription NewTweetsSubscription($handle: String!) {
-    subscribeToTweeterUser(handle: $handle) {
+export const AddTweetSubscription = gql`
+  subscription AddTweetSubscription {
+    addTweet {
       __typename
       tweet_id
       tweet
@@ -14,5 +14,5 @@ export const NewTweetsSubscription = gql`
 `;
 
 export default {
-  NewTweetsSubscription,
+  AddTweetSubscription,
 };

@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import { Container } from './helpers';
 import { DeleteTweetMutation } from '../mutations';
 import { UserTweetsQuery } from '../queries';
-import { NewTweetsSubscription } from '../subscriptions';
+import { AddTweetSubscription } from '../subscriptions';
 
 const Tweet = styled.div`
   border-bottom: 1px solid #e6ecf0;
@@ -101,21 +101,25 @@ const tweetsQuery = graphql(UserTweetsQuery, {
     ...props,
     subscribeToNewTweets: params => {
       props.data.subscribeToMore({
-        document: NewTweetsSubscription,
+        document: AddTweetSubscription,
         variables: params,
-        updateQuery: (
-          prev,
-          { subscriptionData: { data: { subscribeToTweeterUser } } }
-        ) => {
-          console.log('Update');
-          return {
-            ...prev,
-            tweets: [
-              subscribeToTweeterUser,
-              ...prev.tweets.filter(t => t.id !== subscribeToTweeterUser.id),
-            ],
-          };
-        },
+        updateQuery: (prev, { subscriptionData: { data: { addTweet } } }) => ({
+          ...prev,
+          getUserInfo: {
+            ...prev.getUserInfo,
+            tweets: {
+              items: [
+                {
+                  ...addTweet,
+                  favourited: false,
+                  retweeted: false,
+                  retweet_count: 0,
+                },
+                ...prev.getUserInfo.tweets.items,
+              ],
+            },
+          },
+        }),
       });
     },
   }),
