@@ -55,7 +55,7 @@ export class UserTweetsComponent extends React.Component {
 
   render() {
     const { data } = this.props;
-    const { loading, error, getUserTwitterFeed, networkStatus } = data;
+    const { loading, error, getUserInfo, networkStatus } = data;
     const isRefetching = networkStatus === 4;
 
     if (loading && !isRefetching) {
@@ -75,7 +75,7 @@ export class UserTweetsComponent extends React.Component {
 
     return (
       <Container>
-        {getUserTwitterFeed.tweets.items.map((item, index) => (
+        {getUserInfo.tweets.items.map((item, index) => (
           <Tweet key={index}>
             <button onClick={() => this.deleteTweet(item)}>Delete</button>
             {item.tweet}

@@ -56,7 +56,7 @@ const Numbers = styled.div`
 `;
 
 export const UserInfoComponent = ({
-  data: { loading, error, getUserTwitterFeed },
+  data: { loading, error, getUserInfo },
 }) => {
   if (loading) {
     return (
@@ -77,7 +77,7 @@ export const UserInfoComponent = ({
     );
   }
 
-  const user = getUserTwitterFeed;
+  const user = getUserInfo;
 
   return (
     <Div>
