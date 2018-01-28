@@ -102,23 +102,24 @@ const tweetsQuery = graphql(UserTweetsQuery, {
       props.data.subscribeToMore({
         document: AddTweetSubscription,
         variables: params,
-        updateQuery: (prev, { subscriptionData: { data: { addTweet } } }) => ({
-          ...prev,
-          getUserInfo: {
-            ...prev.getUserInfo,
-            tweets: {
-              items: [
-                {
-                  ...addTweet,
-                  favourited: false,
-                  retweeted: false,
-                  retweet_count: 0,
-                },
-                ...prev.getUserInfo.tweets.items,
-              ],
+        updateQuery: (prev, { subscriptionData: { data: { addTweet } } }) => {
+          // NOTE happens when the user created the tweet and it was rendered optimistically
+          const tweetAlreadyExists = prev.getUserInfo.tweets.items.find(
+            item => item.tweet_id === addTweet.tweet_id
+          );
+          if (tweetAlreadyExists) {
+            return { ...prev };
+          }
+          return {
+            ...prev,
+            getUserInfo: {
+              ...prev.getUserInfo,
+              tweets: {
+                items: [addTweet, ...prev.getUserInfo.tweets.items],
+              },
             },
-          },
-        }),
+          };
+        },
       });
     },
   }),
