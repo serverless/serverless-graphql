@@ -9,7 +9,7 @@
             "query" : {
                 "bool" : {
                     "must" : [
-                        {"match" : { "handle" : "$context.source.handle" }}
+                        {"match" : { "handle" : "$context.identity.username" }}
                     ]
                 }
             }

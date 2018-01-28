@@ -14,9 +14,11 @@ const appsync = new AWS.AppSync({ apiVersion: '2017-07-25' });
 const graphQLAPIName = '...'; // your graphQL API Name
 const awsRegion = 'us-east-1'; // AWS Region ex - us-east-1
 const userPoolId = '...'; // Your Cognito User Pool Id
-const roleName = 'ES-AppSyncServiceRole';
+const roleNameElastic = 'ES-AppSyncServiceRole';
+const roleNameDynamo = 'Dynamo-AppSyncServiceRole';
 const accountId = '...';
-const serviceRole = `arn:aws:iam::${accountId}:role/${roleName}`; // Service IAM Role for appsync to access data sources
+const serviceRoleElastic = `arn:aws:iam::${accountId}:role/${roleNameElastic}`; // Service IAM Role for appsync to access data sources
+const serviceRoleDynamo = `arn:aws:iam::${accountId}:role/${roleNameDynamo}`; // Service IAM Role for appsync to access data sources
 const MAX_RETRIES = 20;
 const esHostname = '...';
 const esEndpoint = `https://${esHostname}.${awsRegion}.es.amazonaws.com`;
@@ -62,7 +64,18 @@ appsync
           awsRegion: awsRegion /* required */,
           endpoint: esEndpoint /* required */,
         },
-        serviceRoleArn: serviceRole,
+        serviceRoleArn: serviceRoleElastic,
+      },
+      {
+        apiId: appId /* required */,
+        name: 'Users' /* required */,
+        type: 'AMAZON_DYNAMODB' /* required */,
+        description: 'Store user info',
+        dynamodbConfig: {
+          awsRegion: awsRegion /* required */,
+          tableName: 'Users' /* required */,
+        },
+        serviceRoleArn: serviceRoleDynamo,
       },
     ];
 
@@ -140,15 +153,15 @@ appsync
     const resolverParams = [
       {
         apiId: appId /* required */,
-        dataSourceName: 'elastic' /* required */,
-        fieldName: 'getUserTwitterFeed' /* required */,
+        dataSourceName: 'Users' /* required */,
+        fieldName: 'getUserInfo' /* required */,
         requestMappingTemplate: fs.readFileSync(
-          'mapping-templates/getUserTwitterFeed-request-mapping-template.txt',
+          'mapping-templates/getUserInfo-request-mapping-template.txt',
           'utf8'
         ) /* required */,
         typeName: 'Query' /* required */,
         responseMappingTemplate: fs.readFileSync(
-          'mapping-templates/getUserTwitterFeed-response-mapping-template.txt',
+          'mapping-templates/getUserInfo-response-mapping-template.txt',
           'utf8'
         ) /* required */,
       },
@@ -239,28 +252,14 @@ appsync
       {
         apiId: appId /* required */,
         dataSourceName: 'elastic' /* required */,
-        fieldName: 'searchTwitterFeedByKeyword' /* required */,
+        fieldName: 'searchTweetsByKeyword' /* required */,
         requestMappingTemplate: fs.readFileSync(
-          'mapping-templates/searchTwitterFeedByKeyword-request-mapping-template.txt',
+          'mapping-templates/searchTweetsByKeyword-request-mapping-template.txt',
           'utf8'
         ) /* required */,
-        typeName: 'Query' /* required */,
+        typeName: 'User' /* required */,
         responseMappingTemplate: fs.readFileSync(
-          'mapping-templates/searchTwitterFeedByKeyword-response-mapping-template.txt',
-          'utf8'
-        ) /* required */,
-      },
-      {
-        apiId: appId /* required */,
-        dataSourceName: 'elastic' /* required */,
-        fieldName: 'searchTwitterFeedByLocation' /* required */,
-        requestMappingTemplate: fs.readFileSync(
-          'mapping-templates/searchTwitterFeedByLocation-request-mapping-template.txt',
-          'utf8'
-        ) /* required */,
-        typeName: 'Query' /* required */,
-        responseMappingTemplate: fs.readFileSync(
-          'mapping-templates/searchTwitterFeedByLocation-response-mapping-template.txt',
+          'mapping-templates/searchTweetsByKeyword-response-mapping-template.txt',
           'utf8'
         ) /* required */,
       },
@@ -280,15 +279,15 @@ appsync
       },
       {
         apiId: appId /* required */,
-        dataSourceName: 'elastic' /* required */,
-        fieldName: 'createUserInfo' /* required */,
+        dataSourceName: 'Users' /* required */,
+        fieldName: 'updateUserInfo' /* required */,
         requestMappingTemplate: fs.readFileSync(
-          'mapping-templates/createUserInfo-request-mapping-template.txt',
+          'mapping-templates/updateUserInfo-request-mapping-template.txt',
           'utf8'
         ) /* required */,
         typeName: 'Mutation' /* required */,
         responseMappingTemplate: fs.readFileSync(
-          'mapping-templates/createUserInfo-response-mapping-template.txt',
+          'mapping-templates/updateUserInfo-response-mapping-template.txt',
           'utf8'
         ) /* required */,
       },

@@ -13,7 +13,22 @@ custom:
 
 resources:
   Resources:
-    AppSyncServiceRole:
+    UserTable:
+      Type: 'AWS::DynamoDB::Table'
+      Properties:
+        KeySchema:
+          -
+            AttributeName: handle
+            KeyType: HASH
+        AttributeDefinitions:
+          -
+            AttributeName: handle
+            AttributeType: S
+        ProvisionedThroughput:
+          ReadCapacityUnits: 10
+          WriteCapacityUnits: 10
+        TableName: 'Users'
+    ESAppSyncServiceRole:
       Type: "AWS::IAM::Role"
       Properties:
         RoleName: "ES-AppSyncServiceRole"
@@ -39,3 +54,38 @@ resources:
                     - "es:*"
                   Resource:
                     - "arn:aws:es:us-east-1:${self:custom.account_id}:domain/appsync/*"
+    DDBAppSyncServiceRole:
+      Type: "AWS::IAM::Role"
+      Properties:
+        RoleName: "Dynamo-AppSyncServiceRole"
+        AssumeRolePolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            -
+              Effect: "Allow"
+              Principal:
+                Service:
+                  - "appsync.amazonaws.com"
+              Action:
+                - "sts:AssumeRole"
+        Policies:
+          -
+            PolicyName: "Dynamo-AppSyncServiceRole-Policy"
+            PolicyDocument:
+              Version: "2012-10-17"
+              Statement:
+                -
+                  Effect: "Allow"
+                  Action:
+                    - "dynamodb:Query"
+                    - "dynamodb:BatchWriteItem"
+                    - "dynamodb:GetItem"
+                    - "dynamodb:DeleteItem"
+                    - "dynamodb:PutItem"
+                    - "dynamodb:Scan"
+                    - "dynamodb:UpdateItem"
+                  Resource:
+                    - "arn:aws:dynamodb:us-east-1:${self:custom.account_id}:table/Users"
+                    - "arn:aws:dynamodb:us-east-1:${self:custom.account_id}:table/Users/*"
+                    - "arn:aws:dynamodb:us-east-1:${self:custom.account_id}:table/Tweets"
+                    - "arn:aws:dynamodb:us-east-1:${self:custom.account_id}:table/Tweets/*"

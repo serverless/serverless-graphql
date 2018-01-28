@@ -4,11 +4,12 @@
     "path":"/user/twitter/$util.autoId()",
     "params":{
         "body":{
-            "handle":"$context.arguments.handle",
+            "handle":"$context.identity.username",
             "tweet": "$context.arguments.tweet",
             "retweeted": false,
             "favorited": false,
-            "retweet_count": 0
+            "retweet_count": 0,
+            "created_at": "$context.arguments.created_at"
         }
     }
 }
