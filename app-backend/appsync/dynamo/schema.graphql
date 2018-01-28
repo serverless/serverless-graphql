@@ -11,13 +11,13 @@ type Mutation {
 	): Tweet!
 
 	# Delete User Tweet
-	deleteTweet(tweet_id: String!, handle: String!): Tweet!
+	deleteTweet(tweet_id: String!, handle: String): Tweet!
 
 	# Retweet existing Tweet
-	reTweet(tweet_id: String!, handle: String!): Tweet!
+	reTweet(tweet_id: String!, handle: String): Tweet!
 
 	# Update existing Tweet
-	updateTweet(tweet_id: String!, handle: String!, tweet: String!): Tweet!
+	updateTweet(tweet_id: String!, handle: String, tweet: String!): Tweet!
 
     # Create user info is available in dynamo integration
 	createUserInfo(

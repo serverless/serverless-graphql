@@ -2,7 +2,6 @@
     "version" : "2017-02-28",
     "operation" : "DeleteItem",
     "key" : {
-        "handle" : { "S" : "${context.arguments.handle}" },
         "tweet_id" : { "S" : "${context.arguments.tweet_id}" }
     }
 }
