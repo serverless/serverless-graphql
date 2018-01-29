@@ -9,7 +9,7 @@
             "query" : {
                 "bool" : {
                     "must" : [
-                        {"match" : { "handle" : "$context.identity.username" }},
+                        {"match" : { "handle" : #if($context.source.handle) "$context.source.handle" #else "${context.identity.username}" #end }},
                         {"match" : { "tweet" : "$context.arguments.keyword" }}
                     ]
                 }
