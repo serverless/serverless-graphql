@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 import { Container } from './helpers';
 import { DeleteTweetMutation } from '../mutations';
-import { MeTweetsQuery } from '../queries';
+import { UserTweetsQuery } from '../queries';
 import { AddTweetSubscription } from '../subscriptions';
 
 const Tweet = styled.div`
@@ -29,7 +29,6 @@ const variables = {
 export class UserTweetsComponent extends React.Component {
   constructor(props) {
     super(props);
-
     this.deleteTweet = this.deleteTweet.bind(this);
   }
 
@@ -54,7 +53,7 @@ export class UserTweetsComponent extends React.Component {
 
   render() {
     const { data } = this.props;
-    const { loading, error, meInfo, networkStatus } = data;
+    const { loading, error, getUserInfo, networkStatus } = data;
     const isRefetching = networkStatus === 4;
 
     if (loading && !isRefetching) {
@@ -74,7 +73,7 @@ export class UserTweetsComponent extends React.Component {
 
     return (
       <Container>
-        {meInfo.tweets.items.map((item, index) => (
+        {getUserInfo.tweets.items.map((item, index) => (
           <Tweet key={index}>
             <button onClick={() => this.deleteTweet(item)}>Delete</button>
             {item.tweet}
@@ -86,14 +85,14 @@ export class UserTweetsComponent extends React.Component {
 }
 
 UserTweetsComponent.propTypes = {
-  data: propType(MeTweetsQuery).isRequired,
+  data: propType(UserTweetsQuery).isRequired,
   deleteTweet: PropTypes.func.isRequired,
   subscribeToNewTweets: PropTypes.func.isRequired,
 };
 
-const tweetsQuery = graphql(MeTweetsQuery, {
-  options: () => ({
-    variables,
+const tweetsQuery = graphql(UserTweetsQuery, {
+  options: props => ({
+    variables: { ...variables, handle: props.handle },
     fetchPolicy: 'cache-and-network',
   }),
   props: props => ({
@@ -104,7 +103,7 @@ const tweetsQuery = graphql(MeTweetsQuery, {
         variables: params,
         updateQuery: (prev, { subscriptionData: { data: { addTweet } } }) => {
           // NOTE happens when the user created the tweet and it was rendered optimistically
-          const tweetAlreadyExists = prev.meInfo.tweets.items.find(
+          const tweetAlreadyExists = prev.getUserInfo.tweets.items.find(
             item => item.tweet_id === addTweet.tweet_id
           );
           if (tweetAlreadyExists) {
@@ -112,10 +111,10 @@ const tweetsQuery = graphql(MeTweetsQuery, {
           }
           return {
             ...prev,
-            meInfo: {
-              ...prev.meInfo,
+            getUserInfo: {
+              ...prev.getUserInfo,
               tweets: {
-                items: [addTweet, ...prev.meInfo.tweets.items],
+                items: [addTweet, ...prev.getUserInfo.tweets.items],
               },
             },
           };

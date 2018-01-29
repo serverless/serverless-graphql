@@ -4,7 +4,7 @@ import { propType } from 'graphql-anywhere';
 import styled from 'styled-components';
 
 import { Div, Container } from './helpers';
-import { MeQuery } from '../queries';
+import { UserQuery } from '../queries';
 
 const UserProfile = styled.div`
   margin-bottom: 15px;
@@ -55,7 +55,9 @@ const Numbers = styled.div`
   }
 `;
 
-export const UserInfoComponent = ({ data: { loading, error, meInfo } }) => {
+export const UserInfoComponent = ({
+  data: { loading, error, getUserInfo },
+}) => {
   if (loading) {
     return (
       <Div>
@@ -75,42 +77,28 @@ export const UserInfoComponent = ({ data: { loading, error, meInfo } }) => {
     );
   }
 
-  const user = meInfo;
+  const user = getUserInfo;
 
   return (
     <Div>
       <Container>
         <UserProfile>
           <h4 className="username">
-            {user.name} <span>@{user.handle}</span>
+            {user.name} <span>@{getUserInfo.handle}</span>
           </h4>
           <p className="location">
             <i className="material-icons">location_on</i>
-            {user.location}
+            {getUserInfo.location}
           </p>
-          <p className="description">{user.description}</p>
+          <p className="description">{getUserInfo.description}</p>
         </UserProfile>
       </Container>
 
       <Container>
         <Numbers>
           <div className="column">
-            <div className="title">Tweets</div>
-            <div className="number">
-              <span title="NEED 'TWEET_COUNT' FOR USER">XX</span>
-            </div>
-          </div>
-          <div className="column">
             <div className="title">Followers</div>
-            <div className="number">{user.followers_count}</div>
-          </div>
-          <div className="column">
-            <div className="title">Likes</div>
-            <div className="number">{user.favourites_count}</div>
-          </div>
-          <div className="column">
-            <div className="title">Friends</div>
-            <div className="number">{user.friends_count}</div>
+            <div className="number">{getUserInfo.followers_count}</div>
           </div>
         </Numbers>
       </Container>
@@ -119,12 +107,13 @@ export const UserInfoComponent = ({ data: { loading, error, meInfo } }) => {
 };
 
 UserInfoComponent.propTypes = {
-  data: propType(MeQuery).isRequired,
+  data: propType(UserQuery).isRequired,
 };
 
-export default graphql(MeQuery, {
-  options: () => ({
+export default graphql(UserQuery, {
+  options: props => ({
     variables: {
+      handle: props.handle,
       consumer_key: process.env.REACT_APP_CONSUMER_KEY,
       consumer_secret: process.env.REACT_APP_SECRET_KEY,
     },

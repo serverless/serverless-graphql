@@ -22,15 +22,15 @@ const Content = styled.div`
   flex: 2;
 `;
 
-const User = () => (
+const User = ({ handle }) => (
   <Main>
     <SideBar>
-      <UserInfo />
+      <UserInfo handle={handle} />
     </SideBar>
     <Content>
       <Div>
         <TweetForm />
-        <UserTweets />
+        <UserTweets handle={handle} />
       </Div>
     </Content>
   </Main>

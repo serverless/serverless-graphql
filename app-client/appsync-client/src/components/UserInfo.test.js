@@ -4,7 +4,7 @@ import { UserInfoComponent } from './UserInfo';
 
 it('render user name', () => {
   const data = {
-    meInfo: {
+    getUserInfo: {
       name: 'sid',
       location: 'SF',
       handle: 'sidg_sid',
@@ -25,5 +25,5 @@ it('render user name', () => {
     error: null,
   };
   const wrapper = shallow(<UserInfoComponent data={data} />);
-  expect(wrapper.html()).toContain(data.meInfo.description);
+  expect(wrapper.html()).toContain(data.getUserInfo.description);
 });
