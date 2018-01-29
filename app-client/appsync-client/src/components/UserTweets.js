@@ -21,6 +21,18 @@ const Tweet = styled.div`
   }
 `;
 
+const ProfileIcon = styled.div`
+  border-radius: 1rem;
+  background: grey;
+  width: 1.5rem;
+  height: 1.5rem;
+  float: left;
+  color: white;
+  margin-right: 1rem;
+  text-align: center;
+  line-height: 1.5rem;
+`;
+
 const variables = {
   consumer_key: process.env.REACT_APP_CONSUMER_KEY,
   consumer_secret: process.env.REACT_APP_SECRET_KEY,
@@ -76,6 +88,7 @@ export class UserTweetsComponent extends React.Component {
         {getUserInfo.tweets.items.map((item, index) => (
           <Tweet key={index}>
             <button onClick={() => this.deleteTweet(item)}>Delete</button>
+            <ProfileIcon>{this.props.handle[0]}</ProfileIcon>
             {item.tweet}
           </Tweet>
         ))}
