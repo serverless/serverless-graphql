@@ -97,8 +97,8 @@ export const UserInfoComponent = ({
       <Container>
         <Numbers>
           <div className="column">
-            <div className="title">Followers</div>
-            <div className="number">{getUserInfo.followers_count}</div>
+            <div className="title">Following</div>
+            <div className="number">{getUserInfo.following.length}</div>
           </div>
         </Numbers>
       </Container>
