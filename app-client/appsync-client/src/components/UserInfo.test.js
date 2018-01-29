@@ -9,10 +9,7 @@ it('render user name', () => {
       location: 'SF',
       handle: 'sidg_sid',
       description: 'follow the universe',
-      favourites_count: 200,
-      followers_count: 300,
-      friends_count: 100,
-      followers: [],
+      following: [],
       topTweet: {
         tweet_id: '123',
         tweet: 'this is my first tweet',
