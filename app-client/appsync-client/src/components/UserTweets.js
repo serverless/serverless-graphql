@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 import { Container } from './helpers';
 import { DeleteTweetMutation } from '../mutations';
-import { UserTweetsQuery } from '../queries';
+import { MeTweetsQuery } from '../queries';
 import { AddTweetSubscription } from '../subscriptions';
 
 const Tweet = styled.div`
@@ -54,7 +54,7 @@ export class UserTweetsComponent extends React.Component {
 
   render() {
     const { data } = this.props;
-    const { loading, error, getUserInfo, networkStatus } = data;
+    const { loading, error, meInfo, networkStatus } = data;
     const isRefetching = networkStatus === 4;
 
     if (loading && !isRefetching) {
@@ -74,7 +74,7 @@ export class UserTweetsComponent extends React.Component {
 
     return (
       <Container>
-        {getUserInfo.tweets.items.map((item, index) => (
+        {meInfo.tweets.items.map((item, index) => (
           <Tweet key={index}>
             <button onClick={() => this.deleteTweet(item)}>Delete</button>
             {item.tweet}
@@ -86,12 +86,12 @@ export class UserTweetsComponent extends React.Component {
 }
 
 UserTweetsComponent.propTypes = {
-  data: propType(UserTweetsQuery).isRequired,
+  data: propType(MeTweetsQuery).isRequired,
   deleteTweet: PropTypes.func.isRequired,
   subscribeToNewTweets: PropTypes.func.isRequired,
 };
 
-const tweetsQuery = graphql(UserTweetsQuery, {
+const tweetsQuery = graphql(MeTweetsQuery, {
   options: () => ({
     variables,
     fetchPolicy: 'cache-and-network',
@@ -104,7 +104,7 @@ const tweetsQuery = graphql(UserTweetsQuery, {
         variables: params,
         updateQuery: (prev, { subscriptionData: { data: { addTweet } } }) => {
           // NOTE happens when the user created the tweet and it was rendered optimistically
-          const tweetAlreadyExists = prev.getUserInfo.tweets.items.find(
+          const tweetAlreadyExists = prev.meInfo.tweets.items.find(
             item => item.tweet_id === addTweet.tweet_id
           );
           if (tweetAlreadyExists) {
@@ -112,10 +112,10 @@ const tweetsQuery = graphql(UserTweetsQuery, {
           }
           return {
             ...prev,
-            getUserInfo: {
-              ...prev.getUserInfo,
+            meInfo: {
+              ...prev.meInfo,
               tweets: {
-                items: [addTweet, ...prev.getUserInfo.tweets.items],
+                items: [addTweet, ...prev.meInfo.tweets.items],
               },
             },
           };
