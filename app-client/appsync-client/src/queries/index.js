@@ -38,6 +38,7 @@ export const UserTweetsQuery = gql`
       consumer_key: $consumer_key
       consumer_secret: $consumer_secret
     ) {
+      handle
       tweets(limit: 10) {
         items {
           tweet
@@ -55,6 +56,7 @@ export const UserTweetsQuery = gql`
 export const MeTweetsQuery = gql`
   query MeTweetsQuery($consumer_key: String!, $consumer_secret: String!) {
     meInfo(consumer_key: $consumer_key, consumer_secret: $consumer_secret) {
+      handle
       tweets(limit: 10) {
         items {
           tweet

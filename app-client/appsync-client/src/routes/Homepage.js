@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Container } from '../components/helpers';
+import MeTweets from '../components/MeTweets';
 
 const Main = styled.div`
   width: 800px;
@@ -40,7 +41,7 @@ export default () => (
         <Container>TODO add search</Container>
       </SideBar>
       <Content>
-        <Container>TODO My Tweets</Container>
+        <MeTweets />
       </Content>
     </Main>
   </div>
