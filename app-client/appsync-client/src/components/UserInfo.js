@@ -51,7 +51,7 @@ export const UserInfoComponent = ({
           <div className="title">Following</div>
           {getUserInfo.following.map(handle => (
             <div className="username" key={handle}>
-              <Link to={`/${handle}`}>{handle}</Link>
+              <Link to={`/@${handle}`}>{handle}</Link>
             </div>
           ))}
         </Following>

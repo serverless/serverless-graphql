@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Homepage from './routes/Homepage';
 import Profile from './routes/Profile';
+import Search from './routes/Search';
 
 Amplify.configure({
   Auth: {
@@ -33,7 +34,8 @@ const WithProvider = () => (
     <ApolloProvider client={client}>
       <Rehydrated>
         <Route exact path="/" component={Homepage} />
-        <Route path="/:handle" component={Profile} />
+        <Route path="/search" component={Search} />
+        <Route path="/@:handle" component={Profile} />
       </Rehydrated>
     </ApolloProvider>
   </Router>
