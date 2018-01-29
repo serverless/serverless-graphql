@@ -2,6 +2,7 @@ import React from 'react';
 import { graphql } from 'react-apollo';
 import { propType } from 'graphql-anywhere';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 import { Div, Container } from './helpers';
 import { UserQuery } from '../queries';
@@ -31,6 +32,18 @@ const UserProfile = styled.div`
   }
   & .material-icons {
     font-size: 16px;
+  }
+`;
+
+const Following = styled.div`
+  margin-bottom: 15px;
+  padding: 15px 15px;
+  text-align: center;
+  & .username {
+    font-size: 14px;
+    color: #657786;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
   }
 `;
 
@@ -102,6 +115,16 @@ export const UserInfoComponent = ({
             <div className="number">{getUserInfo.following.length}</div>
           </div>
         </Numbers>
+      </Container>
+
+      <Container>
+        <Following>
+          {getUserInfo.following.map(handle => (
+            <div className="username" key={handle}>
+              <Link to={`/${handle}`}>{handle}</Link>
+            </div>
+          ))}
+        </Following>
       </Container>
     </Div>
   );
