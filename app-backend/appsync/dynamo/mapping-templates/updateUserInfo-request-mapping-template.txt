@@ -5,14 +5,14 @@
         "handle" : { "S" : "${context.identity.username}" }
     },
     "update" : {
-        "expression" : "SET followers = :followers, #name = :name, #location = :location, description = :description, followers_count = :followers_count, friends_count = :friends_count, favourites_count = :favourites_count",
+        "expression" : "SET following = :following, #name = :name, #location = :location, description = :description, followers_count = :followers_count, friends_count = :friends_count, favourites_count = :favourites_count",
         "expressionNames": {
             "#name" : "name",
             "#location" : "location"
         },
         "expressionValues": {
             #set($followersList = [])
-            #foreach ( $follower in $context.arguments.followers )
+            #foreach ( $follower in $context.arguments.following )
               #set( $element =
               ${followersList.add(
               {
@@ -26,7 +26,7 @@
             ":followers_count" : { "N" : ${context.arguments.followers_count} },
             ":friends_count" : { "N" : ${context.arguments.friends_count} },
             ":favourites_count" : { "N" : ${context.arguments.favourites_count} },
-            ":followers" : { "L" : $utils.toJson($followersList) }
+            ":following" : { "L" : $utils.toJson($followersList) }
         }
     }
 }

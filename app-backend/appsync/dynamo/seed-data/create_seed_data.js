@@ -17,11 +17,11 @@ for (let i = 0; i < numUsers; i++) {
 }
 
 for (let i = 0; i < handleNames.length; i++) {
-  const followers = [];
+  const following = [];
 
   //create user info
   for (let k = 0; k < followersPerUser; k++) {
-    followers.push(handleNames[Math.floor(Math.random() * handleNames.length)]);
+    following.push(handleNames[Math.floor(Math.random() * handleNames.length)]);
   }
 
   const followers_count = faker.random.number({
@@ -51,7 +51,7 @@ for (let i = 0; i < handleNames.length; i++) {
     followers_count: followers_count,
     friends_count: friends_count,
     favourites_count: favourites_count,
-    followers: followers,
+    following: following,
   };
 
   udata.push(userInfo);
