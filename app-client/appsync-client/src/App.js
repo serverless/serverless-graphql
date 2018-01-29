@@ -9,7 +9,6 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Homepage from './routes/Homepage';
 import Profile from './routes/Profile';
-import './App.css';
 
 Amplify.configure({
   Auth: {

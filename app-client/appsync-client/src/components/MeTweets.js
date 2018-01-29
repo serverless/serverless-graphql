@@ -4,7 +4,8 @@ import { graphql, compose } from 'react-apollo';
 import { propType } from 'graphql-anywhere';
 
 import { Container, ProfileIcon, Tweet } from './helpers';
-import { UserTweetsQuery } from '../queries';
+import { DeleteTweetMutation } from '../mutations';
+import { MeTweetsQuery } from '../queries';
 import { AddTweetSubscription } from '../subscriptions';
 
 const variables = {
@@ -12,7 +13,12 @@ const variables = {
   consumer_secret: process.env.REACT_APP_SECRET_KEY,
 };
 
-export class UserTweetsComponent extends React.Component {
+export class MeTweetsComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.deleteTweet = this.deleteTweet.bind(this);
+  }
+
   componentDidMount() {
     this.subscription = this.props.subscribeToNewTweets(variables);
   }
@@ -21,9 +27,20 @@ export class UserTweetsComponent extends React.Component {
     this.subscription(); // NOTE removes the subscription
   }
 
+  deleteTweet(tweet) {
+    // eslint-disable-next-line no-alert
+    if (window.confirm('Are you sure you want to delete this tweet?')) {
+      this.props.deleteTweet(tweet.tweet_id).then(() => {
+        setTimeout(() => {
+          this.props.data.refetch();
+        }, 1000); // give the backend a second to fully remove record
+      });
+    }
+  }
+
   render() {
     const { data } = this.props;
-    const { loading, error, getUserInfo, networkStatus } = data;
+    const { loading, error, meInfo, networkStatus } = data;
     const isRefetching = networkStatus === 4;
 
     if (loading && !isRefetching) {
@@ -43,9 +60,10 @@ export class UserTweetsComponent extends React.Component {
 
     return (
       <Container>
-        {getUserInfo.tweets.items.map((item, index) => (
+        {meInfo.tweets.items.map((item, index) => (
           <Tweet key={index}>
-            <ProfileIcon>{getUserInfo.handle[0]}</ProfileIcon>
+            <button onClick={() => this.deleteTweet(item)}>Delete</button>
+            <ProfileIcon>{meInfo.handle[0]}</ProfileIcon>
             {item.tweet}
           </Tweet>
         ))}
@@ -54,15 +72,15 @@ export class UserTweetsComponent extends React.Component {
   }
 }
 
-UserTweetsComponent.propTypes = {
-  data: propType(UserTweetsQuery).isRequired,
+MeTweetsComponent.propTypes = {
+  data: propType(MeTweetsQuery).isRequired,
+  deleteTweet: PropTypes.func.isRequired,
   subscribeToNewTweets: PropTypes.func.isRequired,
-  handle: PropTypes.string.isRequired, // eslint-disable-line react/no-unused-prop-types
 };
 
-const tweetsQuery = graphql(UserTweetsQuery, {
-  options: props => ({
-    variables: { ...variables, handle: props.handle },
+const tweetsQuery = graphql(MeTweetsQuery, {
+  options: () => ({
+    variables,
     fetchPolicy: 'cache-and-network',
   }),
   props: props => ({
@@ -71,9 +89,11 @@ const tweetsQuery = graphql(UserTweetsQuery, {
       props.data.subscribeToMore({
         document: AddTweetSubscription,
         variables: params,
+        // TODO BUG: without the handle we add it to every profile. Subscription filters should
+        // solve the problem in the future.
         updateQuery: (prev, { subscriptionData: { data: { addTweet } } }) => {
           // NOTE happens when the user created the tweet and it was rendered optimistically
-          const tweetAlreadyExists = prev.getUserInfo.tweets.items.find(
+          const tweetAlreadyExists = prev.meInfo.tweets.items.find(
             item => item.tweet_id === addTweet.tweet_id
           );
           if (tweetAlreadyExists) {
@@ -81,10 +101,10 @@ const tweetsQuery = graphql(UserTweetsQuery, {
           }
           return {
             ...prev,
-            getUserInfo: {
-              ...prev.getUserInfo,
+            meInfo: {
+              ...prev.meInfo,
               tweets: {
-                items: [addTweet, ...prev.getUserInfo.tweets.items],
+                items: [addTweet, ...prev.meInfo.tweets.items],
               },
             },
           };
@@ -93,4 +113,21 @@ const tweetsQuery = graphql(UserTweetsQuery, {
   }),
 });
 
-export default compose(tweetsQuery)(UserTweetsComponent);
+const deleteMutation = graphql(DeleteTweetMutation, {
+  props: ({ mutate }) => ({
+    deleteTweet: tweetId =>
+      mutate({
+        variables: {
+          tweet_id: tweetId,
+        },
+        optimisticResponse: () => ({
+          deleteTweet: {
+            tweet_id: tweetId,
+            __typename: 'Tweet',
+          },
+        }),
+      }),
+  }),
+});
+
+export default compose(tweetsQuery, deleteMutation)(MeTweetsComponent);

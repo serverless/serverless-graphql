@@ -2,6 +2,15 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Lato', sans-serif;
-  background: rgb(226, 229, 231);
+  background: rgb(246, 248, 255);
   color: #14171a;
+}
+
+.amplify-nav-bar {
+  border: 0 solid transparent !important;
+}
+
+.amplify-nav {
+  width: 800px;
+  margin: 10px auto !important;
 }

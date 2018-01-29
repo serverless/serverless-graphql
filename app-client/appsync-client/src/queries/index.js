@@ -16,13 +16,6 @@ export const UserQuery = gql`
       handle
       description
       following
-      topTweet {
-        tweet_id
-        tweet
-        retweeted
-        retweet_count
-        favorited
-      }
     }
   }
 `;
@@ -38,6 +31,7 @@ export const UserTweetsQuery = gql`
       consumer_key: $consumer_key
       consumer_secret: $consumer_secret
     ) {
+      handle
       tweets(limit: 10) {
         items {
           tweet
@@ -52,9 +46,22 @@ export const UserTweetsQuery = gql`
   }
 `;
 
+export const MeQuery = gql`
+  query MeQuery($consumer_key: String!, $consumer_secret: String!) {
+    meInfo(consumer_key: $consumer_key, consumer_secret: $consumer_secret) {
+      name
+      location
+      handle
+      description
+      following
+    }
+  }
+`;
+
 export const MeTweetsQuery = gql`
   query MeTweetsQuery($consumer_key: String!, $consumer_secret: String!) {
     meInfo(consumer_key: $consumer_key, consumer_secret: $consumer_secret) {
+      handle
       tweets(limit: 10) {
         items {
           tweet
