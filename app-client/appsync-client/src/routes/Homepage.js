@@ -37,6 +37,7 @@ export default () => (
         <Container>
           <Following>TODO people I follow</Following>
         </Container>
+        <Container>TODO add search</Container>
       </SideBar>
       <Content>
         <Container>TODO My Tweets</Container>
