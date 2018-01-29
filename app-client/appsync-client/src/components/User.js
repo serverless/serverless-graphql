@@ -1,6 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
-
 import UserInfo from './UserInfo';
 import UserTweets from './UserTweets';
 import TweetForm from './TweetForm';
@@ -35,5 +35,9 @@ const User = ({ handle }) => (
     </Content>
   </Main>
 );
+
+User.propTypes = {
+  handle: PropTypes.string.isRequired,
+};
 
 export default User;

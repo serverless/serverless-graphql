@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Amplify, { Auth } from 'aws-amplify';
 import { withAuthenticator } from 'aws-amplify-react/dist/Auth';
 import AWSAppSyncClient from 'aws-appsync';
@@ -39,6 +40,14 @@ const Profile = props => (
     <User handle={props.match.params.handle} />
   </div>
 );
+
+Profile.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      handle: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
+};
 
 const WithProvider = () => (
   <Router>
