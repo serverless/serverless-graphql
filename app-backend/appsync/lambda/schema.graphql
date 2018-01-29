@@ -40,7 +40,7 @@ type Mutation {
 		followers_count: Int!,
 		friends_count: Int!,
 		favourites_count: Int!,
-		followers: [String]
+		following: [String]
 	): User!
 }
 
@@ -79,7 +79,7 @@ type User {
 	followers_count: Int!
 	friends_count: Int!
 	favourites_count: Int!
-	followers: [String!]!
+	following: [String!]!
 	topTweet: Tweet
 	tweets(limit: Int, nextToken: String): TweetConnection
 

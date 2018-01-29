@@ -3,8 +3,8 @@ import { OAuth2 } from 'oauth';
 
 const Twitter = require('twitter');
 
-async function getFollowers(handle, consumerKey, consumerSecret) {
-  const url = 'followers/list';
+async function getFollowing(handle, consumerKey, consumerSecret) {
+  const url = 'friends/list';
 
   const oauth2 = new OAuth2(
     consumerKey,
@@ -94,7 +94,7 @@ async function getRawTweets(handle, consumerKey, consumerSecret) {
           const tweetArray = [];
           let listOfTweets;
 
-          return getFollowers(handle, consumerKey, consumerSecret).then(
+          return getFollowing(handle, consumerKey, consumerSecret).then(
             data => {
               if (tweets.length >= 1) {
                 listOfTweets = {
@@ -105,7 +105,7 @@ async function getRawTweets(handle, consumerKey, consumerSecret) {
                   followers_count: tweets[0].user.followers_count,
                   friends_count: tweets[0].user.friends_count,
                   favourites_count: tweets[0].user.favourites_count,
-                  followers: data,
+                  following: data,
                 };
               }
 

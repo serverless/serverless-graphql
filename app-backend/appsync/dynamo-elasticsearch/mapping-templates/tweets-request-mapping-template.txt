@@ -4,12 +4,12 @@
     "path":"/user/twitter/_search",
     "params":{
         "body":{
-            "from":$context.arguments.nextToken,
+            "from":0,
             "size":$context.arguments.limit,
             "query" : {
                 "bool" : {
                     "must" : [
-                        {"match" : { "handle" : "$context.identity.username" }}
+                        {"match" : { "handle" : #if($context.source.handle) "$context.source.handle" #else "${context.identity.username}" #end }}
                     ]
                 }
             }
