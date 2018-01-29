@@ -96,3 +96,15 @@ export const Following = styled.div`
     margin-top: 0.5rem;
   }
 `;
+
+export const Footer = styled.div`
+  font-size: 11px;
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  & a {
+    color: #666;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+  }
+`;
