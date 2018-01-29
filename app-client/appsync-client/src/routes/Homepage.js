@@ -1,46 +1,20 @@
 import React from 'react';
-import styled from 'styled-components';
-import { Container } from '../components/helpers';
+import { Container, Main, SideBar, Content } from '../components/helpers';
 import MeTweets from '../components/MeTweets';
-
-const Main = styled.div`
-  width: 800px;
-  margin: auto;
-  display: flex;
-  flex-direction: row;
-`;
-
-const SideBar = styled.div`
-  flex: 1;
-  margin-right: 10px;
-`;
-
-const Content = styled.div`
-  flex: 2;
-`;
-
-const Following = styled.div`
-  margin-bottom: 15px;
-  padding: 15px 15px;
-  text-align: center;
-  & .username {
-    font-size: 14px;
-    color: #657786;
-    margin-bottom: 0.5rem;
-    margin-top: 0.5rem;
-  }
-`;
+import MeFollowing from '../components/MeFollowing';
+import TweetForm from '../components/TweetForm';
 
 export default () => (
   <div className="App">
     <Main>
       <SideBar>
         <Container>
-          <Following>TODO people I follow</Following>
+          <MeFollowing />
         </Container>
         <Container>TODO add search</Container>
       </SideBar>
       <Content>
+        <TweetForm />
         <MeTweets />
       </Content>
     </Main>

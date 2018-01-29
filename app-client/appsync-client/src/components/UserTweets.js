@@ -4,7 +4,6 @@ import { graphql, compose } from 'react-apollo';
 import { propType } from 'graphql-anywhere';
 
 import { Container, ProfileIcon, Tweet } from './helpers';
-import { DeleteTweetMutation } from '../mutations';
 import { UserTweetsQuery } from '../queries';
 import { AddTweetSubscription } from '../subscriptions';
 
@@ -14,28 +13,12 @@ const variables = {
 };
 
 export class UserTweetsComponent extends React.Component {
-  constructor(props) {
-    super(props);
-    this.deleteTweet = this.deleteTweet.bind(this);
-  }
-
   componentDidMount() {
     this.subscription = this.props.subscribeToNewTweets(variables);
   }
 
   componentWillUnmount() {
     this.subscription(); // NOTE removes the subscription
-  }
-
-  deleteTweet(tweet) {
-    // eslint-disable-next-line no-alert
-    if (window.confirm('Are you sure you want to delete this tweet?')) {
-      this.props.deleteTweet(tweet.tweet_id).then(() => {
-        setTimeout(() => {
-          this.props.data.refetch();
-        }, 1000); // give the backend a second to fully remove record
-      });
-    }
   }
 
   render() {
@@ -62,7 +45,6 @@ export class UserTweetsComponent extends React.Component {
       <Container>
         {getUserInfo.tweets.items.map((item, index) => (
           <Tweet key={index}>
-            <button onClick={() => this.deleteTweet(item)}>Delete</button>
             <ProfileIcon>{getUserInfo.handle[0]}</ProfileIcon>
             {item.tweet}
           </Tweet>
@@ -74,9 +56,8 @@ export class UserTweetsComponent extends React.Component {
 
 UserTweetsComponent.propTypes = {
   data: propType(UserTweetsQuery).isRequired,
-  deleteTweet: PropTypes.func.isRequired,
   subscribeToNewTweets: PropTypes.func.isRequired,
-  handle: PropTypes.string.isRequired,
+  handle: PropTypes.string.isRequired, // eslint-disable-line react/no-unused-prop-types
 };
 
 const tweetsQuery = graphql(UserTweetsQuery, {
@@ -112,21 +93,4 @@ const tweetsQuery = graphql(UserTweetsQuery, {
   }),
 });
 
-const deleteMutation = graphql(DeleteTweetMutation, {
-  props: ({ mutate }) => ({
-    deleteTweet: tweetId =>
-      mutate({
-        variables: {
-          tweet_id: tweetId,
-        },
-        optimisticResponse: () => ({
-          deleteTweet: {
-            tweet_id: tweetId,
-            __typename: 'Tweet',
-          },
-        }),
-      }),
-  }),
-});
-
-export default compose(tweetsQuery, deleteMutation)(UserTweetsComponent);
+export default compose(tweetsQuery)(UserTweetsComponent);

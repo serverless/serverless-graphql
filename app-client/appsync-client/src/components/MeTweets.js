@@ -79,8 +79,8 @@ MeTweetsComponent.propTypes = {
 };
 
 const tweetsQuery = graphql(MeTweetsQuery, {
-  options: props => ({
-    variables: { ...variables },
+  options: () => ({
+    variables,
     fetchPolicy: 'cache-and-network',
   }),
   props: props => ({
