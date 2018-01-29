@@ -4,15 +4,12 @@ import { UserInfoComponent } from './UserInfo';
 
 it('render user name', () => {
   const data = {
-    meInfo: {
+    getUserInfo: {
       name: 'sid',
       location: 'SF',
       handle: 'sidg_sid',
       description: 'follow the universe',
-      favourites_count: 200,
-      followers_count: 300,
-      friends_count: 100,
-      followers: [],
+      following: [],
       topTweet: {
         tweet_id: '123',
         tweet: 'this is my first tweet',
@@ -25,5 +22,5 @@ it('render user name', () => {
     error: null,
   };
   const wrapper = shallow(<UserInfoComponent data={data} />);
-  expect(wrapper.html()).toContain(data.meInfo.description);
+  expect(wrapper.html()).toContain(data.getUserInfo.description);
 });

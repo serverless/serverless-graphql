@@ -1,13 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Amplify, { Auth } from 'aws-amplify';
 import { withAuthenticator } from 'aws-amplify-react/dist/Auth';
 import AWSAppSyncClient from 'aws-appsync';
 import { Rehydrated } from 'aws-appsync-react';
 import { AUTH_TYPE } from 'aws-appsync/lib/link/auth-link';
 import { ApolloProvider } from 'react-apollo';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import User from './components/User';
-import logo from './logo.svg';
+import Homepage from './routes/Homepage';
+import Profile from './routes/Profile';
 import './App.css';
 
 Amplify.configure({
@@ -28,28 +29,15 @@ const client = new AWSAppSyncClient({
   },
 });
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Serverless GraphQL Apollo </h2>
-        </div>
-        <div className="App-User">
-          <User />
-        </div>
-      </div>
-    );
-  }
-}
-
 const WithProvider = () => (
-  <ApolloProvider client={client}>
-    <Rehydrated>
-      <App />
-    </Rehydrated>
-  </ApolloProvider>
+  <Router>
+    <ApolloProvider client={client}>
+      <Rehydrated>
+        <Route exact path="/" component={Homepage} />
+        <Route path="/:handle" component={Profile} />
+      </Rehydrated>
+    </ApolloProvider>
+  </Router>
 );
 
 export default withAuthenticator(WithProvider, { includeGreetings: true });

@@ -13,11 +13,9 @@ export const UserQuery = gql`
     ) {
       name
       location
-      favourites_count
+      handle
       description
-      followers_count
-      friends_count
-      followers
+      following
       topTweet {
         tweet_id
         tweet
@@ -40,10 +38,7 @@ export const UserTweetsQuery = gql`
       consumer_key: $consumer_key
       consumer_secret: $consumer_secret
     ) {
-      tweets(
-        limit: 10
-        nextToken: "0" # only necessary for ElasticSearch implementation
-      ) {
+      tweets(limit: 10) {
         items {
           tweet
           tweet_id
@@ -52,27 +47,6 @@ export const UserTweetsQuery = gql`
           favorited
         }
         nextToken
-      }
-    }
-  }
-`;
-
-export const MeQuery = gql`
-  query MeQuery($consumer_key: String!, $consumer_secret: String!) {
-    meInfo(consumer_key: $consumer_key, consumer_secret: $consumer_secret) {
-      name
-      location
-      favourites_count
-      description
-      followers_count
-      friends_count
-      followers
-      topTweet {
-        tweet_id
-        tweet
-        retweeted
-        retweet_count
-        favorited
       }
     }
   }
