@@ -6,7 +6,7 @@
         "expression": "handle = :handle",
         "expressionValues" : {
             ":handle" : {
-                "S" : "${context.identity.username}"
+                "S" : #if($context.source.handle) "$context.source.handle" #else "${context.identity.username}" #end
             }
         }
     },
