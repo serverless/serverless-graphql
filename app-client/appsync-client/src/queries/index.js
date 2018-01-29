@@ -75,3 +75,17 @@ export const MeTweetsQuery = gql`
     }
   }
 `;
+
+export const SearchTweetsQuery = gql`
+  query UserQuery($keyword: String!) {
+    searchAllTweetsByKeyword(keyword: $keyword) {
+      items {
+        tweet
+        tweet_id
+        retweet_count
+        retweeted
+        favorited
+      }
+    }
+  }
+`;
