@@ -29,6 +29,7 @@
     "space-before-function-paren": "off",
     "no-console": "off",
     "func-names": "off",
-    "object-curly-newline": "off"
+    "object-curly-newline": "off",
+    "jsx-a11y/anchor-is-valid": "off"
   }
 }

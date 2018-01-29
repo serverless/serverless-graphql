@@ -101,6 +101,7 @@ UserTweetsComponent.propTypes = {
   data: propType(UserTweetsQuery).isRequired,
   deleteTweet: PropTypes.func.isRequired,
   subscribeToNewTweets: PropTypes.func.isRequired,
+  handle: PropTypes.string.isRequired,
 };
 
 const tweetsQuery = graphql(UserTweetsQuery, {
