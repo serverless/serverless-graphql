@@ -77,14 +77,15 @@ export const UserInfoComponent = ({
     );
   }
 
-  const user = getUserInfo;
-
   return (
     <Div>
       <Container>
         <UserProfile>
           <h4 className="username">
-            {user.name} <span>@{getUserInfo.handle}</span>
+            {getUserInfo.name}
+            <div>
+              <span>@{getUserInfo.handle}</span>
+            </div>
           </h4>
           <p className="location">
             <i className="material-icons">location_on</i>
