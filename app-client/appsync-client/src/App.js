@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Amplify, { Auth } from 'aws-amplify';
 import { withAuthenticator } from 'aws-amplify-react/dist/Auth';
 import AWSAppSyncClient from 'aws-appsync';
@@ -8,7 +7,8 @@ import { AUTH_TYPE } from 'aws-appsync/lib/link/auth-link';
 import { ApolloProvider } from 'react-apollo';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import User from './components/User';
+import Homepage from './routes/Homepage';
+import Profile from './routes/Profile';
 import './App.css';
 
 Amplify.configure({
@@ -29,31 +29,11 @@ const client = new AWSAppSyncClient({
   },
 });
 
-const Home = () => (
-  <div className="App">
-    <User />
-  </div>
-);
-
-const Profile = props => (
-  <div className="App">
-    <User handle={props.match.params.handle} />
-  </div>
-);
-
-Profile.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      handle: PropTypes.string.isRequired,
-    }).isRequired,
-  }).isRequired,
-};
-
 const WithProvider = () => (
   <Router>
     <ApolloProvider client={client}>
       <Rehydrated>
-        <Route exact path="/" component={Home} />
+        <Route exact path="/" component={Homepage} />
         <Route path="/:handle" component={Profile} />
       </Rehydrated>
     </ApolloProvider>
