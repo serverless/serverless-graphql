@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { graphql, compose } from 'react-apollo';
 import { propType } from 'graphql-anywhere';
 
-import { Container, ProfileIcon, Tweet } from './helpers';
+import { Div, Container, ProfileIcon, Tweet } from './helpers';
 import { DeleteTweetMutation } from '../mutations';
 import { MeTweetsQuery } from '../queries';
 import { AddTweetSubscription } from '../subscriptions';

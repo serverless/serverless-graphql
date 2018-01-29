@@ -1,32 +1,10 @@
 import React from 'react';
 import { graphql } from 'react-apollo';
 import { propType } from 'graphql-anywhere';
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 import { Div, Container, UserProfile, Following } from './helpers';
 import { UserQuery } from '../queries';
-
-const Numbers = styled.div`
-  display: flex;
-  margin-top: 15px;
-  margin-bottom: 15px;
-  & .column {
-    color: #657786;
-    flex: 1;
-    text-align: center;
-    padding: 15px 0;
-  }
-  & .title {
-    font-size: 12px;
-    font-weight: bold;
-  }
-  & .number {
-    font-size: 18px;
-    font-weight: bold;
-    margin-top: 3px;
-  }
-`;
 
 export const UserInfoComponent = ({
   data: { loading, error, getUserInfo },

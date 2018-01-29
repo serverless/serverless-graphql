@@ -56,6 +56,7 @@ export const ProfileIcon = styled.div`
   text-align: center;
   line-height: 1.5rem;
 `;
+
 export const UserProfile = styled.div`
   margin-bottom: 15px;
   padding: 15px 15px;
