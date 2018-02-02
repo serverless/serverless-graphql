@@ -7,10 +7,19 @@ provider:
   runtime: nodejs6.10
   stage: dev
   region: us-east-1
+  tracing: true # enable tracing
+  iamRoleStatements:
+    - Effect: "Allow" # xray permissions (required)
+      Action:
+        - "xray:PutTraceSegments"
+        - "xray:PutTelemetryRecords"
+      Resource:
+        - "*"
 
 plugins:
   - serverless-offline
   - serverless-webpack
+  - serverless-plugin-tracing
 
 custom:
   account_id: ${opt:account_id}

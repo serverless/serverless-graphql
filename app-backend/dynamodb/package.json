@@ -23,7 +23,8 @@
     "graphql": "^0.10.5",
     "graphql-playground-middleware-lambda": "^1.2.0",
     "graphql-tools": "2.7.2",
-    "serverless-dynamodb-client": "^0.0.2"
+    "serverless-dynamodb-client": "^0.0.2",
+    "serverless-plugin-tracing": "^2.0.0"
   },
   "devDependencies": {
     "aws-sdk": "^2.4.8",
