@@ -1,0 +1,43 @@
+service: serverless-graphql-apollo
+
+frameworkVersion: ">=1.21.0 <2.0.0"
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  stage: production
+  region: us-west-1
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:*
+      Resource: "*"
+
+plugins:
+  - serverless-offline
+  - serverless-webpack
+  - serverless-offline-scheduler
+
+custom:
+  serverless-offline:
+    port: 4000
+    babelOptions:
+      presets: ["es2015", "stage-2"]
+  webpackIncludeModules: true
+
+functions:
+  graphql:
+    handler: handler.graphqlHandler
+    events:
+    - http:
+        path: graphql
+        method: post
+        cors: true
+
+  api:
+    handler: handler.apiHandler
+    events:
+    - http:
+        path: api
+        method: get
+        cors: true
