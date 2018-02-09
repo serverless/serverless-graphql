@@ -23,14 +23,20 @@ exports.graphqlHandler = function graphqlHandler(event, context, callback) {
 };
 
 // for local endpointURL is /graphql and for prod it is /stage/graphql
-exports.playgroundHandler = lambdaPlayground({
-  endpoint: process.env.REACT_APP_GRAPHQL_ENDPOINT
-    ? process.env.REACT_APP_GRAPHQL_ENDPOINT
-    : '/production/graphql',
-});
+exports.playgroundHandler = (event, context, callback) => {
+  event.callbackWaitsForEmptyEventLoop = false;
+  return lambdaPlayground({
+    endpoint: process.env.REACT_APP_GRAPHQL_ENDPOINT
+      ? process.env.REACT_APP_GRAPHQL_ENDPOINT
+      : '/production/graphql',
+  })(event, context, callback);
+};
 
-exports.graphiqlHandler = graphiqlLambda({
-  endpointURL: process.env.REACT_APP_GRAPHQL_ENDPOINT
-    ? process.env.REACT_APP_GRAPHQL_ENDPOINT
-    : '/production/graphql',
-});
+exports.graphiqlHandler = (event, context, callback) => {
+  event.callbackWaitsForEmptyEventLoop = false;
+  return graphiqlLambda({
+    endpointURL: process.env.REACT_APP_GRAPHQL_ENDPOINT
+      ? process.env.REACT_APP_GRAPHQL_ENDPOINT
+      : '/production/graphql',
+  })(event, context, callback);
+};
