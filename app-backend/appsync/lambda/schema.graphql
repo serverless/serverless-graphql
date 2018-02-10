@@ -45,8 +45,8 @@ type Mutation {
 }
 
 type Query {
-	meInfo(consumer_key!: String, consumer_secret!: String): User!
-	getUserInfo(handle: String!, consumer_key!: String, consumer_secret!: String): User!
+	meInfo(consumer_key: String!, consumer_secret: String!): User!
+	getUserInfo(handle: String!, consumer_key: String!, consumer_secret: String!): User!
 
 	# search functionality is available in elasticsearch integration
 	searchAllTweetsByKeyword(keyword: String!): TweetConnection
