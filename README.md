@@ -21,6 +21,7 @@ This example uses the following technologies:
   - [RDS (MySQL, PostGres and Aurora)](https://aws.amazon.com/rds/)
   - [REST API](https://developer.twitter.com/en/docs)
   - Plugins
+      - [Serverless Appsync Plugin](https://github.com/sid88in/serverless-appsync-plugin)
       - [Serverless Webpack](https://github.com/serverless-heaven/serverless-webpack)
       - [Serverless Offline](https://github.com/dherault/serverless-offline)
       - [Serverless DynamoDB Local](https://github.com/99xt/serverless-dynamodb-local)
