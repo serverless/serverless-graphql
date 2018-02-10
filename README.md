@@ -35,7 +35,7 @@ This example uses the following technologies:
 
 ## System Architecture
 
-![serverless application architecture v2](https://user-images.githubusercontent.com/1587005/35407827-f10c2314-01c1-11e8-8451-74cc12e6b2b5.png)
+![serverless application architecture v2](https://user-images.githubusercontent.com/1587005/36063546-21c3a540-0e33-11e8-9fa4-1a1e5e9a6537.png)
 
 ## Quick Setup
 
