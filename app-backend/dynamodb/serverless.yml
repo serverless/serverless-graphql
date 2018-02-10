@@ -14,6 +14,9 @@ plugins:
   - serverless-offline
 
 custom:
+  serverless-offline:
+    port: 4000
+  webpackIncludeModules: true
   dynamodb:
     start:
       port: 8000
@@ -31,6 +34,7 @@ custom:
 functions:
   graphql:
     handler: handler.graphqlHandler
+    role: ServiceRole
     events:
     - http:
         path: graphql
@@ -38,6 +42,7 @@ functions:
         cors: true
   playground:
     handler: handler.playgroundHandler
+    role: ServiceRole
     events:
     - http:
         path: playground
@@ -45,6 +50,7 @@ functions:
         cors: true
   graphiql:
     handler: handler.graphiqlHandler
+    role: ServiceRole
     events:
     - http:
         path: graphiql
@@ -121,10 +127,10 @@ resources:
             ProvisionedThroughput:
               ReadCapacityUnits: 50
               WriteCapacityUnits: 50
-    AppSyncServiceRole:
+    ServiceRole:
       Type: "AWS::IAM::Role"
       Properties:
-        RoleName: "Dynamo-AppSyncServiceRole"
+        RoleName: "DynamoRole"
         AssumeRolePolicyDocument:
           Version: "2012-10-17"
           Statement:
@@ -132,12 +138,12 @@ resources:
               Effect: "Allow"
               Principal:
                 Service:
-                  - "appsync.amazonaws.com"
+                  - "lambda.amazonaws.com"
               Action:
                 - "sts:AssumeRole"
         Policies:
           -
-            PolicyName: "Dynamo-AppSyncServiceRole-Policy"
+            PolicyName: "Dynamo-ServiceRole-Policy"
             PolicyDocument:
               Version: "2012-10-17"
               Statement:

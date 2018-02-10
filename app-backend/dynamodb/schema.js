@@ -68,7 +68,19 @@ type Tweet {
 
 type TweetConnection {
 	items: [Tweet!]!
-	nextToken: String
+	nextToken: Token
+}
+
+input TokenInput {
+    tweet_id : String!
+    created_at: String!
+    handle: String!
+}
+
+type Token {
+    tweet_id : String!
+    created_at: String!
+    handle: String!
 }
 
 type User {
@@ -81,7 +93,7 @@ type User {
 	favourites_count: Int!
 	following: [String!]!
 	topTweet: Tweet
-	tweets(limit: Int!, nextToken: String): TweetConnection
+	tweets(limit: Int!, nextToken: TokenInput): TweetConnection
 
 	# search functionality is available in elasticsearch integration
     searchTweetsByKeyword(keyword: String!): TweetConnection
