@@ -1,28 +1,23 @@
-const data = require('./users.json');
+const udata = require('./Users.json');
+const tdata = require('./Tweets.json');
 const connection = require('../knexfile');
 
 const knex = require('knex')(connection.production);
 
-const posts = [];
-
-data.forEach((a, index) => {
-  a.posts.forEach(element => {
-    element.userId = index + 1;
-    posts.push(element);
-  });
+const users = udata.map(a => {
+  return a;
 });
 
-const users = data.map(a => {
-  delete a.posts;
+const tweets = tdata.map(a => {
   return a;
 });
 
 const insertData = function() {
-  return knex('users')
+  return knex('Users')
     .del()
-    .then(() => knex('posts').del())
-    .then(() => knex('users').insert(users))
-    .then(() => knex('posts').insert(posts));
+    .then(() => knex('Tweets').del())
+    .then(() => knex('Users').insert(users))
+    .then(() => knex('Tweets').insert(tweets));
 };
 
 insertData()
