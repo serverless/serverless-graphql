@@ -19,8 +19,14 @@ export const resolvers = {
           }
           return user;
         })
-        .catch(error => {
-          throw error;
-        }),
+        .then(user =>
+          knex('Tweets')
+            .where('handle', user.handle)
+            .then(posts => {
+              // eslint-disable-next-line no-param-reassign
+              user.tweets = { items: posts };
+              return user;
+            })
+        ),
   },
 };
