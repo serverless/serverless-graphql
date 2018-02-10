@@ -7,17 +7,6 @@ provider:
   runtime: nodejs6.10
   stage: dev
   region: us-east-1
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - dynamodb:Query
-        - dynamodb:Scan
-        - dynamodb:GetItem
-        - dynamodb:BatchGetItem
-        - dynamodb:PutItem
-        - dynamodb:UpdateItem
-        - dynamodb:DeleteItem
-      Resource: "arn:aws:dynamodb:us-east-1:*:table/users"
 
 plugins:
   - serverless-webpack
@@ -25,9 +14,6 @@ plugins:
   - serverless-offline
 
 custom:
-  serverless-offline:
-    port: 4000
-  webpackIncludeModules: true
   dynamodb:
     start:
       port: 8000
@@ -37,8 +23,10 @@ custom:
     seed:
       test:
         sources:
-          - table: users
-            sources: [seed-data/users.json]
+          - table: Users
+            sources: [seed-data/Users.json]
+          - table: Tweets
+            sources: [seed-data/Tweets.json]
 
 functions:
   graphql:
@@ -70,13 +58,101 @@ resources:
       Properties:
         KeySchema:
           -
-            AttributeName: screen_name
+            AttributeName: handle
             KeyType: HASH
         AttributeDefinitions:
           -
-            AttributeName: screen_name
+            AttributeName: handle
             AttributeType: S
         ProvisionedThroughput:
           ReadCapacityUnits: 10
           WriteCapacityUnits: 10
-        TableName: 'users'
+        TableName: 'Users'
+    TweetsTable:
+      Type: 'AWS::DynamoDB::Table'
+      Properties:
+        KeySchema:
+          -
+            AttributeName: tweet_id
+            KeyType: HASH
+        AttributeDefinitions:
+          -
+            AttributeName: tweet_id
+            AttributeType: S
+          -
+            AttributeName: handle
+            AttributeType: S
+          -
+            AttributeName: retweet_count
+            AttributeType: N
+          -
+            AttributeName: created_at
+            AttributeType: S
+        ProvisionedThroughput:
+          ReadCapacityUnits: 10
+          WriteCapacityUnits: 10
+        TableName: 'Tweets'
+        GlobalSecondaryIndexes:
+          -
+            IndexName: top-index
+            KeySchema:
+              -
+                AttributeName: handle
+                KeyType: HASH
+              -
+                AttributeName: retweet_count
+                KeyType: RANGE
+            Projection:
+              ProjectionType: ALL
+            ProvisionedThroughput:
+              ReadCapacityUnits: 50
+              WriteCapacityUnits: 50
+          -
+            IndexName: tweet-index
+            KeySchema:
+              -
+                AttributeName: handle
+                KeyType: HASH
+              -
+                AttributeName: created_at
+                KeyType: RANGE
+            Projection:
+              ProjectionType: ALL
+            ProvisionedThroughput:
+              ReadCapacityUnits: 50
+              WriteCapacityUnits: 50
+    AppSyncServiceRole:
+      Type: "AWS::IAM::Role"
+      Properties:
+        RoleName: "Dynamo-AppSyncServiceRole"
+        AssumeRolePolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            -
+              Effect: "Allow"
+              Principal:
+                Service:
+                  - "appsync.amazonaws.com"
+              Action:
+                - "sts:AssumeRole"
+        Policies:
+          -
+            PolicyName: "Dynamo-AppSyncServiceRole-Policy"
+            PolicyDocument:
+              Version: "2012-10-17"
+              Statement:
+                -
+                  Effect: "Allow"
+                  Action:
+                    - "dynamodb:Query"
+                    - "dynamodb:BatchWriteItem"
+                    - "dynamodb:GetItem"
+                    - "dynamodb:DeleteItem"
+                    - "dynamodb:PutItem"
+                    - "dynamodb:Scan"
+                    - "dynamodb:UpdateItem"
+                  Resource:
+                    - "arn:aws:dynamodb:us-east-1:*:table/Users"
+                    - "arn:aws:dynamodb:us-east-1:*:table/Users/*"
+                    - "arn:aws:dynamodb:us-east-1:*:table/Tweets"
+                    - "arn:aws:dynamodb:us-east-1:*:table/Tweets/*"

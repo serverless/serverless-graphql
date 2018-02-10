@@ -15,13 +15,13 @@ const promisify = foo =>
     });
   });
 
-const twitterEndpoint = {
-  getRawTweets(args) {
+const data = {
+  getTweets(args) {
     return promisify(callback =>
       docClient.query(
         {
-          TableName: 'users',
-          KeyConditionExpression: 'screen_name = :v1',
+          TableName: 'Users',
+          KeyConditionExpression: 'handle = :v1',
           ExpressionAttributeValues: {
             ':v1': args.handle,
           },
@@ -35,21 +35,15 @@ const twitterEndpoint = {
       if (result.Items.length >= 1) {
         listOfTweets = {
           name: result.Items[0].name,
-          screen_name: result.Items[0].screen_name,
+          handle: result.Items[0].handle,
           location: result.Items[0].location,
           description: result.Items[0].description,
           followers_count: result.Items[0].followers_count,
           friends_count: result.Items[0].friends_count,
           favourites_count: result.Items[0].favourites_count,
-          posts: [],
+          following: result.Items[0].following,
         };
       }
-
-      for (let i = 0; i < result.Items[0].posts.length; i += 1) {
-        tweets.push({ tweet: result.Items[0].posts[i].tweet });
-      }
-
-      listOfTweets.posts = tweets;
 
       return listOfTweets;
     });
@@ -58,6 +52,6 @@ const twitterEndpoint = {
 // eslint-disable-next-line import/prefer-default-export
 export const resolvers = {
   Query: {
-    getTwitterFeed: (root, args) => twitterEndpoint.getRawTweets(args),
+    getUserInfo: (root, args) => data.getTweets(args),
   },
 };
