@@ -6,7 +6,11 @@ import { Link } from 'react-router-dom';
 import { Div, Container, UserProfile, Following } from './helpers';
 import { MeQuery } from '../queries';
 
-export const UserInfoComponent = ({ data: { loading, error, meInfo } }) => {
+//react component 1) can return JSX or 2) can extend other components
+export const UserInfoComponent = props => {
+  //react compnent -> function that returns JSX, input: destructured params
+  const { data } = props;
+  const { loading, error, meInfo } = data;
   if (loading) {
     return (
       <Div>
@@ -47,7 +51,9 @@ export const UserInfoComponent = ({ data: { loading, error, meInfo } }) => {
       <Container>
         <Following>
           <div>Following</div>
-          {meInfo.following.map(handle => (
+          {meInfo.following.map((
+            handle //this is the list of following a user have on his profile
+          ) => (
             <div className="username" key={handle}>
               <Link to={`/@${handle}`}>{handle}</Link>
             </div>
@@ -59,10 +65,11 @@ export const UserInfoComponent = ({ data: { loading, error, meInfo } }) => {
 };
 
 UserInfoComponent.propTypes = {
-  data: propType(MeQuery).isRequired,
+  data: propType(MeQuery).isRequired, //dynamic type checking at runtime
 };
 
 export default graphql(MeQuery, {
+  //graphql is a function that creates a higher order component with a certain configuration and UserInfoComponent is component
   options: () => ({
     variables: {
       consumer_key: process.env.REACT_APP_CONSUMER_KEY,
@@ -70,3 +77,5 @@ export default graphql(MeQuery, {
     },
   }),
 })(UserInfoComponent);
+//graphql is like a black box because it abstracts data loading (renders the tree and fetch everuythin)
+//apollo HOC is injecting props using graphql function

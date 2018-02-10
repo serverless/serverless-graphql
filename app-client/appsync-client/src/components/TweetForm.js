@@ -49,10 +49,11 @@ export class TweetFormComponent extends React.Component {
   }
 
   handleSubmit(event) {
-    event.preventDefault();
+    event.preventDefault(); //prevent from going to next page. (don't do anything)
     const { value, sending } = this.state;
 
     if (!value.trim() || sending) {
+      //empty string or just clicked sending so that people can't send 2 tweets at he the same time
       return;
     }
 
@@ -61,7 +62,7 @@ export class TweetFormComponent extends React.Component {
       error: null,
     });
 
-    this.props
+    this.props //props are derived from the component
       .addTweet(value)
       .then(() => {
         this.setState({
@@ -93,7 +94,7 @@ export class TweetFormComponent extends React.Component {
             type="text"
             size="50"
             value={value}
-            onChange={this.updateValue}
+            onChange={this.updateValue} //keep saving text state
             placeholder="Submit a tweet!"
             maxLength="140"
           />
@@ -113,6 +114,7 @@ export default graphql(AddTweetMutation, {
     addTweet: tweet => {
       const createdAt = new Date().toISOString();
       return mutate({
+        //mutate is an API to send GraphQL mutation, if you invoke it, you do the request.
         variables: {
           consumer_key: process.env.REACT_APP_CONSUMER_KEY,
           consumer_secret: process.env.REACT_APP_SECRET_KEY,
@@ -131,6 +133,7 @@ export default graphql(AddTweetMutation, {
           },
         }),
         refetchQueries: [
+          //when i add a tweet, something might change in the backend so fetch tweets again
           {
             query: MeTweetsQuery,
             variables: {

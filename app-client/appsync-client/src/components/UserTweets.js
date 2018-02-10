@@ -14,6 +14,7 @@ const variables = {
 
 export class UserTweetsComponent extends React.Component {
   componentDidMount() {
+    //subscribe to users tweet when I am on his page, and then unsubscribe from the tweets once I leave his page.
     this.subscription = this.props.subscribeToNewTweets(variables);
   }
 
@@ -24,7 +25,7 @@ export class UserTweetsComponent extends React.Component {
   render() {
     const { data } = this.props;
     const { loading, error, getUserInfo, networkStatus } = data;
-    const isRefetching = networkStatus === 4;
+    const isRefetching = networkStatus === 4; //what is this
 
     if (loading && !isRefetching) {
       return (
@@ -62,16 +63,22 @@ UserTweetsComponent.propTypes = {
 
 const tweetsQuery = graphql(UserTweetsQuery, {
   options: props => ({
+    // you provide function to options property of graphql config object
     variables: { ...variables, handle: props.handle },
     fetchPolicy: 'cache-and-network',
   }),
   props: props => ({
-    ...props,
-    subscribeToNewTweets: params =>
+    //props is always coming from parent component
+    ...props, // expand and create (spead operator)
+    subscribeToNewTweets: (
+      params //subscribeToNewTweets is a function?
+    ) =>
       props.data.subscribeToMore({
-        document: AddTweetSubscription,
+        //where is subscribeToMore coming from - APOLLO API
+        document: AddTweetSubscription, //what is document?
         variables: params,
         updateQuery: (prev, { subscriptionData: { data: { addTweet } } }) => {
+          //what is prev? - prev state of the data
           // NOTE happens when the user created the tweet and it was rendered optimistically
           const tweetAlreadyExists = prev.getUserInfo.tweets.items.find(
             item => item.tweet_id === addTweet.tweet_id
@@ -80,6 +87,7 @@ const tweetsQuery = graphql(UserTweetsQuery, {
             return { ...prev };
           }
           return {
+            //reconstruct the entire state and add 1 tweet in the begginning of the tweet!
             ...prev,
             getUserInfo: {
               ...prev.getUserInfo,

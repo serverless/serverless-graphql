@@ -114,6 +114,7 @@ const tweetsQuery = graphql(MeTweetsQuery, {
 });
 
 const deleteMutation = graphql(DeleteTweetMutation, {
+  //we can add refetch queries
   props: ({ mutate }) => ({
     deleteTweet: tweetId =>
       mutate({

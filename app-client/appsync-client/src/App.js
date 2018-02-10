@@ -21,9 +21,11 @@ Amplify.configure({
 });
 
 const client = new AWSAppSyncClient({
+  //pass object in the constructor with properties
   url: process.env.REACT_APP_GRAPHQL_ENDPOINT,
   region: process.env.REACT_APP_AWS_CLIENT_REGION,
   auth: {
+    //property of a js object
     type: AUTH_TYPE.AMAZON_COGNITO_USER_POOLS,
     jwtToken: async () =>
       (await Auth.currentSession()).getIdToken().getJwtToken(),
@@ -31,14 +33,21 @@ const client = new AWSAppSyncClient({
 });
 
 const WithProvider = () => (
+  //react function component
   <Router>
+    {' '}
+    // context allows you to pass info from multiple level of components, so
+    Route can access info from Router.
     <ApolloProvider client={client}>
+      {' '}
+      //pass instantiatied client in ApolloProvider component
       <Rehydrated>
         <Route exact path="/" component={Homepage} />
         <Route path="/search" component={Search} />
         <Route path="/@:handle" component={Profile} />
         <Footer>
-          <Link to="/">Home</Link>
+          <Link to="/">Home</Link> //special link without rerendering the entire
+          page, render the subroute and optimize rendering
           <span> | </span>
           <Link to="/search">Search</Link>
         </Footer>
