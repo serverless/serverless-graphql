@@ -68,7 +68,7 @@ type Tweet {
 
 type TweetConnection {
 	items: [Tweet!]!
-	nextToken: Token
+	nextToken: String
 }
 
 type User {

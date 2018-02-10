@@ -9,9 +9,9 @@ const knex = require('knex')(
 // eslint-disable-next-line import/prefer-default-export
 export const resolvers = {
   Query: {
-    getTwitterFeed: (root, args) =>
-      knex('users')
-        .where('screen_name', args.handle)
+    getUserInfo: (root, args) =>
+      knex('Users')
+        .where('handle', args.handle)
         .then(users => {
           const user = users[0];
           if (!user) {
@@ -19,14 +19,8 @@ export const resolvers = {
           }
           return user;
         })
-        .then(user =>
-          knex('posts')
-            .where('userId', user.id)
-            .then(posts => {
-              // eslint-disable-next-line no-param-reassign
-              user.posts = posts;
-              return user;
-            })
-        ),
+        .catch(error => {
+          throw error;
+        }),
   },
 };
