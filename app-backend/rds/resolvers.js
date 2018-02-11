@@ -29,4 +29,17 @@ export const resolvers = {
             })
         ),
   },
+  User: {
+    topTweet: obj =>
+      knex('Tweets')
+        .where('handle', obj.handle)
+        .orderBy('retweet_count', 'desc')
+        .limit(1)
+        .then(tweet => {
+          if (!tweet) {
+            throw new Error('User not found');
+          }
+          return tweet[0];
+        }),
+  },
 };
