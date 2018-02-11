@@ -79,7 +79,7 @@ function User({ user }) {
       <Container>
         <UserProfile>
           <h4 className="username">
-            {user.name} <span>@{user.screen_name}</span>
+            {user.name} <span>@{user.handle}</span>
           </h4>
           <p className="location">
             <i className="material-icons">location_on</i>
@@ -93,7 +93,7 @@ function User({ user }) {
         <Numbers>
           <div className="column">
             <div className="title">Tweets</div>
-            <div className="number">{user.posts.length}</div>
+            <div className="number">{user.tweets.items.length}</div>
           </div>
           <div className="column">
             <div className="title">Followers</div>
@@ -111,7 +111,7 @@ function User({ user }) {
       </Container>
 
       <Container>
-        {user.posts.map((name, index) => (
+        {user.tweets.items.map((name, index) => (
           <Tweet key={index}>{name.tweet}</Tweet>
         ))}
       </Container>
