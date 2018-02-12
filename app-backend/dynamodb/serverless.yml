@@ -162,3 +162,19 @@ resources:
                     - "arn:aws:dynamodb:us-east-1:*:table/Users/*"
                     - "arn:aws:dynamodb:us-east-1:*:table/Tweets"
                     - "arn:aws:dynamodb:us-east-1:*:table/Tweets/*"
+    XrayLambdaRolePolicy:
+      Type: "AWS::IAM::Policy"
+      Properties:
+        PolicyName: "xray-policy"
+        PolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            -
+              Effect: "Allow"
+              Action:
+                - "xray:PutTraceSegments"
+                - "xray:PutTelemetryRecords"
+              Resource:
+                - "*"
+        Roles:
+          - Ref: ServiceRole

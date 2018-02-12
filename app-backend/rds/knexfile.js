@@ -12,7 +12,7 @@ module.exports = {
     },
   },
   production: {
-    client: process.env.DATABASE_TYPE === 'pg' ? 'pg' : 'mysql',
+    client: 'pg',
     connection: process.env.DATABASE_URL,
   },
 };
