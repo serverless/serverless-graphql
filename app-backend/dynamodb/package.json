@@ -14,11 +14,12 @@
     "start":
       "yarn dynamodb-generate-seed-data && serverless dynamodb install && env-cmd ../../config/security.env.local serverless offline start",
     "deploy-prod":
-      "yarn dynamodb-generate-seed-data && serverless --stage=production deploy && yarn dynamodb-insert-seed-data-prod"
+      "yarn dynamodb-generate-seed-data && env-cmd ../../config/security.env.prod serverless --stage=production deploy && yarn dynamodb-insert-seed-data-prod"
   },
   "dependencies": {
     "apollo-server-lambda": "1.3.2",
     "apollo-tracing": "^0.0.9",
+    "aws-xray-sdk": "^1.2.0",
     "babel-polyfill": "^6.26.0",
     "graphql": "^0.10.5",
     "graphql-playground-middleware-lambda": "^1.2.0",
@@ -26,7 +27,7 @@
     "serverless-dynamodb-client": "^0.0.2"
   },
   "devDependencies": {
-    "aws-sdk": "^2.4.8",
+    "aws-sdk": "^2.192.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
