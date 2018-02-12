@@ -20,7 +20,7 @@ exports.up = function(knex, Promise) {
         table.string('tweet').notNull();
         table.boolean('retweeted').notNull();
         table.integer('retweet_count').notNull();
-        table.integer('favorited').notNull();
+        table.boolean('favorited').notNull();
         table.string('created_at').notNull();
         table.integer('user_id').notNull();
       });
