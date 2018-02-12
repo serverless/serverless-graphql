@@ -18,16 +18,7 @@ export const resolvers = {
             throw new Error('User not found');
           }
           return user;
-        })
-        .then(user =>
-          knex('Tweets')
-            .where('handle', user.handle)
-            .then(posts => {
-              // eslint-disable-next-line no-param-reassign
-              user.tweets = { items: posts };
-              return user;
-            })
-        ),
+        }),
   },
   User: {
     topTweet: obj =>
@@ -40,6 +31,21 @@ export const resolvers = {
             throw new Error('User not found');
           }
           return tweet[0];
+        }),
+    tweets: obj =>
+      knex
+        .select('*')
+        .from('Tweets')
+        .leftJoin('Users', 'Tweets.user_id', 'Users.user_id')
+        .where('handle', obj.handle)
+        .then(posts => {
+          if (!posts) {
+            throw new Error('User not found');
+          }
+
+          tweets = { items: posts };
+
+          return tweets;
         }),
   },
 };

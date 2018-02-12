@@ -1,10 +1,7 @@
 exports.up = function(knex, Promise) {
   return knex.schema
     .createTable('Users', function(table) {
-      table
-        .increments('id')
-        .unsigned()
-        .primary();
+      table.integer('user_id').primary();
       table.string('name').notNull();
       table.string('handle').notNull();
       table.string('location').notNull();
@@ -25,7 +22,7 @@ exports.up = function(knex, Promise) {
         table.integer('retweet_count').notNull();
         table.integer('favorited').notNull();
         table.string('created_at').notNull();
-        table.string('handle').notNull();
+        table.integer('user_id').notNull();
       });
     });
 };
