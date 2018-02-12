@@ -44,6 +44,7 @@ for (let i = 0; i < handleNames.length; i++) {
   const description = faker.name.jobTitle();
 
   const userInfo = {
+    user_id: i,
     handle: handleNames[i],
     name: name,
     location: location,
@@ -60,7 +61,6 @@ for (let i = 0; i < handleNames.length; i++) {
     const id = faker.random.uuid();
 
     const tweetInfo = {
-      handle: handleNames[i],
       tweet_id: id,
       tweet: faker.lorem.sentence(),
       retweeted: faker.random.boolean(),
@@ -70,6 +70,7 @@ for (let i = 0; i < handleNames.length; i++) {
       }),
       favorited: faker.random.boolean(),
       created_at: faker.date.between('2016-01-01', '2017-01-27'),
+      user_id: i,
     };
 
     tdata.push(tweetInfo);
