@@ -13,6 +13,8 @@
       "cd seed-data && node create_seed_data.js && node seed_local.js",
     "seed-prod":
       "cd seed-data && node create_seed_data.js && node seed_prod.js",
+    "seed-prod-batch":
+      "cd seed-data && node create_seed_data.js && node batch_insert.js",
     "start":
       "yarn migrate && yarn seed-local && env-cmd ../../config/security.env.local serverless offline start",
     "deploy-prod":
