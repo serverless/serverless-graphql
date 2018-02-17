@@ -9,11 +9,11 @@ provider:
   region: us-east-1
 
 plugins:
+  - serverless-appsync-plugin
   - serverless-dynamodb-local
   - serverless-offline
 
 custom:
-  account_id: ${opt:account_id}
   dynamodb:
     start:
       port: 8000
@@ -27,11 +27,47 @@ custom:
             sources: [seed-data/Users.json]
           - table: Tweets
             sources: [seed-data/Tweets.json]
+  appSync:
+    name:  "dynamoGraphqlApi"
+    # apiId # only required for update-appsync/delete-appsync
+    authenticationType: "AMAZON_COGNITO_USER_POOLS"
+    userPoolConfig:
+      awsRegion: "us-east-1" # required # region
+      defaultAction: "ALLOW"
+      userPoolId: "us-east-1_dplcfGDHn" # required # user pool ID
+      region: "us-east-1" # defaults to provider region
+    mappingTemplatesLocation: "mapping-templates" # defaults to mapping-templates
+    mappingTemplates:
+      - dataSource: "Users" # data source name
+        type: "Query"
+        field: "getUserInfo"
+        request: "getUserInfo-request-mapping-template.txt" # request mapping template name
+        response: "getUserInfo-response-mapping-template.txt" # response mapping template name
+      - dataSource: "Tweets" # data source name
+        type: "User"
+        field: "topTweet"
+        request: "topTweet-request-mapping-template.txt" # request mapping template name
+        response: "topTweet-response-mapping-template.txt" # response mapping template name
+    schema: "schema.graphql" # defaults schema.graphql
+    serviceRole: "AppSyncServiceRole"
+    dataSources:
+      - type: "AMAZON_DYNAMODB"
+        name: "Users" # data source name
+        description: "User info" # DynamoDB Table Description
+        config:
+          tableName: "Users" # DynamoDB Table Name
+          serviceRoleArn: "arn:aws:iam::*:role/dynamo-${self:custom.appSync.serviceRole}"
+      - type: "AMAZON_DYNAMODB"
+        name: "Tweets" # data source name
+        description: "Tweets info" # DynamoDB Table Description
+        config:
+          tableName: "Tweets" # DynamoDB Table Name
+          serviceRoleArn: "arn:aws:iam::*:role/dynamo-${self:custom.appSync.serviceRole}"
 
 resources:
   Resources:
     UserTable:
-      Type: 'AWS::DynamoDB::Table'
+      Type: "AWS::DynamoDB::Table"
       Properties:
         KeySchema:
           -
@@ -44,9 +80,9 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 10
           WriteCapacityUnits: 10
-        TableName: 'Users'
+        TableName: "Users"
     TweetsTable:
-      Type: 'AWS::DynamoDB::Table'
+      Type: "AWS::DynamoDB::Table"
       Properties:
         KeySchema:
           -
@@ -68,7 +104,7 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 10
           WriteCapacityUnits: 10
-        TableName: 'Tweets'
+        TableName: "Tweets"
         GlobalSecondaryIndexes:
           -
             IndexName: top-index
@@ -129,7 +165,7 @@ resources:
                     - "dynamodb:Scan"
                     - "dynamodb:UpdateItem"
                   Resource:
-                    - "arn:aws:dynamodb:us-east-1:${self:custom.account_id}:table/Users"
-                    - "arn:aws:dynamodb:us-east-1:${self:custom.account_id}:table/Users/*"
-                    - "arn:aws:dynamodb:us-east-1:${self:custom.account_id}:table/Tweets"
-                    - "arn:aws:dynamodb:us-east-1:${self:custom.account_id}:table/Tweets/*"
+                    - "arn:aws:dynamodb:us-east-1:*:table/Users"
+                    - "arn:aws:dynamodb:us-east-1:*:table/Users/*"
+                    - "arn:aws:dynamodb:us-east-1:*:table/Tweets"
+                    - "arn:aws:dynamodb:us-east-1:*:table/Tweets/*"

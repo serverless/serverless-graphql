@@ -13,13 +13,13 @@
     "start":
       "yarn dynamodb-generate-seed-data && serverless dynamodb install && serverless offline start",
     "deploy-prod":
-      "yarn dynamodb-generate-seed-data && serverless --stage=production --account_id=xxx deploy && yarn dynamodb-insert-seed-data-prod"
+      "yarn dynamodb-generate-seed-data && serverless --stage=production deploy && yarn dynamodb-insert-seed-data-prod"
   },
   "dependencies": {
-    "amazon-cognito-identity-js": "^1.29.0",
     "aws-sdk": "^2.176.0",
     "babel-polyfill": "^6.26.0",
     "bluebird": "^3.5.1",
+    "serverless-appsync-plugin": "^0.0.4",
     "serverless-dynamodb-client": "^0.0.2"
   },
   "devDependencies": {
