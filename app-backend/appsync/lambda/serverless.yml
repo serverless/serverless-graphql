@@ -37,16 +37,11 @@ custom:
         request: "meInfo-request-mapping-template.txt"
         response: "meInfo-response-mapping-template.txt"
       - dataSource: Lambda
-        type: User
-        field: tweets
-        request: "tweets-request-mapping-template.txt"
-        response: "tweets-response-mapping-template.txt"
-      - dataSource: Lambda
         type: Mutation
         field: createTweet
         request: "createTweet-request-mapping-template.txt"
         response: "createTweet-response-mapping-template.txt"
-      - dataSource: ElasticSearch
+      - dataSource: Lambda
         type: Mutation
         field: deleteTweet
         request: "deleteTweet-request-mapping-template.txt"
