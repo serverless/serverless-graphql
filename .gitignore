@@ -1,8 +1,9 @@
 .DS_Store
 node_modules
 npm-debug.log
-users.json
-
+Users.json
+Tweets.json
+ESUsers.json
 # serverless zip
 .serverless
 # webpack build files

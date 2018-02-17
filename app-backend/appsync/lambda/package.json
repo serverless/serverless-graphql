@@ -10,7 +10,6 @@
     "deploy-prod": "serverless --stage=production --account_id=xxx deploy"
   },
   "dependencies": {
-    "amazon-cognito-identity-js": "^1.29.0",
     "aws-sdk": "^2.176.0",
     "babel-polyfill": "^6.26.0",
     "bluebird": "^3.5.1",

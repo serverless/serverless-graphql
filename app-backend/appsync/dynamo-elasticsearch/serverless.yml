@@ -8,8 +8,105 @@ provider:
   stage: dev
   region: us-east-1
 
+plugins:
+  - serverless-dynamodb-local
+  - serverless-offline
+  - serverless-appsync-plugin
+
 custom:
-  account_id: ${opt:account_id}
+  accountId: 1234xxxxxxxx # replace this with your accountId
+  dynamodb:
+    start:
+      port: 8000
+      inMemory: true
+      migrate: true
+      seed: true
+    seed:
+      test:
+        sources:
+          - table: Users
+            sources: [seed-data/Users.json]
+  appSync:
+    # name:  # defaults to api
+    # apiId # only required for update-appsync
+    authenticationType: AMAZON_COGNITO_USER_POOLS
+    userPoolConfig:
+      awsRegion: us-east-1 # required # region
+      defaultAction: ALLOW
+      userPoolId: us-east-1_xxxxxxxxx # replace this with your Cognito User Pool Id
+    # region: # defaults to provider region
+    # mappingTemplatesLocation: # defaults to mapping-templates
+    mappingTemplates:
+      - dataSource: Users
+        type: Query
+        field: getUserInfo
+        request: "getUserInfo-request-mapping-template.txt"
+        response: "getUserInfo-response-mapping-template.txt"
+      - dataSource: Users
+        type: Query
+        field: meInfo
+        request: "meInfo-request-mapping-template.txt"
+        response: "meInfo-response-mapping-template.txt"
+      - dataSource: ElasticSearch
+        type: User
+        field: topTweet
+        request: "topTweet-request-mapping-template.txt"
+        response: "topTweet-response-mapping-template.txt"
+      - dataSource: ElasticSearch
+        type: User
+        field: tweets
+        request: "tweets-request-mapping-template.txt"
+        response: "tweets-response-mapping-template.txt"
+      - dataSource: ElasticSearch
+        type: Mutation
+        field: createTweet
+        request: "createTweet-request-mapping-template.txt"
+        response: "createTweet-response-mapping-template.txt"
+      - dataSource: ElasticSearch
+        type: Mutation
+        field: deleteTweet
+        request: "deleteTweet-request-mapping-template.txt"
+        response: "deleteTweet-response-mapping-template.txt"
+      - dataSource: ElasticSearch
+        type: Mutation
+        field: reTweet
+        request: "reTweet-request-mapping-template.txt"
+        response: "reTweet-response-mapping-template.txt"
+      - dataSource: ElasticSearch
+        type: Mutation
+        field: updateTweet
+        request: "updateTweet-request-mapping-template.txt"
+        response: "updateTweet-response-mapping-template.txt"
+      - dataSource: Users
+        type: Mutation
+        field: updateUserInfo
+        request: "updateUserInfo-request-mapping-template.txt"
+        response: "updateUserInfo-response-mapping-template.txt"
+      - dataSource: ElasticSearch
+        type: User
+        field: searchTweetsByKeyword
+        request: "searchTweetsByKeyword-request-mapping-template.txt"
+        response: "searchTweetsByKeyword-response-mapping-template.txt"
+      - dataSource: ElasticSearch
+        type: Query
+        field: searchAllTweetsByKeyword
+        request: "searchAllTweetsByKeyword-request-mapping-template.txt"
+        response: "searchAllTweetsByKeyword-response-mapping-template.txt"
+    # schema: # defaults schema.graphql
+    serviceRole: "AppSyncServiceRole"
+    dataSources:
+      - type: AMAZON_DYNAMODB
+        name: Users
+        description: 'Users table'
+        config:
+          tableName: 'Users'
+          serviceRoleArn: "arn:aws:iam::${self:custom.accountId}:role/Dynamo-${self:custom.appSync.serviceRole}"
+      - type: AMAZON_ELASTICSEARCH
+        name: ElasticSearch
+        description: 'ElasticSearch'
+        config:
+          endpoint: https://search-xxxxxxx-xxxxxxxxxxxxxxxxxxxxxxxxx.us-east-1.es.amazonaws.com # required # "https://{DOMAIN}.{REGION}.es.amazonaws.com"
+          serviceRoleArn: "arn:aws:iam::${self:custom.accountId}:role/ElasticSearch-${self:custom.appSync.serviceRole}"
 
 resources:
   Resources:
@@ -28,10 +125,10 @@ resources:
           ReadCapacityUnits: 10
           WriteCapacityUnits: 10
         TableName: 'ESUsers'
-    ESAppSyncServiceRole:
+    AppSyncESServiceRole:
       Type: "AWS::IAM::Role"
       Properties:
-        RoleName: "ES-AppSyncServiceRole"
+        RoleName: "ElasticSearch-AppSyncServiceRole"
         AssumeRolePolicyDocument:
           Version: "2012-10-17"
           Statement:
@@ -44,7 +141,7 @@ resources:
                 - "sts:AssumeRole"
         Policies:
           -
-            PolicyName: "ES-AppSyncServiceRole-Policy"
+            PolicyName: "AppSyncESServiceRolePolicy"
             PolicyDocument:
               Version: "2012-10-17"
               Statement:
@@ -53,11 +150,11 @@ resources:
                   Action:
                     - "es:*"
                   Resource:
-                    - "arn:aws:es:us-east-1:${self:custom.account_id}:domain/appsync/*"
-    DDBAppSyncServiceRole:
+                    - "arn:aws:es:us-east-1:*:domain/appsync/*"
+    AppSyncDynamoDBServiceRole:
       Type: "AWS::IAM::Role"
       Properties:
-        RoleName: "ES-Dynamo-AppSyncServiceRole"
+        RoleName: "Dynamo-AppSyncServiceRole"
         AssumeRolePolicyDocument:
           Version: "2012-10-17"
           Statement:
@@ -70,7 +167,7 @@ resources:
                 - "sts:AssumeRole"
         Policies:
           -
-            PolicyName: "ES-Dynamo-AppSyncServiceRole-Policy"
+            PolicyName: "AppSyncDynamoDBServiceRolePolicy"
             PolicyDocument:
               Version: "2012-10-17"
               Statement:
@@ -85,5 +182,5 @@ resources:
                     - "dynamodb:Scan"
                     - "dynamodb:UpdateItem"
                   Resource:
-                    - "arn:aws:dynamodb:us-east-1:${self:custom.account_id}:table/ESUsers"
-                    - "arn:aws:dynamodb:us-east-1:${self:custom.account_id}:table/ESUsers/*"
+                    - "arn:aws:dynamodb:us-east-1:*:table/ESUsers"
+                    - "arn:aws:dynamodb:us-east-1:*:table/ESUsers/*"
