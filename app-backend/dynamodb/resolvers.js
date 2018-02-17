@@ -6,9 +6,11 @@ const AWS = AWSXRay.captureAWS(require('aws-sdk'));
 
 let docClient;
 
-if (process.env.NODE_ENV === 'production')
+if (process.env.NODE_ENV === 'production') {
   docClient = new AWS.DynamoDB.DocumentClient();
-else docClient = dynamodb.doc;
+} else {
+  docClient = dynamodb.doc;
+}
 
 // add to handler.js
 const promisify = foo =>
@@ -95,7 +97,6 @@ const data = {
         callback
       )
     ).then(result => {
-      const tweets = [];
       let listOfTweets;
 
       if (result.Items.length >= 1) {
