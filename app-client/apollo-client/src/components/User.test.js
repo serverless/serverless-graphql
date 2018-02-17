@@ -11,12 +11,14 @@ it('render user name', () => {
     favourites_count: 200,
     followers_count: 300,
     friends_count: 100,
-    posts: [
-      {
-        name: 'sid',
-        tweet: 'this is my first tweet',
-      },
-    ],
+    tweets: {
+      items: [
+        {
+          tweet_id: '12343',
+          tweet: 'this is my first tweet',
+        },
+      ],
+    },
   };
   const wrapper = shallow(<User user={user} />);
   expect(wrapper.html()).toContain(user.description);

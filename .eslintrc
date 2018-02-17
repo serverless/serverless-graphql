@@ -30,6 +30,7 @@
     "no-console": "off",
     "func-names": "off",
     "object-curly-newline": "off",
-    "jsx-a11y/anchor-is-valid": "off"
+    "jsx-a11y/anchor-is-valid": "off",
+    "import/no-extraneous-dependencies": ["error", {"ignore": ["aws-sdk"]}]
   }
 }

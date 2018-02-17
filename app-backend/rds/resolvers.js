@@ -42,10 +42,7 @@ export const resolvers = {
           if (!posts) {
             throw new Error('User not found');
           }
-
-          tweets = { items: posts };
-
-          return tweets;
+          return { items: posts };
         }),
   },
 };
