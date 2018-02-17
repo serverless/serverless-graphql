@@ -7,7 +7,10 @@
     "url": "git@github.com:serverless/serverless-graphql.git"
   },
   "scripts": {
-    "deploy-prod": "serverless --stage=production --account_id=xxx deploy"
+    "deploy-prod":
+      "serverless --stage=production deploy && serverless deploy-appsync",
+    "update-prod": "serverless update-appsync",
+    "delete-prod": "serverless delete-appsync"
   },
   "dependencies": {
     "aws-sdk": "^2.176.0",

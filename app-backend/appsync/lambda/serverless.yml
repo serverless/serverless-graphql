@@ -9,6 +9,7 @@ provider:
   region: us-east-1
 
 plugins:
+  - serverless-appsync-plugin
   - serverless-offline
   - serverless-webpack
 
