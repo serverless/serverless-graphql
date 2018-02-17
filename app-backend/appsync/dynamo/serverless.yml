@@ -9,11 +9,12 @@ provider:
   region: us-east-1
 
 plugins:
-  - serverless-appsync-plugin
   - serverless-dynamodb-local
   - serverless-offline
+  - serverless-appsync-plugin
 
 custom:
+  accountId: 1234xxxxxxxx # replace this with your accountId
   dynamodb:
     start:
       port: 8000
@@ -28,41 +29,76 @@ custom:
           - table: Tweets
             sources: [seed-data/Tweets.json]
   appSync:
-    name:  "dynamoGraphqlApi"
-    # apiId # only required for update-appsync/delete-appsync
-    authenticationType: "AMAZON_COGNITO_USER_POOLS"
+    # name:  # defaults to api
+    # apiId # only required for update-appsync
+    authenticationType: AMAZON_COGNITO_USER_POOLS
     userPoolConfig:
-      awsRegion: "us-east-1" # required # region
-      defaultAction: "ALLOW"
-      userPoolId: "us-east-1_xxxxxxxxx" # required # user pool ID
-      region: "us-east-1" # defaults to provider region
-    mappingTemplatesLocation: "mapping-templates" # defaults to mapping-templates
+      awsRegion: us-east-1 # required # region
+      defaultAction: ALLOW
+      userPoolId: us-east-1_xxxxxxxxx # replace this with your Cognito User Pool Id
+    # region: # defaults to provider region
+    # mappingTemplatesLocation: # defaults to mapping-templates
     mappingTemplates:
-      - dataSource: "Users" # data source name
-        type: "Query"
-        field: "getUserInfo"
-        request: "getUserInfo-request-mapping-template.txt" # request mapping template name
-        response: "getUserInfo-response-mapping-template.txt" # response mapping template name
-      - dataSource: "Tweets" # data source name
-        type: "User"
-        field: "topTweet"
-        request: "topTweet-request-mapping-template.txt" # request mapping template name
-        response: "topTweet-response-mapping-template.txt" # response mapping template name
-    schema: "schema.graphql" # defaults schema.graphql
+      - dataSource: Users
+        type: Query
+        field: getUserInfo
+        request: "getUserInfo-request-mapping-template.txt"
+        response: "getUserInfo-response-mapping-template.txt"
+      - dataSource: Users
+        type: Query
+        field: meInfo
+        request: "meInfo-request-mapping-template.txt"
+        response: "meInfo-response-mapping-template.txt"
+      - dataSource: Tweets
+        type: User
+        field: topTweet
+        request: "topTweet-request-mapping-template.txt"
+        response: "topTweet-response-mapping-template.txt"
+      - dataSource: Tweets
+        type: User
+        field: tweets
+        request: "tweets-request-mapping-template.txt"
+        response: "tweets-response-mapping-template.txt"
+      - dataSource: Tweets
+        type: Mutation
+        field: createTweet
+        request: "createTweet-request-mapping-template.txt"
+        response: "createTweet-response-mapping-template.txt"
+      - dataSource: Tweets
+        type: Mutation
+        field: deleteTweet
+        request: "deleteTweet-request-mapping-template.txt"
+        response: "deleteTweet-response-mapping-template.txt"
+      - dataSource: Tweets
+        type: Mutation
+        field: reTweet
+        request: "reTweet-request-mapping-template.txt"
+        response: "reTweet-response-mapping-template.txt"
+      - dataSource: Tweets
+        type: Mutation
+        field: updateTweet
+        request: "updateTweet-request-mapping-template.txt"
+        response: "updateTweet-response-mapping-template.txt"
+      - dataSource: Users
+        type: Mutation
+        field: updateUserInfo
+        request: "updateUserInfo-request-mapping-template.txt"
+        response: "updateUserInfo-response-mapping-template.txt"
+    # schema: # defaults schema.graphql
     serviceRole: "AppSyncServiceRole"
     dataSources:
-      - type: "AMAZON_DYNAMODB"
-        name: "Users" # data source name
-        description: "User info" # DynamoDB Table Description
+      - type: AMAZON_DYNAMODB
+        name: Users
+        description: 'Users table'
         config:
-          tableName: "Users" # DynamoDB Table Name
-          serviceRoleArn: "arn:aws:iam::*:role/dynamo-${self:custom.appSync.serviceRole}"
-      - type: "AMAZON_DYNAMODB"
-        name: "Tweets" # data source name
-        description: "Tweets info" # DynamoDB Table Description
+          tableName: 'Users'
+          serviceRoleArn: "arn:aws:iam::${self:custom.accountId}:role/Dynamo-${self:custom.appSync.serviceRole}"
+      - type: AMAZON_DYNAMODB
+        name: Tweets
+        description: 'Tweets table'
         config:
-          tableName: "Tweets" # DynamoDB Table Name
-          serviceRoleArn: "arn:aws:iam::*:role/dynamo-${self:custom.appSync.serviceRole}"
+          tableName: 'Tweets'
+          serviceRoleArn: "arn:aws:iam::${self:custom.accountId}:role/Dynamo-${self:custom.appSync.serviceRole}"
 
 resources:
   Resources:
