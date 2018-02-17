@@ -34,7 +34,7 @@ custom:
     userPoolConfig:
       awsRegion: "us-east-1" # required # region
       defaultAction: "ALLOW"
-      userPoolId: "us-east-1_dplcfGDHn" # required # user pool ID
+      userPoolId: "us-east-1_xxxxxxxxx" # required # user pool ID
       region: "us-east-1" # defaults to provider region
     mappingTemplatesLocation: "mapping-templates" # defaults to mapping-templates
     mappingTemplates:
