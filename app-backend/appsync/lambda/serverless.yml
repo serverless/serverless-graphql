@@ -9,11 +9,57 @@ provider:
   region: us-east-1
 
 plugins:
+  - serverless-appsync-plugin
   - serverless-offline
   - serverless-webpack
 
 custom:
-  account_id: ${opt:account_id}
+  accountId: 1234xxxxxxxx # replace this with your accountId
+  appSync:
+    # name:  # defaults to api
+    # apiId # only required for update-appsync
+    authenticationType: AMAZON_COGNITO_USER_POOLS
+    userPoolConfig:
+      awsRegion: us-east-1 # required # region
+      defaultAction: ALLOW
+      userPoolId: us-east-1_xxxxxxxxx # replace this with your Cognito User Pool Id
+    # region: # defaults to provider region
+    # mappingTemplatesLocation: # defaults to mapping-templates
+    mappingTemplates:
+      - dataSource: Lambda
+        type: Query
+        field: getUserInfo
+        request: "getUserInfo-request-mapping-template.txt"
+        response: "getUserInfo-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Query
+        field: meInfo
+        request: "meInfo-request-mapping-template.txt"
+        response: "meInfo-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Mutation
+        field: createTweet
+        request: "createTweet-request-mapping-template.txt"
+        response: "createTweet-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Mutation
+        field: deleteTweet
+        request: "deleteTweet-request-mapping-template.txt"
+        response: "deleteTweet-response-mapping-template.txt"
+      - dataSource: Lambda
+        type: Mutation
+        field: reTweet
+        request: "reTweet-request-mapping-template.txt"
+        response: "reTweet-response-mapping-template.txt"
+    # schema: # defaults schema.graphql
+    serviceRole: "AppSyncServiceRole"
+    dataSources:
+      - type: AWS_LAMBDA
+        name: Lambda
+        description: 'Lambda DataSource'
+        config:
+          lambdaFunctionArn: "arn:aws:lambda:us-east-1:${self:custom.accountId}:serverless-graphql-appsync-lda-production-graphql"
+          serviceRoleArn: "arn:aws:iam::${self:custom.accountId}:role/Lambda-${self:custom.appSync.serviceRole}"
   serverless-offline:
     port: 4000
   webpackIncludeModules: true
@@ -49,5 +95,5 @@ resources:
                   Action:
                     - "lambda:invokeFunction"
                   Resource:
-                    - "arn:aws:lambda:us-east-1:${self:custom.account_id}:function:serverless-graphql-appsync-lda-production-graphql"
-                    - "arn:aws:lambda:us-east-1:${self:custom.account_id}:function:serverless-graphql-appsync-lda-production-graphql:*"
+                    - "arn:aws:lambda:us-east-1:*:function:serverless-graphql-appsync-lda-production-graphql"
+                    - "arn:aws:lambda:us-east-1:*:function:serverless-graphql-appsync-lda-production-graphql:*"
