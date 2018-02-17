@@ -8,7 +8,7 @@
   },
   "scripts": {
     "deploy-prod":
-      "cd seed-data && node create-seed-data && cd .. && serverless --stage=production --account_id=xxx deploy && cd seed-data && node insert_seed_data_prod"
+      "cd seed-data && node create-seed-data && cd .. && serverless --stage=production deploy && cd seed-data && node insert_seed_data_prod"
   },
   "dependencies": {
     "aws-sdk": "^2.176.0",

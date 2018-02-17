@@ -21,8 +21,6 @@ custom:
         sources:
           - table: Users
             sources: [seed-data/Users.json]
-          - table: Tweets
-            sources: [seed-data/Tweets.json]
   appSync:
     # name:  # defaults to api
     # apiId # only required for update-appsync
