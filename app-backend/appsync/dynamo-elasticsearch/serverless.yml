@@ -8,6 +8,11 @@ provider:
   stage: dev
   region: us-east-1
 
+plugins:
+  - serverless-dynamodb-local
+  - serverless-offline
+  - serverless-appsync-plugin
+
 custom:
   accountId: 1234xxxxxxxx # replace this with your accountId
   dynamodb:
@@ -83,7 +88,7 @@ custom:
         request: "searchTweetsByKeyword-request-mapping-template.txt"
         response: "searchTweetsByKeyword-response-mapping-template.txt"
       - dataSource: ElasticSearch
-        type: User
+        type: Query
         field: searchAllTweetsByKeyword
         request: "searchAllTweetsByKeyword-request-mapping-template.txt"
         response: "searchAllTweetsByKeyword-response-mapping-template.txt"
@@ -100,7 +105,7 @@ custom:
         name: ElasticSearch
         description: 'ElasticSearch'
         config:
-          endpoint: # required # "https://{DOMAIN}.{REGION}.es.amazonaws.com"
+          endpoint: https://search-xxxxxxx-xxxxxxxxxxxxxxxxxxxxxxxxx.us-east-1.es.amazonaws.com # required # "https://{DOMAIN}.{REGION}.es.amazonaws.com"
           serviceRoleArn: "arn:aws:iam::${self:custom.accountId}:role/ElasticSearch-${self:custom.appSync.serviceRole}"
 
 resources:
@@ -123,7 +128,7 @@ resources:
     AppSyncESServiceRole:
       Type: "AWS::IAM::Role"
       Properties:
-        RoleName: "AppSyncESServiceRoleRole"
+        RoleName: "ElasticSearch-AppSyncServiceRole"
         AssumeRolePolicyDocument:
           Version: "2012-10-17"
           Statement:
@@ -149,7 +154,7 @@ resources:
     AppSyncDynamoDBServiceRole:
       Type: "AWS::IAM::Role"
       Properties:
-        RoleName: "AppSyncDynamoDBServiceRoleRole"
+        RoleName: "Dynamo-AppSyncServiceRole"
         AssumeRolePolicyDocument:
           Version: "2012-10-17"
           Statement:
