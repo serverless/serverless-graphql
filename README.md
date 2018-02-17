@@ -1,3 +1,8 @@
+# Introduction
+
+> *Part 1:* [Running a scalable & reliable GraphQL endpoint with Serverless](https://serverless.com/blog/running-scalable-reliable-graphql-endpoint-with-serverless/)  
+> *Part 2:* AppSync: AWS Managed GraphQL Service (Coming Soon!!!)
+
 # Serverless GraphQL
 
 This starter kit is an opinionated set of tools combined to help you get started building a Serverless application with an GraphQL endpoint and deploy them to production in minutes.
@@ -115,6 +120,10 @@ http://localhost:4000/graphiql
 http://localhost:4000/playground
 ```
 
+If you've followed me this far, DynamoDB will now be available and running on your local machine at `http://localhost:8000/shell`:
+
+![!Live Example](https://user-images.githubusercontent.com/1587005/36065162-b4ad3c14-0e4b-11e8-8776-e19596546ce1.gif)
+
 
 ## Setup for Production (Deploy resources to AWS)
 
@@ -124,46 +133,29 @@ Configure your AWS keys. Here you can find a [2min walkthrough](https://www.yout
 sls config credentials --provider aws --key <your_aws_access_key> --secret <your_aws_secret_key>
 ```
 
+![!Live Example](https://user-images.githubusercontent.com/1587005/36068493-de82620e-0e8b-11e8-887b-e1593cd3c8cc.gif)
 
 You need to make sure you have access to your deployed lambda functions.
 
 1. **Select Backend** 
 
-- *AWS Appsync* (Serverless Offline does not support Appsync at this point)
+- *AWS Appsync* (Supported by [Serverless-AppSync-Plugin](https://github.com/sid88in/serverless-appsync-plugin))
 
 To use aws appsync you will need to create cognito user pool to authenticate the API [Reference](https://serverless-stack.com/chapters/create-a-cognito-user-pool.html)
 
     - *AWS DynamoDB*
         cd app-backend/appsync/dynamodb
         yarn deploy-prod
-        
-    Please make sure:
-     1. account_id is configured in package.json
-     2. graphQLAPIName, userPoolId and accountId are configured in deploy-dynamo.js
-    
-        node deploy-dynamo.js
-        
+                
     - AWS ElasticSearch
         
         cd app-backend/appsync/elasticsearch
         yarn deploy-prod
-        
-    Please make sure:
-     1. account_id is configured in package.json
-     2. graphQLAPIName, userPoolId, accountId and esHostname are configured in deploy-elasticsearch.js
-    
-        node deploy-elasticsearch.js
-        
+                
     - AWS Lambda
         
         cd app-backend/appsync/lambda
         yarn deploy-prod
-        
-    Please make sure:
-     1. account_id is configured in package.json
-     2. graphQLAPIName, userPoolId and accountId are configured in deploy-lambda.js
-    
-        node deploy-lambda.js
         
 - *Lambda Backend* (Serverless Offline Supported)
 
@@ -415,24 +407,15 @@ schema {
 │   ├── /security.env.prod                      # production config
 ```
 
-## Usage of GraphQL Playground
-To use the GraphQL Playground, open `/playground` of your Serverless service. With serverless offline it is `http://localhost:4000/playground`. Why GraphQL Playground and not GraphiQL? [Refer FAQ](https://github.com/graphcool/graphql-playground)
-![playground](https://user-images.githubusercontent.com/1587005/32695336-96dbbe16-c70d-11e7-96b9-c7ef4e9ba32c.gif)
-
-## Usage of GraphiQL
- To use the GraphiQL, open `/graphiql` of your Serverless service. With serverless offline it is `http://localhost:4000/graphiql`.
- ![graphiql](https://user-images.githubusercontent.com/1587005/32695300-943e355e-c70c-11e7-9fac-2c9324a242c4.gif)
-
 ## Coming Soon
 
 1. Schema Stitching
 2. Lambda Backend: GraphCool, Druid
-3. Lambda Backend: GraphQL Mutations and Subscriptions 
-4. Aggregations at Scale - Druid
-5. Lambda Backend: Authentication and Authorization
-6. Lambda Backend: Pagination
-7. Swagger Integration
-8. Integration with Azure, IBM and Google Coud
+3. Aggregations at Scale - Druid
+4. Lambda Backend: Authentication and Authorization
+5. Lambda Backend: Pagination
+6. Swagger Integration
+7. Integration with Azure, IBM and Google Coud
 
 ## Who uses Serverless GraphQL Apollo?
 
