@@ -8,9 +8,10 @@
   },
   "scripts": {
     "deploy-prod":
-      "cd seed-data && node create-seed-data && cd .. && serverless --stage=production deploy && cd seed-data && node insert_seed_data_prod && cd .. && serverless deploy-appsync",
-    "update-prod": "serverless update-appsync",
-    "delete-prod": "serverless delete-appsync"
+      "cd seed-data && node create-seed-data && cd .. && serverless --stage=production deploy && cd seed-data && node insert_seed_data_prod",
+    "deploy-appsync": "serverless deploy-appsync",
+    "update-appsync": "serverless update-appsync",
+    "delete-appsync": "serverless delete-appsync"
   },
   "dependencies": {
     "aws-sdk": "^2.176.0",

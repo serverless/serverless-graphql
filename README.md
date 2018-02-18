@@ -146,16 +146,19 @@ To use aws appsync you will need to create cognito user pool to authenticate the
     - *AWS DynamoDB*
         cd app-backend/appsync/dynamodb
         yarn deploy-prod
+        yarn deploy-appsync
                 
     - AWS ElasticSearch
         
         cd app-backend/appsync/elasticsearch
         yarn deploy-prod
+        yarn deploy-appsync
                 
     - AWS Lambda
         
         cd app-backend/appsync/lambda
         yarn deploy-prod
+        yarn deploy-appsync
         
 - *Lambda Backend* (Serverless Offline Supported)
 
