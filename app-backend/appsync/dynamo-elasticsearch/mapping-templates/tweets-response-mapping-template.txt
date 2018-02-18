@@ -10,7 +10,8 @@
           	"retweet_count" : "$entry.get('_source')['retweet_count']",
             "retweeted": $entry.get('_source')['retweeted'],
             "favorited": $entry.get('_source')['favorited'],
-            "tweet_id": "$entry.get('_id')"
+            "tweet_id": "$entry.get('_id')",
+            "created_at": $entry.get('_source')['created_at']
           }
           )}
           )
