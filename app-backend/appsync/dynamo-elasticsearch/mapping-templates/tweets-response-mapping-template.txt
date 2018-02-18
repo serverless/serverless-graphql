@@ -1,6 +1,7 @@
 {
   #set($hitcount = $context.result.hits.total)
     #set($tweetList = [])
+    #set($counter = 0)
   #if($hitcount > 0)
         #foreach($entry in $context.result.hits.hits)
           #set( $element =
@@ -13,7 +14,9 @@
           }
           )}
           )
+          #set ($counter = $counter + 1)
       #end
-      "items" : $util.toJson($tweetList)
+          "items" : $util.toJson($tweetList),
+          "nextToken" : "$counter"
    #end
 }

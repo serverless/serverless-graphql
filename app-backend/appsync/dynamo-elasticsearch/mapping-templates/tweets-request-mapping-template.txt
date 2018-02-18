@@ -4,8 +4,8 @@
     "path":"/user/twitter/_search",
     "params":{
         "body":{
-            "from":0,
-            "size":$context.arguments.limit,
+            "from": #if($context.arguments.nextToken) $context.arguments.nextToken #else 0 #end,
+            "size": $context.arguments.limit,
             "query" : {
                 "bool" : {
                     "must" : [

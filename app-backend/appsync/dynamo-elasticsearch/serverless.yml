@@ -99,7 +99,7 @@ custom:
         name: Users
         description: 'Users table'
         config:
-          tableName: 'Users'
+          tableName: 'ESUsers'
           serviceRoleArn: "arn:aws:iam::${self:custom.accountId}:role/Dynamo-${self:custom.appSync.serviceRole}"
       - type: AMAZON_ELASTICSEARCH
         name: ElasticSearch
