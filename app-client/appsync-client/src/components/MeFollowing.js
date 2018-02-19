@@ -64,6 +64,7 @@ UserInfoComponent.propTypes = {
 
 export default graphql(MeQuery, {
   options: () => ({
+    fetchPolicy: 'network-only',
     variables: {
       consumer_key: process.env.REACT_APP_CONSUMER_KEY,
       consumer_secret: process.env.REACT_APP_SECRET_KEY,
