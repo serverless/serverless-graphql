@@ -52,8 +52,8 @@ async function getFavouritesCount(handle, consumerKey, consumerSecret) {
 exports.graphqlHandler = (event, context, callback) => {
   console.log('Received event {}', JSON.stringify(event, 3));
 
-  const consumerKey = 'N7vFfwCK4nM3DmzYZH4sTFKbS';
-  const consumerSecret = 'HsrhKwC29Wtv6sJZEsU9UOtjnGpSn0a1PdjidvOQGKkNffJW7h';
+  const consumerKey = event.arguments.consumer_key;
+  const consumerSecret = event.arguments.consumer_secret;
 
   console.log('Got an Invoke Request.');
   switch (event.field) {
