@@ -89,12 +89,10 @@ const tweetsQuery = graphql(MeTweetsQuery, {
       props.data.subscribeToMore({
         document: AddTweetSubscription,
         variables: params,
-        // TODO BUG: without the handle we add it to every profile. Subscription filters should
-        // solve the problem in the future.
+        // TODO BUG: need to filter tweets based on more fine grained / unique value if possible
         updateQuery: (prev, { subscriptionData: { data: { addTweet } } }) => {
-          // NOTE happens when the user created the tweet and it was rendered optimistically
           const tweetAlreadyExists = prev.meInfo.tweets.items.find(
-            item => item.tweet_id === addTweet.tweet_id
+            item => item.tweet === addTweet.tweet
           );
           if (tweetAlreadyExists) {
             return { ...prev };

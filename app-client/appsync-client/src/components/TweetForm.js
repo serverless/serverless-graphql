@@ -127,15 +127,26 @@ export default graphql(AddTweetMutation, {
             __typename: 'Tweet',
           },
         }),
-        refetchQueries: [
-          {
+        update: (proxy, { data: { createTweet } }) => {
+          const data = proxy.readQuery({
             query: MeTweetsQuery,
             variables: {
               consumer_key: process.env.REACT_APP_CONSUMER_KEY,
               consumer_secret: process.env.REACT_APP_SECRET_KEY,
-            },
-          },
-        ],
+              tweet,
+            }
+          });
+          data.meInfo.tweets.items.push(createTweet)
+          proxy.writeQuery({
+            query: MeTweetsQuery,
+            data,
+            variables: {
+              consumer_key: process.env.REACT_APP_CONSUMER_KEY,
+              consumer_secret: process.env.REACT_APP_SECRET_KEY,
+              tweet,
+            }
+          });
+        }
       });
     },
   }),
