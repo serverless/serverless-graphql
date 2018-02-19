@@ -1,6 +1,7 @@
 {
   #set($hitcount = $context.result.hits.total)
     #set($tweetList = [])
+    #set($counter = 0)
   #if($hitcount > 0)
         #foreach($entry in $context.result.hits.hits)
           #set( $element =
@@ -9,11 +10,14 @@
           	"retweet_count" : "$entry.get('_source')['retweet_count']",
             "retweeted": $entry.get('_source')['retweeted'],
             "favorited": $entry.get('_source')['favorited'],
-            "tweet_id": "$entry.get('_id')"
+            "tweet_id": "$entry.get('_id')",
+            "created_at": $entry.get('_source')['created_at']
           }
           )}
           )
+          #set ($counter = $counter + 1)
       #end
-      "items" : $util.toJson($tweetList)
+          "items" : $util.toJson($tweetList),
+          "nextToken" : "$counter"
    #end
 }

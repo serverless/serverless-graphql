@@ -8,16 +8,20 @@
   },
   "scripts": {
     "deploy-prod":
-      "cd seed-data && node create-seed-data && cd .. && serverless --stage=production deploy && cd seed-data && node insert_seed_data_prod && cd .. && serverless deploy-appsync",
-    "update-prod": "serverless update-appsync",
-    "delete-prod": "serverless delete-appsync"
+      "cd seed-data && node create-seed-data && cd .. && serverless --stage=production deploy && cd seed-data && node insert_seed_data_prod",
+    "deploy-appsync": "serverless deploy-appsync",
+    "update-appsync": "serverless update-appsync",
+    "delete-appsync": "serverless delete-appsync"
   },
   "dependencies": {
     "aws-sdk": "^2.176.0",
     "babel-polyfill": "^6.26.0",
     "bluebird": "^3.5.1",
+    "node-fetch": "^2.0.0",
+    "oauth": "^0.9.15",
     "serverless-appsync-plugin": "^0.0.4",
-    "serverless-dynamodb-local": "^0.2.27"
+    "serverless-dynamodb-local": "^0.2.27",
+    "twitter": "^1.7.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

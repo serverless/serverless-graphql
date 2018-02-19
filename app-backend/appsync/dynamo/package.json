@@ -13,9 +13,10 @@
     "start":
       "yarn dynamodb-generate-seed-data && serverless dynamodb install && serverless offline start",
     "deploy-prod":
-      "yarn dynamodb-generate-seed-data && serverless --stage=production deploy && yarn dynamodb-insert-seed-data-prod && serverless deploy-appsync",
-    "update-prod": "serverless update-appsync",
-    "delete-prod": "serverless delete-appsync"
+      "yarn dynamodb-generate-seed-data && serverless --stage=production deploy && yarn dynamodb-insert-seed-data-prod",
+    "deploy-appsync": "serverless deploy-appsync",
+    "update-appsync": "serverless update-appsync",
+    "delete-appsync": "serverless delete-appsync"
   },
   "dependencies": {
     "aws-sdk": "^2.176.0",

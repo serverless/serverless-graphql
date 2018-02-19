@@ -3,13 +3,11 @@ import gql from 'graphql-tag';
 export const AddTweetMutation = gql`
   mutation AddTweetMutation(
     $tweet: String!
-    $created_at: String!
     $consumer_key: String!
     $consumer_secret: String!
   ) {
     createTweet(
       tweet: $tweet
-      created_at: $created_at
       consumer_key: $consumer_key
       consumer_secret: $consumer_secret
     ) {

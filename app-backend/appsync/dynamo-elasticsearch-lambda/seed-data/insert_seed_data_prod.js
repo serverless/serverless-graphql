@@ -23,7 +23,6 @@ allUsers.forEach(function(user) {
       description: user.description,
       followers_count: user.followers_count,
       friends_count: user.friends_count,
-      favourites_count: user.favourites_count,
       following: user.following,
     },
   };

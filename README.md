@@ -141,21 +141,26 @@ You need to make sure you have access to your deployed lambda functions.
 
 - *AWS Appsync* (Supported by [Serverless-AppSync-Plugin](https://github.com/sid88in/serverless-appsync-plugin))
 
+**Note** Please make sure latest serverless package is installed `npm install -g serverless@latest`
+
 To use aws appsync you will need to create cognito user pool to authenticate the API [Reference](https://serverless-stack.com/chapters/create-a-cognito-user-pool.html)
 
-    - *AWS DynamoDB*
+    - AWS DynamoDB
         cd app-backend/appsync/dynamodb
         yarn deploy-prod
+        yarn deploy-appsync
                 
     - AWS ElasticSearch
         
-        cd app-backend/appsync/elasticsearch
+        cd app-backend/appsync/dynamo-elasticsearch-lambda
         yarn deploy-prod
+        yarn deploy-appsync
                 
     - AWS Lambda
         
         cd app-backend/appsync/lambda
         yarn deploy-prod
+        yarn deploy-appsync
         
 - *Lambda Backend* (Serverless Offline Supported)
 

@@ -39,11 +39,6 @@ for (let i = 0; i < numUsers; i++) {
     max: 500,
   });
 
-  const favourites_count = faker.random.number({
-    min: 1,
-    max: 5000,
-  });
-
   const name = faker.name.findName();
   const location = faker.address.city();
   const description = faker.name.jobTitle();
@@ -55,7 +50,6 @@ for (let i = 0; i < numUsers; i++) {
     description: description,
     followers_count: followers_count,
     friends_count: friends_count,
-    favourites_count: favourites_count,
     following: following,
   };
 
