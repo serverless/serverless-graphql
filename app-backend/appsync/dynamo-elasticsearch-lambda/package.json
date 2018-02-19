@@ -17,8 +17,11 @@
     "aws-sdk": "^2.176.0",
     "babel-polyfill": "^6.26.0",
     "bluebird": "^3.5.1",
+    "node-fetch": "^2.0.0",
+    "oauth": "^0.9.15",
     "serverless-appsync-plugin": "^0.0.4",
-    "serverless-dynamodb-local": "^0.2.27"
+    "serverless-dynamodb-local": "^0.2.27",
+    "twitter": "^1.7.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

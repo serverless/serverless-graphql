@@ -111,19 +111,16 @@ TweetFormComponent.propTypes = {
 export default graphql(AddTweetMutation, {
   props: ({ mutate }) => ({
     addTweet: tweet => {
-      const createdAt = new Date().toISOString();
       return mutate({
         variables: {
           consumer_key: process.env.REACT_APP_CONSUMER_KEY,
           consumer_secret: process.env.REACT_APP_SECRET_KEY,
           tweet,
-          created_at: createdAt,
         },
         optimisticResponse: () => ({
           createTweet: {
             tweet,
             tweet_id: uuid(),
-            created_at: createdAt,
             retweeted: false,
             retweet_count: 0,
             favorited: false,

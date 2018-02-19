@@ -12,6 +12,7 @@ plugins:
   - serverless-dynamodb-local
   - serverless-offline
   - serverless-appsync-plugin
+  - serverless-webpack
 
 custom:
   accountId: 1234xxxxxxxx # replace this with your accountId
@@ -26,8 +27,9 @@ custom:
         sources:
           - table: Users
             sources: [seed-data/Users.json]
+  webpackIncludeModules: true
   appSync:
-    # name:  # defaults to api
+    name:  miniTwitter # defaults to api
     # apiId # only required for update-appsync
     authenticationType: AMAZON_COGNITO_USER_POOLS
     userPoolConfig:
@@ -37,76 +39,91 @@ custom:
     # region: # defaults to provider region
     # mappingTemplatesLocation: # defaults to mapping-templates
     mappingTemplates:
-      - dataSource: Users
+      - dataSource: myDynamoDB
         type: Query
         field: getUserInfo
         request: "getUserInfo-request-mapping-template.txt"
         response: "getUserInfo-response-mapping-template.txt"
-      - dataSource: Users
+      - dataSource: myDynamoDB
         type: Query
         field: meInfo
         request: "meInfo-request-mapping-template.txt"
         response: "meInfo-response-mapping-template.txt"
-      - dataSource: ElasticSearch
+      - dataSource: myElasticSearch
         type: User
         field: topTweet
         request: "topTweet-request-mapping-template.txt"
         response: "topTweet-response-mapping-template.txt"
-      - dataSource: ElasticSearch
+      - dataSource: myElasticSearch
         type: User
         field: tweets
         request: "tweets-request-mapping-template.txt"
         response: "tweets-response-mapping-template.txt"
-      - dataSource: ElasticSearch
+      - dataSource: myElasticSearch
         type: Mutation
         field: createTweet
         request: "createTweet-request-mapping-template.txt"
         response: "createTweet-response-mapping-template.txt"
-      - dataSource: ElasticSearch
+      - dataSource: myElasticSearch
         type: Mutation
         field: deleteTweet
         request: "deleteTweet-request-mapping-template.txt"
         response: "deleteTweet-response-mapping-template.txt"
-      - dataSource: ElasticSearch
+      - dataSource: myElasticSearch
         type: Mutation
         field: reTweet
         request: "reTweet-request-mapping-template.txt"
         response: "reTweet-response-mapping-template.txt"
-      - dataSource: ElasticSearch
+      - dataSource: myElasticSearch
         type: Mutation
         field: updateTweet
         request: "updateTweet-request-mapping-template.txt"
         response: "updateTweet-response-mapping-template.txt"
-      - dataSource: Users
+      - dataSource: myDynamoDB
         type: Mutation
         field: updateUserInfo
         request: "updateUserInfo-request-mapping-template.txt"
         response: "updateUserInfo-response-mapping-template.txt"
-      - dataSource: ElasticSearch
+      - dataSource: myElasticSearch
         type: User
         field: searchTweetsByKeyword
         request: "searchTweetsByKeyword-request-mapping-template.txt"
         response: "searchTweetsByKeyword-response-mapping-template.txt"
-      - dataSource: ElasticSearch
+      - dataSource: myElasticSearch
         type: Query
         field: searchAllTweetsByKeyword
         request: "searchAllTweetsByKeyword-request-mapping-template.txt"
         response: "searchAllTweetsByKeyword-response-mapping-template.txt"
-    # schema: # defaults schema.graphql
+      - dataSource: myLambda
+        type: User
+        field: favourites_count
+        request: "getFavourites-request-mapping-template.txt"
+        response: "getFavourites-response-mapping-template.txt"
+    schema: # defaults schema.graphql
     serviceRole: "AppSyncServiceRole"
     dataSources:
       - type: AMAZON_DYNAMODB
-        name: Users
+        name: myDynamoDB
         description: 'Users table'
         config:
           tableName: 'ESUsers'
           serviceRoleArn: "arn:aws:iam::${self:custom.accountId}:role/Dynamo-${self:custom.appSync.serviceRole}"
       - type: AMAZON_ELASTICSEARCH
-        name: ElasticSearch
+        name: myElasticSearch
         description: 'ElasticSearch'
         config:
-          endpoint: https://search-xxxxxxx-xxxxxxxxxxxxxxxxxxxxxxxxx.us-east-1.es.amazonaws.com # required # "https://{DOMAIN}.{REGION}.es.amazonaws.com"
+          endpoint: https://search-xxxxxx-xxxxxxxxxxxxxxx.us-east-1.es.amazonaws.com # required # "https://{DOMAIN}.{REGION}.es.amazonaws.com"
           serviceRoleArn: "arn:aws:iam::${self:custom.accountId}:role/ElasticSearch-${self:custom.appSync.serviceRole}"
+      - type: AWS_LAMBDA
+        name: myLambda
+        description: 'Lambda DataSource'
+        config:
+          lambdaFunctionArn: "arn:aws:lambda:us-east-1:${self:custom.accountId}:function:serverless-graphql-appsync-es-production-graphql"
+          serviceRoleArn: "arn:aws:iam::${self:custom.accountId}:role/Lambda-${self:custom.appSync.serviceRole}"
+
+functions:
+  graphql:
+    handler: handler.graphqlHandler
 
 resources:
   Resources:
@@ -184,3 +201,30 @@ resources:
                   Resource:
                     - "arn:aws:dynamodb:us-east-1:*:table/ESUsers"
                     - "arn:aws:dynamodb:us-east-1:*:table/ESUsers/*"
+    AppSyncLambdaServiceRole:
+      Type: "AWS::IAM::Role"
+      Properties:
+        RoleName: "Lambda-AppSyncServiceRole"
+        AssumeRolePolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            -
+              Effect: "Allow"
+              Principal:
+                Service:
+                  - "appsync.amazonaws.com"
+              Action:
+                - "sts:AssumeRole"
+        Policies:
+          -
+            PolicyName: "Lambda-AppSyncServiceRole-Policy"
+            PolicyDocument:
+              Version: "2012-10-17"
+              Statement:
+                -
+                  Effect: "Allow"
+                  Action:
+                    - "lambda:invokeFunction"
+                  Resource:
+                    - "arn:aws:lambda:us-east-1:${self:custom.accountId}:function:serverless-graphql-appsync-es-production-graphql"
+                    - "arn:aws:lambda:us-east-1:${self:custom.accountId}:function:serverless-graphql-appsync-es-production-graphql:*"

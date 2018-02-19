@@ -145,14 +145,14 @@ You need to make sure you have access to your deployed lambda functions.
 
 To use aws appsync you will need to create cognito user pool to authenticate the API [Reference](https://serverless-stack.com/chapters/create-a-cognito-user-pool.html)
 
-    - *AWS DynamoDB*
+    - AWS DynamoDB
         cd app-backend/appsync/dynamodb
         yarn deploy-prod
         yarn deploy-appsync
                 
     - AWS ElasticSearch
         
-        cd app-backend/appsync/elasticsearch
+        cd app-backend/appsync/dynamo-elasticsearch-lambda
         yarn deploy-prod
         yarn deploy-appsync
                 
