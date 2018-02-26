@@ -354,7 +354,7 @@ schema {
 │   │   │   ├── /index.html                     # main html file to render react app
 │   │   │   ├── /...                            # front end metadata
 │   │   ├── /src/                               # react app code logic
-│   │   │   ├── /componenets/                   # react componenets
+│   │   │   ├── /components/                    # react components
 │   │   │   ├── /App.js                         # react application logic
 │   │   │   ├── /index.js                       # react dom render
 │   │   │   ├── /aws-exports.js                 # AWS Authentication
@@ -366,7 +366,7 @@ schema {
 │   │   │   ├── /index.html                     # main html file to render react app
 │   │   │   ├── /...                            # front end metadata
 │   │   ├── /src/                               # react app code logic
-│   │   │   ├── /componenets/                   # react componenets
+│   │   │   ├── /components/                    # react components
 │   │   │   ├── /App.js                         # react application logic
 │   │   │   ├── /index.js                       # react dom render
 │   │   │   ├── /...                            # etc.
