@@ -243,7 +243,7 @@ To use aws appsync you will need to create cognito user pool to authenticate the
 
 - GraphQL Schema:
 
-```
+```graphql
 type Mutation {
 	# Create a tweet for a user
 	# consumer keys and tokens are not required for dynamo integration
@@ -395,13 +395,13 @@ schema {
 │   │   ├── /schema.js                          # graphql schema
 │   │   ├── /serverless.yml                     # Serverless yaml for AWS deployment
 │   │   ├── /webpack.config.js                  # Webpack server side code with ES6
-│   ├── /RDS                                # Integrations for PostGres, MySQL and Aurora Backend
+│   ├── /rds                                # Integrations for PostGres, MySQL and Aurora Backend
 │   │   ├── /seed-data/                         # seed test data
 │   │   │   ├── /create_seed_data.js            # Create Seed data to be inserted in dynamodb local and remote
 │   │   │   ├── /seed_local.js                  # Insert seed data in aws dynamodb (serverless)
 │   │   │   ├── /seed_prod.js                   # Test Query on DynamoDB Local Client http://localhost:8000
 │   │   ├── /migrations/                        # Create DDL statements
-│   │   ├── /kenxfile                           # Database Configurations 
+│   │   ├── /knexfile.js                        # Database Configurations 
 │   │   ├── /handler.js                         # AWS Lambda - Apollo Lambda Server
 │   │   ├── /package.js                         # server side dependencies
 │   │   ├── /resolvers.js                       # graphql resolvers
