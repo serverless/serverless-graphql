@@ -3566,9 +3566,9 @@ sax@>=0.6.0, sax@^1.2.1:
   version "5.4.1"
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.4.1.tgz#e059c09d8571f0540823733433505d3a2f00b18e"
 
-serverless-appsync-plugin@^0.0.4:
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/serverless-appsync-plugin/-/serverless-appsync-plugin-0.0.4.tgz#5e84f3b260cfe70af37fb92667ff65129fdfd0b5"
+serverless-appsync-plugin@^0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/serverless-appsync-plugin/-/serverless-appsync-plugin-0.0.5.tgz#995865042e5f47d2bb48cb283a31093db98c4a2d"
   dependencies:
     async "^2.6.0"
     bluebird "^3.5.1"
