@@ -19,7 +19,7 @@
     "bluebird": "^3.5.1",
     "node-fetch": "^2.0.0",
     "oauth": "^0.9.15",
-    "serverless-appsync-plugin": "^0.0.4",
+    "serverless-appsync-plugin": "^0.0.5",
     "serverless-dynamodb-local": "^0.2.27",
     "twitter": "^1.7.1"
   },

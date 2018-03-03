@@ -31,7 +31,7 @@ custom:
   appSync:
     name:  miniTwitter # defaults to api
     # apiId # only required for update-appsync
-    authenticationType: AMAZON_COGNITO_USER_POOLS
+    authenticationType: AMAZON_COGNITO_USER_POOLS # API_KEY is also supported
     userPoolConfig:
       awsRegion: us-east-1 # required # region
       defaultAction: ALLOW

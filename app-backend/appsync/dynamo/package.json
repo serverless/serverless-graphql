@@ -22,7 +22,7 @@
     "aws-sdk": "^2.176.0",
     "babel-polyfill": "^6.26.0",
     "bluebird": "^3.5.1",
-    "serverless-appsync-plugin": "^0.0.4",
+    "serverless-appsync-plugin": "^0.0.5",
     "serverless-dynamodb-client": "^0.0.2"
   },
   "devDependencies": {
