@@ -7,6 +7,8 @@ provider:
   runtime: nodejs6.10
   stage: production
   region: us-west-1
+  environment:
+    MONGODB_URL: ${env:MONGODB_URL}
   iamRoleStatements:
     - Effect: Allow
       Action:

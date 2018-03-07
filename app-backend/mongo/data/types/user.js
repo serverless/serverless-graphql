@@ -3,7 +3,7 @@ const userType = `
         address: String
         verified: Boolean
     }
-    
+
     type Address {
         street: String
         city: String
@@ -12,17 +12,17 @@ const userType = `
         country: String
         zip: String
     }
-    
+
     type Phone {
         number: String
         verified: Boolean
     }
-    
+
     type Height {
         ft: Int
         in: Int
     }
-    
+
     type Image {
         filesize: Int
         resolution: String
@@ -30,13 +30,13 @@ const userType = `
         imagetype: String
         url: String
     }
-    
+
     type ProfileImage {
         fullResolution: String,
         displayResolution: String,
         thumbnailResolution: String
     }
-    
+
     type Service {
         nameOfService: String
         price: Int
@@ -47,20 +47,20 @@ const userType = `
         onePersonBooking: Boolean
         noTravel: Boolean
     }
-    
+
     type Available {
         available: Boolean
         timeRangeStart: String
         timeRangeEnd: String
         allday: Boolean
     }
-    
+
     type Award {
         type: String
         Month: String
         Year: Int
     }
-    
+
     type BasicInformation {
         username: String
         firstname: String
@@ -73,36 +73,36 @@ const userType = `
         age: Int
         phone: Phone
     }
-    
+
     type FavoriteItem {
         userId: ID!
         userName: String!
         user_name: String!
         userAvatar: String!
     }
-    
+
     type CustomFavorites {
         models: [FavoriteItem]
         photographers: [FavoriteItem]
         muas: [FavoriteItem]
     }
-    
+
     type Favorites {
         models: [String]
         photographers: [String]
         brands: [String]
         muas: [String]
     }
-    
+
     type Measurements {
         height: Height
         waist: Int
         shoe: Float
         tattoos: Boolean
         hairColor: String
-        eyeColor: String  
+        eyeColor: String
     }
-    
+
     type Availability {
         sunday: Available
         monday: Available
@@ -112,45 +112,45 @@ const userType = `
         friday: Available
         saturday: Available
     }
-    
+
     type EmailNotification {
         notifications: Boolean
         newsletter: Boolean
         contentUpdates: Boolean
         reminders: Boolean
     }
-    
+
     type PhotoUpload {
         profilePicture: ProfileImage
     }
-    
+
     type RateOptions {
         ratetype: String
         amount: Int
     }
-    
+
     type PhotographerOptions {
         camera: String
         lens: String
     }
-    
+
     type Preferences {
         emailNotification: EmailNotification
     }
-    
+
     type Password {
         bcrypt: String
     }
-    
+
     type Token {
         when: String
         hashedToken: String
     }
-    
+
     type Resume {
         loginTokens: [Token]
     }
-    
+
     type Stripe {
         access_token: String
         livemode: Boolean
@@ -160,7 +160,7 @@ const userType = `
         stripe_user_id: String
         scope: String
     }
-    
+
     type Sendbird {
         user_id: String
         nickname: String
@@ -169,7 +169,7 @@ const userType = `
         is_online: Boolean
         last_seen_at: Int
     }
-    
+
     type AccountService {
         password: Password
         paypal: String
@@ -177,7 +177,7 @@ const userType = `
         stripe: Stripe
         resume: Resume
     }
-    
+
     type User {
         _id: ID!
         active: Boolean
@@ -203,7 +203,7 @@ const userType = `
         accountServices: AccountService
         awards: [Award]
     }
-    
+
     type StripeResponse {
         access_token: String
         livemode: Boolean
@@ -215,12 +215,12 @@ const userType = `
         error: String
         error_description: String
     }
-    
+
      input EmailInput {
         address: String
         verified: Boolean
     }
-    
+
     input AddressInput {
         street: String
         city: String
@@ -229,23 +229,23 @@ const userType = `
         country: String
         zip: String
     }
-    
+
     input PhoneInput {
         number: String
         verified: Boolean
     }
-    
+
     input HeightInput {
         ft: Int
         in: Int
     }
-    
+
     input ProfileImageInput {
         fullResolution: String
         displayResolution: String
         thumbnailResolution: String
     }
-    
+
     input ServiceInput {
         nameOfService: String
         price: Int
@@ -256,20 +256,20 @@ const userType = `
         onePersonBooking: Boolean
         noTravel: Boolean
     }
-    
+
     input AvailableInput {
         available: Boolean
         timeRangeStart: String
         timeRangeEnd: String
         allday: Boolean
     }
-    
+
     input AwardInput {
         type: String
         Month: String
         Year: Int
     }
-    
+
     input BasicInformationInput {
         username: String
         firstname: String
@@ -282,23 +282,23 @@ const userType = `
         age: Int
         phone: PhoneInput
     }
-    
+
     input FavoritesInput {
         models: [String]
         photographers: [String]
         brands: [String]
         muas: [String]
     }
-    
+
     input MeasurementsInput {
         height: HeightInput
         waist: Int
         shoe: Float
         tattoos: Boolean
         hairColor: String
-        eyeColor: String  
+        eyeColor: String
     }
-    
+
     input AvailabilityInput {
         sunday: AvailableInput
         monday: AvailableInput
@@ -308,45 +308,45 @@ const userType = `
         friday: AvailableInput
         saturday: AvailableInput
     }
-    
+
     input EmailNotificationInput {
         notifications: Boolean
         newsletter: Boolean
         contentUpdates: Boolean
         reminders: Boolean
     }
-    
+
     input PhotoUploadInput {
         profilePicture: ProfileImageInput
     }
-    
+
     input RateOptionsInput {
         ratetype: String
         amount: Int
     }
-    
+
     input PhotographerOptionsInput {
         camera: String
         lens: String
     }
-    
+
     input PreferencesInput {
         emailNotification: EmailNotificationInput
     }
-    
+
     input PasswordInput {
         bcrypt: String
     }
-    
+
     input TokenInput {
         when: String
         hashedToken: String
     }
-    
+
     input ResumeInput {
         loginTokens: [TokenInput]
     }
-    
+
     input StripeInput {
         access_token: String
         livemode: Boolean
@@ -356,7 +356,7 @@ const userType = `
         stripe_user_id: String
         scope: String
     }
-    
+
     input SendbirdInput {
         user_id: String
         nickname: String
@@ -365,7 +365,7 @@ const userType = `
         is_online: Boolean
         last_seen_at: Int
     }
-    
+
     input AccountServiceInput {
         password: PasswordInput
         paypal: String
@@ -373,7 +373,7 @@ const userType = `
         stripe: StripeInput
         resume: ResumeInput
     }
-    
+
     input UserInput {
         active: Boolean
         admin: Boolean
@@ -398,12 +398,12 @@ const userType = `
         accountServices: AccountServiceInput
         awards: [AwardInput]
     }
-    
+
     type Result {
         result: User
         message: String
     }
-    
+
     input Rates {
         free: Boolean
         below_20: Boolean
@@ -413,7 +413,7 @@ const userType = `
         up_100: Boolean
         flat: Boolean
     }
-    
+
     input Categories {
         models: Boolean
         photographers: Boolean
@@ -421,7 +421,7 @@ const userType = `
         brands: Boolean
         campaigns: Boolean
     }
-    
+
     input Locations {
         asia: Boolean
         au_nz: Boolean
@@ -432,12 +432,12 @@ const userType = `
         uk: Boolean
         us: Boolean
     }
-    
+
     input Sex {
         male: Boolean
         female: Boolean
     }
-    
+
     type HomepageUsers {
         top_models: [User]
         top_photographers: [User]
@@ -449,21 +449,20 @@ const userType = `
         featured_photographers: [User]
         featured_muas: [User]
     }
-    
+
     type SimpleMedia {
         _id: ID
         type: String
         url: String
     }
-    
+
     type EditProfileOutput {
         photos: [SimpleMedia]
-        detail: User 
+        detail: User
     }
-    
+
     type Query {
         users: [User]
-        getUsersForHomepage: HomepageUsers
         getUserById(
             _id: ID!
         ): User
@@ -474,13 +473,13 @@ const userType = `
             _id: ID!
         ): Availability
         getUserFavoritesById(
-            _id: ID!   
+            _id: ID!
         ): CustomFavorites
         getUserByUsername(
             username: String!
         ): User
     }
-    
+
     type Mutation {
         login(
             email: String!
@@ -490,7 +489,7 @@ const userType = `
             user: UserInput!
         ): User
         getUserByPreferences(
-           _id: ID!     
+           _id: ID!
         ): User
         getUsersByType(
             type: String!
