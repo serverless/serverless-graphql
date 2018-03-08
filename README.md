@@ -190,7 +190,7 @@ To use aws appsync you will need to create cognito user pool to authenticate the
           yarn deploy-prod
           ```
 
-2. **Config**: Get your /graphql POST endpoint as shown below and use it in config/security.env.prod
+2. **Config**: Get your /graphql POST endpoint as shown below and use it in config/security.env.prod  **NOTE** Please remove all quotes and <> and place only your POST endpoint url otherwise you will get 405 method not allowed error on POST to your endpoint
 
 ![deploy feedback](https://user-images.githubusercontent.com/1587005/32410402-351ff868-c17c-11e7-9bfb-e39f7e8c14a3.png)
 
