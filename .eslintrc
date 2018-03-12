@@ -31,6 +31,7 @@
     "func-names": "off",
     "object-curly-newline": "off",
     "jsx-a11y/anchor-is-valid": "off",
+    "arrow-body-style": "off",
     "import/no-extraneous-dependencies": ["error", {"ignore": ["aws-sdk"]}]
   }
 }
