@@ -121,6 +121,28 @@ http://localhost:4000/graphiql
 http://localhost:4000/playground
 ```
 
+5. **Sample Query for GraphiQL or GraphQL**
+```
+{
+  getUserInfo(handle: "Madalyn61") {
+    name
+    tweets {
+      items {
+        retweeted
+        retweet_count
+        favorited
+        tweet
+      }
+    }
+    topTweet {
+      retweeted
+      retweet_count
+      favorited
+    }
+  }
+}
+```
+
 If you've followed me this far, DynamoDB will now be available and running on your local machine at `http://localhost:8000/shell`:
 
 ![!Live Example](https://user-images.githubusercontent.com/1587005/36065162-b4ad3c14-0e4b-11e8-8776-e19596546ce1.gif)

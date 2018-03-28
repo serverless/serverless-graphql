@@ -23,7 +23,7 @@ export const resolvers = {
   User: {
     topTweet: obj =>
       knex('Tweets')
-        .where('handle', obj.handle)
+        .where('user_id', obj.user_id)
         .orderBy('retweet_count', 'desc')
         .limit(1)
         .then(tweet => {
