@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/serverless/serverless-graphql.svg?branch=master)](https://travis-ci.org/serverless/serverless-graphql)
 # Introduction
 
 > *Part 1:* [Running a scalable & reliable GraphQL endpoint with Serverless](https://serverless.com/blog/running-scalable-reliable-graphql-endpoint-with-serverless/)  
