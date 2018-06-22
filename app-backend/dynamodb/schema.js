@@ -93,7 +93,7 @@ type User {
     favourites_count: Int!
     following: [String!]!
     topTweet: Tweet
-    tweets(limit: Int!, nextToken: TokenInput): TweetConnection
+    tweets(limit: Int, nextToken: TokenInput): TweetConnection
 
     # search functionality is available in elasticsearch integration
     searchTweetsByKeyword(keyword: String!): TweetConnection
