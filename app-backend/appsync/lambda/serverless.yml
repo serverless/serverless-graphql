@@ -58,7 +58,7 @@ custom:
         name: Lambda
         description: 'Lambda DataSource'
         config:
-          lambdaFunctionArn: "arn:aws:lambda:us-east-1:${self:custom.accountId}:serverless-graphql-appsync-lda-production-graphql"
+          lambdaFunctionArn: "arn:aws:lambda:us-east-1:${self:custom.accountId}:function:serverless-graphql-appsync-lda-production-graphql"
           serviceRoleArn: "arn:aws:iam::${self:custom.accountId}:role/Lambda-${self:custom.appSync.serviceRole}"
   serverless-offline:
     port: 4000
