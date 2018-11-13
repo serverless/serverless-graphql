@@ -358,13 +358,6 @@ apollo-tracing@0.3.1:
     apollo-server-env "2.2.0"
     graphql-extensions "0.3.1"
 
-apollo-tracing@^0.0.9:
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/apollo-tracing/-/apollo-tracing-0.0.9.tgz#37fd4a7f5340f6e2ac9437d284f10ae2b1c85ad1"
-  integrity sha512-Xm+fgFHTSdMQ49u4Sw3bwW+4TbVfzg4FLaAuYQAkZDBGi0eTWWEgnSBmHQ4qIyKQKfMN9u0/vCODZv/zwhQH/w==
-  dependencies:
-    graphql-tools "^2.2.0"
-
 apollo-utilities@^1.0.0:
   version "1.0.25"
   resolved "https://registry.yarnpkg.com/apollo-utilities/-/apollo-utilities-1.0.25.tgz#899b00f5f990fb451675adf84cb3de82eb6372ea"
@@ -2391,23 +2384,6 @@ graphql-extensions@0.3.1:
   dependencies:
     "@apollographql/apollo-tools" "^0.2.2"
 
-graphql-playground-html@1.5.0:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/graphql-playground-html/-/graphql-playground-html-1.5.0.tgz#bfe1a53e8e7df563bdbd20077e0ac6bf9aaf0f64"
-  integrity sha512-8D/zx64g0I6xV1nZ/uqy1dPMvBElraN4GFawKQxjcUih70Z5Eq62SfaOigXqzHFLchP9GgEF2Ml6nS4LQYiPlg==
-
-graphql-playground-middleware-lambda@^1.2.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/graphql-playground-middleware-lambda/-/graphql-playground-middleware-lambda-1.4.0.tgz#6fc450b16b67f8e9a9c41bd108cb9a4fa75abd27"
-  integrity sha512-i2DdlwZJ18OvEJQGS2bkwx6UCgZaix+mySv7Rp2AMfAYMFotbAoiE5Adud9tS4/1AakU5VHhSwwB3SRB5C820w==
-  dependencies:
-    graphql-playground-html "1.5.0"
-
-graphql-playground-middleware@^1.1.0:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/graphql-playground-middleware/-/graphql-playground-middleware-1.1.2.tgz#f8503b1b89cf6dcf79f1873feb1e821b4d099bd7"
-  integrity sha512-HP0zrMtmamPUe0IUeLuBBK7GsTc9JrmE8JsjxTgEaIZP5GF2huorrNXop9kLbrT8PcuIjDc41i1mO4hQwwrvOg==
-
 graphql-subscriptions@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/graphql-subscriptions/-/graphql-subscriptions-1.0.0.tgz#475267694b3bd465af6477dbab4263a3f62702b8"
@@ -2419,24 +2395,6 @@ graphql-tag@^2.9.2:
   version "2.10.0"
   resolved "https://registry.yarnpkg.com/graphql-tag/-/graphql-tag-2.10.0.tgz#87da024be863e357551b2b8700e496ee2d4353ae"
   integrity sha512-9FD6cw976TLLf9WYIUPCaaTpniawIjHWZSwIRZSjrfufJamcXbVVYfN2TWvJYbw0Xf2JjYbl1/f2+wDnBVw3/w==
-
-graphql-tools@2.7.2:
-  version "2.7.2"
-  resolved "https://registry.yarnpkg.com/graphql-tools/-/graphql-tools-2.7.2.tgz#03104a155b15f8441b0e5a7113b12b9512341a9e"
-  integrity sha512-BhL37XtfH1XCDoMi/RR+ApOm/zVpGE0GFRdZhRaQn3wd6W9rBIVoAGa7/k/VimROy45UKDO4DIyhnbGAZW1lqg==
-  dependencies:
-    apollo-utilities "^1.0.1"
-    deprecated-decorator "^0.1.6"
-    uuid "^3.1.0"
-
-graphql-tools@^2.2.0:
-  version "2.11.0"
-  resolved "https://registry.yarnpkg.com/graphql-tools/-/graphql-tools-2.11.0.tgz#be86d14acfe4ca9411967c6b54bac2eedc0dbb72"
-  integrity sha512-otVxwHA0IfCmj8sgJNeOOgLTi+WFSLWZpJ/Kwt4r0EdgZ4spU5whymLEpFvLuWfuGHY+gjCvo6hSJoU0Ka57+g==
-  dependencies:
-    apollo-utilities "^1.0.1"
-    deprecated-decorator "^0.1.6"
-    uuid "^3.1.0"
 
 graphql-tools@^4.0.0:
   version "4.0.3"
