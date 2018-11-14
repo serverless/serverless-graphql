@@ -92,7 +92,18 @@ async function getUserTweets(args) {
         .then(tweets => {
           const tweetArray = [];
           let listOfTweets;
-
+          if (tweets.length <= 0) {
+            listOfTweets = {
+              name: '',
+              handle: args.handle,
+              location: '',
+              description: '',
+              followers_count: 0,
+              friends_count: 0,
+              favourites_count: 0,
+              following: [],
+            };
+          }
           return getFollowing(
             args.handle,
             args.consumer_key,
