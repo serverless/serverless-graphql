@@ -12,7 +12,7 @@
     "dynamodb-insert-seed-data-prod":
       "cd seed-data && node insert_seed_data_prod.js",
     "start":
-      "AWS_XRAY_CONTEXT_MISSING=LOG_ERROR yarn dynamodb-generate-seed-data && serverless dynamodb install && env-cmd ../../config/security.env.local serverless offline start",
+      "yarn dynamodb-generate-seed-data && serverless dynamodb install && env-cmd ../../config/security.env.local serverless offline start",
     "deploy-prod":
       "yarn dynamodb-generate-seed-data && env-cmd ../../config/security.env.prod serverless --stage=production deploy && yarn dynamodb-insert-seed-data-prod"
   },

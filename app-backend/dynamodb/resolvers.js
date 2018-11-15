@@ -1,16 +1,15 @@
 // add to handler.js
 import dynamodb from 'serverless-dynamodb-client';
 
-const AWSXRay = require('aws-xray-sdk');
-// const AWS = AWSXRay.captureAWS(require('aws-sdk'));
-
 let docClient;
 
-// if (process.env.NODE_ENV === 'production') {
-//   docClient = new AWS.DynamoDB.DocumentClient();
-// } else {
-docClient = dynamodb.doc;
-// }
+if (process.env.NODE_ENV === 'production') {
+  const AWSXRay = require('aws-xray-sdk');
+  const AWS = AWSXRay.captureAWS(require('aws-sdk'));
+  docClient = new AWS.DynamoDB.DocumentClient();
+} else {
+  docClient = dynamodb.doc;
+}
 
 // add to handler.js
 const promisify = foo =>
