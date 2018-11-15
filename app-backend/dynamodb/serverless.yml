@@ -40,22 +40,9 @@ functions:
         path: graphql
         method: post
         cors: true
-  playground:
-    handler: handler.playgroundHandler
-    role: ServiceRole
-    events:
     - http:
-        path: playground
+        path: graphql
         method: get
-        cors: true
-  graphiql:
-    handler: handler.graphiqlHandler
-    role: ServiceRole
-    events:
-    - http:
-        path: graphiql
-        method: get
-        cors: true
 
 resources:
   Resources:
