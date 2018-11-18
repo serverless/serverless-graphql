@@ -52,6 +52,8 @@ type Query {
     searchAllTweetsByKeyword(keyword: String!): TweetConnection
 }
 
+directive @aws_subscribe(mutations: [String]) on FIELD_DEFINITION
+
 type Subscription {
     addTweet: Tweet
         @aws_subscribe(mutations: ["createTweet"])

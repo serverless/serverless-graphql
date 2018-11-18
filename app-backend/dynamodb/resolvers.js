@@ -1,12 +1,11 @@
 // add to handler.js
 import dynamodb from 'serverless-dynamodb-client';
 
-const AWSXRay = require('aws-xray-sdk');
-const AWS = AWSXRay.captureAWS(require('aws-sdk'));
-
 let docClient;
 
 if (process.env.NODE_ENV === 'production') {
+  const AWSXRay = require('aws-xray-sdk'); // eslint-disable-line global-require
+  const AWS = AWSXRay.captureAWS(require('aws-sdk')); // eslint-disable-line global-require
   docClient = new AWS.DynamoDB.DocumentClient();
 } else {
   docClient = dynamodb.doc;
