@@ -23,7 +23,7 @@ This example uses the following technologies:
   - [Serverless](https://serverless.com/framework/docs/)
   - [AWS AppSync](https://aws.amazon.com/appsync/) DynamoDB, Elasticsearch and Lambda Integrations
   - [AWS Lambda](https://aws.amazon.com/lambda/) & [AWS API Gateway](https://aws.amazon.com/documentation/apigateway/)
-  - [Apollo Lambda GraphQL Server](https://www.npmjs.com/package/apollo-server-lambda)
+  - [Apollo Server Lambda 2.0](https://www.npmjs.com/package/apollo-server-lambda)
   - [DynamoDB](https://aws.amazon.com/dynamodb/)
   - [RDS (MySQL, PostGres and Aurora)](https://aws.amazon.com/rds/)
   - [REST API](https://developer.twitter.com/en/docs)
@@ -61,7 +61,7 @@ yarn install
 
 ## Feature Support in this repository
 
-![feature_support](https://user-images.githubusercontent.com/1587005/35409562-6fd6dd1a-01c7-11e8-9467-321deb9a56b1.png)
+![feature-support](/feature-support.png)
 
 ## Quick Start (Serverless Offline)
 Please note: [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/installing.html) is required to be installed on your system
@@ -81,6 +81,8 @@ Please note: [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/installi
         cd app-backend/rest-api
         yarn start
         ```
+
+    *Generate your Consumer Key and Secret Key for a [Twitter App](https://developer.twitter.com/en/docs/basics/developer-portal/guides/apps) and update [config](/config/security.env.local)*
 
     - *DynamoDB*
         ```
@@ -121,8 +123,12 @@ http://localhost:4000/graphiql
 ```
 http://localhost:4000/playground
 ```
+*`rest-api` and `dynamodb` backends route GET and POST to the same `/graphql` endpoint handler*
+```
+http://localhost:4000/graphql
+```
 
-5. **Sample Query for GraphiQL or GraphQL**
+5. **Sample Query for GraphiQL, Playground or GraphQL**
 ```
 {
   getUserInfo(handle: "Madalyn61") {
