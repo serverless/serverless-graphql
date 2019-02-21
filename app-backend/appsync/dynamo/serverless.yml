@@ -17,19 +17,23 @@ plugins:
 custom:
   appsync-offline:
     port: 62222
+    dynamodb:
+      client:
+        endpoint: "http://localhost:8000"
+        region: localhost
   dynamodb:
     start:
       port: 8000
       inMemory: true
       migrate: true
       seed: true
-  seed:	
-    test:	
-      sources:	
-        - table: Users	
-          sources: [seed-data/Users.json]	
-        - table: Tweets	
-          sources: [seed-data/Tweets.json]
+    seed:
+      test:
+        sources:
+          - table: Users
+            sources: [seed-data/Users.json]	
+          - table: Tweets
+            sources: [seed-data/Tweets.json]
   appSync:
     name: dynamodbDemo # defaults to api
     authenticationType: AMAZON_COGNITO_USER_POOLS # API_KEY is also supported
