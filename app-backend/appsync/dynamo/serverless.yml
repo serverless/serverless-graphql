@@ -9,24 +9,20 @@ provider:
   region: us-east-1
 
 plugins:
-  - serverless-dynamodb-local
-  - serverless-offline
   - serverless-appsync-plugin
+  - serverless-dynamodb-local
+  - serverless-appsync-offline
+  - serverless-offline
 
 custom:
+  appsync-offline:
+    port: 62222
   dynamodb:
     start:
       port: 8000
       inMemory: true
       migrate: true
       seed: true
-    seed:
-      test:
-        sources:
-          - table: Users
-            sources: [seed-data/Users.json]
-          - table: Tweets
-            sources: [seed-data/Tweets.json]
   appSync:
     name: dynamodbDemo # defaults to api
     authenticationType: AMAZON_COGNITO_USER_POOLS # API_KEY is also supported
