@@ -23,6 +23,13 @@ custom:
       inMemory: true
       migrate: true
       seed: true
+  seed:	
+    test:	
+      sources:	
+        - table: Users	
+          sources: [seed-data/Users.json]	
+        - table: Tweets	
+          sources: [seed-data/Tweets.json]
   appSync:
     name: dynamodbDemo # defaults to api
     authenticationType: AMAZON_COGNITO_USER_POOLS # API_KEY is also supported
