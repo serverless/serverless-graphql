@@ -4,17 +4,23 @@ frameworkVersion: ">=1.21.0 <2.0.0"
 
 provider:
   name: aws
-  runtime: nodejs6.10
+  runtime: nodejs8.10
   stage: dev
   region: us-east-1
 
 plugins:
-  - serverless-dynamodb-local
-  - serverless-offline
   - serverless-appsync-plugin
+  - serverless-dynamodb-local
+  - serverless-appsync-offline
+  - serverless-offline
 
 custom:
-  accountId: 1234xxxxxxxx # replace this with your accountId
+  appsync-offline:
+    port: 62222
+    dynamodb:
+      client:
+        endpoint: "http://localhost:8000"
+        region: localhost
   dynamodb:
     start:
       port: 8000
@@ -25,17 +31,16 @@ custom:
       test:
         sources:
           - table: Users
-            sources: [seed-data/Users.json]
+            sources: [seed-data/Users.json]	
           - table: Tweets
             sources: [seed-data/Tweets.json]
   appSync:
-    # name:  # defaults to api
-    # apiId # only required for update-appsync
+    name: dynamodbDemo # defaults to api
     authenticationType: AMAZON_COGNITO_USER_POOLS # API_KEY is also supported
     userPoolConfig:
       awsRegion: us-east-1 # required # region
       defaultAction: ALLOW
-      userPoolId: us-east-1_xxxxxxxxx # replace this with your Cognito User Pool Id
+      userPoolId: {Ref: CognitoUserPoolUsers}
     # region: # defaults to provider region
     # mappingTemplatesLocation: # defaults to mapping-templates
     mappingTemplates:
@@ -85,23 +90,64 @@ custom:
         request: "updateUserInfo-request-mapping-template.txt"
         response: "updateUserInfo-response-mapping-template.txt"
     # schema: # defaults schema.graphql
-    serviceRole: "AppSyncServiceRole"
+    #serviceRole: # if not provided, a default role is generated
     dataSources:
       - type: AMAZON_DYNAMODB
         name: Users
         description: 'Users table'
         config:
           tableName: 'Users'
-          serviceRoleArn: "arn:aws:iam::${self:custom.accountId}:role/Dynamo-${self:custom.appSync.serviceRole}"
+          iamRoleStatements: # custom IAM Role statements for this DataSource. Ignored if `serviceRoleArn` is present. Auto-generated if both `serviceRoleArn` and `iamRoleStatements` are omitted
+            - Effect: "Allow"
+              Action:
+                - "dynamodb:Query"
+                - "dynamodb:UpdateItem"
+              Resource:
+                - "arn:aws:dynamodb:${self:provider.region}:*:table/Users"
+                - "arn:aws:dynamodb:${self:provider.region}:*:table/Users/*"
       - type: AMAZON_DYNAMODB
         name: Tweets
         description: 'Tweets table'
         config:
           tableName: 'Tweets'
-          serviceRoleArn: "arn:aws:iam::${self:custom.accountId}:role/Dynamo-${self:custom.appSync.serviceRole}"
+          iamRoleStatements: # custom IAM Role statements for this DataSource. Ignored if `serviceRoleArn` is present. Auto-generated if both `serviceRoleArn` and `iamRoleStatements` are omitted
+            - Effect: "Allow"
+              Action:
+                - "dynamodb:Query"
+                - "dynamodb:UpdateItem"
+                - "dynamodb:PutItem"
+                - "dynamodb:DeleteItem"
+              Resource:
+                - "arn:aws:dynamodb:${self:provider.region}:*:table/Tweets"
+                - "arn:aws:dynamodb:${self:provider.region}:*:table/Tweets/*"
 
 resources:
   Resources:
+    CognitoUserPoolUsers:
+      Type: AWS::Cognito::UserPool
+      DeletionPolicy: Retain
+      Properties:
+        UserPoolName: MyUserPool
+        AutoVerifiedAttributes:
+          - email
+        Policies:
+          PasswordPolicy:
+            MinimumLength: 8
+            RequireLowercase: true
+            RequireNumbers: true
+            RequireSymbols: false
+            RequireUppercase: true
+        UsernameAttributes:
+          - email
+
+    WebUserPoolClient:
+      Type: AWS::Cognito::UserPoolClient
+      Properties:
+          ClientName: "Web"
+          GenerateSecret: false
+          RefreshTokenValidity: 30
+          UserPoolId: {Ref: CognitoUserPoolUsers}
+
     UserTable:
       Type: "AWS::DynamoDB::Table"
       Properties:
@@ -170,38 +216,3 @@ resources:
             ProvisionedThroughput:
               ReadCapacityUnits: 50
               WriteCapacityUnits: 50
-    AppSyncServiceRole:
-      Type: "AWS::IAM::Role"
-      Properties:
-        RoleName: "Dynamo-AppSyncServiceRole"
-        AssumeRolePolicyDocument:
-          Version: "2012-10-17"
-          Statement:
-            -
-              Effect: "Allow"
-              Principal:
-                Service:
-                  - "appsync.amazonaws.com"
-              Action:
-                - "sts:AssumeRole"
-        Policies:
-          -
-            PolicyName: "Dynamo-AppSyncServiceRole-Policy"
-            PolicyDocument:
-              Version: "2012-10-17"
-              Statement:
-                -
-                  Effect: "Allow"
-                  Action:
-                    - "dynamodb:Query"
-                    - "dynamodb:BatchWriteItem"
-                    - "dynamodb:GetItem"
-                    - "dynamodb:DeleteItem"
-                    - "dynamodb:PutItem"
-                    - "dynamodb:Scan"
-                    - "dynamodb:UpdateItem"
-                  Resource:
-                    - "arn:aws:dynamodb:us-east-1:*:table/Users"
-                    - "arn:aws:dynamodb:us-east-1:*:table/Users/*"
-                    - "arn:aws:dynamodb:us-east-1:*:table/Tweets"
-                    - "arn:aws:dynamodb:us-east-1:*:table/Tweets/*"
