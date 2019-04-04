@@ -90,7 +90,14 @@ const tweetsQuery = graphql(MeTweetsQuery, {
         document: AddTweetSubscription,
         variables: params,
         // TODO BUG: need to filter tweets based on more fine grained / unique value if possible
-        updateQuery: (prev, { subscriptionData: { data: { addTweet } } }) => {
+        updateQuery: (
+          prev,
+          {
+            subscriptionData: {
+              data: { addTweet },
+            },
+          }
+        ) => {
           const tweetAlreadyExists = prev.meInfo.tweets.items.find(
             item => item.tweet === addTweet.tweet
           );
@@ -128,4 +135,7 @@ const deleteMutation = graphql(DeleteTweetMutation, {
   }),
 });
 
-export default compose(tweetsQuery, deleteMutation)(MeTweetsComponent);
+export default compose(
+  tweetsQuery,
+  deleteMutation
+)(MeTweetsComponent);
