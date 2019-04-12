@@ -1,7 +1,6 @@
 {
   "name": "app-client",
-  "homepage":
-    "https://s3-bucketname-serverless-graphql.s3-website-us-east-1.amazonaws.com",
+  "homepage": "https://s3-bucketname-serverless-graphql.s3-website-us-east-1.amazonaws.com",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -32,6 +31,6 @@
     "enzyme": "^3.1.1",
     "enzyme-adapter-react-16": "^1.0.4",
     "react-test-renderer": "^16.1.1",
-    "serverless-finch": "^1.3.0"
+    "serverless-finch": "^2.4.0"
   }
 }
