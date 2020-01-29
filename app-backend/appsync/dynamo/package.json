@@ -38,7 +38,11 @@
     "serverless-dynamodb-local": "0.2.35",
     "serverless-offline": "^4.5.1",
     "serverless-webpack": "^4.1.0",
-    "webpack": "^3.8.1",
+    "webpack": "^4.41.5",
     "webpack-node-externals": "^1.6.0"
+  },
+  "resolutions": {
+    "jest/jest-cli/jest-haste-map/sane/fsevents": "2.1.2",
+    "webpack/watchpack/chokidar/fsevents": "2.1.2"
   }
 }
