@@ -25,7 +25,7 @@
     "knex": "^0.14.2",
     "mysql": "^2.15.0",
     "pg": "^7.4.0",
-    "sqlite3": "^3.1.13"
+    "sqlite3": "^4.1.1"
   },
   "devDependencies": {
     "aws-sdk": "^2.4.8",
@@ -43,5 +43,9 @@
     "serverless-webpack": "^4.1.0",
     "webpack": "^3.8.1",
     "webpack-node-externals": "^1.6.0"
+  },
+  "resolutions": {
+    "jest/jest-cli/jest-haste-map/sane/fsevents": "2.1.2",
+    "webpack/watchpack/chokidar/fsevents": "2.1.2"
   }
 }
