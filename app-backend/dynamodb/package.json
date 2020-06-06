@@ -14,7 +14,7 @@
     "deploy-prod": "yarn dynamodb-generate-seed-data && env-cmd ../../config/security.env.prod serverless --stage=production deploy && yarn dynamodb-insert-seed-data-prod"
   },
   "dependencies": {
-    "apollo-server-lambda": "^2.2.2",
+    "apollo-server-lambda": "^2.14.2",
     "aws-xray-sdk": "^2.1.0",
     "babel-polyfill": "^6.26.0",
     "graphql": "^14.0.2",
