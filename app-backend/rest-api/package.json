@@ -12,7 +12,7 @@
     "deploy-prod": "serverless --stage=production deploy"
   },
   "dependencies": {
-    "apollo-server-lambda": "^2.2.1",
+    "apollo-server-lambda": "^2.14.2",
     "babel-polyfill": "^6.26.0",
     "graphql": "^14.0.2",
     "node-fetch": "^1.7.3",
