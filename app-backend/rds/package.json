@@ -16,7 +16,7 @@
     "deploy-prod": "env-cmd ../../config/security.env.prod yarn migrate --env production && env-cmd ../../config/security.env.prod yarn seed-prod && env-cmd ../../config/security.env.prod serverless --stage=production deploy"
   },
   "dependencies": {
-    "apollo-server-lambda": "1.3.2",
+    "apollo-server-lambda": "2.14.2",
     "apollo-tracing": "^0.0.9",
     "babel-polyfill": "^6.26.0",
     "graphql": "^0.10.5",
