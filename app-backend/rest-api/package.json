@@ -15,7 +15,7 @@
     "apollo-server-lambda": "^2.2.1",
     "babel-polyfill": "^6.26.0",
     "graphql": "^14.0.2",
-    "node-fetch": "^1.7.3",
+    "node-fetch": "^2.6.1",
     "oauth": "^0.9.15",
     "twitter": "^1.7.1"
   },
