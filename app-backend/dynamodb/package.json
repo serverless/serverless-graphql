@@ -21,7 +21,7 @@
     "serverless-dynamodb-client": "^0.0.2"
   },
   "devDependencies": {
-    "aws-sdk": "^2.192.0",
+    "aws-sdk": "^2.814.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
