@@ -13,7 +13,7 @@
     "delete-appsync": "serverless delete-appsync"
   },
   "dependencies": {
-    "aws-sdk": "^2.176.0",
+    "aws-sdk": "^2.814.0",
     "babel-polyfill": "^6.26.0",
     "bluebird": "^3.5.1",
     "node-fetch": "^1.7.3",
