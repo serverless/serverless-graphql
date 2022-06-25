@@ -16,7 +16,7 @@
     "aws-sdk": "^2.176.0",
     "babel-polyfill": "^6.26.0",
     "bluebird": "^3.5.1",
-    "node-fetch": "^1.7.3",
+    "node-fetch": "^2.6.7",
     "oauth": "^0.9.15",
     "serverless-appsync-plugin": "^0.0.5",
     "twitter": "^1.7.1"
