@@ -1,4 +1,7 @@
-[![Build Status](https://travis-ci.org/serverless/serverless-graphql.svg?branch=master)](https://travis-ci.org/serverless/serverless-graphql)
+**📦 Archived - This repository is archived and preserved for reference only. No updates, issues, or pull requests will be accepted. If you have questions, please reach out to our support team.**
+
+---
+
 # Introduction
 
 > *Part 1:* [Running a scalable & reliable GraphQL endpoint with Serverless](https://serverless.com/blog/running-scalable-reliable-graphql-endpoint-with-serverless/)  
